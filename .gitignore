@@ -1,0 +1,22 @@
+# MkDocs build output — nunca commitear
+site/
+
+# GSD / Claude — artefactos de planificación privados
+.planning/
+.claude/
+*.claude*
+CLAUDE.md
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Archivos binarios y propietarios originales
+*.pdf
+*.xlsx
+
+# OS
+.DS_Store
+Thumbs.db

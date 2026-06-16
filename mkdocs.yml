@@ -1,0 +1,116 @@
+site_name: "Módulo 4: Ciberdefensa Defensiva"
+site_url: https://ollerenac.github.io/ciberdefensa-modulo4/
+site_description: "Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército"
+site_author: "INICTEL-UNI"
+repo_url: https://github.com/ollerenac/ciberdefensa-modulo4
+repo_name: ollerenac/ciberdefensa-modulo4
+
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.tracking
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search:
+      lang: es
+
+nav:
+  - Inicio: index.md
+
+  - Seguridad de la Información y Criptografía:
+    - seguridad-criptografia/index.md
+    - En el Ordenador:
+      - seguridad-criptografia/en-el-ordenador/index.md
+      - "Controles Defensivos (Parte 1)": seguridad-criptografia/en-el-ordenador/controles-defensivos-p1.md
+      - "Controles Defensivos (Parte 2)": seguridad-criptografia/en-el-ordenador/controles-defensivos-p2.md
+      - "Antivirus Avanzados (Parte 1)": seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1.md
+      - "Antivirus Avanzados (Parte 2)": seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p2.md
+      - "Cortafuegos (Parte 1)": seguridad-criptografia/en-el-ordenador/cortafuegos-p1.md
+      - "Cortafuegos (Parte 2)": seguridad-criptografia/en-el-ordenador/cortafuegos-p2.md
+      - "Examen Parcial": seguridad-criptografia/en-el-ordenador/examen-parcial.md
+      - "Lab — Iptables (Parte 1)": seguridad-criptografia/en-el-ordenador/lab-iptables-p1.md
+      - "Lab — Iptables (Parte 2)": seguridad-criptografia/en-el-ordenador/lab-iptables-p2.md
+    - En la Red:
+      - seguridad-criptografia/en-la-red/index.md
+      - "Proxy Squid (Parte 1)": seguridad-criptografia/en-la-red/proxy-squid-p1.md
+      - "Proxy Squid (Parte 2)": seguridad-criptografia/en-la-red/proxy-squid-p2.md
+      - "IDS e IPS (Parte 1)": seguridad-criptografia/en-la-red/ids-ips-p1.md
+      - "IDS e IPS (Parte 2)": seguridad-criptografia/en-la-red/ids-ips-p2.md
+      - "Honey Pots (Parte 1)": seguridad-criptografia/en-la-red/honeypots-p1.md
+      - "Honey Pots (Parte 2)": seguridad-criptografia/en-la-red/honeypots-p2.md
+      - "Examen Final": seguridad-criptografia/en-la-red/examen-final.md
+
+  - Capas SI:
+    - capas-si/index.md
+    - La Familia ISO 27000:
+      - capas-si/familia-iso27000/index.md
+      - "ISO 27000 — Generalidades (Parte 1)": capas-si/familia-iso27000/iso27000-generalidades-p1.md
+      - "ISO 27000 — Generalidades (Parte 2)": capas-si/familia-iso27000/iso27000-generalidades-p2.md
+      - "ISO 27001 — Requisitos (Parte 1)": capas-si/familia-iso27000/iso27001-requisitos-p1.md
+      - "ISO 27001 — Requisitos (Parte 2)": capas-si/familia-iso27000/iso27001-requisitos-p2.md
+      - "ISO 27002 — Controles (Parte 1)": capas-si/familia-iso27000/iso27002-controles-p1.md
+      - "ISO 27002 — Controles (Parte 2)": capas-si/familia-iso27000/iso27002-controles-p2.md
+      - "ISO 27005 — Gestión del Riesgo (Parte 1)": capas-si/familia-iso27000/iso27005-riesgo-p1.md
+      - "ISO 27005 — Gestión del Riesgo (Parte 2)": capas-si/familia-iso27000/iso27005-riesgo-p2.md
+      - "Examen Parcial": capas-si/familia-iso27000/examen-parcial.md
+      - "Lab — Auditoría Interna (Parte 1)": capas-si/familia-iso27000/lab-auditoria-p1.md
+      - "Lab — Auditoría Interna (Parte 2)": capas-si/familia-iso27000/lab-auditoria-p2.md
+    - Defensa en Profundidad:
+      - capas-si/defensa-profundidad/index.md
+      - "Capa Humana y Perimetral (Parte 1)": capas-si/defensa-profundidad/capa-humana-perimetral-p1.md
+      - "Capa Humana y Perimetral (Parte 2)": capas-si/defensa-profundidad/capa-humana-perimetral-p2.md
+      - "Capa de Red y Endpoint (Parte 1)": capas-si/defensa-profundidad/capa-red-endpoint-p1.md
+      - "Capa de Red y Endpoint (Parte 2)": capas-si/defensa-profundidad/capa-red-endpoint-p2.md
+      - "Capa de Aplicaciones y Datos (Parte 1)": capas-si/defensa-profundidad/capa-aplicaciones-datos-p1.md
+      - "Capa de Aplicaciones y Datos (Parte 2)": capas-si/defensa-profundidad/capa-aplicaciones-datos-p2.md
+      - "Activos Críticos y Escenarios Defensivos (Parte 1)": capas-si/defensa-profundidad/capa-activos-criticos-p1.md
+      - "Activos Críticos y Escenarios Defensivos (Parte 2)": capas-si/defensa-profundidad/capa-activos-criticos-p2.md
+      - "Examen Final": capas-si/defensa-profundidad/examen-final.md
+
+  - Gestión de Riesgos y Vulnerabilidades:
+    - gestion-riesgos/index.md
+    - Fundamentos de Gestión de Riesgos:
+      - gestion-riesgos/fundamentos-riesgo/index.md
+      - "Concepto de Riesgo": gestion-riesgos/fundamentos-riesgo/concepto-riesgo.md
+      - "Tipos de Riesgo en Entornos Militares": gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar.md
+    - Identificación y Evaluación de Vulnerabilidades:
+      - gestion-riesgos/identificacion-vulnerabilidades/index.md
+      - "Métodos de Identificación y Priorización": gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion.md
+    - Mitigación y Control de Riesgos:
+      - gestion-riesgos/mitigacion-controles/index.md
+      - "Controles y Buenas Prácticas": gestion-riesgos/mitigacion-controles/controles-buenas-practicas.md
+      - "Examen": gestion-riesgos/mitigacion-controles/examen.md
+
+  - Conferencias Magistrales:
+    - conferencias/index.md
+    - Responsabilidad Social:
+      - conferencias/responsabilidad-social/index.md
+      - "Impacto de la Responsabilidad Social": conferencias/responsabilidad-social/impacto-responsabilidad-social.md
+    - Operaciones de Paz:
+      - conferencias/operaciones-paz/index.md
+      - "Operaciones de Paz en Entornos Globales": conferencias/operaciones-paz/operaciones-paz-globales.md
