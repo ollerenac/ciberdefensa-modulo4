@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-06-16T14:36:46Z",
+  "phase": "03",
+  "phase_name": "asignatura-2-capas-si",
+  "phase_dir": ".planning/phases/03-asignatura-2-capas-si",
+  "plan": 4,
+  "task": 1,
+  "total_tasks": 1,
+  "status": "paused",
+  "completed_tasks": [
+    {"id": "03-01", "name": "ISO 27000 theory pages (CONT-13..20)", "status": "done", "commit": "5b77dff + 3 feat commits", "notes": "Session limit interrupted before SUMMARY.md — recovered manually"},
+    {"id": "03-02", "name": "ISO audit labs + EXAM-03", "status": "done", "commit": "025d911"},
+    {"id": "03-03", "name": "Defensa en Profundidad theory pages (CONT-21..28)", "status": "done", "commit": "01d57c6"}
+  ],
+  "remaining_tasks": [
+    {"id": "03-04", "name": "EXAM-04 final exam (Defensa en Profundidad, 15 questions)", "status": "in_progress", "notes": "Agent ad40db35dc084d304 running in worktree-agent-ad40db35dc084d304 at base 6f82f73"},
+    {"id": "post-wave", "name": "code_review_gate → verify_phase_goal → aggregate_results", "status": "not_started"}
+  ],
+  "blockers": [
+    {
+      "description": "Wave 3 executor agent may still be running or may have hit session limit",
+      "type": "external",
+      "workaround": "Check git log --oneline worktree-agent-ad40db35dc084d304 --not main and .planning/phases/03-asignatura-2-capas-si/03-04-SUMMARY.md existence. If complete: merge + clean up. If not: re-execute plan 03-04."
+    }
+  ],
+  "human_actions_pending": [],
+  "decisions": [
+    {"decision": "Qualitative 3x3 risk matrix as primary ISO 27005 evaluation method", "rationale": "Military context — cost not only metric", "phase": "03"},
+    {"decision": "ISO 27002 presented with 4-theme structure (2022 edition)", "rationale": "Aligned with current edition, not 2013 14-domain version", "phase": "03"},
+    {"decision": "CONT-28 tabletop Inject 1 references WannaCry/SMBv1 from Phase 2 CONT-01", "rationale": "Pedagogical continuity per D-13", "phase": "03"}
+  ],
+  "uncommitted_files": [],
+  "next_action": "1. Check worktree-agent-ad40db35dc084d304: git log --oneline worktree-agent-ad40db35dc084d304 --not main. 2. If SUMMARY committed: merge worktree to main, run mkdocs build --strict, update ROADMAP for 03-04. 3. If incomplete: re-execute plan 03-04. 4. After 03-04 done: run /gsd:code-review 3, then /gsd:verify-work 3.",
+  "context_notes": "Phase 03 Wave 1+2 complete and merged to main. 17 of 22 content files written. Wave 3 (EXAM-04) is the last content file. After that: code review, phase verification, then optionally /gsd:secure-phase 3."
+}
