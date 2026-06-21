@@ -74,8 +74,6 @@ La lección práctica del escenario anterior no es técnica: es de planificació
 
 ---
 
----
-
 ## Aplicación en Contexto Castrense
 
 Las lecciones de ciberseguridad de misiones de paz son transferibles al entorno nacional, y esta transferibilidad es una de las razones por las que la experiencia internacional es tan valiosa para el desarrollo profesional del Técnico. Un Técnico que ha operado en coalición con aliados de distintos países y culturas de seguridad regresa con una comprensión de controles de acceso, gestión de clasificación y coordinación de seguridad que supera con mucho lo que puede aprender en un ejercicio doméstico. El entorno multinacional es exigente precisamente porque expone al Técnico a actores con culturas de seguridad diferentes — y el Técnico aprende a mantener sus propios estándares independientemente del estándar de quienes lo rodean.
