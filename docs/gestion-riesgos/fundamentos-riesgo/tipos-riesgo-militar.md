@@ -109,19 +109,7 @@ El Técnico publica en redes sociales fotos, videos o comentarios que revelan in
 !!! note "Principio de mínimo privilegio"
     Cada usuario debe tener acceso solo a los recursos que necesita para su función — ni uno más. Un Técnico de mantenimiento de radios no necesita acceso a la base de datos de personal de la unidad. Implementar este principio reduce el daño potencial de cualquier riesgo humano, tanto de negligencia como de amenaza interna.
 
----
-
-## Interacción entre Categorías
-
-En la práctica, los riesgos no aparecen en categorías limpias. Un solo escenario puede involucrar múltiples categorías simultáneamente:
-
-**Ejemplo:** Un Técnico conecta un USB personal al servidor de archivos de la sala de comunicaciones para copiar música.
-
-- **Riesgo Humano (negligencia):** El Técnico viola la política de medios removibles.
-- **Riesgo TI:** El USB puede introducir malware que infecta el servidor.
-- **Riesgo Operacional (potencial):** Si el malware afecta el servidor, los archivos de planificación operacional pueden quedar inaccesibles o comprometidos.
-
-La clasificación por categorías sirve para **priorizar la respuesta** — el Técnico primero aísla el vector TI (desconecta el USB, escanea el servidor) y luego escala el aspecto humano (informe de incidente al Jefe).
+En la práctica, los riesgos no aparecen en categorías limpias. Un solo escenario puede involucrar múltiples categorías simultáneamente. Por ejemplo: un Técnico que conecta un USB personal al servidor de archivos activa un **Riesgo Humano** (negligencia al violar la política de medios removibles), un **Riesgo TI** (el USB puede introducir malware), y un **Riesgo Operacional** potencial (si el malware afecta el servidor, los archivos de planificación pueden quedar comprometidos). La clasificación por categorías sirve para priorizar la respuesta — el Técnico primero aísla el vector TI y luego escala el aspecto humano a la cadena de mando.
 
 ---
 
