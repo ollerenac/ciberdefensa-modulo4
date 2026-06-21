@@ -42,14 +42,14 @@ El objetivo no es escribir CVEs — es leer los que ya existen y tomar decisione
 | **Descripción** | Vulnerabilidad de desbordamiento de búfer en el servicio SMB de Windows que permite ejecución remota de código sin autenticación previa. |
 | **Sistemas afectados** | Windows 10 (todas las versiones), Windows 11 (versiones anteriores a 22H2) |
 | **Vector de ataque** | Red — accesible desde la red sin requerir interacción del usuario |
-| **Puntuación CVSS** | 8.8 — **Alta** → requiere acción en 7 días o menos |
+| **Puntuación CVSS** | 8.8 — **High (Alta)** → requiere acción en 7 días o menos |
 | **Solución disponible** | Sí — parche de seguridad MS24-XXX (Windows Update) |
 
 **¿Qué hace el Técnico con este CVE?**
 
 1. **Verifica si sus sistemas están afectados.** Si los terminales C2 corren Windows 10 o Windows 11 anterior a 22H2, están en la lista.
 2. **Consulta si hay parche disponible.** El campo "Solución disponible" dice que sí existe — el parche MS24-XXX aplica vía Windows Update.
-3. **Prioriza por score:** 8.8 = Alta → plazo de remediación: dentro de 7 días.
+3. **Prioriza por score:** 8.8 = High (Alta) → plazo de remediación: dentro de 7 días.
 4. **Aplica el parche y documenta** la acción en el registro de mantenimiento de la unidad.
 
 !!! tip "Regla de los dos pasos"
