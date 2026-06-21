@@ -148,7 +148,7 @@ c) Escriba la primera línea del campo "Descripción" del reporte de vulnerabili
 
     ## Parte A — Clave de la Matriz de Riesgo (30 puntos)
 
-    Criterio de corrección: 2 puntos por cada celda en blanco correctamente completada. Las filas tienen entre 3 y 4 celdas evaluables. Total: 15 celdas × 2 puntos = 30 puntos.
+    Criterio de corrección: 2 puntos por cada celda de contenido en blanco correctamente completada (Activo/Amenaza/Vulnerabilidad, Probabilidad, Impacto, Nivel de Riesgo). La columna "Tratamiento propuesto" se evalúa cualitativamente: respuesta razonada y coherente con el nivel de riesgo = correcta; respuesta ausente o contradictoria = 0 pts. Celdas de contenido evaluadas: 3 por fila × 5 filas = 15 celdas × 2 puntos = 30 puntos.
 
     | # | Activo | Amenaza | Vulnerabilidad | Prob. | Impacto | Riesgo | Tratamiento |
     |---|--------|---------|----------------|-------|---------|--------|-------------|
