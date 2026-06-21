@@ -126,7 +126,7 @@ El score CVSS da la severidad técnica de una vulnerabilidad. Pero en el entorno
 | **Critical (9–10)** | Acción inmediata. Escalar en horas, no en días. | Acción en 24 horas — misma urgencia por la gravedad de la falla. |
 | **High (7–8.9)** | Tratar como Critical: escalar en 24 horas. El activo amplifica el impacto. | Tratar como High estándar: mitigar en 7 días. |
 | **Medium (4–6.9)** | Tratar como High: plan de remediación en 7 días. | Tratar como Medium estándar: plan en 30 días. |
-| **Low (0–3.9)** | Documentar y revisar en el próximo ciclo de auditoría. | Documentar. No es acción prioritaria. |
+| **Low (0.1–3.9)** | Documentar y revisar en el próximo ciclo de auditoría. | Documentar. No es acción prioritaria. |
 
 **Regla de elevación:** Si una vulnerabilidad High afecta el sistema C2, se trata como Critical. Si la misma vulnerabilidad High afecta una laptop de uso administrativo sin datos sensibles, se mantiene como High estándar. La criticidad del activo puede subir una banda completa la prioridad de acción.
 
@@ -160,7 +160,7 @@ El Técnico de guardia de la Jefatura de Comunicaciones del Batallón de Comunic
 ## Resumen
 
 - **CVE** es el identificador estándar de vulnerabilidades. El formato es CVE-AÑO-NÚMERO. La base de datos oficial es [nvd.nist.gov](https://nvd.nist.gov).
-- El **score CVSS v3.1** tiene cuatro bandas: Critical (9–10), High (7–8.9), Medium (4–6.9), Low (0–3.9). La banda determina el plazo de acción — no el número exacto.
+- El **score CVSS v3.1** tiene cuatro bandas: Critical (9–10), High (7–8.9), Medium (4–6.9), Low (0.1–3.9). La banda determina el plazo de acción — no el número exacto.
 - Los **tres métodos sin herramientas especializadas**: Windows Update para parches pendientes, búsqueda en NVD por producto/versión, y boletines Microsoft Patch Tuesday.
 - La **criticidad del activo** puede elevar la prioridad de acción: una vulnerabilidad High en un sistema C2 se trata como Critical.
 - El Técnico **no calcula** el score CVSS — lo lee de la ficha y actúa según la banda.

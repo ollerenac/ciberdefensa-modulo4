@@ -229,7 +229,7 @@ c) Escriba la primera línea del campo "Descripción" del reporte de vulnerabili
     Justificación: Score CVSS 9.2 = banda Critical (9.0–10.0). La regla de plazo operacional para Critical es acción dentro de las 24 horas siguientes a la detección. El activo es el servidor de archivos de la JC-BC3, que es un activo compartido crítico para la unidad — lo que confirma la urgencia.
 
     Opciones incorrectas:
-    - A) Incorrecto: Ciclo mensual es el plazo para severidad Low (0–3.9). CVSS 9.2 es Critical.
+    - A) Incorrecto: Ciclo mensual es el plazo para severidad Low (0.1–3.9). CVSS 9.2 es Critical.
     - B) Incorrecto: Plan de 30 días corresponde a severidad Medium (4.0–6.9).
     - C) Incorrecto: 7 días corresponde a severidad High (7.0–8.9). CVSS 9.2 supera ese umbral.
 
