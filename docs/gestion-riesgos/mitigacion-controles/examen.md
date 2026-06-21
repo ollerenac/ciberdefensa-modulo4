@@ -132,6 +132,39 @@ c) Escriba la primera línea del campo "Descripción" del reporte de vulnerabili
 
 ---
 
+## Parte D — Profundización (sin puntuación adicional — práctica formativa)
+
+**Instrucciones:** Estas preguntas no suman puntos al total pero sirven para autoevaluación. Responder si el tiempo lo permite.
+
+---
+
+**P8.** El Técnico de la JC-BC3 identifica que las radios HF del batallón usan firmware con una vulnerabilidad con CVSS 7.5 y sin parche disponible del fabricante. ¿Cuál es el control compensatorio más adecuado?
+
+- A) Dejar las radios fuera de servicio hasta que el parche esté disponible
+- B) Reducir la exposición a frecuencias no operacionales y verificar integridad de firmware post-sesión mientras se espera el parche
+- C) Actualizar manualmente el firmware descargando la versión del fabricante de internet
+- D) Aceptar el riesgo sin documentación porque no hay solución disponible
+
+---
+
+**P9.** ¿Cuál de los siguientes describe mejor la diferencia entre una vulnerabilidad y una amenaza?
+
+- A) Una vulnerabilidad es externa y una amenaza es interna al sistema
+- B) Una vulnerabilidad es una debilidad en el activo; una amenaza es el agente que puede explotarla
+- C) Una vulnerabilidad solo aplica a software; una amenaza aplica a hardware y personas
+- D) No hay diferencia operacional — ambos términos se usan indistintamente en los registros de riesgo
+
+---
+
+**P10.** El Oficial de la JC-BC3 debe decidir si acepta o mitiga una vulnerabilidad con CVSS 3.2 en un sistema de backup secundario que no está conectado a la red operacional. ¿Qué tratamiento es más apropiado?
+
+- A) Mitigar de inmediato — todo score CVSS requiere remediación dentro de las 24 horas
+- B) Aceptar el riesgo documentando la decisión — severidad Low en un activo de baja criticidad puede ser aceptada con control administrativo
+- C) Eliminar el activo — si no se puede parchar, el sistema debe ser dado de baja
+- D) Transferir el riesgo contratando un proveedor externo de gestión de vulnerabilidades
+
+---
+
 !!! danger "Solo instructor — Clave de Respuestas"
 
     ## Tabla de tiempo sugerido
@@ -142,6 +175,7 @@ c) Escriba la primera línea del campo "Descripción" del reporte de vulnerabili
     | Parte A | Completar la matriz de riesgo | 20 min |
     | Parte B | Selección múltiple (4 preguntas) | 20 min |
     | Parte C | Respuesta corta (3 preguntas) | 15 min |
+    | Parte D | Preguntas de profundización — sin puntuación (si queda tiempo) | — |
     | **Total** | | **60 min** |
 
     ---
@@ -246,3 +280,23 @@ c) Escriba la primera línea del campo "Descripción" del reporte de vulnerabili
     "El Técnico de turno detecta la vulnerabilidad durante la revisión de sistemas o en el ejercicio de sus funciones. Completa el reporte de vulnerabilidad con los datos del hallazgo y lo entrega al Jefe inmediato dentro del plazo según la severidad (24 horas para Critical, 7 días para High). El Jefe inmediato evalúa si puede actuar con sus propios recursos o escala al Oficial de Seguridad. El Oficial de Seguridad toma la decisión formal: mitigar con los controles disponibles, aceptar el riesgo residual por escrito, o escalar al mando superior si el impacto supera su nivel de autoridad."
 
     Criterio de aceptación (10 puntos): La respuesta debe mencionar al menos tres actores (Técnico, Jefe, Oficial de Seguridad) con su rol específico. Respuestas que mencionan solo dos actores o que no diferencian quién decide vs. quién reporta reciben puntaje parcial (5-7 puntos).
+
+    ---
+
+    ## Parte D — Clave de Profundización (sin puntuación — práctica formativa)
+
+    **P8 — Respuesta correcta: B) Reducir la exposición a frecuencias no operacionales y verificar integridad de firmware post-sesión mientras se espera el parche**
+
+    Justificación: Sin parche disponible, la acción correcta es aplicar controles compensatorios que reduzcan la superficie de ataque: limitar el uso de las radios a frecuencias autorizadas (reduce la ventana de ataque si la vulnerabilidad requiere exposición en frecuencias específicas) y verificar la integridad del firmware tras cada sesión (detecta modificaciones no autorizadas). La opción A paraliza la operación innecesariamente. La opción C introduce un riesgo adicional al descargar firmware de internet sin verificación de cadena de suministro. La opción D es inaceptable — el riesgo sin documentación no es aceptado, es ignorado.
+
+    ---
+
+    **P9 — Respuesta correcta: B) Una vulnerabilidad es una debilidad en el activo; una amenaza es el agente que puede explotarla**
+
+    Justificación: La distinción fundamental de la taxonomía de riesgo: la vulnerabilidad es la condición del activo (el firmware sin parchear, la contraseña débil, el puerto abierto), mientras que la amenaza es el actor o evento que puede aprovecharla (el atacante externo, el malware, el insider). Las opciones A, C y D contienen afirmaciones incorrectas — las vulnerabilidades pueden ser de hardware, física o de proceso, no solo de software; y los dos términos tienen significados técnicos distintos y no son intercambiables.
+
+    ---
+
+    **P10 — Respuesta correcta: B) Aceptar el riesgo documentando la decisión — severidad Low en un activo de baja criticidad puede ser aceptada con control administrativo**
+
+    Justificación: CVSS 3.2 es banda Low (0.1–3.9). Un activo de backup secundario sin conexión a la red operacional tiene criticidad baja. La combinación de baja severidad técnica + baja criticidad del activo hace que la aceptación formal del riesgo con documentación sea el tratamiento apropiado. La opción A es incorrecta — el plazo de 24 horas es para Critical (9.0–10.0). La opción C no corresponde a ningún tratamiento estándar en la taxonomía (eliminar un activo útil por una vulnerabilidad Low es desproporcionado). La opción D es incorrecta en el contexto castrense — los riesgos en sistemas de la unidad no se transfieren a proveedores externos de esa forma.
