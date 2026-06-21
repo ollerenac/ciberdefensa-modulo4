@@ -32,7 +32,7 @@ Un control de seguridad es cualquier medida —técnica, administrativa o físic
 
 ---
 
-## La Plantilla de Reporte de Vulnerabilidad
+## El Reporte de Vulnerabilidad: Plantilla y Cadena
 
 El reporte de vulnerabilidad es el documento que el Técnico completa cuando detecta una falla de seguridad. Sin este reporte, la vulnerabilidad no existe formalmente para la cadena de mando — no se puede decidir sobre lo que no está documentado.
 
@@ -70,34 +70,18 @@ El reporte de vulnerabilidad es el documento que el Técnico completa cuando det
 
 ---
 
-## La Cadena de Reporte Militar
+### La Cadena de Reporte Militar
 
 El reporte de vulnerabilidad no termina cuando el Técnico completa el formulario. Sigue una cadena de decisión que determina qué acción se toma y con qué autoridad.
 
-### Flujo de Reporte
+#### Flujo de Reporte
 
-```
-1. TÉCNICO detecta la vulnerabilidad
-   → Completa el reporte de vulnerabilidad (plantilla anterior)
-   → Entrega el reporte al Jefe inmediato dentro del plazo según severidad
+1. **El Técnico detecta la vulnerabilidad** — completa el reporte de vulnerabilidad con la plantilla estándar y lo entrega al Jefe inmediato dentro del plazo según severidad (24 horas para Critical, 7 días para High).
+2. **El Jefe inmediato evalúa** — determina si la remediación está dentro de su autoridad y recursos. Si puede actuar, autoriza la acción y la documenta. Si la severidad es Critical o High, o si los recursos no son suficientes, escala al Oficial de Seguridad.
+3. **El Oficial de Seguridad decide** — determina la acción formal: mitigar con los controles disponibles, aceptar formalmente el riesgo residual, o escalar al mando superior. Emite la resolución por escrito con fecha y firma. Si se acepta el riesgo, queda documentado quién tomó la decisión y con qué criterio.
+4. **El Técnico implementa y cierra** — aplica la remediación o el control compensatorio autorizado, documenta el resultado (qué se hizo, cuándo, qué se verificó) y cierra el reporte con la fecha de resolución.
 
-2. JEFE INMEDIATO recibe el reporte
-   → Evalúa si la remediación está dentro de su autoridad y recursos
-   → Si puede actuar: autoriza la acción y la documenta
-   → Si no puede actuar o si la severidad es Critical/High: escala al Oficial de Seguridad
-
-3. OFICIAL DE SEGURIDAD recibe el reporte escalado
-   → Determina la acción: mitigar / aceptar formalmente / escalar al mando superior
-   → Emite la resolución por escrito con fecha y firma
-   → Si se acepta el riesgo: queda documentado quién tomó la decisión y con qué criterio
-
-4. TÉCNICO implementa la acción autorizada
-   → Aplica la remediación o el control compensatorio
-   → Documenta el resultado: qué se hizo, cuándo, qué resultado se verificó
-   → Cierra el reporte con fecha de resolución
-```
-
-### Roles y Responsabilidades
+#### Roles y Responsabilidades
 
 | Rol | Recibe | Decide | Plazo de respuesta |
 |-----|--------|--------|--------------------|
@@ -127,13 +111,12 @@ No hay parche disponible, así que la remediación definitiva no es posible. El 
 
 **¿Cómo llena el campo "Control compensatorio" en la plantilla?**
 
-```
-Control compensatorio: Hasta la publicación del parche por el fabricante, aplicar:
-(1) Restricción de uso a frecuencias operacionales autorizadas únicamente.
-(2) Verificación de integridad de firmware post-sesión según manual técnico.
-(3) Radio de respaldo designada como contingencia si se detecta comportamiento anómalo.
-Referencia: incidente reportado a Oficial de Seguridad, reporte VUL-2024-007, 2024-03-15.
-```
+!!! example "Ejemplo de control compensatorio para el campo 'Control compensatorio'"
+    Control compensatorio: Hasta la publicación del parche por el fabricante, aplicar:
+    (1) Restricción de uso a frecuencias operacionales autorizadas únicamente.
+    (2) Verificación de integridad de firmware post-sesión según manual técnico.
+    (3) Radio de respaldo designada como contingencia si se detecta comportamiento anómalo.
+    Referencia: incidente reportado a Oficial de Seguridad, reporte VUL-2024-007, 2024-03-15.
 
 **¿A quién reporta y en qué plazo?**
 
