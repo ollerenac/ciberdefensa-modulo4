@@ -48,7 +48,7 @@ La rúbrica tiene tres niveles por control (D-09). No hay una respuesta modelo �
 | Marcar "Cumple" porque "algo existe" (ej. planilla Excel, llave en la puerta) | El alumno evalúa existencia en lugar de eficacia del control | "El control ISO no pregunta si algo existe, sino si funciona y está gestionado. Una planilla sin actualizar no cumple el inventario." |
 | Confundir § 5.15 (control de acceso lógico) con § 7.2 (control de acceso físico) | Ambos controles se activan con el mismo escenario de cuentas/llave | "§ 5.15 habla de cuentas de usuario en sistemas. § 7.2 habla de quién entra a la sala física. Pueden estar relacionados pero son controles distintos." |
 | Dejar la columna de evidencia en blanco | El alumno no sabe qué escribir | "Copia una frase del escenario que justifique tu marca. Si marcas 'No cumple', ¿qué en el escenario te indica que no cumple?" |
-| Marcar § 8.13 "Parcial" porque "Windows Defender está activo" pero sin citar actualizaciones | El alumno no lee el escenario completo | "Vuelve al escenario: ¿qué dice sobre las actualizaciones de Defender?" |
+| Marcar § 8.7 "Parcial" porque "Windows Defender está activo" pero sin citar actualizaciones | El alumno no lee el escenario completo | "Vuelve al escenario: ¿qué dice sobre las actualizaciones de Defender?" |
 | Recuento final incorrecto (no suman 20) | Error de conteo | Pedir al alumno que cuente fila a fila en voz alta |
 
 ---

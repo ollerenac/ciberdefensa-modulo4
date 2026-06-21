@@ -180,7 +180,7 @@ El Comandante que firma el SOP de comunicaciones seguras está ejerciendo § 5.1
 ## Resumen
 
 1. Las cláusulas 4-7 de ISO 27001 establecen las bases del SGSI: **contexto** (§4), **liderazgo** (§5), **planificación** (§6) y **apoyo** (§7).
-2. El formato D-02 resume cada cláusula: qué significa, por qué existe, y cómo aplica en un contexto militar concreto.
+2. La siguiente sección resume cada cláusula: qué significa, por qué existe, y cómo aplica en un contexto militar concreto.
 3. La § 4 responde "¿quiénes somos y en qué entorno operamos?"; § 5 dice que el mando debe comprometerse activamente; § 6 convierte los riesgos en decisiones documentadas; § 7 asegura que el SGSI tiene los recursos y la documentación para funcionar.
 4. La documentación (§ 7.5) no es un fin en sí mismo — es la evidencia de que el SGSI existe y funciona, y el mecanismo para transmitirlo y mejorarlo.
 

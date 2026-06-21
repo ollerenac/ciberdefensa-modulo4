@@ -161,4 +161,4 @@ Este es exactamente el proceso de la Parte 2 de ISO 27005 aplicado a un escenari
 
 ---
 
-*Continúa en: [Examen Parcial — Capas SI](examen-parcial.md)*
+*Continúa en: [Lab: Taller de Auditoría ISO 27001 — Parte 1](lab-auditoria-p1.md)*

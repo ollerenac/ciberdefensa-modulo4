@@ -119,7 +119,7 @@ El informe de lecciones aprendidas es el mecanismo por el que la organización m
 
 ---
 
-!!! danger "Ejercicio Tabletop: Ransomware en la Red de la Unidad (2 horas)"
+!!! example "Ejercicio Tabletop: Ransomware en la Red de la Unidad (2 horas)"
 
     ## Tabletop Exercise: Ransomware en la Red de la Unidad (2 horas)
 
@@ -191,7 +191,7 @@ El informe de lecciones aprendidas es el mecanismo por el que la organización m
 
         Son las 14:37 del martes. El Técnico de Sistemas recibe una alerta del EDR en su consola: en los últimos 4 minutos, 12 equipos de la VLAN 30 (usuarios) han mostrado actividad inusual — el proceso `svchost.exe` está cifrando archivos en las carpetas compartidas de red. Simultáneamente, varios técnicos reportan que sus pantallas muestran un mensaje en inglés con fondo rojo: "YOUR FILES HAVE BEEN ENCRYPTED. Pay 5 BTC to recover them."
 
-        Los primeros análisis del EDR indican que el vector de entrada fue un archivo Excel malicioso recibido por correo electrónico hace 3 horas. El malware se propagó por la red aprovechando recursos compartidos con contraseñas débiles. El malware se propagó por la red aprovechando el protocolo SMBv1 — el mismo vector del ransomware WannaCry estudiado en la Unidad "En el Ordenador" (2017). Los equipos de la VLAN 40 (sistemas tácticos y C2) no muestran alertas todavía.
+        Los primeros análisis del EDR indican que el vector de entrada fue un archivo Excel malicioso recibido por correo electrónico hace 3 horas. El malware se propagó por la red aprovechando el protocolo SMBv1 — el mismo vector del ransomware WannaCry estudiado en la Unidad "En el Ordenador" (2017). Los equipos de la VLAN 40 (sistemas tácticos y C2) no muestran alertas todavía.
 
         **Estado actual:** 12 equipos VLAN 30 cifrados. VLAN 40 aparentemente limpia. Servidor de directorio (VLAN 20) sin alertas pero accesible desde VLAN 30.
 
