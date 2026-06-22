@@ -1,0 +1,2467 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/capas-si/familia-iso27000/iso27001-requisitos-p1/">
+      
+      
+        <link rel="prev" href="../iso27000-generalidades-p2/">
+      
+      
+        <link rel="next" href="../iso27001-requisitos-p2/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>ISO 27001 — Requisitos (Parte 1) - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#horas-asignadas-2-hrs" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ISO 27001 — Requisitos (Parte 1)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cortafuegos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cortafuegos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/lab-iptables-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27000-generalidades-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Responsabilidad Social
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Responsabilidad Social
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/responsabilidad-social/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/responsabilidad-social/impacto-responsabilidad-social/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Impacto de la Responsabilidad Social
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Operaciones de Paz
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Operaciones de Paz
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/operaciones-paz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/operaciones-paz/operaciones-paz-globales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operaciones de Paz en Entornos Globales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<h1 id="horas-asignadas-2-hrs">Horas asignadas: 2 hrs<a class="headerlink" href="#horas-asignadas-2-hrs" title="Permanent link">&para;</a></h1>
+<h1 id="tipo-teoria">Tipo: Teoría<a class="headerlink" href="#tipo-teoria" title="Permanent link">&para;</a></h1>
+<hr />
+<h1 id="iso-27001-requisitos-clave-parte-1">ISO 27001 — Requisitos Clave (Parte 1)<a class="headerlink" href="#iso-27001-requisitos-clave-parte-1" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Duración:</strong> 2 horas | <strong>Asignatura:</strong> Capas SI | <strong>Unidad:</strong> La Familia ISO 27000</p>
+</blockquote>
+<h2 id="objetivo-de-la-clase">Objetivo de la clase<a class="headerlink" href="#objetivo-de-la-clase" title="Permanent link">&para;</a></h2>
+<p>Al finalizar esta clase, el alumno será capaz de:</p>
+<ul>
+<li>Explicar en lenguaje sencillo el propósito de las cláusulas 4 a 7 de ISO 27001:2022.</li>
+<li>Identificar qué pregunta responde cada cláusula en el contexto de una organización o unidad militar.</li>
+<li>Asociar cada cláusula con acciones concretas que un Técnico de comunicaciones puede observar o ejecutar.</li>
+</ul>
+<hr />
+<h2 id="clausulas-de-iso-27001-cubiertas-en-esta-clase">Cláusulas de ISO 27001 cubiertas en esta clase<a class="headerlink" href="#clausulas-de-iso-27001-cubiertas-en-esta-clase" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Cláusula</th>
+<th>Título</th>
+<th>En una frase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>§ 4</td>
+<td>Contexto de la organización</td>
+<td>Conocer quién eres, qué haces y qué riesgos te rodean</td>
+</tr>
+<tr>
+<td>§ 5</td>
+<td>Liderazgo</td>
+<td>La dirección debe comprometerse visiblemente con la seguridad</td>
+</tr>
+<tr>
+<td>§ 6</td>
+<td>Planificación</td>
+<td>Evaluar riesgos, establecer objetivos y seleccionar controles</td>
+</tr>
+<tr>
+<td>§ 7</td>
+<td>Apoyo</td>
+<td>Recursos, competencia del personal, concienciación y documentación</td>
+</tr>
+</tbody>
+</table>
+<p>ISO 27001:2022 tiene 10 cláusulas de requisitos (cláusulas 4 a 10) más un Annex A con 93 controles. Esta clase cubre las cláusulas 4 a 7 — el bloque que establece las bases del SGSI. La Parte 2 cubrirá las cláusulas 8, 9 y 10.</p>
+<div class="admonition note">
+<p>El objetivo de estas clases no es que el alumno memorice el texto de la norma. El objetivo es que, cuando trabaje en una organización que tiene un SGSI, entienda qué significa cada elemento que encuentra y por qué existe. Las referencias § X.Y son la llave para buscar la guía correspondiente cuando la necesiten.</p>
+</div>
+<hr />
+<h2 id="las-clausulas-4-7-las-bases-del-sgsi">Las Cláusulas 4-7: Las Bases del SGSI<a class="headerlink" href="#las-clausulas-4-7-las-bases-del-sgsi" title="Permanent link">&para;</a></h2>
+<h3 id="4-contexto-de-la-organizacion">§ 4 Contexto de la organización<a class="headerlink" href="#4-contexto-de-la-organizacion" title="Permanent link">&para;</a></h3>
+<p>Esta cláusula tiene tres subcláusulas principales. Todas responden a la misma pregunta fundamental: ¿quiénes somos y en qué entorno operamos?</p>
+<h3 id="41-comprender-la-organizacion-y-su-contexto">§ 4.1 Comprender la organización y su contexto<a class="headerlink" href="#41-comprender-la-organizacion-y-su-contexto" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> Antes de diseñar cualquier control de seguridad, la organización debe entender quién es, qué hace y qué factores externos e internos afectan su seguridad. No hay un SGSI genérico que funcione igual para todos — cada organización tiene su contexto único.</p>
+<p><strong>Por qué existe esta cláusula:</strong> Sin análisis de contexto, los controles implementados pueden ser incorrectos — una pequeña jefatura de comunicaciones no necesita los mismos controles que un Estado Mayor con cientos de sistemas. Implementar demasiado es costoso e innecesario; implementar muy poco es peligroso.</p>
+<p><strong>En una unidad militar:</strong>
+La Jefatura de Comunicaciones de un batallón define su contexto identificando: misión táctica (soporte de comunicaciones en operaciones), activos principales (radios tácticas, sistemas C2, equipos de puesto de mando), partes interesadas (Comandante de batallón, personal de comunicaciones, unidades subordinadas), y amenazas prioritarias (interceptación de señales, interferencia electrónica, acceso físico no autorizado a equipos).</p>
+<h3 id="42-comprender-las-necesidades-y-expectativas-de-las-partes-interesadas">§ 4.2 Comprender las necesidades y expectativas de las partes interesadas<a class="headerlink" href="#42-comprender-las-necesidades-y-expectativas-de-las-partes-interesadas" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> Las "partes interesadas" son todas las personas y organizaciones que se ven afectadas por la seguridad de la información de la organización — o que tienen expectativas sobre cómo se gestiona. Incluye no solo a los usuarios internos, sino también a clientes, reguladores, socios y proveedores.</p>
+<p><strong>Por qué existe esta cláusula:</strong> Los controles de seguridad deben satisfacer no solo las necesidades internas, sino también los requisitos que imponen terceros. Un contrato puede exigir ciertos estándares de protección de datos; una regulación puede imponer controles específicos.</p>
+<p><strong>En una unidad militar:</strong>
+Las partes interesadas de una unidad de comunicaciones incluyen: el Comando Superior (que impone requisitos de clasificación y manejo de información), unidades aliadas (que exigen compatibilidad de protocolos cifrados), el área de contrainteligencia (que puede imponer restricciones sobre qué sistemas conectar a qué redes), y los propios Técnicos (que necesitan procedimientos claros y realizables).</p>
+<h3 id="43-determinar-el-alcance-del-sgsi">§ 4.3 Determinar el alcance del SGSI<a class="headerlink" href="#43-determinar-el-alcance-del-sgsi" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> El alcance define exactamente qué sistemas, qué información y qué unidades organizativas cubre el SGSI. Lo que está dentro del alcance es gestionado por el SGSI; lo que está fuera puede no serlo.</p>
+<p><strong>Por qué existe esta cláusula:</strong> Sin un alcance definido, no hay forma de saber si el SGSI cubre lo que necesita cubrir — ni de evaluar si es completo. El alcance también comunica a las partes interesadas qué está bajo control y qué no.</p>
+<p><strong>En una unidad militar:</strong>
+Una unidad de comunicaciones puede definir su alcance como: "todos los sistemas de comunicaciones tácticas y estratégicas operados por la Jefatura de Comunicaciones del Batallón, incluyendo radios tácticas, terminales de enlace de datos, y los equipos del puesto de mando avanzado". Los sistemas administrativos (computadoras de oficina, impresoras) pueden estar fuera del alcance si no procesan información clasificada.</p>
+<hr />
+<h3 id="5-liderazgo">§ 5 Liderazgo<a class="headerlink" href="#5-liderazgo" title="Permanent link">&para;</a></h3>
+<p>Esta cláusula establece que la seguridad de la información no puede ser responsabilidad exclusiva del área técnica. La dirección — el mando — debe comprometerse activamente.</p>
+<h3 id="51-liderazgo-y-compromiso">§ 5.1 Liderazgo y compromiso<a class="headerlink" href="#51-liderazgo-y-compromiso" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> El mando debe demostrar que la seguridad de la información es una prioridad real, no una prioridad declarada. Esto significa asignar recursos, participar en las revisiones del SGSI y tomar decisiones sobre riesgo.</p>
+<p><strong>Por qué existe esta cláusula:</strong> Los Técnicos pueden configurar sistemas perfectamente seguros, pero si el mando no apoya las políticas de seguridad — o las viola abiertamente — el SGSI falla. La seguridad necesita autoridad para ser efectiva.</p>
+<p><strong>En una unidad militar:</strong>
+El Comandante demuestra compromiso con la seguridad cuando: aprueba formalmente la política de seguridad de comunicaciones, asigna tiempo de instrucción para la formación del personal en procedimientos de seguridad, y no omite los procedimientos de verificación de equipos por presión de tiempo operacional.</p>
+<h3 id="52-politica-de-seguridad-de-la-informacion">§ 5.2 Política de seguridad de la información<a class="headerlink" href="#52-politica-de-seguridad-de-la-informacion" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> La organización debe tener una política de seguridad de la información — un documento oficial, aprobado por la dirección, que establece el compromiso de la organización con la seguridad y los principios que guían todas las decisiones en esta materia.</p>
+<p><strong>Por qué existe esta cláusula:</strong> Sin una política formal, cada persona interpreta la seguridad según su criterio. La política es el documento de referencia que alinea a toda la organización.</p>
+<p><strong>En una unidad militar:</strong>
+La política puede ser tan simple como un párrafo en las órdenes de operaciones permanentes: "Todo el personal de comunicaciones es responsable de mantener la seguridad de los equipos y la información que procesan. Los incidentes de seguridad deben reportarse al Oficial de Seguridad en no más de 2 horas." Lo que importa es que exista, esté aprobada por el mando y sea conocida por todo el personal.</p>
+<h3 id="53-roles-responsabilidades-y-autoridades">§ 5.3 Roles, responsabilidades y autoridades<a class="headerlink" href="#53-roles-responsabilidades-y-autoridades" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> Alguien debe ser responsable del SGSI. Esta cláusula requiere que la organización asigne responsabilidades específicas de seguridad a personas concretas — no a "el área de TI" en abstracto.</p>
+<p><strong>Por qué existe esta cláusula:</strong> La responsabilidad difusa es responsabilidad inexistente. Si todos son responsables de la seguridad, nadie lo es en la práctica.</p>
+<p><strong>En una unidad militar:</strong>
+La asignación puede ser: "El Suboficial de Comunicaciones de Turno es responsable de verificar el estado de seguridad de los equipos al inicio de cada turno. El Oficial de Seguridad es responsable de la política y de las revisiones mensuales."</p>
+<hr />
+<h3 id="6-planificacion">§ 6 Planificación<a class="headerlink" href="#6-planificacion" title="Permanent link">&para;</a></h3>
+<p>Si la cláusula 4 respondió "¿quiénes somos?", la cláusula 6 responde "¿qué vamos a hacer con los riesgos que identificamos?".</p>
+<h3 id="61-acciones-para-abordar-riesgos-y-oportunidades">§ 6.1 Acciones para abordar riesgos y oportunidades<a class="headerlink" href="#61-acciones-para-abordar-riesgos-y-oportunidades" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> La organización debe evaluar sus riesgos de seguridad de forma sistemática — identificar qué activos tiene, qué amenazas los afectan, qué tan vulnerables son, y qué impacto tendría un incidente — y luego decidir qué hacer con cada riesgo.</p>
+<p><strong>Por qué existe esta cláusula:</strong> Los controles de seguridad son una respuesta a los riesgos identificados, no decisiones arbitrarias. Sin evaluación de riesgos, es imposible saber si los controles implementados son los correctos.</p>
+<p><strong>En una unidad militar:</strong>
+Un riesgo identificado podría ser: "Las radios tácticas del pelotón de reconocimiento se transportan en vehículos que pueden ser capturados. Si una radio es capturada con el material criptográfico cargado, el adversario tiene acceso a las comunicaciones cifradas." La respuesta al riesgo es: procedimiento de emergencia para borrar el material criptográfico si el equipo va a ser capturado, más renovación inmediata del material en el resto de la red de comunicaciones.</p>
+<h3 id="62-objetivos-de-seguridad-de-la-informacion">§ 6.2 Objetivos de seguridad de la información<a class="headerlink" href="#62-objetivos-de-seguridad-de-la-informacion" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> El SGSI debe tener objetivos medibles — no solo "mejorar la seguridad", sino "reducir el tiempo de respuesta a incidentes de seguridad a menos de 4 horas" o "garantizar que el 100% del personal completa la instrucción de seguridad anual".</p>
+<p><strong>Por qué existe esta cláusula:</strong> Lo que no se mide no se gestiona. Los objetivos medibles permiten saber si el SGSI está funcionando o no.</p>
+<p><strong>En una unidad militar:</strong>
+Objetivos concretos para una jefatura de comunicaciones: "Todos los equipos con material criptográfico deben verificarse cada 24 horas durante operaciones", "Ningún equipo debe conectarse a la red de unidad sin pasar la lista de verificación de seguridad estándar."</p>
+<hr />
+<h3 id="7-apoyo">§ 7 Apoyo<a class="headerlink" href="#7-apoyo" title="Permanent link">&para;</a></h3>
+<p>Esta cláusula responde: "¿con qué recursos cuenta el SGSI para funcionar?"</p>
+<h3 id="71-recursos">§ 7.1 Recursos<a class="headerlink" href="#71-recursos" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> La organización debe proporcionar los recursos necesarios para que el SGSI funcione — tiempo, personal, herramientas, presupuesto. Un SGSI sin recursos es un documento sin implementación.</p>
+<p><strong>Por qué existe esta cláusula:</strong> Es frecuente que las organizaciones aprueben un SGSI en papel pero no asignen recursos para operarlo. Esta cláusula hace que la asignación de recursos sea un requisito explícito.</p>
+<h3 id="72-competencia">§ 7.2 Competencia<a class="headerlink" href="#72-competencia" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> Las personas que tienen responsabilidades de seguridad deben estar calificadas para ejercerlas. La organización debe verificar que su personal tiene la formación y experiencia necesarias para su rol en el SGSI.</p>
+<p><strong>Por qué existe esta cláusula:</strong> Un SGSI es tan fuerte como las personas que lo operan. Un Técnico sin la formación adecuada puede implementar controles incorrectamente, crear vulnerabilidades sin saberlo, o no reconocer señales de un incidente.</p>
+<p><strong>En una unidad militar:</strong>
+Un Técnico recién asignado a una jefatura de comunicaciones debe recibir la instrucción necesaria antes de operar equipos con material criptográfico: qué verificaciones realizar, qué hacer en caso de anomalía, cómo reportar un incidente. Esta instrucción es un requisito de § 7.2, no una cortesía.</p>
+<h3 id="73-concienciacion">§ 7.3 Concienciación<a class="headerlink" href="#73-concienciacion" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> Todo el personal que puede afectar la seguridad de la información — no solo los Técnicos, sino todos los usuarios de los sistemas — debe ser consciente de la política de seguridad, de su contribución al SGSI, y de las consecuencias de no cumplir con los requisitos.</p>
+<p><strong>Por qué existe esta cláusula:</strong> La mayoría de los incidentes de seguridad tienen un componente humano — alguien que hizo clic en el archivo equivocado, que usó una contraseña débil, que dejó un equipo desbloqueado. La concienciación no elimina estos errores, pero los reduce significativamente.</p>
+<h3 id="74-comunicacion">§ 7.4 Comunicación<a class="headerlink" href="#74-comunicacion" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> La organización debe definir qué información de seguridad se comunica, a quién, cuándo y cómo.</p>
+<h3 id="75-informacion-documentada">§ 7.5 Información documentada<a class="headerlink" href="#75-informacion-documentada" title="Permanent link">&para;</a></h3>
+<p><strong>En lenguaje sencillo:</strong> El SGSI debe estar documentado — las políticas, los procedimientos, los registros de auditorías, los resultados de la evaluación de riesgos. La documentación es la evidencia de que el SGSI existe y funciona.</p>
+<p><strong>Por qué existe esta cláusula:</strong> Sin documentación, no hay forma de verificar que el SGSI existe, ni de transmitirlo a personal nuevo, ni de mejorar sobre lo que se hizo antes.</p>
+<p><strong>En una unidad militar:</strong>
+La documentación del SGSI de una jefatura de comunicaciones puede ser tan simple como: un registro de los equipos con material criptográfico y su estado, un checklist firmado de verificaciones diarias, y un registro de incidentes de seguridad con fecha y resolución.</p>
+<hr />
+<h2 id="aplicacion-en-contexto-castrense">Aplicación en Contexto Castrense<a class="headerlink" href="#aplicacion-en-contexto-castrense" title="Permanent link">&para;</a></h2>
+<p>Las cláusulas 4-7 de ISO 27001 no son burocracia abstracta — son las preguntas que cualquier organización bien gestionada debería poder responder, y que los Técnicos de comunicaciones militares ya responden en la práctica, aunque no siempre con esta terminología.</p>
+<p><strong>Ejemplo 1 — Contexto y alcance en un puesto de mando avanzado:</strong>
+Antes de desplegar un puesto de mando avanzado (§ 4.3 alcance), el Oficial de Comunicaciones define qué sistemas se van a operar — radios de largo alcance, terminal de enlace de datos, computadores de mando. Identifica las partes interesadas (§ 4.2): el Comandante de la fuerza de tarea necesita comunicaciones confiables; el Estado Mayor necesita que los datos de situación lleguen sin corrupción; el área de contrainteligencia necesita que ninguna transmisión sea interceptable. Cada uno de esos requisitos se convierte en un control de seguridad concreto.</p>
+<p><strong>Ejemplo 2 — Liderazgo y competencia en la operación de sistemas C2:</strong>
+El Comandante que firma el SOP de comunicaciones seguras está ejerciendo § 5.1 (liderazgo y compromiso). El Suboficial que verifica diariamente el estado de los equipos SCIF antes de permitir el ingreso de personal está ejerciendo § 5.3 (responsabilidades). La instrucción obligatoria de operación de sistemas C2 antes de asignar a un Técnico a ese puesto es § 7.2 (competencia). Estas acciones existen en muchas unidades militares — ISO 27001 les pone nombre y las hace verificables.</p>
+<hr />
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Las cláusulas 4-7 de ISO 27001 establecen las bases del SGSI: <strong>contexto</strong> (§4), <strong>liderazgo</strong> (§5), <strong>planificación</strong> (§6) y <strong>apoyo</strong> (§7).</li>
+<li>La siguiente sección resume cada cláusula: qué significa, por qué existe, y cómo aplica en un contexto militar concreto.</li>
+<li>La § 4 responde "¿quiénes somos y en qué entorno operamos?"; § 5 dice que el mando debe comprometerse activamente; § 6 convierte los riesgos en decisiones documentadas; § 7 asegura que el SGSI tiene los recursos y la documentación para funcionar.</li>
+<li>La documentación (§ 7.5) no es un fin en sí mismo — es la evidencia de que el SGSI existe y funciona, y el mecanismo para transmitirlo y mejorarlo.</li>
+</ol>
+<h2 id="para-profundizar">Para profundizar<a class="headerlink" href="#para-profundizar" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Recursos opcionales — no requeridos para el examen.</p>
+</blockquote>
+<ul>
+<li><strong>Resumen de ISO 27001:2022 (IT Governance):</strong> https://www.itgovernance.co.uk/iso27001-2022-changes — Cambios entre la versión 2013 y 2022, con énfasis en las cláusulas 4-10.</li>
+<li><strong>ISO 27001 Clause by Clause (Advisera):</strong> https://advisera.com/27001academy/knowledgebase/iso-27001-clause-by-clause-explanation/ — Explicación en inglés de cada cláusula en lenguaje accesible.</li>
+<li><strong>Plantilla de alcance SGSI:</strong> https://www.iso27001security.com/html/27001.html — Referencia para entender cómo se documenta el alcance en organizaciones reales.</li>
+</ul>
+<hr />
+<p><em>Siguiente: <a href="../iso27001-requisitos-p2/">ISO 27001 — Requisitos Clave (Parte 2)</a></em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

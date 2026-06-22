@@ -1,0 +1,2686 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/gestion-riesgos/mitigacion-controles/examen/">
+      
+      
+        <link rel="prev" href="../controles-buenas-practicas/">
+      
+      
+        <link rel="next" href="../../../conferencias/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Examen - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#horas-asignadas-1-hr" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Examen
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cortafuegos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cortafuegos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/lab-iptables-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27000-generalidades-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27001-requisitos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Responsabilidad Social
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Responsabilidad Social
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/responsabilidad-social/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/responsabilidad-social/impacto-responsabilidad-social/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Impacto de la Responsabilidad Social
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Operaciones de Paz
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Operaciones de Paz
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/operaciones-paz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/operaciones-paz/operaciones-paz-globales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operaciones de Paz en Entornos Globales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<h1 id="horas-asignadas-1-hr">Horas asignadas: 1 hr<a class="headerlink" href="#horas-asignadas-1-hr" title="Permanent link">&para;</a></h1>
+<h1 id="tipo-examen">Tipo: Examen<a class="headerlink" href="#tipo-examen" title="Permanent link">&para;</a></h1>
+<hr />
+<h1 id="examen-gestion-de-riesgos-y-vulnerabilidades">Examen — Gestión de Riesgos y Vulnerabilidades<a class="headerlink" href="#examen-gestion-de-riesgos-y-vulnerabilidades" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Duración:</strong> 1 hora | <strong>Asignatura:</strong> Gestión de Riesgos y Vulnerabilidades | <strong>Unidad:</strong> Mitigación y Control de Riesgos</p>
+</blockquote>
+<h2 id="instrucciones-generales">Instrucciones generales<a class="headerlink" href="#instrucciones-generales" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Duración:</strong> 60 minutos.</li>
+<li><strong>Puntaje total:</strong> 100 puntos.</li>
+<li><strong>Materiales permitidos:</strong> ninguno — examen a libro cerrado.</li>
+<li><strong>Instrucciones de entrega:</strong> escribir nombre y grado en la parte superior de la hoja antes de comenzar.</li>
+<li>Responder las tres partes en orden. No pasar a la siguiente parte sin completar la anterior.</li>
+<li>En la Parte A, escribir las respuestas directamente sobre las líneas en blanco de la tabla. Usar los valores A (Alta), M (Media) o B (Baja) para las columnas de probabilidad e impacto.</li>
+</ul>
+<hr />
+<h2 id="escenario">Escenario<a class="headerlink" href="#escenario" title="Permanent link">&para;</a></h2>
+<p>La <strong>Jefatura de Comunicaciones del Batallón de Comunicaciones N°3</strong> (JC-BC3) ha completado una revisión interna de seguridad de sus sistemas de información. La sala de comunicaciones cuenta con un servidor de archivos, cuatro terminales C2 (sistema de mando y control), un conjunto de radios HF/VHF para comunicaciones tácticas, y seis laptops de campo utilizadas en operaciones fuera del cuartel.</p>
+<p>Durante la revisión se identificaron varias situaciones de riesgo sin resolver:</p>
+<ul>
+<li>Las laptops de campo no tienen cifrado de disco habilitado y se han dejado sin supervisión en vehículos tácticos en al menos dos ocasiones en los últimos 3 meses.</li>
+<li>El firmware de las radios HF tiene una vulnerabilidad publicada (CVE con score 7.5) para la cual el fabricante aún no ha liberado un parche.</li>
+<li>Un miembro del equipo de turno ha estado compartiendo su contraseña de acceso al servidor de archivos con el personal del siguiente turno "para ahorrar tiempo en el cambio".</li>
+</ul>
+<p>El Técnico de guardia ha recibido la tarea de evaluar estos riesgos y proponer acciones.</p>
+<hr />
+<h2 id="parte-a-matriz-de-riesgo-30-puntos">Parte A — Matriz de Riesgo (30 puntos)<a class="headerlink" href="#parte-a-matriz-de-riesgo-30-puntos" title="Permanent link">&para;</a></h2>
+<p><strong>Instrucciones:</strong> Complete las celdas marcadas con <strong><em>_</em></strong>___ basándose en el escenario descrito y en los conocimientos de la asignatura. Justifique brevemente su respuesta en la columna de Tratamiento.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Activo</th>
+<th>Amenaza</th>
+<th>Vulnerabilidad</th>
+<th>Prob. (A/M/B)</th>
+<th>Impacto (A/M/B)</th>
+<th>Riesgo</th>
+<th>Tratamiento propuesto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Sistema de comunicaciones táctico (radios HF)</td>
+<td>Malware / explotación de firmware</td>
+<td><strong><em>_</em></strong>___</td>
+<td>Alta</td>
+<td><strong><em>_</em></strong>___</td>
+<td><strong><em>_</em></strong>___</td>
+<td><strong><em>_</em></strong>___</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong><em>_</em></strong>___</td>
+<td>Acceso físico no autorizado</td>
+<td>Sin cifrado de disco activo</td>
+<td><strong><em>_</em></strong>___</td>
+<td>Alta</td>
+<td><strong><em>_</em></strong>___</td>
+<td><strong><em>_</em></strong>___</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Base de datos de personal (servidor de archivos)</td>
+<td><strong><em>_</em></strong>___</td>
+<td>Parches del sistema operativo sin aplicar (90 días)</td>
+<td>Media</td>
+<td><strong><em>_</em></strong>___</td>
+<td><strong><em>_</em></strong>___</td>
+<td><strong><em>_</em></strong>___</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Laptops de campo</td>
+<td>Robo o pérdida del equipo</td>
+<td>Sin cifrado de disco</td>
+<td><strong><em>_</em></strong>___</td>
+<td><strong><em>_</em></strong>___</td>
+<td><strong><em>_</em></strong>___</td>
+<td><strong><em>_</em></strong>___</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Red de la unidad</td>
+<td>Insider threat</td>
+<td><strong><em>_</em></strong>___</td>
+<td>Baja</td>
+<td><strong><em>_</em></strong>___</td>
+<td><strong><em>_</em></strong>___</td>
+<td><strong><em>_</em></strong>___</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="parte-b-seleccion-multiple-40-puntos-10-puntos-por-pregunta">Parte B — Selección Múltiple (40 puntos — 10 puntos por pregunta)<a class="headerlink" href="#parte-b-seleccion-multiple-40-puntos-10-puntos-por-pregunta" title="Permanent link">&para;</a></h2>
+<p><strong>Instrucciones:</strong> Marque con una X la opción correcta. Solo una respuesta es correcta por pregunta.</p>
+<hr />
+<p><strong>P1.</strong> Un Técnico detecta que la radio táctica VHF del puesto de mando avanzado tiene el firmware sin actualizar desde hace 12 meses. El fabricante publicó un boletín de seguridad indicando que esa versión tiene una vulnerabilidad conocida. ¿Cuál de los siguientes términos describe correctamente el firmware sin actualizar?</p>
+<ul>
+<li>A) Una amenaza</li>
+<li>B) Un impacto</li>
+<li>C) Una vulnerabilidad</li>
+<li>D) Un riesgo</li>
+</ul>
+<hr />
+<p><strong>P2.</strong> Durante la revisión de seguridad de la JC-BC3, el Técnico detecta que un miembro del equipo de turno comparte su contraseña de acceso al servidor de archivos con el personal del turno siguiente. Según la taxonomía de tipos de riesgo castrense, ¿en qué categoría principal se clasifica este comportamiento?</p>
+<ul>
+<li>A) Riesgo Operacional — afecta directamente la ejecución de la misión por falla de proceso de mando</li>
+<li>B) Riesgo Físico — implica acceso no autorizado a instalaciones de la unidad</li>
+<li>C) Riesgo Humano (negligencia) — violación de la política de credenciales por comodidad operacional</li>
+<li>D) Riesgo TI — vulnerabilidad técnica en el sistema de autenticación del servidor</li>
+</ul>
+<hr />
+<p><strong>P3.</strong> El Técnico de la JC-BC3 recibe un boletín de Microsoft Patch Tuesday que indica que el sistema operativo Windows Server 2016 del servidor de archivos tiene una vulnerabilidad con score CVSS 9.2. Según los plazos operacionales de la asignatura, ¿cuál es la acción correcta?</p>
+<ul>
+<li>A) Documentar la vulnerabilidad en el registro de riesgos y revisarla en el próximo ciclo mensual</li>
+<li>B) Elaborar un plan de mitigación para los próximos 30 días</li>
+<li>C) Informar al Jefe de sección en el próximo reporte de turno y planificar la remediación en 7 días</li>
+<li>D) Escalar inmediatamente al Jefe de sección y aplicar el parche o control compensatorio dentro de las 24 horas</li>
+</ul>
+<hr />
+<p><strong>P4.</strong> El IDS de la red de la JC-BC3 genera una alerta cuando detecta un volumen inusual de tráfico saliente desde el servidor de archivos hacia una dirección IP desconocida. ¿Qué tipo de control es el IDS en este escenario?</p>
+<ul>
+<li>A) Preventivo — porque bloquea el tráfico no autorizado antes de que salga de la red</li>
+<li>B) Detectivo — porque alerta sobre un comportamiento anómalo que ya está ocurriendo</li>
+<li>C) Correctivo — porque restaura el estado normal de la red después del incidente</li>
+<li>D) Preventivo y correctivo a la vez — porque detiene el tráfico y notifica al administrador simultáneamente</li>
+</ul>
+<hr />
+<h2 id="parte-c-respuesta-corta-30-puntos-10-puntos-por-pregunta">Parte C — Respuesta Corta (30 puntos — 10 puntos por pregunta)<a class="headerlink" href="#parte-c-respuesta-corta-30-puntos-10-puntos-por-pregunta" title="Permanent link">&para;</a></h2>
+<p><strong>Instrucciones:</strong> Responder de forma concisa. Las respuestas no deben superar las 5 líneas por pregunta.</p>
+<hr />
+<p><strong>P5.</strong> La laptop del Oficial de Inteligencia de la JC-BC3 fue olvidada dentro de un vehículo táctico sin supervisión durante 3 horas. La laptop no tiene cifrado de disco habilitado. Complete los siguientes campos para una fila del registro de riesgo de este activo:</p>
+<ul>
+<li><strong>Activo:</strong> <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</li>
+<li><strong>Amenaza:</strong> <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>_</li>
+<li><strong>Vulnerabilidad:</strong> <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</li>
+<li><strong>Probabilidad (A/M/B) y justificación:</strong> <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>____</li>
+<li><strong>Impacto (A/M/B) y justificación:</strong> <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong></li>
+</ul>
+<hr />
+<p><strong>P6.</strong> El proveedor de software de gestión de comunicaciones usado en la JC-BC3 publica el siguiente aviso de seguridad:</p>
+<blockquote>
+<p>"Vulnerabilidad identificada en CommManager Pro versión 3.2.1 y anteriores. Score CVSS base: <strong>9.2</strong>. La vulnerabilidad permite a un atacante con acceso a la red ejecutar código arbitrario sin autenticación. Se recomienda actualizar a la versión 3.3.0 inmediatamente."</p>
+</blockquote>
+<p>Responda las siguientes preguntas:</p>
+<p>a) ¿A qué banda de severidad CVSS corresponde el score 9.2?</p>
+<p>b) ¿La vulnerabilidad obliga a tomar acción inmediata o puede esperar al ciclo de mantenimiento mensual? Justifique.</p>
+<p>c) Escriba la primera línea del campo "Descripción" del reporte de vulnerabilidad para este hallazgo.</p>
+<hr />
+<p><strong>P7.</strong> Describa en 2 a 3 oraciones la cadena de reporte de vulnerabilidades en la JC-BC3: ¿quién detecta la vulnerabilidad, quién recibe el reporte inicial, y quién toma la decisión final de acción?</p>
+<p>___________________________________________________________________________________</p>
+<p>___________________________________________________________________________________</p>
+<p>___________________________________________________________________________________</p>
+<p>___________________________________________________________________________________</p>
+<p>___________________________________________________________________________________</p>
+<hr />
+<h2 id="parte-d-profundizacion-sin-puntuacion-adicional-practica-formativa">Parte D — Profundización (sin puntuación adicional — práctica formativa)<a class="headerlink" href="#parte-d-profundizacion-sin-puntuacion-adicional-practica-formativa" title="Permanent link">&para;</a></h2>
+<p><strong>Instrucciones:</strong> Estas preguntas no suman puntos al total pero sirven para autoevaluación. Responder si el tiempo lo permite.</p>
+<hr />
+<p><strong>P8.</strong> El Técnico de la JC-BC3 identifica que las radios HF del batallón usan firmware con una vulnerabilidad con CVSS 7.5 y sin parche disponible del fabricante. ¿Cuál es el control compensatorio más adecuado?</p>
+<ul>
+<li>A) Dejar las radios fuera de servicio hasta que el parche esté disponible</li>
+<li>B) Reducir la exposición a frecuencias no operacionales y verificar integridad de firmware post-sesión mientras se espera el parche</li>
+<li>C) Actualizar manualmente el firmware descargando la versión del fabricante de internet</li>
+<li>D) Aceptar el riesgo sin documentación porque no hay solución disponible</li>
+</ul>
+<hr />
+<p><strong>P9.</strong> ¿Cuál de los siguientes describe mejor la diferencia entre una vulnerabilidad y una amenaza?</p>
+<ul>
+<li>A) Una vulnerabilidad es externa y una amenaza es interna al sistema</li>
+<li>B) Una vulnerabilidad es una debilidad en el activo; una amenaza es el agente que puede explotarla</li>
+<li>C) Una vulnerabilidad solo aplica a software; una amenaza aplica a hardware y personas</li>
+<li>D) No hay diferencia operacional — ambos términos se usan indistintamente en los registros de riesgo</li>
+</ul>
+<hr />
+<p><strong>P10.</strong> El Oficial de la JC-BC3 debe decidir si acepta o mitiga una vulnerabilidad con CVSS 3.2 en un sistema de backup secundario que no está conectado a la red operacional. ¿Qué tratamiento es más apropiado?</p>
+<ul>
+<li>A) Mitigar de inmediato — todo score CVSS requiere remediación dentro de las 24 horas</li>
+<li>B) Aceptar el riesgo documentando la decisión — severidad Low en un activo de baja criticidad puede ser aceptada con control administrativo</li>
+<li>C) Eliminar el activo — si no se puede parchar, el sistema debe ser dado de baja</li>
+<li>D) Transferir el riesgo contratando un proveedor externo de gestión de vulnerabilidades</li>
+</ul>
+<hr />
+<div class="admonition danger">
+<p class="admonition-title">Solo instructor — Clave de Respuestas</p>
+<h2 id="tabla-de-tiempo-sugerido">Tabla de tiempo sugerido<a class="headerlink" href="#tabla-de-tiempo-sugerido" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Actividad</th>
+<th>Tiempo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>Lectura del escenario e instrucciones</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td>Parte A</td>
+<td>Completar la matriz de riesgo</td>
+<td>20 min</td>
+</tr>
+<tr>
+<td>Parte B</td>
+<td>Selección múltiple (4 preguntas)</td>
+<td>20 min</td>
+</tr>
+<tr>
+<td>Parte C</td>
+<td>Respuesta corta (3 preguntas)</td>
+<td>15 min</td>
+</tr>
+<tr>
+<td>Parte D</td>
+<td>Preguntas de profundización — sin puntuación (si queda tiempo)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td></td>
+<td><strong>60 min</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="parte-a-clave-de-la-matriz-de-riesgo-30-puntos">Parte A — Clave de la Matriz de Riesgo (30 puntos)<a class="headerlink" href="#parte-a-clave-de-la-matriz-de-riesgo-30-puntos" title="Permanent link">&para;</a></h2>
+<p>Criterio de corrección: 2 puntos por cada celda de contenido en blanco correctamente completada (Activo/Amenaza/Vulnerabilidad, Probabilidad, Impacto, Nivel de Riesgo). La columna "Tratamiento propuesto" se evalúa cualitativamente: respuesta razonada y coherente con el nivel de riesgo = correcta; respuesta ausente o contradictoria = 0 pts. Celdas de contenido evaluadas: 3 por fila × 5 filas = 15 celdas × 2 puntos = 30 puntos.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Activo</th>
+<th>Amenaza</th>
+<th>Vulnerabilidad</th>
+<th>Prob.</th>
+<th>Impacto</th>
+<th>Riesgo</th>
+<th>Tratamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Sistema de comunicaciones táctico (radios HF)</td>
+<td>Malware / explotación de firmware</td>
+<td><strong>Firmware con vulnerabilidad publicada sin parche disponible</strong></td>
+<td>Alta</td>
+<td><strong>Alta</strong></td>
+<td><strong>Alto</strong></td>
+<td><strong>Mitigar con control compensatorio: reducir exposición de las radios a frecuencias no operacionales; monitorear integridad de firmware post-sesión; planificar actualización en cuanto el parche esté disponible.</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Laptops de campo</strong></td>
+<td>Acceso físico no autorizado</td>
+<td>Sin cifrado de disco activo</td>
+<td><strong>Alta</strong></td>
+<td>Alta</td>
+<td><strong>Alto</strong></td>
+<td><strong>Mitigar: habilitar cifrado de disco (BitLocker) en todas las laptops de campo. Hasta que el cifrado esté activo, establecer custodia permanente de equipos — no dejarlos en vehículos sin supervisión.</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Base de datos de personal (servidor de archivos)</td>
+<td><strong>Acceso no autorizado / explotación de vulnerabilidad del SO</strong></td>
+<td>Parches del sistema operativo sin aplicar (90 días)</td>
+<td>Media</td>
+<td><strong>Alta</strong></td>
+<td><strong>Alto</strong></td>
+<td><strong>Mitigar: aplicar actualizaciones de seguridad pendientes en el servidor. Priorizar las marcadas como High/Critical según el score CVSS.</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Laptops de campo</td>
+<td>Robo o pérdida del equipo</td>
+<td>Sin cifrado de disco</td>
+<td><strong>Alta</strong></td>
+<td><strong>Alta</strong></td>
+<td><strong>Alto</strong></td>
+<td><strong>Mitigar: habilitar cifrado de disco (BitLocker). Control inmediato: establecer política de custodia de equipos en operaciones de campo.</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Red de la unidad</td>
+<td>Insider threat</td>
+<td><strong>Contraseñas compartidas entre turnos / ausencia de política de credenciales individuales</strong></td>
+<td>Baja</td>
+<td><strong>Alta</strong></td>
+<td><strong>Medio</strong></td>
+<td><strong>Mitigar: implementar política de uso exclusivo de credenciales personales. Revocar la contraseña compartida inmediatamente. Auditar el log de accesos de los últimos 30 días.</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas de corrección:</strong>
+- Fila 1, Vulnerabilidad: "firmware sin parchear" o "vulnerabilidad de firmware publicada" son aceptables.
+- Fila 3, Amenaza: "acceso no autorizado", "explotación de vulnerabilidad", "malware" son todas aceptables.
+- Fila 5, Riesgo: Probabilidad Baja × Impacto Alta = <strong>Medio</strong> según la matriz 3×3 (ver tabla de la clase).
+- Fila 4, Prob.: Alta es correcta (laptops de campo ya han sido dejadas sin supervisión en 2 ocasiones en 3 meses, según el escenario).</p>
+<hr />
+<h2 id="parte-b-clave-de-seleccion-multiple-40-puntos">Parte B — Clave de Selección Múltiple (40 puntos)<a class="headerlink" href="#parte-b-clave-de-seleccion-multiple-40-puntos" title="Permanent link">&para;</a></h2>
+<p><strong>P1 — Respuesta correcta: C) Una vulnerabilidad</strong></p>
+<p>Justificación: El firmware sin actualizar es una debilidad del activo (la radio) que puede ser explotada por una amenaza (el atacante que usa el exploit de la vulnerabilidad publicada). No es la amenaza (la amenaza es quien explota la falla), no es el impacto (que sería la pérdida de comunicación), y no es el riesgo (que es la combinación de amenaza × vulnerabilidad × probabilidad × impacto).</p>
+<p>Opciones incorrectas:
+- A) Incorrecto: La amenaza es el actor hostil o el malware, no el firmware desactualizado.
+- B) Incorrecto: El impacto es la consecuencia (pérdida de comunicaciones), no la vulnerabilidad.
+- D) Incorrecto: El riesgo es la probabilidad de que la amenaza explote la vulnerabilidad y cause impacto — es el concepto que engloba todos los elementos, no solo la debilidad del activo.</p>
+<hr />
+<p><strong>P2 — Respuesta correcta: C) Riesgo Humano (negligencia)</strong></p>
+<p>Justificación: Compartir contraseñas es un comportamiento negligente del personal — no hay intención maliciosa, pero viola la política de seguridad y destruye la trazabilidad de auditoría. Es la categoría Riesgo Humano, subcategoría negligencia.</p>
+<p>Opciones incorrectas:
+- A) Incorrecto: El riesgo operacional afecta la ejecución de la misión por falla de procesos de C2. Compartir contraseñas no impacta directamente la misión en tiempo real.
+- B) Incorrecto: El riesgo físico implica acceso o daño a equipos en el entorno físico. La contraseña compartida es un riesgo de autenticación, no de acceso físico.
+- D) Incorrecto: El riesgo TI es una vulnerabilidad técnica del sistema de autenticación. La falla aquí es de comportamiento humano, no del sistema técnico. Si el sistema tuviera MFA habilitado, la contraseña compartida sería menos crítica — pero el problema descrito es el comportamiento, no la configuración del sistema.</p>
+<hr />
+<p><strong>P3 — Respuesta correcta: D) Escalar inmediatamente al Jefe de sección y aplicar el parche o control compensatorio dentro de las 24 horas</strong></p>
+<p>Justificación: Score CVSS 9.2 = banda Critical (9.0–10.0). La regla de plazo operacional para Critical es acción dentro de las 24 horas siguientes a la detección. El activo es el servidor de archivos de la JC-BC3, que es un activo compartido crítico para la unidad — lo que confirma la urgencia.</p>
+<p>Opciones incorrectas:
+- A) Incorrecto: Ciclo mensual es el plazo para severidad Low (0.1–3.9). CVSS 9.2 es Critical.
+- B) Incorrecto: Plan de 30 días corresponde a severidad Medium (4.0–6.9).
+- C) Incorrecto: 7 días corresponde a severidad High (7.0–8.9). CVSS 9.2 supera ese umbral.</p>
+<hr />
+<p><strong>P4 — Respuesta correcta: B) Detectivo — porque alerta sobre un comportamiento anómalo que ya está ocurriendo</strong></p>
+<p>Justificación: El IDS en este escenario detecta tráfico inusual y genera una alerta — no bloquea el tráfico, solo detecta y alerta. Esta es la función primaria de un control detectivo: alertar cuando un incidente está ocurriendo o ya ocurrió.</p>
+<p>Opciones incorrectas:
+- A) Incorrecto: Un IDS en modo detección (no prevención) no bloquea el tráfico. Un IPS (Intrusion Prevention System) cumple la función preventiva de bloqueo activo.
+- C) Incorrecto: Un control correctivo restaura el estado normal después del incidente (ej. restaurar backup, revocar credenciales). El IDS no restaura nada.
+- D) Incorrecto: Un IDS estándar no bloquea el tráfico — solo alerta. La opción describe una función de IPS, no de IDS.</p>
+<hr />
+<h2 id="parte-c-respuestas-modelo-30-puntos">Parte C — Respuestas Modelo (30 puntos)<a class="headerlink" href="#parte-c-respuestas-modelo-30-puntos" title="Permanent link">&para;</a></h2>
+<p><strong>P5 — Respuesta modelo (10 puntos)</strong></p>
+<ul>
+<li><strong>Activo:</strong> Laptop del Oficial de Inteligencia de la JC-BC3 (equipo de campo con documentos operacionales).</li>
+<li><strong>Amenaza:</strong> Acceso físico no autorizado o robo del equipo mientras estaba sin supervisión en el vehículo táctico.</li>
+<li><strong>Vulnerabilidad:</strong> Sin cifrado de disco habilitado — cualquier persona con acceso físico puede leer los archivos sin necesidad de credenciales.</li>
+<li><strong>Probabilidad (Alta / Media):</strong> Media o Alta son ambas aceptables. Justificación para Alta: el equipo ya estuvo sin supervisión en vehículo táctico; la conducta es recurrente. Justificación para Media: no hay evidencia de intento de acceso real, solo exposición física. El instructor acepta cualquiera de las dos si la justificación es consistente.</li>
+<li><strong>Impacto (Alta):</strong> Alta. La laptop del Oficial de Inteligencia contiene con alta probabilidad información clasificada (planes de operaciones, inteligencia de situación). Un compromiso de esa información puede afectar la seguridad del personal y la integridad de la misión.</li>
+</ul>
+<p>Criterio de puntaje: 2 puntos por campo correctamente completado con justificación coherente. Total: 5 campos × 2 puntos = 10 puntos.</p>
+<hr />
+<p><strong>P6 — Respuesta modelo (10 puntos)</strong></p>
+<p>a) <strong>Banda Critical (9.0–10.0).</strong> Score 9.2 cae en la banda Critical.</p>
+<p>b) <strong>Acción inmediata obligatoria — no puede esperar al ciclo mensual.</strong> La banda Critical tiene un plazo operacional de 24 horas. Adicionalmente, el aviso indica que la vulnerabilidad permite ejecución de código sin autenticación desde la red — un atacante con acceso a la red de la unidad puede explotar la falla sin credenciales. Esperar 30 días expone la red de la JC-BC3 a un riesgo inaceptable durante ese período.</p>
+<p>c) <strong>Primera línea del campo Descripción (ejemplo aceptable):</strong>
+"CommManager Pro versión 3.2.1 instalada en [nombre del sistema] presenta una vulnerabilidad Critical (CVSS 9.2) que permite ejecución remota de código sin autenticación por un actor con acceso a la red de la unidad."</p>
+<p>El instructor evalúa: ¿incluye el nombre del producto? ¿incluye la severidad o score? ¿describe el impacto (ejecución de código)? ¿menciona que no requiere autenticación? 2-3 de estos elementos = puntaje completo.</p>
+<p>Criterio de puntaje: a) 2 puntos, b) 4 puntos (2 por la respuesta + 2 por la justificación), c) 4 puntos.</p>
+<hr />
+<p><strong>P7 — Respuesta modelo (10 puntos)</strong></p>
+<p>"El Técnico de turno detecta la vulnerabilidad durante la revisión de sistemas o en el ejercicio de sus funciones. Completa el reporte de vulnerabilidad con los datos del hallazgo y lo entrega al Jefe inmediato dentro del plazo según la severidad (24 horas para Critical, 7 días para High). El Jefe inmediato evalúa si puede actuar con sus propios recursos o escala al Oficial de Seguridad. El Oficial de Seguridad toma la decisión formal: mitigar con los controles disponibles, aceptar el riesgo residual por escrito, o escalar al mando superior si el impacto supera su nivel de autoridad."</p>
+<p>Criterio de aceptación (10 puntos): La respuesta debe mencionar al menos tres actores (Técnico, Jefe, Oficial de Seguridad) con su rol específico. Respuestas que mencionan solo dos actores o que no diferencian quién decide vs. quién reporta reciben puntaje parcial (5-7 puntos).</p>
+<hr />
+<h2 id="parte-d-clave-de-profundizacion-sin-puntuacion-practica-formativa">Parte D — Clave de Profundización (sin puntuación — práctica formativa)<a class="headerlink" href="#parte-d-clave-de-profundizacion-sin-puntuacion-practica-formativa" title="Permanent link">&para;</a></h2>
+<p><strong>P8 — Respuesta correcta: B) Reducir la exposición a frecuencias no operacionales y verificar integridad de firmware post-sesión mientras se espera el parche</strong></p>
+<p>Justificación: Sin parche disponible, la acción correcta es aplicar controles compensatorios que reduzcan la superficie de ataque: limitar el uso de las radios a frecuencias autorizadas (reduce la ventana de ataque si la vulnerabilidad requiere exposición en frecuencias específicas) y verificar la integridad del firmware tras cada sesión (detecta modificaciones no autorizadas). La opción A paraliza la operación innecesariamente. La opción C introduce un riesgo adicional al descargar firmware de internet sin verificación de cadena de suministro. La opción D es inaceptable — el riesgo sin documentación no es aceptado, es ignorado.</p>
+<hr />
+<p><strong>P9 — Respuesta correcta: B) Una vulnerabilidad es una debilidad en el activo; una amenaza es el agente que puede explotarla</strong></p>
+<p>Justificación: La distinción fundamental de la taxonomía de riesgo: la vulnerabilidad es la condición del activo (el firmware sin parchear, la contraseña débil, el puerto abierto), mientras que la amenaza es el actor o evento que puede aprovecharla (el atacante externo, el malware, el insider). Las opciones A, C y D contienen afirmaciones incorrectas — las vulnerabilidades pueden ser de hardware, física o de proceso, no solo de software; y los dos términos tienen significados técnicos distintos y no son intercambiables.</p>
+<hr />
+<p><strong>P10 — Respuesta correcta: B) Aceptar el riesgo documentando la decisión — severidad Low en un activo de baja criticidad puede ser aceptada con control administrativo</strong></p>
+<p>Justificación: CVSS 3.2 es banda Low (0.1–3.9). Un activo de backup secundario sin conexión a la red operacional tiene criticidad baja. La combinación de baja severidad técnica + baja criticidad del activo hace que la aceptación formal del riesgo con documentación sea el tratamiento apropiado. La opción A es incorrecta — el plazo de 24 horas es para Critical (9.0–10.0). La opción C no corresponde a ningún tratamiento estándar en la taxonomía (eliminar un activo útil por una vulnerabilidad Low es desproporcionado). La opción D es incorrecta en el contexto castrense — los riesgos en sistemas de la unidad no se transfieren a proveedores externos de esa forma.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
