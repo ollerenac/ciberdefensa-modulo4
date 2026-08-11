@@ -1,47 +1,115 @@
 {
   "version": "1.0",
-  "timestamp": "2026-06-22T09:40:44.546Z",
-  "phase": "04",
-  "phase_name": "gestion-riesgos-conferencias",
-  "phase_dir": ".planning/phases/04-gestion-riesgos-conferencias",
+  "timestamp": "2026-08-11T07:25:15.849Z",
+  "context": "default",
+  "phase": null,
+  "phase_name": null,
+  "phase_dir": null,
+  "quick_task": "260810-rjh",
   "plan": null,
   "task": null,
   "total_tasks": null,
-  "status": "milestone_complete",
+  "status": "paused",
   "completed_tasks": [
-    {"id": 1, "name": "Phase 01 — Site Foundation", "status": "done", "commit": "4c9dafb"},
-    {"id": 2, "name": "Phase 02 — Asignatura 1: Criptografía y PKI", "status": "done", "commit": "see phase 02 commits"},
-    {"id": 3, "name": "Phase 03 — Asignatura 2: Capas SI (22 files, UAT 13/13)", "status": "done", "commit": "see phase 03 commits"},
-    {"id": 4, "name": "Phase 04 — Asignaturas 3+4: Gestión de Riesgos + Conferencias (7 files)", "status": "done", "commit": "0077ae5"},
-    {"id": 5, "name": "Code review fixes CR-01 through WR-06 (8 findings)", "status": "done", "commit": "f5853e7"},
-    {"id": 6, "name": "Phase 04 verification 13/13 PASS", "status": "done", "commit": "8f6c7b3"},
-    {"id": 7, "name": "Push to GitHub (57 commits → remote)", "status": "done", "commit": "0077ae5 → origin/main"}
+    {
+      "id": 1,
+      "name": "Milestone v1.0 — Módulo 4 con cuatro asignaturas",
+      "status": "done",
+      "commit": "16f6e5c"
+    },
+    {
+      "id": 2,
+      "name": "GSD Quick 260810-rjh — auditoría pedagógica, OVA e ISO 27000",
+      "status": "done",
+      "commit": "07c9cc9"
+    }
   ],
-  "remaining_tasks": [],
-  "blockers": [],
+  "remaining_tasks": [
+    {
+      "id": 1,
+      "name": "P0-1 — separar material público del alumno y material privado del instructor",
+      "status": "not_started"
+    },
+    {
+      "id": 2,
+      "name": "P0-3 — cerrar la especificación de OVA y validar VirtualBox/Hyper-V en el laboratorio",
+      "status": "not_started"
+    },
+    {
+      "id": 3,
+      "name": "P0-9 — crear la guía docente de Generalidades + ISO/IEC 27001",
+      "status": "not_started"
+    }
+  ],
+  "blockers": [
+    {
+      "description": "Los subagentes GSD de investigación, planificación y verificación quedaron ejecutándose sin devolver resultado bajo el perfil restringido; el orquestador tuvo que aplicar el fallback documentado.",
+      "type": "technical",
+      "workaround": "Ejecutar lecturas y verificaciones desde el orquestador; usar el runtime de /home/researcher/.codex/gsd-core si el de /home/researcher/.agents/gsd-core falla."
+    }
+  ],
+  "async_jobs": [],
   "human_actions_pending": [
     {
-      "action": "Verify GitHub Actions deploy to GitHub Pages completed successfully",
-      "context": "Push triggered CI/CD — Actions workflow deploys to gh-pages branch. Check https://github.com/ollerenac/ciberdefensa-modulo4/actions",
+      "action": "Definir dónde se entregará el paquete privado del instructor",
+      "context": "P0-1 puede excluir soluciones y claves del sitio público, pero el canal privado final debe acordarse con el responsable del curso.",
       "blocking": false
     },
     {
-      "action": "Review Info-level items from 04-REVIEW.md (optional cosmetic)",
-      "context": "IN-01: CONT-29 formula in code fence (low impact). IN-02: CONT-33 could use ### subheadings for instructor flow. Neither blocks delivery.",
+      "action": "Validar VirtualBox, VT-x/AMD-V, Hyper-V, WSL2 y VBS en la imagen Windows real del laboratorio",
+      "context": "Es requisito para aceptar la futura OVA, no para iniciar P0-1.",
       "blocking": false
     },
     {
-      "action": "Human judgment: verify Estatuto del Militar Peruano reference in CONT-33 is legally accurate",
-      "context": "Verifier flagged this as a human-only check. Cannot verify from code — requires domain knowledge.",
+      "action": "Confirmar acceso autorizado del profesor a ISO/IEC 27001, 27002 y 27005",
+      "context": "La guía debe resumir y usar casos originales; la consulta normativa exacta requiere copias autorizadas.",
       "blocking": false
     }
   ],
   "decisions": [
-    {"decision": "Parte D (ungraded formative questions P8-P10) added to EXAM-05 to reach 10 visible items", "rationale": "Kept A=30/B=40/C=30=100pt totals intact; Parte D is explicit about 0 pts so arithmetic doesn't break", "phase": "04"},
-    {"decision": "CVSS Low band corrected to 0.1-3.9 (not 0-3.9) in metodos-identificacion and examen", "rationale": "CVSS v3.1 spec (FIRST.org): 0.0 = None, not Low", "phase": "04"},
-    {"decision": "Reporting chain in controles-buenas-practicas moved from code fence to numbered prose list", "rationale": "Code blocks for prose is a MkDocs anti-pattern; breaks word-wrap on small screens", "phase": "04"}
+    {
+      "decision": "Usar Ubuntu 24.04.4 LTS Desktop como base preliminar de la OVA principal.",
+      "rationale": "El curso es defensivo, la audiencia tiene Linux básico y se priorizan estabilidad y reproducibilidad sobre un catálogo de pentesting.",
+      "phase": "quick-260810-rjh"
+    },
+    {
+      "decision": "Mantener Kali solo como OVA opcional futura para un rol atacante controlado.",
+      "rationale": "Kali presupone experiencia Linux y su rama rolling no es la mejor base común para esta cohorte.",
+      "phase": "quick-260810-rjh"
+    },
+    {
+      "decision": "Crear snapshots después de importar la OVA.",
+      "rationale": "OVF/OVA exporta el estado plano actual y no transporta el árbol de snapshots.",
+      "phase": "quick-260810-rjh"
+    },
+    {
+      "decision": "Priorizar P0-1 antes que la mejora editorial general.",
+      "rationale": "Cinco exámenes y las soluciones del profesor quedan accesibles en el sitio estático actual.",
+      "phase": "quick-260810-rjh"
+    }
   ],
-  "uncommitted_files": [],
-  "next_action": "Milestone v1.0 is complete and pushed. No immediate next action required. If continuing, consider /gsd:milestone-summary for a final report or starting Módulo 3 content.",
-  "context_notes": "Project delivered all 4 phases of Curso de Ciberdefensa Módulo 4: Defensiva. 34 content/lab/exam files. MkDocs Material site live on GitHub Pages at https://ollerenac.github.io/ciberdefensa-modulo4/. Phase 04 had 8 code-review fixes applied after an interrupted session — CR-01 was on a leftover branch (gsd-reviewfix/04-150133) that was merged; remaining 7 fixes applied by gsd-code-fixer agent."
+  "uncommitted_files": [
+    {
+      "path": ".planning/phases/03-asignatura-2-capas-si/.continue-here.md",
+      "state": "deleted",
+      "ownership": "pre-existing user change; do not restore or commit"
+    },
+    {
+      "path": "BRIEF.md",
+      "state": "untracked",
+      "ownership": "pre-existing user file; do not commit without explicit scope"
+    },
+    {
+      "path": "SCENARIOS_ES.md",
+      "state": "untracked",
+      "ownership": "pre-existing user file; do not commit without explicit scope"
+    },
+    {
+      "path": "temas.txt",
+      "state": "untracked",
+      "ownership": "pre-existing user file; do not commit without explicit scope"
+    }
+  ],
+  "next_action": "Resume with $gsd-resume-work, then execute a validated gsd-quick for P0-1: separate student and instructor material and add a build-time leakage guard.",
+  "context_notes": "The audit is complete and committed. No new phase is active, so the handoff uses default context at .planning/.continue-here.md. The official schedule discovered in the workbook is urgent: Asignatura 1 starts 2026-08-13, technical labs 2026-08-17/18, and ISO 27000 starts 2026-08-19. No MkDocs server process was visible from the current execution environment; verify externally on resume."
 }
