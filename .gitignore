@@ -17,6 +17,12 @@ venv/
 *.pdf
 *.xlsx
 
+# Imágenes de instalación y VMs exportadas del laboratorio — decenas de GB
+isos/
+ova/
+*.iso
+*.ova
+
 # OS
 .DS_Store
 Thumbs.db
