@@ -1,6 +1,6 @@
 ---
 # Horas asignadas: 4 hrs
-# Tipo: Teoría
+# Tipo: Teoría + Laboratorio
 ---
 
 # Controles Defensivos en el Ordenador (Parte 1)
@@ -15,6 +15,68 @@ Al finalizar esta clase, el alumno será capaz de:
 - Identificar la superficie de ataque de un ordenador con Windows 11 (puertos abiertos, servicios en ejecución, cuentas de usuario, software instalado).
 - Aplicar un checklist básico de hardening basado en los conceptos del CIS Benchmark Level 1.
 - Explicar el principio de mínimo privilegio y verificar su aplicación auditando las cuentas locales del equipo.
+
+---
+
+## Entorno de laboratorio
+
+Cada tema principal de esta clase termina con un bloque **▸ Práctica**, que se ejecuta sobre la máquina virtual **VM-WIN-SI**. La estación virtual llega deliberadamente con defectos de configuración: el trabajo del alumno es evaluarla, no dar todo por bueno.
+
+!!! info "Credenciales, arranque de la VM y capturas de pantalla"
+    Todo eso está en la página **[Laboratorio virtual — accesos y credenciales](laboratorio-vm.md)**. Conviene tenerla abierta en otra pestaña durante la clase.
+
+| Requisito | Verificación |
+|-----------|-------------|
+| VM-WIN-SI iniciada desde el estado preparado | El instructor confirma la restauración de `01-MISION-CONTROLES` |
+| Sesión abierta como cuenta estándar | `operador_alumno` — **no abrir PowerShell como administrador en esta Parte 1** |
+| Archivo de incidentes disponible | `Test-Path C:\Mision\incidentes-CIA.txt` devuelve `True` |
+| Windows PowerShell 5.1 de 64 bits | Abrir **Windows PowerShell** desde el menú Inicio |
+
+!!! warning "Reglas del laboratorio"
+    - Trabajar de forma individual salvo indicación del instructor.
+    - Toda la Parte 1 se ejecuta **sin elevación**. Lo que no se pueda verificar sin privilegios se anota como tal — esa limitación es parte de la lección.
+    - Guardar cada evidencia con el nombre exacto indicado.
+    - Si un paso falla, **no improvisar otro comando**: registrar el hallazgo y notificar al instructor.
+
+### ▸ Práctica 0 — Preparar el registro de evidencia
+
+**Tiempo:** 10 minutos.
+
+Toda actuación sobre un equipo debe quedar registrada. Antes de tocar nada, se abre una transcripción que grabará cada comando y su resultado.
+
+```powershell
+New-Item -ItemType Directory -Path C:\Lab\Evidencias -Force | Out-Null
+Start-Transcript -Path C:\Lab\Evidencias\01-reconocimiento.txt -Force
+```
+
+**Se espera ver:** un mensaje que confirme el inicio de la transcripción en `C:\Lab\Evidencias\01-reconocimiento.txt`.
+
+**Si no aparece:** comprobar que la sesión corresponde a VM-WIN-SI y avisar al instructor. No elegir otra ruta ni continuar sin transcripción.
+
+!!! warning "Mantener la ventana abierta"
+    Esta ventana de PowerShell permanece abierta durante toda la Parte 1. Si se cierra, la transcripción se corta y se pierde la evidencia.
+
+---
+
+## Qué es un control de seguridad
+
+Un **control de seguridad** es cualquier medida —técnica, organizativa o física— que se implanta para reducir un riesgo. El cortafuegos es un control, pero también lo son la política de contraseñas, el registro de auditoría y la orden que prohíbe conectar memorias USB ajenas.
+
+Los controles se clasifican según **el momento en que actúan** respecto al incidente:
+
+| Tipo | Cuándo actúa | Qué hace | Ejemplo en la estación |
+|------|-------------|----------|------------------------|
+| **Preventivo** | Antes | Impide que el incidente llegue a ocurrir | Cuenta Invitado deshabilitada; SMBv1 retirado; contraseña de 14 caracteres |
+| **Detectivo** | Durante o después | No impide el hecho, pero deja constancia de que ocurrió | Auditoría de inicio de sesión; registro del cortafuegos; transcripción de PowerShell |
+| **Correctivo** | Después | Restablece el estado correcto una vez detectado el problema | Cuarentena del antivirus; restauración de un snapshot; retirada de privilegios de una cuenta |
+
+!!! note "Ninguno basta por sí solo"
+    Un control preventivo que falla y no deja rastro es un incidente invisible: nadie sabrá nunca que ocurrió. Un control detectivo sin corrección es un registro de derrotas. La defensa útil combina los tres — a esto se le llama **defensa en profundidad**, y es el eje de toda la Asignatura 2.
+
+!!! example "Aplicación en entorno castrense"
+    Un centinela en la puerta del cuartel es **preventivo**: impide la entrada. El libro de registro de visitas es **detectivo**: no impide nada, pero permite reconstruir quién entró. La orden de cambiar la cerradura tras extraviarse una llave es **correctiva**: repara la situación una vez conocida. Ningún jefe de seguridad renunciaría a ninguno de los tres.
+
+Durante todo el curso, cada vez que se configure una protección conviene preguntarse dos cosas: **qué dimensión de la Triada CIA protege** y **de qué tipo de control se trata**.
 
 ---
 
@@ -37,6 +99,37 @@ Cada vez que se configure una nueva protección en este curso, se identificará 
 
 **Ejemplo integrado:** El ransomware es el ataque perfecto contra la Triada CIA completa. El atacante exfiltra datos antes de cifrar (vulnera Confidencialidad), modifica y cifra los archivos (vulnera Integridad) y hace el sistema inutilizable (vulnera Disponibilidad). Por eso el ransomware es la amenaza más devastadora para infraestructuras críticas.
 
+### ▸ Práctica 1 — Clasificar incidentes reales según la Triada CIA
+
+**Tiempo:** 25 minutos.
+
+En `C:\Mision` la estación tiene un parte con cuatro incidentes reportados. El alumno debe determinar qué dimensión de la Triada afecta cada uno y justificarlo.
+
+```powershell
+Get-Content C:\Mision\incidentes-CIA.txt
+
+@(
+    'Incidente 1 — dimensión afectada y justificación:',
+    'Incidente 2 — dimensión afectada y justificación:',
+    'Incidente 3 — dimensión afectada y justificación:',
+    'Incidente 4 — dimensión afectada y justificación:'
+) | Set-Content C:\Lab\Evidencias\01-CIA.txt
+
+notepad.exe C:\Lab\Evidencias\01-CIA.txt
+```
+
+Completar cada línea en el Bloc de notas y **guardar antes de cerrar**.
+
+**Se espera ver:** cuatro incidentes en el archivo de misión y cuatro respuestas en `01-CIA.txt`, cada una con su dimensión y su justificación. El caso de ransomware debe considerar las tres dimensiones.
+
+**Si no aparece:** si falta `incidentes-CIA.txt`, no reconstruir los casos de memoria. Detenerse y pedir al instructor que revise el estado inicial de la VM.
+
+!!! question "Punto de control"
+    ¿Cada respuesta explica **por qué** se afecta la dimensión elegida? Una sigla sin justificación no cumple el criterio de aceptación.
+
+!!! note "Por qué `C:\Mision` es de solo lectura"
+    Intentar escribir en esa carpeta devuelve *Acceso denegado*. Es intencional: el parte de misión es evidencia, y la evidencia no se altera. Las respuestas van a `C:\Lab\Evidencias`.
+
 ---
 
 ## La Superficie de Ataque del Ordenador
@@ -51,11 +144,14 @@ Pensemos en analogía militar: cuando se establece un perímetro de seguridad al
 
 **1. Puertos abiertos:** Cada puerto que escucha conexiones de red es una puerta potencial. Un puerto abierto indica que hay un servicio esperando instrucciones de la red. Si ese servicio tiene una vulnerabilidad, es un punto de entrada.
 
-Para visualizar los puertos que escucha un equipo Windows 11, abrir CMD como administrador y ejecutar:
+Para visualizar los puertos que escucha un equipo Windows 11, abrir CMD y ejecutar:
 
 ```cmd
 netstat -an
 ```
+
+!!! note "No hace falta elevación para mirar"
+    Enumerar puertos es una operación de lectura: funciona con una cuenta estándar. Se necesitan privilegios para *cambiar* la configuración, no para observarla. En la práctica de esta clase se usa el equivalente en PowerShell, que además indica **qué proceso** tiene abierto cada puerto — el dato que permite justificarlo.
 
 La salida muestra columnas: Proto, Dirección local, Dirección extranjera, Estado. Las líneas con estado `LISTENING` son puertos abiertos esperando conexiones entrantes. El Técnico debe poder responder: ¿por qué está abierto este puerto? ¿Qué servicio lo usa? ¿Esa funcionalidad es necesaria en este equipo?
 
@@ -67,6 +163,63 @@ La salida muestra columnas: Proto, Dirección local, Dirección extranjera, Esta
 
 !!! example "Aplicación en entorno castrense"
     Un equipo de reconocimiento despliega un puesto de mando avanzado. Antes de conectar el ordenador a la red de unidad, el Técnico de comunicaciones realiza una evaluación rápida de superficie de ataque: ejecuta `netstat -an` en CMD y verifica qué puertos están escuchando. Identifica que el puerto 445 (SMB) está abierto — necesario para compartir archivos en red, pero también el vector del ransomware WannaCry que en 2017 afectó a hospitales y empresas en todo el mundo. El Técnico confirma que la versión SMBv1 está deshabilitada antes de conectar el equipo. Esta verificación de cinco minutos puede evitar que un incidente de seguridad interrumpa la misión.
+
+### ▸ Práctica 2 — Enumerar la superficie de ataque de la estación
+
+**Tiempo:** 45 minutos.
+
+Los cuatro componentes que se acaban de explicar se van a enumerar ahora sobre la VM, uno por uno. Se usa PowerShell en lugar de `netstat -an` porque permite relacionar cada puerto con el proceso que lo tiene abierto — el dato que de verdad permite justificarlo.
+
+**Paso 1 — Puertos TCP en escucha, con su proceso**
+
+```powershell
+Get-NetTCPConnection -State Listen |
+    Sort-Object LocalPort |
+    Select-Object LocalAddress,
+                  LocalPort,
+                  OwningProcess,
+                  @{Name='Proceso';Expression={
+                      (Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue).ProcessName
+                  }}
+```
+
+**Se espera ver:** una tabla ordenada por puerto, con dirección local, puerto, PID y nombre del proceso.
+
+**Si no aparece:** si algún nombre de proceso queda vacío, conservar el PID como evidencia. Si la consulta entera falla, no avanzar y avisar al instructor.
+
+!!! question "Interpretación"
+    Elegir al menos **dos** entradas que requieran justificación. Para cada una: ¿qué proceso la abre? ¿qué función cumpliría en una estación militar? ¿qué información adicional haría falta antes de llamarla vulnerabilidad?
+
+**Paso 2 — Servicios en ejecución, cuentas locales y software instalado**
+
+```powershell
+Get-CimInstance Win32_Service -Filter "State='Running'" |
+    Select-Object Name, DisplayName, StartMode |
+    Sort-Object Name
+
+Get-LocalUser |
+    Select-Object Name, Enabled, LastLogon, SID
+
+$RutasSoftware = @(
+    'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
+    'HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*'
+)
+
+Get-ItemProperty $RutasSoftware -ErrorAction SilentlyContinue |
+    Where-Object DisplayName |
+    Select-Object DisplayName, DisplayVersion, Publisher |
+    Sort-Object DisplayName -Unique
+```
+
+**Se espera ver:** la lista de servicios en ejecución, las cuentas locales con su SID, y el software instalado con versión y editor.
+
+**Si no aparece:** no sustituir estos cmdlets por comandos que dependan del idioma del sistema. Si `Get-LocalUser` falla o alguna lista queda vacía, detenerse y avisar al instructor.
+
+!!! note "Hallazgo no equivale a vulnerabilidad"
+    Un puerto en escucha o un servicio activo es un **hallazgo**, y un hallazgo exige justificación. Solo después de evaluar su necesidad, su configuración y su exposición se determina si constituye una vulnerabilidad. Informar «puerto en escucha»; no informar «vulnerabilidad» sin demostrar la condición que la produce.
+
+!!! tip "Los identificadores no dependen del idioma"
+    La columna SID es la que importa. El sistema está en español: la cuenta *Guest* aparece como **Invitado** y el grupo *Administrators* como **Administradores**. Los nombres cambian con el idioma; los SID no. En las prácticas siguientes se identifican las cuentas por su SID.
 
 ---
 
@@ -95,6 +248,48 @@ El panel principal muestra seis áreas de protección, cada una representada por
 
 La práctica correcta es que un Técnico revise el Windows Security Center al inicio de cada jornada en equipos críticos. Un panel rojo indica que el equipo no debe conectarse a la red de unidad hasta resolver el problema.
 
+### ▸ Práctica 3 — Revisar el panel y contrastarlo con los datos del sistema
+
+**Tiempo:** 20 minutos.
+
+El panel gráfico resume; los cmdlets dan el dato exacto. Un Técnico usa los dos y comprueba que coinciden.
+
+**Paso 1 — Abrir Seguridad de Windows y capturar el panel principal**
+
+```powershell
+Start-Process 'windowsdefender:'
+```
+
+Revisar el panel principal y guardar una captura con el nombre exacto `C:\Lab\Evidencias\01-seguridad-windows.png`:
+
+1. Pulsar `Win + Shift + S` y seleccionar la zona con el ratón.
+2. **Hacer clic en el aviso** que aparece en la esquina inferior derecha. Si ya desapareció, abrir **Recorte y anotación** desde el menú Inicio.
+3. En esa ventana, pulsar `Ctrl + S`.
+4. Navegar a `C:\Lab\Evidencias`, escribir el nombre exacto y guardar.
+
+!!! warning "El paso 2 es el que se olvida"
+    Sin hacer clic en el aviso, la captura se queda solo en el portapapeles y **no existe como archivo**. Comprobarlo con `Test-Path C:\Lab\Evidencias\01-seguridad-windows.png`, que debe devolver `True`.
+
+**Paso 2 — Contrastar el panel con el estado real de Defender y del cortafuegos**
+
+```powershell
+Get-MpComputerStatus |
+    Format-List AntivirusEnabled,
+                RealTimeProtectionEnabled,
+                AntivirusSignatureLastUpdated,
+                DefenderSignaturesOutOfDate
+
+Get-NetFirewallProfile |
+    Format-Table Name, Enabled
+```
+
+**Se espera ver:** `AntivirusEnabled` y `RealTimeProtectionEnabled` en `True`, `DefenderSignaturesOutOfDate` en `False`, y los tres perfiles del cortafuegos (Dominio, Privado, Público) en `True`. La fecha de firmas depende del día de la práctica.
+
+**Si no aparece:** en esta Parte 1 **no se corrige nada**. Registrar el hallazgo, detenerse y avisar al instructor. La corrección corresponde a la Parte 2.
+
+!!! question "Verificación cruzada"
+    ¿El color que muestra el panel coincide con lo que devuelven los cmdlets? Si el panel está verde pero un dato dice lo contrario, ¿cuál de los dos se informa en el parte, y por qué?
+
 ---
 
 ## El Principio de Mínimo Privilegio
@@ -116,6 +311,38 @@ La práctica correcta es que los Técnicos tengan **dos cuentas**: una cuenta es
 
 La **superficie de privilegio** es el conjunto de recursos del sistema a los que un proceso o usuario tiene acceso autorizado. El objetivo del hardening es minimizar la superficie de privilegio de cada entidad en el sistema.
 
+### ▸ Práctica 4 — Auditar las cuentas locales de la estación
+
+**Tiempo:** 25 minutos.
+
+La lista de cuentas ya se obtuvo en la Práctica 2. Ahora se interpreta. El **RID** es el tramo final del SID e identifica el rol de la cuenta con independencia de su nombre y del idioma del sistema.
+
+```powershell
+Get-LocalUser |
+    Select-Object Name,
+                  Enabled,
+                  LastLogon,
+                  @{Name='RID';Expression={ ($_.SID.Value -split '-')[-1] }} |
+    Sort-Object RID |
+    Format-Table -AutoSize
+```
+
+| RID | Cuenta | Qué debe cumplir |
+|-----|--------|------------------|
+| 500 | Administrador integrado | Deshabilitada |
+| 501 | Invitado (*Guest*) | Deshabilitada — control CIS L1 nº 1 |
+| 503 | DefaultAccount | Deshabilitada, es de sistema |
+| 504 | WDAGUtilityAccount | Deshabilitada, es de sistema |
+| ≥1000 | Cuentas creadas en el equipo | Cada una exige justificación |
+
+**Se espera ver:** las cuatro cuentas integradas en `Enabled: False`, y varias cuentas con RID ≥ 1000 correspondientes a esta estación.
+
+!!! question "Punto de control"
+    Anotar en el parte cada cuenta con RID ≥ 1000: ¿qué función cumpliría? ¿Cuándo inició sesión por última vez? ¿Alguna parece sobrar? La sola existencia de una cuenta no la vuelve no autorizada — hay que argumentarlo.
+
+!!! warning "Lo que no se puede ver sin privilegios"
+    Averiguar **a qué grupos pertenece** cada cuenta requiere elevación, y ahí es donde se esconde el defecto más grave de esta estación. Anotar esa limitación en el parte: se resuelve en la Parte 2 con la cuenta `tec_admin`. Que un operador sin privilegios no pueda completar la auditoría es, en sí mismo, el principio de mínimo privilegio funcionando.
+
 ---
 
 ## Hardening Básico: CIS Benchmark Level 1
@@ -131,14 +358,129 @@ Para los Técnicos del Ejército, el objetivo inicial es cumplir el Level 1. Los
 
 | Control CIS L1 | Por qué importa | Cómo verificar |
 |----------------|-----------------|---------------|
-| **1. Deshabilitar cuenta Guest** | La cuenta Guest permite acceso sin contraseña. Es el primer vector que un atacante prueba en un sistema nuevo. | Ejecutar: `Get-LocalUser -Name "Guest" \| Select-Object Name, Enabled` — debe mostrar `Enabled: False` |
-| **2. Contraseña mínima de 14 caracteres** | Contraseñas cortas son vulnerables a ataques de fuerza bruta. 14 caracteres con complejidad tardan años en romperse con hardware actual. | `secpol.msc → Account Policies → Password Policy → Minimum password length` |
-| **3. Umbral de bloqueo: 5 intentos** | Limita los intentos de adivinar contraseñas. Después de 5 intentos fallidos, la cuenta se bloquea. | `secpol.msc → Account Lockout Policy → Account lockout threshold: 5` |
+| **1. Deshabilitar la cuenta Invitado** | La cuenta Invitado (*Guest*) permite acceso sin contraseña. Es el primer vector que un atacante prueba en un sistema nuevo. | Localizarla por **RID 501**, no por nombre: `Get-LocalUser \| Where-Object { ($_.SID.Value -split '-')[-1] -eq '501' }` — debe mostrar `Enabled: False` |
+| **2. Contraseña mínima de 14 caracteres** | Contraseñas cortas son vulnerables a ataques de fuerza bruta. 14 caracteres con complejidad tardan años en romperse con hardware actual. | `net.exe accounts` — la línea *Longitud mínima de contraseña* debe ser ≥ 14 |
+| **3. Umbral de bloqueo: 5 intentos** | Limita los intentos de adivinar contraseñas. Después de 5 intentos fallidos, la cuenta se bloquea. | `net.exe accounts` — la línea *Umbral de bloqueo* debe ser 5, no `Nunca` |
 | **4. Deshabilitar SMBv1** | SMBv1 es el protocolo que explotó WannaCry en 2017 para propagarse entre equipos. No tiene uso legítimo en redes modernas. | `Get-WindowsOptionalFeature -Online -FeatureName SMB1Protocol` — debe mostrar `State: Disabled` |
-| **5. Habilitar auditoría de inicio de sesión** | Registra cada intento de inicio de sesión (exitoso y fallido) en el Visor de eventos. Esencial para detectar ataques de fuerza bruta. | `secpol.msc → Local Policies → Audit Policy → Audit logon events: Success, Failure` |
-| **6. Windows Update al día** | Los parches de seguridad corrigen vulnerabilidades conocidas. Un sistema sin parches recientes tiene vulnerabilidades públicas que cualquier atacante puede explotar. | `Settings → Windows Update → Check for updates` — debe mostrar "You're up to date" |
+| **5. Habilitar auditoría de inicio de sesión** | Registra cada intento de inicio de sesión (exitoso y fallido) en el Visor de eventos. Esencial para detectar ataques de fuerza bruta. | `auditpol.exe /get /subcategory:"{0CCE9215-69AE-11D9-BED3-505054503030}"` — debe indicar *Correcto y error* |
+| **6. Windows Update al día** | Los parches de seguridad corrigen vulnerabilidades conocidas. Un sistema sin parches recientes tiene vulnerabilidades públicas que cualquier atacante puede explotar. | **Configuración → Windows Update → Buscar actualizaciones** — debe mostrar «Está todo actualizado» |
+
+!!! tip "Por qué un GUID en el control 5"
+    El nombre de la subcategoría de auditoría está traducido en un Windows en español, así que `auditpol` no la encuentra si se la pide por nombre en inglés. El GUID `{0CCE9215-…}` identifica *Inicio de sesión* en cualquier idioma. Es el mismo principio que usar el RID 501 en lugar de «Guest».
 
 Estos seis controles son el mínimo absoluto antes de conectar cualquier equipo a la red de unidad. No son opcionales.
+
+### ▸ Práctica 5 — Levantar el parte de conformidad CIS L1
+
+**Tiempo:** 25 minutos.
+
+Se recorre la tabla de los seis controles y se anota el estado **observado** de cada uno. Sin elevación no se pueden comprobar todos, y eso también se registra: un parte honesto distingue «cumple», «no cumple» y «no verificable con los privilegios disponibles».
+
+**Paso 1 — Control 1: cuenta Invitado deshabilitada**
+
+```powershell
+Get-LocalUser |
+    Where-Object { ($_.SID.Value -split '-')[-1] -eq '501' } |
+    Format-List Name, Enabled, SID
+```
+
+**Se espera ver:** una sola cuenta —en un sistema en español se llama **Invitado**— con `Enabled: False`.
+
+**Paso 2 — Control 6: estado de Windows Update**
+
+Abrir **Configuración → Windows Update** y anotar la fecha de la última comprobación y si hay actualizaciones pendientes. No instalar nada durante la clase.
+
+**Paso 3 — Levantar el parte de conformidad**
+
+Generar la plantilla y completarla en el Bloc de notas:
+
+```powershell
+@'
+PARTE DE CONFORMIDAD CIS BENCHMARK LEVEL 1
+Estacion: VM-WIN-SI    Operador: operador_alumno    Sesion: sin elevacion
+
+Estados admitidos: CUMPLE / NO CUMPLE / NO VERIFICABLE SIN ELEVACION
+
+1. Cuenta Invitado (RID 501) deshabilitada ....
+   Comprobado con: Get-LocalUser, filtrando por RID 501
+
+2. Longitud minima de contrasena 14 ..........
+   Comprobado con:
+
+3. Umbral de bloqueo 5 intentos ..............
+   Comprobado con:
+
+4. SMBv1 deshabilitado .......................
+   Comprobado con:
+
+5. Auditoria de inicio de sesion activada ....
+   Comprobado con:
+
+6. Windows Update al dia .....................
+   Comprobado con: Configuracion > Windows Update
+
+OBSERVACIONES:
+'@ | Set-Content C:\Lab\Evidencias\01-conformidad-CIS.txt -Encoding UTF8
+
+notepad.exe C:\Lab\Evidencias\01-conformidad-CIS.txt
+```
+
+Rellenar los seis estados y **guardar antes de cerrar**. Los controles que no se puedan comprobar con la sesión actual se marcan `NO VERIFICABLE SIN ELEVACION` — no se dejan en blanco ni se dan por buenos.
+
+**Paso 4 — Revisar la evidencia y cerrar la transcripción**
+
+```powershell
+Get-Content C:\Lab\Evidencias\01-CIA.txt
+Get-Content C:\Lab\Evidencias\01-conformidad-CIS.txt
+Get-ChildItem C:\Lab\Evidencias | Format-Table Name, Length, LastWriteTime -AutoSize
+Stop-Transcript
+```
+
+**Se espera ver:** los dos partes completos, un listado con los cuatro archivos de evidencia, y un mensaje que confirme el cierre de `01-reconocimiento.txt`.
+
+**Si no aparece:** si algún parte está vacío, volver a abrirlo, completarlo y repetir el paso. Si falta la captura `.png`, revisar el procedimiento de guardado antes de cerrar la transcripción.
+
+!!! question "Cierre"
+    1. Cuatro de los seis controles no se pudieron verificar. ¿Es eso un fallo del procedimiento o el resultado esperado? ¿Qué dice sobre el nivel de privilegio con el que debe trabajar un operador en su jornada normal?
+    2. Clasificar los seis controles CIS como **preventivos**, **detectivos** o **correctivos**. ¿Cuántos de cada tipo hay? ¿Qué revela ese reparto sobre lo que el benchmark prioriza?
+
+---
+
+## Puesta en común de hallazgos
+
+**Tiempo:** 15 minutos.
+
+Cada alumno informa **un** elemento de su parte que requiera justificación, y responde:
+
+1. ¿Es un dato observado o una conclusión propia?
+2. ¿Qué función podría cumplir ese elemento en la estación?
+3. ¿Qué evidencia adicional permitiría decidir si es necesario o riesgoso?
+
+!!! warning "Lenguaje técnico preciso"
+    Se informa «puerto en escucha» o «servicio activo» como hallazgo. No se informa una vulnerabilidad sin demostrar la condición que la produce. En un parte real, esa diferencia decide si se moviliza o no a un equipo de respuesta.
+
+### Evidencia que debe quedar en la estación
+
+Al terminar la Parte 1, en `C:\Lab\Evidencias` deben existir:
+
+- [ ] `01-reconocimiento.txt` — transcripción completa, con marca de cierre
+- [ ] `01-CIA.txt` — los cuatro incidentes clasificados y justificados
+- [ ] `01-seguridad-windows.png` — captura del panel de Seguridad de Windows
+- [ ] `01-conformidad-CIS.txt` — los seis controles con su estado observado
+
+Comprobación final:
+
+```powershell
+'01-reconocimiento.txt','01-CIA.txt','01-seguridad-windows.png','01-conformidad-CIS.txt' |
+    ForEach-Object {
+        [pscustomobject]@{
+            Archivo = $_
+            Existe  = Test-Path "C:\Lab\Evidencias\$_"
+        }
+    } | Format-Table -AutoSize
+```
+
+Las cuatro filas deben decir `True`. Estos archivos son el punto de partida de la Parte 2: **no se borran ni se mueven**.
 
 ---
 
@@ -149,7 +491,7 @@ Estos seis controles son el mínimo absoluto antes de conectar cualquier equipo 
 
     **Paso 1 — Verificar Windows Security Center:** Abre el panel y revisa los seis paneles. Si alguno está en rojo o amarillo, no conecta el equipo a la red hasta resolverlo.
 
-    **Paso 2 — Verificar Windows Update:** `Settings → Windows Update → Check for updates`. Descarga e instala todos los parches pendientes. Un laptop guardado seis meses puede tener docenas de parches de seguridad atrasados, incluyendo correcciones para vulnerabilidades críticas.
+    **Paso 2 — Verificar Windows Update:** **Configuración → Windows Update → Buscar actualizaciones**. Descarga e instala todos los parches pendientes. Un laptop guardado seis meses puede tener docenas de parches de seguridad atrasados, incluyendo correcciones para vulnerabilidades críticas.
 
     **Paso 3 — Auditar cuentas:** Ejecuta `Get-LocalUser` en PowerShell para listar todas las cuentas. Verifica que la cuenta Guest esté deshabilitada y que no existan cuentas desconocidas con privilegios de Administrador.
 
@@ -163,11 +505,13 @@ Estos seis controles son el mínimo absoluto antes de conectar cualquier equipo 
 
 ## Resumen
 
-1. La **Triada CIA** (Confidencialidad, Integridad, Disponibilidad) es el marco de referencia para evaluar toda amenaza y toda protección durante el curso.
-2. La **superficie de ataque** incluye puertos abiertos, servicios en ejecución, cuentas de usuario y software instalado — reducirla es el objetivo del hardening.
-3. El **Windows Security Center** proporciona una vista de estado unificada de todas las protecciones; un panel rojo requiere acción antes de conectar el equipo a la red.
-4. El **principio de mínimo privilegio** dicta que nadie — ni usuarios ni procesos — debe tener más acceso del estrictamente necesario para su función.
-5. El **CIS Benchmark Level 1** establece seis controles mínimos para Windows 11: deshabilitar Guest, contraseña de 14 chars, umbral de bloqueo en 5 intentos, deshabilitar SMBv1, auditoría de inicio de sesión activada, y Windows Update al día.
+1. Un **control de seguridad** es toda medida que reduce un riesgo, y se clasifica por el momento en que actúa: **preventivo** (impide), **detectivo** (deja constancia) y **correctivo** (repara). Los tres son necesarios.
+2. La **Triada CIA** (Confidencialidad, Integridad, Disponibilidad) es el marco de referencia para evaluar toda amenaza y toda protección durante el curso.
+3. La **superficie de ataque** incluye puertos abiertos, servicios en ejecución, cuentas de usuario y software instalado — reducirla es el objetivo del hardening.
+4. El **Windows Security Center** proporciona una vista de estado unificada de todas las protecciones; un panel rojo requiere acción antes de conectar el equipo a la red.
+5. El **principio de mínimo privilegio** dicta que nadie — ni usuarios ni procesos — debe tener más acceso del estrictamente necesario para su función.
+6. El **CIS Benchmark Level 1** establece seis controles mínimos para Windows 11: deshabilitar la cuenta Invitado, contraseña de 14 caracteres, umbral de bloqueo en 5 intentos, deshabilitar SMBv1, auditoría de inicio de sesión activada, y Windows Update al día.
+7. Los identificadores del sistema (**SID**, **RID**, **GUID**) no dependen del idioma; los nombres sí. En un Windows en español, `Guest` es `Invitado` y `Administrators` es `Administradores` — por eso se identifica por SID.
 
 ## Para profundizar
 

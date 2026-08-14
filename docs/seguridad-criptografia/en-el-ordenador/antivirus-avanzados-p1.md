@@ -1,6 +1,6 @@
 ---
 # Horas asignadas: 3 hrs
-# Tipo: Teoría
+# Tipo: Teoría + Laboratorio
 ---
 
 # Antivirus Avanzados: Microsoft Defender (Parte 1)
@@ -16,6 +16,58 @@ Al finalizar esta clase, el alumno será capaz de:
 - Definir y configurar exclusiones de Defender, entendiendo el riesgo que cada exclusión representa.
 - Interpretar el resultado de un escaneo y un evento de cuarentena.
 - Describir la diferencia entre detección heurística/comportamental y detección por firmas como capas complementarias de protección.
+
+---
+
+## Entorno de laboratorio
+
+Como en Controles Defensivos, cada tema principal cierra con un bloque **▸ Práctica** sobre la estación **VM-WIN-SI**. Credenciales y arranque de la máquina: [Laboratorio virtual](laboratorio-vm.md).
+
+| Requisito | Verificación |
+|-----------|-------------|
+| VM-WIN-SI iniciada | Sesión abierta como `operador_alumno` |
+| Defender operativo | `Get-MpComputerStatus` devuelve datos del motor y de las firmas |
+| Credenciales de `tec_admin` disponibles | Las prácticas 13 y 14 requieren elevación |
+| Conectividad a internet desde la VM | Necesaria para `Update-MpSignature` |
+
+!!! warning "Dos niveles de privilegio en esta clase"
+    Las prácticas 11 y 12 son de **observación** y funcionan sin elevar. Las prácticas 13 y 14 **modifican la configuración de Defender** y exigen una consola elevada con `tec_admin`. Cada bloque indica cuál necesita.
+
+### ▸ Práctica 11 — Estado del motor y edad de las firmas
+
+**Tiempo:** 15 minutos. **Privilegio:** sin elevación.
+
+```powershell
+New-Item -ItemType Directory -Path C:\Lab\Evidencias -Force | Out-Null
+Start-Transcript -Path C:\Lab\Evidencias\03-defender.txt -Force
+
+Get-MpComputerStatus |
+    Format-List AMRunningMode,
+                AntivirusEnabled,
+                AntispywareEnabled,
+                RealTimeProtectionEnabled,
+                AntivirusSignatureVersion,
+                AntivirusSignatureLastUpdated,
+                DefenderSignaturesOutOfDate
+```
+
+**Se espera ver:** el motor en modo `Normal`, antivirus y protección en tiempo real en `True`, una versión de firmas, y `DefenderSignaturesOutOfDate` en `False`.
+
+**Calcular la edad real de las firmas:**
+
+```powershell
+$Estado = Get-MpComputerStatus
+$Edad   = (Get-Date) - $Estado.AntivirusSignatureLastUpdated
+
+[pscustomobject]@{
+    UltimaActualizacion = $Estado.AntivirusSignatureLastUpdated
+    HorasDeAntiguedad   = [math]::Round($Edad.TotalHours, 1)
+    MarcadasComoViejas  = $Estado.DefenderSignaturesOutOfDate
+} | Format-List
+```
+
+!!! question "Interpretación"
+    ¿Cuántas horas de antigüedad tienen las firmas de esta estación? Microsoft publica varias actualizaciones al día. Si el equipo hubiera estado guardado seis meses, ¿qué valor tendría `DefenderSignaturesOutOfDate` y qué habría que hacer **antes** de conectarlo a la red de unidad?
 
 ---
 
@@ -71,6 +123,51 @@ Update-MpSignature
 ```
 
 Si el equipo no tiene acceso a internet, se puede distribuir el paquete de definiciones fuera de línea desde el sitio oficial de Microsoft (mpam-fe.exe). Este procedimiento es relevante para operaciones en entornos sin conectividad.
+
+### ▸ Práctica 12 — Actualizar firmas, escanear e interpretar el resultado
+
+**Tiempo:** 25 minutos. **Privilegio:** sin elevación.
+
+**Paso 1 — Actualizar las definiciones y medir cuánto tarda**
+
+```powershell
+$t = Measure-Command { Update-MpSignature }
+Write-Host "Update-MpSignature tardo: $([math]::Round($t.TotalSeconds,1)) segundos"
+
+(Get-MpComputerStatus).AntivirusSignatureLastUpdated
+```
+
+**Se espera ver:** la marca de tiempo actualizada al momento de la práctica.
+
+**Si no aparece:** si el comando falla, la VM probablemente no tiene salida a internet. Registrar el fallo como hallazgo — un equipo sin acceso a las definiciones es exactamente el escenario del laptop guardado seis meses.
+
+**Paso 2 — Ejecutar un análisis rápido**
+
+```powershell
+$t = Measure-Command { Start-MpScan -ScanType QuickScan }
+Write-Host "Quick Scan tardo: $([math]::Round($t.TotalMinutes,1)) minutos"
+```
+
+**Se espera ver:** el comando **no devuelve el control hasta que el análisis termina**. En esta estación tarda alrededor de 4 a 5 minutos. Que la consola parezca congelada es lo normal: está analizando.
+
+!!! note "Un análisis que no devuelve nada es un análisis limpio"
+    `Start-MpScan` no imprime un informe al terminar. El silencio significa que no hubo detecciones. Para consultar el resultado hay que preguntarlo explícitamente, que es el paso siguiente — y es el error más común: dar por hecho que «no salió nada» equivale a «no se analizó».
+
+**Paso 3 — Consultar el historial de detecciones**
+
+```powershell
+Get-MpThreatDetection |
+    Sort-Object InitialDetectionTime -Descending |
+    Format-Table InitialDetectionTime, ThreatID, Resources -AutoSize
+
+Get-MpThreat |
+    Format-Table ThreatName, SeverityID, IsActive, Resources -AutoSize
+```
+
+**Se espera ver:** en una estación limpia, **ninguna fila**. Una salida vacía aquí es el resultado correcto, no un error del comando.
+
+!!! question "Interpretación"
+    ¿Qué diferencia hay entre `Get-MpThreatDetection` y `Get-MpThreat`? El primero lista **eventos de detección** (cuándo se detectó algo y sobre qué archivo); el segundo lista **amenazas conocidas por el equipo** con su severidad y si siguen activas. Un archivo ya puesto en cuarentena aparece como detección, pero `IsActive` en `False`.
 
 ---
 
@@ -139,6 +236,67 @@ Set-MpPreference -DisableRealtimeMonitoring $false
 
 Este comando asegura que la protección en tiempo real esté activa. Si alguien la había deshabilitado, este comando la vuelve a habilitar. El valor `$false` para "deshabilitar" puede resultar confuso — léase como "establece DisableRealtime a falso", es decir, la protección NO está deshabilitada, está activa.
 
+### ▸ Práctica 13 — Provocar una detección controlada y leer la cuarentena
+
+**Tiempo:** 20 minutos. **Privilegio:** sin elevación para provocar la detección; elevación para limpiar la cuarentena.
+
+Hasta aquí el antivirus no ha detectado nada, así que no se ha visto cómo se comporta cuando sí detecta. Para observarlo hace falta un archivo que dispare la detección **sin ser malware**.
+
+!!! note "Qué es el archivo de prueba EICAR"
+    **EICAR** (*European Institute for Computer Antivirus Research*) publicó una cadena de texto de 68 caracteres que todos los antivirus del mercado reconocen por acuerdo como si fuera una amenaza. **No es malware**: no se ejecuta, no hace nada, no tiene código. Es el equivalente a la munición de fogueo — sirve para comprobar que el arma dispara sin que haya proyectil. Es el método estándar y seguro para verificar que un antivirus está realmente operativo.
+
+**Paso 1 — Crear el archivo de prueba**
+
+La cadena se escribe en dos mitades que se unen al ejecutar. Si estuviera entera en un documento, el antivirus pondría en cuarentena el propio documento.
+
+```powershell
+$Parte1 = 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR'
+$Parte2 = '-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*'
+
+Set-Content -Path C:\Lab\Evidencias\prueba-eicar.txt `
+            -Value ($Parte1 + $Parte2) `
+            -Encoding ASCII -NoNewline
+```
+
+**Se espera ver:** con la protección en tiempo real activa, Defender reacciona **en segundos**: aparece una notificación de Windows y el archivo desaparece del disco. Es posible que el propio comando devuelva un error de acceso — eso significa que el antivirus interceptó la escritura antes de completarla, que es el mejor resultado posible.
+
+**Paso 2 — Comprobar que el archivo ya no está**
+
+```powershell
+Test-Path C:\Lab\Evidencias\prueba-eicar.txt
+```
+
+**Se espera ver:** `False`. El antivirus lo retiró.
+
+**Paso 3 — Leer el evento de detección**
+
+```powershell
+Get-MpThreatDetection |
+    Sort-Object InitialDetectionTime -Descending |
+    Select-Object -First 3 |
+    Format-List InitialDetectionTime, ThreatID, Resources, ActionSuccess
+
+Get-MpThreat |
+    Format-Table ThreatName, SeverityID, IsActive, Resources -AutoSize
+```
+
+**Se espera ver:** una detección reciente cuyo `ThreatName` identifica el archivo de prueba EICAR, con la ruta del archivo en `Resources`.
+
+!!! question "Interpretación del evento"
+    1. ¿Qué **acción** tomó Defender: eliminó, puso en cuarentena o solo alertó?
+    2. La detección aparece con `IsActive` en `False`. ¿Qué significa eso respecto al riesgo actual del equipo?
+    3. Este archivo se detectó **por firma**, no por comportamiento. ¿Por qué era imposible detectarlo por comportamiento?
+
+**Paso 4 — Revisar la cuarentena en la interfaz gráfica**
+
+Abrir **Seguridad de Windows → Protección antivirus y contra amenazas → Historial de protección**. Localizar la entrada correspondiente y guardar una captura como `C:\Lab\Evidencias\03-cuarentena.png` (procedimiento en la página [Laboratorio virtual](laboratorio-vm.md)).
+
+!!! danger "No restaurar el archivo desde la cuarentena"
+    El historial de protección ofrece un botón para **permitir** el elemento detectado. En este laboratorio **no se usa**. Restaurar algo desde la cuarentena es una decisión que en un equipo real requiere autorización del oficial de seguridad, y aquí sirve para practicar precisamente esa contención.
+
+!!! warning "Nota para el instructor"
+    Esta práctica no formó parte del ensayo en seco de la imagen. Conviene ejecutarla una vez sobre `01-MISION-CONTROLES` antes de dictarla, para confirmar el texto exacto de la notificación y del `ThreatName` en la VM en español.
+
 ---
 
 ## Exclusiones: Necesidad y Riesgo
@@ -148,8 +306,9 @@ Una exclusión le dice a Defender: "no analices esta carpeta, archivo, proceso o
 - **Falsos positivos:** Una herramienta de administración legítima que usa técnicas similares a las de malware puede ser detectada erróneamente.
 - **Rendimiento:** En servidores de bases de datos o aplicaciones que procesan miles de archivos por segundo, el análisis en tiempo real puede degradar el rendimiento inaceptablemente.
 
-**Cómo configurar exclusiones via GUI:**
-Windows Security → Virus & threat protection → Manage settings → Exclusions → Add or remove exclusions → Add an exclusion
+**Cómo configurar exclusiones desde la interfaz gráfica** (rutas en un Windows en español):
+
+Seguridad de Windows → Protección antivirus y contra amenazas → Administrar la configuración → Exclusiones → Agregar o quitar exclusiones → Agregar una exclusión
 
 **Cómo configurar exclusiones via PowerShell:**
 
@@ -174,6 +333,96 @@ Cada exclusión es una zona ciega que el AV no verá. Si un atacante logra depos
     - **¿Cuándo se revisa?** Fecha de revisión (máximo 90 días). Si la razón ya no existe (la aplicación fue desinstalada, el problema fue resuelto), la exclusión se elimina.
 
     Una carpeta excluida que nadie recuerda por qué fue excluida, que lleva dos años en producción, y que contiene un software legado que ya nadie mantiene es exactamente el tipo de punto ciego que los atacantes buscan.
+
+### ▸ Práctica 14 — Crear una exclusión, comprobar el punto ciego y revertirla
+
+**Tiempo:** 15 minutos. **Privilegio:** **consola elevada con `tec_admin`**.
+
+Se acaba de leer que cada exclusión es una zona ciega. Aquí se comprueba que eso es literal, y se deshace al terminar.
+
+!!! danger "Esta práctica termina obligatoriamente en el Paso 5"
+    Se va a crear deliberadamente un punto ciego en el antivirus. **La estación no puede quedar así.** Si suena el timbre a mitad de la práctica, se ejecuta el Paso 5 antes de levantarse.
+
+**Paso 1 — Registrar las exclusiones existentes**
+
+```powershell
+Get-MpPreference | Format-List ExclusionPath, ExclusionExtension, ExclusionProcess
+```
+
+**Se espera ver:** las tres listas vacías. Es lo correcto en una estación recién entregada: **ninguna exclusión sin justificar**.
+
+**Paso 2 — Crear la carpeta y excluirla**
+
+```powershell
+New-Item -ItemType Directory -Path C:\Lab\ZonaExcluida -Force | Out-Null
+
+Add-MpPreference -ExclusionPath 'C:\Lab\ZonaExcluida'
+
+Get-MpPreference | Format-List ExclusionPath
+```
+
+**Se espera ver:** `C:\Lab\ZonaExcluida` en la lista de exclusiones.
+
+**Si no aparece:** `Add-MpPreference` exige elevación. Si da error de acceso, la consola no está elevada.
+
+**Paso 3 — Depositar el archivo de prueba dentro de la zona excluida**
+
+```powershell
+$Parte1 = 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR'
+$Parte2 = '-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*'
+
+Set-Content -Path C:\Lab\ZonaExcluida\prueba-eicar.txt `
+            -Value ($Parte1 + $Parte2) `
+            -Encoding ASCII -NoNewline
+
+Test-Path C:\Lab\ZonaExcluida\prueba-eicar.txt
+```
+
+**Se espera ver:** `True`. **El archivo sobrevive.** En la Práctica 13, el mismo archivo desapareció en segundos; aquí Defender ni se entera de que existe.
+
+!!! question "El punto que hay que entender"
+    El antivirus está activo, con protección en tiempo real y firmas al día. La amenaza es exactamente la misma que detectó hace diez minutos. Lo único que cambió es una línea de configuración. ¿Qué le costaría a un atacante que ya tuviera acceso al equipo aprovechar esto? ¿Y por qué una exclusión sin fecha de revisión es una vulnerabilidad permanente?
+
+**Paso 4 — Comprobar que un análisis dirigido tampoco la ve**
+
+```powershell
+Start-MpScan -ScanType CustomScan -ScanPath C:\Lab\ZonaExcluida
+Test-Path C:\Lab\ZonaExcluida\prueba-eicar.txt
+```
+
+**Se espera ver:** `True` otra vez. Ni siquiera un análisis apuntado directamente a esa carpeta detecta nada: la exclusión también se aplica a los análisis bajo demanda.
+
+**Paso 5 — Revertir: quitar la exclusión y comprobar que la protección vuelve**
+
+```powershell
+Remove-MpPreference -ExclusionPath 'C:\Lab\ZonaExcluida'
+
+Get-MpPreference | Format-List ExclusionPath
+
+Start-MpScan -ScanType CustomScan -ScanPath C:\Lab\ZonaExcluida
+Test-Path C:\Lab\ZonaExcluida\prueba-eicar.txt
+```
+
+**Se espera ver:** la lista de exclusiones vacía de nuevo, y `Test-Path` devolviendo **`False`** — retirada la exclusión, Defender detecta y elimina el archivo que llevaba minutos ahí tranquilamente.
+
+**Paso 6 — Dejar la estación limpia y cerrar el registro**
+
+```powershell
+Remove-Item C:\Lab\ZonaExcluida -Recurse -Force -ErrorAction SilentlyContinue
+
+[pscustomobject]@{
+    ExclusionesRestantes     = (Get-MpPreference).ExclusionPath.Count
+    CarpetaEliminada         = -not (Test-Path C:\Lab\ZonaExcluida)
+    TiempoRealActivo         = (Get-MpComputerStatus).RealTimeProtectionEnabled
+} | Format-List
+
+Stop-Transcript
+```
+
+**Se espera ver:** `ExclusionesRestantes` en `0`, `CarpetaEliminada` en `True` y `TiempoRealActivo` en `True`. Los tres deben cumplirse antes de dar la práctica por terminada.
+
+!!! warning "Nota para el instructor"
+    Como la Práctica 13, este bloque no formó parte del ensayo en seco. Conviene ejecutarlo una vez sobre `01-MISION-CONTROLES` antes de dictarlo. Comprobar en particular que la protección contra manipulaciones (*Tamper Protection*) no bloquee `Add-MpPreference` en esta imagen.
 
 ---
 
@@ -200,7 +449,10 @@ Cada exclusión es una zona ciega que el AV no verá. Si un atacante logra depos
 2. Las **actualizaciones de definiciones** son críticas: `Update-MpSignature` debe ejecutarse antes de conectar cualquier equipo que estuvo offline, y verificarse con `(Get-MpComputerStatus).AntivirusSignatureLastUpdated`.
 3. La **detección heurística y comportamental** complementa las firmas analizando el comportamiento del código — detecta malware nuevo pero genera más falsos positivos.
 4. Los comandos PowerShell clave son: `Get-MpComputerStatus` (estado), `Update-MpSignature` (actualizar definiciones), `Start-MpScan -ScanType QuickScan` (escaneo rápido), `Set-MpPreference -DisableRealtimeMonitoring $false` (activar protección en tiempo real).
-5. Cada **exclusión** es una zona ciega que el AV no ve — toda exclusión debe estar documentada con justificación, autorización y fecha de revisión.
+5. Un análisis que termina **en silencio** no informa de nada: el resultado se consulta explícitamente con `Get-MpThreatDetection` (eventos de detección) y `Get-MpThreat` (amenazas conocidas y si siguen activas).
+6. El archivo de prueba **EICAR** permite comprobar que el antivirus está realmente operativo sin usar malware — es el único modo seguro de ver una detección y una cuarentena de verdad.
+7. Cada **exclusión** es una zona ciega que el AV no ve — comprobado en la práctica: el mismo archivo que Defender elimina en segundos sobrevive indefinidamente dentro de una ruta excluida, incluso ante un análisis dirigido.
+8. Toda exclusión debe estar documentada con justificación, autorización y fecha de revisión — y toda exclusión creada para practicar debe **revertirse con `Remove-MpPreference`** antes de terminar.
 
 ## Para profundizar
 

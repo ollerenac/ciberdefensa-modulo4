@@ -46,6 +46,7 @@ nav:
     - seguridad-criptografia/index.md
     - En el Ordenador:
       - seguridad-criptografia/en-el-ordenador/index.md
+      - "🖥 Laboratorio virtual — accesos y credenciales": seguridad-criptografia/en-el-ordenador/laboratorio-vm.md
       - "Controles Defensivos (Parte 1)": seguridad-criptografia/en-el-ordenador/controles-defensivos-p1.md
       - "Controles Defensivos (Parte 2)": seguridad-criptografia/en-el-ordenador/controles-defensivos-p2.md
       - "Antivirus Avanzados (Parte 1)": seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1.md
