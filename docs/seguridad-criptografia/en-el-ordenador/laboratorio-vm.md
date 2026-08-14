@@ -18,7 +18,7 @@ Esta página reúne todo lo necesario para entrar y trabajar en la máquina virt
     | Cuenta | Contraseña | Para qué sirve |
     |--------|-----------|----------------|
     | **`operador_alumno`** | `Operador2026` | **La cuenta de trabajo.** Con esta se inicia sesión siempre. Es una cuenta estándar, sin privilegios administrativos. |
-    | **`tec_admin`** | *la que indique el instructor* | **Cuenta de elevación.** No se inicia sesión con ella: se teclea solo cuando Windows pide permiso de administrador (UAC). |
+    | **`tec_admin`** | `123inictel456` | **Cuenta de elevación.** No se inicia sesión con ella: se teclea solo cuando Windows pide permiso de administrador (UAC). |
     | **`operador_temp`** | `Temporal2026` | **No usar.** Forma parte del escenario del laboratorio. |
 
 !!! warning "Estas credenciales son de laboratorio"
