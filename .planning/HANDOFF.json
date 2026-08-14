@@ -1,11 +1,9 @@
 {
   "version": "1.0",
-  "timestamp": "2026-08-11T07:25:15.849Z",
-  "context": "default",
+  "timestamp": "2026-08-14T06:58:00-05:00",
   "phase": null,
   "phase_name": null,
   "phase_dir": null,
-  "quick_task": "260810-rjh",
   "plan": null,
   "task": null,
   "total_tasks": null,
@@ -13,103 +11,176 @@
   "completed_tasks": [
     {
       "id": 1,
-      "name": "Milestone v1.0 — Módulo 4 con cuatro asignaturas",
+      "name": "Insertar bloques de practica en controles-defensivos-p1.md (6 ejercicios, 165 min) conservando la teoria intacta",
       "status": "done",
-      "commit": "16f6e5c"
+      "commit": "3109c44"
     },
     {
       "id": 2,
-      "name": "GSD Quick 260810-rjh — auditoría pedagógica, OVA e ISO 27000",
+      "name": "Reescribir controles-defensivos-p2.md como teoria+laboratorio (5 ejercicios, 45 min de 60)",
       "status": "done",
-      "commit": "07c9cc9"
+      "commit": "3109c44"
+    },
+    {
+      "id": 3,
+      "name": "Anadir practica a antivirus-avanzados-p1.md (4 ejercicios, 75 min de 180)",
+      "status": "done",
+      "commit": "3109c44"
+    },
+    {
+      "id": 4,
+      "name": "Crear docs/.../laboratorio-vm.md con credenciales, arranque de VM y procedimientos, y anadirla al nav",
+      "status": "done",
+      "commit": "3109c44"
+    },
+    {
+      "id": 5,
+      "name": "Cerrar los 18 hallazgos de REVISION-URGENTE-CLASES-2026-08-14.md",
+      "status": "done",
+      "commit": "3109c44"
+    },
+    {
+      "id": 6,
+      "name": "Completar la credencial de tec_admin en la pagina de laboratorio",
+      "status": "done",
+      "commit": "a6ce304"
+    },
+    {
+      "id": 7,
+      "name": "Publicar la guia del instructor como artifact privado",
+      "status": "done",
+      "commit": "n/a"
     }
   ],
   "remaining_tasks": [
     {
       "id": 1,
-      "name": "P0-1 — separar material público del alumno y material privado del instructor",
+      "name": "Ensayar los ejercicios 13 y 14 (EICAR y exclusiones de Defender) sobre 01-MISION-CONTROLES",
       "status": "not_started"
     },
     {
       "id": 2,
-      "name": "P0-3 — cerrar la especificación de OVA y validar VirtualBox/Hyper-V en el laboratorio",
+      "name": "P0-1: los 5 examenes publican su clave de respuestas inline; docs/instructor/ sirve 7 soluciones por URL directa",
       "status": "not_started"
     },
     {
       "id": 3,
-      "name": "P0-9 — crear la guía docente de Generalidades + ISO/IEC 27001",
+      "name": "P0-2: portadas 'En desarrollo', horas 19/13 vs 20/12 declaradas, y Suricata vs Snort",
+      "status": "not_started"
+    },
+    {
+      "id": 4,
+      "name": "VM-LNX-SI: Guest Additions, snapshot 00-BASE-LIMPIA, iptables y herramientas de red",
+      "status": "not_started"
+    },
+    {
+      "id": 5,
+      "name": "Reescribir la Unidad 2 para que Squid, Snort y honeypot corran en VM-LNX-SI",
+      "status": "not_started"
+    },
+    {
+      "id": 6,
+      "name": "Decidir si se borran o archivan los 4 borradores obsoletos de .planning/lab/drafts/",
       "status": "not_started"
     }
   ],
   "blockers": [
     {
-      "description": "Los subagentes GSD de investigación, planificación y verificación quedaron ejecutándose sin devolver resultado bajo el perfil restringido; el orquestador tuvo que aplicar el fallback documentado.",
+      "description": "Los ejercicios 13 y 14 no estan ensayados sobre la imagen; riesgo de que Tamper Protection bloquee Add-MpPreference o de que el ThreatName en espanol no coincida",
       "type": "technical",
-      "workaround": "Ejecutar lecturas y verificaciones desde el orquestador; usar el runtime de /home/researcher/.codex/gsd-core si el de /home/researcher/.agents/gsd-core falla."
+      "workaround": "Marcados como pendientes de ensayo dentro del propio material"
+    },
+    {
+      "description": "La deteccion heuristica y comportamental (objetivo 5 de Antivirus P1) se queda sin practica: demostrarla exigiria un proceso tipo ransomware",
+      "type": "technical",
+      "workaround": "Anotado en la guia del instructor para decirlo en voz alta"
+    },
+    {
+      "description": "No se midio si VirtualBox corre degradado por Hyper-V/VBS; solo se confirmo que la VM arranca en las 20 maquinas",
+      "type": "external",
+      "workaround": "Buscar el icono de tortuga en la barra inferior de la ventana de VirtualBox"
+    },
+    {
+      "description": "Disco del host al 94% con ova/VM-WIN-SI.ova (32 GB) todavia residente",
+      "type": "technical",
+      "workaround": "Borrarlo antes de exportar VM-LNX-SI"
+    },
+    {
+      "description": "Red del aula a 100 Mb/s reales 98; volvera a importar con VM-LNX-SI",
+      "type": "external",
+      "workaround": "USB 3.0 para distribuir imagenes"
     }
   ],
   "async_jobs": [],
   "human_actions_pending": [
     {
-      "action": "Definir dónde se entregará el paquete privado del instructor",
-      "context": "P0-1 puede excluir soluciones y claves del sitio público, pero el canal privado final debe acordarse con el responsable del curso.",
+      "action": "Ensayar los ejercicios 13 y 14 antes de dictar Antivirus P1",
+      "context": "Unico hueco de verificacion en el material que se dicta hoy. Diez minutos.",
+      "blocking": true
+    },
+    {
+      "action": "Comprobar el icono de tortuga en una estacion",
+      "context": "Descartar que VirtualBox corra degradado por VBS en el Windows 11 Pro anfitrion",
       "blocking": false
     },
     {
-      "action": "Validar VirtualBox, VT-x/AMD-V, Hyper-V, WSL2 y VBS en la imagen Windows real del laboratorio",
-      "context": "Es requisito para aceptar la futura OVA, no para iniciar P0-1.",
+      "action": "Confirmar que los teclados fisicos del aula son espanoles",
+      "context": "AltGr+1 para la tuberia esta documentado; con teclados US los alumnos pelearian con casi todos los comandos",
       "blocking": false
     },
     {
-      "action": "Confirmar acceso autorizado del profesor a ISO/IEC 27001, 27002 y 27005",
-      "context": "La guía debe resumir y usar casos originales; la consulta normativa exacta requiere copias autorizadas.",
+      "action": "Decidir sobre la contrasena de tec_admin publicada",
+      "context": "123inictel456 esta en el sitio publico y en el historial de Git. Cambiarla en la VM no la despublica. Si se parece a credenciales reales de INICTEL, cambiarlas alli.",
       "blocking": false
     }
   ],
   "decisions": [
     {
-      "decision": "Usar Ubuntu 24.04.4 LTS Desktop como base preliminar de la OVA principal.",
-      "rationale": "El curso es defensivo, la audiencia tiene Linux básico y se priorizan estabilidad y reproducibilidad sobre un catálogo de pentesting.",
-      "phase": "quick-260810-rjh"
+      "decision": "La teoria publicada es la espina dorsal; la practica se inserta, no la sustituye",
+      "rationale": "El usuario rechazo dictar los borradores reescritos: entrar a clase con un texto nunca dictado es un riesgo que el ahorro de trabajo no compensa. Resultado: 265 lineas anadidas, 1 borrada.",
+      "phase": null
     },
     {
-      "decision": "Mantener Kali solo como OVA opcional futura para un rol atacante controlado.",
-      "rationale": "Kali presupone experiencia Linux y su rama rolling no es la mejor base común para esta cohorte.",
-      "phase": "quick-260810-rjh"
+      "decision": "Los laboratorios absorben las horas de teoria, no se suman",
+      "rationale": "4h+1h de teoria y 4h+1h de laboratorio son el mismo bloque de 5 horas. Por eso los bloques de exposicion viven dentro de la clase.",
+      "phase": null
     },
     {
-      "decision": "Crear snapshots después de importar la OVA.",
-      "rationale": "OVF/OVA exporta el estado plano actual y no transporta el árbol de snapshots.",
-      "phase": "quick-260810-rjh"
+      "decision": "La Parte 1 solo observa; la Parte 2 corrige",
+      "rationale": "Todas las practicas de P1 son de lectura y sin elevacion. Que 4 de 6 controles CIS no se puedan verificar sin privilegios se convirtio en leccion explicita.",
+      "phase": null
     },
     {
-      "decision": "Priorizar P0-1 antes que la mejora editorial general.",
-      "rationale": "Cinco exámenes y las soluciones del profesor quedan accesibles en el sitio estático actual.",
-      "phase": "quick-260810-rjh"
+      "decision": "Evidencia antes que correccion, y nunca borrar una cuenta",
+      "rationale": "Deshabilitar antes de registrar destruye informacion y avisa al atacante. Retirar privilegio y deshabilitar es reversible y conserva el SID.",
+      "phase": null
+    },
+    {
+      "decision": "EICAR como unico escenario de deteccion, partido en dos mitades",
+      "rationale": "Metodo estandar y seguro para ver una cuarentena real sin malware. Partido para que Defender no ponga en cuarentena los archivos del propio curso al clonar el repo.",
+      "phase": null
+    },
+    {
+      "decision": "Toda exclusion de Defender creada en clase se revierte en la misma practica",
+      "rationale": "Sin Remove-MpPreference la estacion quedaba con una zona ciega permanente.",
+      "phase": null
+    },
+    {
+      "decision": "Identificar objetos de Windows por RID/SID/GUID, nunca por nombre",
+      "rationale": "La VM es es-ES: Guest es Invitado y Administrators es Administradores. Los comandos en ingles fallaban en las 20 estaciones.",
+      "phase": null
+    },
+    {
+      "decision": "Las credenciales de laboratorio se publican en el sitio abierto",
+      "rationale": "Autorizado explicitamente por el usuario. Imagen desechable, identica en las 20 estaciones, no sale de la red del aula.",
+      "phase": null
     }
   ],
   "uncommitted_files": [
-    {
-      "path": ".planning/phases/03-asignatura-2-capas-si/.continue-here.md",
-      "state": "deleted",
-      "ownership": "pre-existing user change; do not restore or commit"
-    },
-    {
-      "path": "BRIEF.md",
-      "state": "untracked",
-      "ownership": "pre-existing user file; do not commit without explicit scope"
-    },
-    {
-      "path": "SCENARIOS_ES.md",
-      "state": "untracked",
-      "ownership": "pre-existing user file; do not commit without explicit scope"
-    },
-    {
-      "path": "temas.txt",
-      "state": "untracked",
-      "ownership": "pre-existing user file; do not commit without explicit scope"
-    }
+    ".planning/.continue-here.md",
+    ".planning/HANDOFF.json",
+    ".planning/STATE.md"
   ],
-  "next_action": "Resume with $gsd-resume-work, then execute a validated gsd-quick for P0-1: separate student and instructor material and add a build-time leakage guard.",
-  "context_notes": "The audit is complete and committed. No new phase is active, so the handoff uses default context at .planning/.continue-here.md. The official schedule discovered in the workbook is urgent: Asignatura 1 starts 2026-08-13, technical labs 2026-08-17/18, and ISO 27000 starts 2026-08-19. No MkDocs server process was visible from the current execution environment; verify externally on resume."
+  "next_action": "Arrancar VM-WIN-SI desde 01-MISION-CONTROLES y ejecutar a mano los ejercicios 13 y 14 de antivirus-avanzados-p1.md: crear el archivo EICAR y comprobar que Defender lo retira, crear la exclusion, comprobar que el archivo sobrevive dentro de ella, y revertirla. Confirmar que Tamper Protection no bloquee Add-MpPreference y anotar el ThreatName exacto en espanol. Restaurar el snapshot al terminar.",
+  "context_notes": "La sesion nacio de una pregunta del usuario que resulto ser la correcta: por que el material separaba toda la teoria de toda la practica. Investigarlo revelo que los borradores de laboratorio ya alternaban internamente pero duplicaban la teoria en version empobrecida. El dato que desatasco el diseno fue el presupuesto de horas: teoria y laboratorio ocupan el mismo bloque de 5 horas. La revision urgente llego despues y confirmo errores que ninguna lectura de texto habria detectado: comandos en ingles sobre un Windows en espanol, una evidencia pedida y nunca creada, y una exclusion de Defender que dejaba una zona ciega permanente. Todos salieron de contrastar el documento contra la maquina real."
 }
