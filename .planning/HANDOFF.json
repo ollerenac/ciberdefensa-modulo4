@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "timestamp": "2026-08-14T06:58:00-05:00",
+  "timestamp": "2026-08-14T11:10:00-05:00",
   "phase": null,
   "phase_name": null,
   "phase_dir": null,
@@ -101,9 +101,9 @@
       "workaround": "Buscar el icono de tortuga en la barra inferior de la ventana de VirtualBox"
     },
     {
-      "description": "Disco del host al 94% con ova/VM-WIN-SI.ova (32 GB) todavia residente",
+      "description": "Disco del host al 97% (29 GB libres, empeoro desde 94%); ova/VM-WIN-SI.ova (32 GB) ya no tiene funcion: importado en las 20 maquinas, SHA-256 registrado",
       "type": "technical",
-      "workaround": "Borrarlo antes de exportar VM-LNX-SI"
+      "workaround": "Borrar el OVA; re-exportable desde el snapshot 01-MISION-CONTROLES si hiciera falta"
     },
     {
       "description": "Red del aula a 100 Mb/s reales 98; volvera a importar con VM-LNX-SI",
@@ -113,6 +113,11 @@
   ],
   "async_jobs": [],
   "human_actions_pending": [
+    {
+      "action": "Responder si las clases del 14 ago ya se dictaron",
+      "context": "Determina si el ensayo de E13/E14 sigue siendo urgente o si el frente pasa a disco y P0-1",
+      "blocking": true
+    },
     {
       "action": "Ensayar los ejercicios 13 y 14 antes de dictar Antivirus P1",
       "context": "Unico hueco de verificacion en el material que se dicta hoy. Diez minutos.",
@@ -181,6 +186,6 @@
     ".planning/HANDOFF.json",
     ".planning/STATE.md"
   ],
-  "next_action": "Arrancar VM-WIN-SI desde 01-MISION-CONTROLES y ejecutar a mano los ejercicios 13 y 14 de antivirus-avanzados-p1.md: crear el archivo EICAR y comprobar que Defender lo retira, crear la exclusion, comprobar que el archivo sobrevive dentro de ella, y revertirla. Confirmar que Tamper Protection no bloquee Add-MpPreference y anotar el ThreatName exacto en espanol. Restaurar el snapshot al terminar.",
+  "next_action": "Preguntar si las clases del 14 ago ya se dictaron. Si no: arrancar VM-WIN-SI desde 01-MISION-CONTROLES y ejecutar a mano los ejercicios 13 y 14 de antivirus-avanzados-p1.md: crear el archivo EICAR y comprobar que Defender lo retira, crear la exclusion, comprobar que el archivo sobrevive dentro de ella, y revertirla. Confirmar que Tamper Protection no bloquee Add-MpPreference y anotar el ThreatName exacto en espanol. Restaurar el snapshot al terminar.",
   "context_notes": "La sesion nacio de una pregunta del usuario que resulto ser la correcta: por que el material separaba toda la teoria de toda la practica. Investigarlo revelo que los borradores de laboratorio ya alternaban internamente pero duplicaban la teoria en version empobrecida. El dato que desatasco el diseno fue el presupuesto de horas: teoria y laboratorio ocupan el mismo bloque de 5 horas. La revision urgente llego despues y confirmo errores que ninguna lectura de texto habria detectado: comandos en ingles sobre un Windows en espanol, una evidencia pedida y nunca creada, y una exclusion de Defender que dejaba una zona ciega permanente. Todos salieron de contrastar el documento contra la maquina real."
 }
