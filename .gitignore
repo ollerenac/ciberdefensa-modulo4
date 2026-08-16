@@ -26,3 +26,8 @@ ova/
 # OS
 .DS_Store
 Thumbs.db
+
+# Contexto local — no publicar
+BRIEF.md
+SCENARIOS_ES.md
+temas.txt

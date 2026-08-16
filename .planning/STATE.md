@@ -56,9 +56,10 @@ All 4 phases shipped, code-reviewed, fixed, and verified. The MkDocs Material co
 
 ## Session Continuity
 
-Last session: 2026-06-21
-Stopped at: Milestone v1.0 complete
-Resume file: None
+Last session: 2026-08-16
+Stopped at: Resume 16-ago — clases del 14-ago avanzaron solo hasta controles-defensivos-p1.md:143 («Los cuatro componentes de la superficie de ataque»). P2 y Antivirus P1 sin dictar: el ensayo E13/E14 sigue pendiente antes de dictar Antivirus P1. BRIEF.md, SCENARIOS_ES.md y temas.txt añadidos a .gitignore.
+Resume file: .planning/.continue-here.md
+Leak confirmed 2026-08-13: los 5 exámenes publican su clave de respuestas inline en bloques `!!! danger "Solo instructor"` (renderizan visibles), y docs/instructor/ publica 7 soluciones por URL directa pese a estar fuera del nav
 
 ## Phase 01 — Site Foundation ✅
 

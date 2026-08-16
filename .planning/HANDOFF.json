@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "timestamp": "2026-08-14T11:10:00-05:00",
+  "timestamp": "2026-08-16T17:32:00-05:00",
   "phase": null,
   "phase_name": null,
   "phase_dir": null,
@@ -11,181 +11,113 @@
   "completed_tasks": [
     {
       "id": 1,
-      "name": "Insertar bloques de practica en controles-defensivos-p1.md (6 ejercicios, 165 min) conservando la teoria intacta",
+      "name": "Resolver la pregunta abierta del handoff anterior: las clases del 14-ago avanzaron solo hasta controles-defensivos-p1.md:143 (Los cuatro componentes de la superficie de ataque)",
       "status": "done",
-      "commit": "3109c44"
+      "commit": "n/a"
     },
     {
       "id": 2,
-      "name": "Reescribir controles-defensivos-p2.md como teoria+laboratorio (5 ejercicios, 45 min de 60)",
+      "name": "Excluir BRIEF.md, SCENARIOS_ES.md y temas.txt del repo publico via .gitignore",
       "status": "done",
-      "commit": "3109c44"
+      "commit": "pendiente en este WIP"
     },
     {
       "id": 3,
-      "name": "Anadir practica a antivirus-avanzados-p1.md (4 ejercicios, 75 min de 180)",
+      "name": "Estudio guiado + correccion en vivo de la seccion Puertos abiertos de controles-defensivos-p1.md: frase clave en negrita, netstat -an -> netstat -ano (teoria y ejemplo castrense), salida real de la VM recortada a 12 lineas, y lista de 6 lecturas una por columna (Proto, Direccion local, Direccion remota, Estado, PID, rango dinamico)",
       "status": "done",
-      "commit": "3109c44"
-    },
-    {
-      "id": 4,
-      "name": "Crear docs/.../laboratorio-vm.md con credenciales, arranque de VM y procedimientos, y anadirla al nav",
-      "status": "done",
-      "commit": "3109c44"
-    },
-    {
-      "id": 5,
-      "name": "Cerrar los 18 hallazgos de REVISION-URGENTE-CLASES-2026-08-14.md",
-      "status": "done",
-      "commit": "3109c44"
-    },
-    {
-      "id": 6,
-      "name": "Completar la credencial de tec_admin en la pagina de laboratorio",
-      "status": "done",
-      "commit": "a6ce304"
-    },
-    {
-      "id": 7,
-      "name": "Publicar la guia del instructor como artifact privado",
-      "status": "done",
-      "commit": "n/a"
+      "commit": "pendiente en este WIP"
     }
   ],
   "remaining_tasks": [
     {
       "id": 1,
-      "name": "Ensayar los ejercicios 13 y 14 (EICAR y exclusiones de Defender) sobre 01-MISION-CONTROLES",
+      "name": "Continuar el estudio guiado en el componente 2. Servicios en ejecucion de controles-defensivos-p1.md; despues 3. Cuentas y 4. Software, y luego P2",
       "status": "not_started"
     },
     {
       "id": 2,
-      "name": "P0-1: los 5 examenes publican su clave de respuestas inline; docs/instructor/ sirve 7 soluciones por URL directa",
+      "name": "Volcar al artifact Guia del instructor los cambios acumulados del 16-ago (analisis por PID de netstat, gancho LLMNR/Responder, pregunta de la IP peruana, advertencia de atribucion por convencion)",
       "status": "not_started"
     },
     {
       "id": 3,
-      "name": "P0-2: portadas 'En desarrollo', horas 19/13 vs 20/12 declaradas, y Suricata vs Snort",
+      "name": "Ensayar los ejercicios 13 y 14 (EICAR y exclusiones de Defender) sobre 01-MISION-CONTROLES antes de dictar Antivirus P1 — vuelve a ser obligatorio porque esa clase no se dicto",
       "status": "not_started"
     },
     {
       "id": 4,
-      "name": "VM-LNX-SI: Guest Additions, snapshot 00-BASE-LIMPIA, iptables y herramientas de red",
+      "name": "Borrar ova/VM-WIN-SI.ova (32 GB) para bajar el disco del host del 97% — OK tecnico dado, ejecucion pendiente",
       "status": "not_started"
     },
     {
       "id": 5,
-      "name": "Reescribir la Unidad 2 para que Squid, Snort y honeypot corran en VM-LNX-SI",
+      "name": "P0-1: los 5 examenes publican su clave de respuestas inline; docs/instructor/ sirve 7 soluciones por URL directa",
       "status": "not_started"
     },
     {
       "id": 6,
-      "name": "Decidir si se borran o archivan los 4 borradores obsoletos de .planning/lab/drafts/",
+      "name": "P0-2, VM-LNX-SI, reescritura de Unidad 2, y decision sobre los 4 borradores de .planning/lab/drafts/",
       "status": "not_started"
     }
   ],
   "blockers": [
     {
-      "description": "Los ejercicios 13 y 14 no estan ensayados sobre la imagen; riesgo de que Tamper Protection bloquee Add-MpPreference o de que el ThreatName en espanol no coincida",
+      "description": "Los ejercicios 13 y 14 siguen sin ensayar sobre la imagen; riesgo de que Tamper Protection bloquee Add-MpPreference o de que el ThreatName en espanol no coincida",
       "type": "technical",
       "workaround": "Marcados como pendientes de ensayo dentro del propio material"
     },
     {
-      "description": "La deteccion heuristica y comportamental (objetivo 5 de Antivirus P1) se queda sin practica: demostrarla exigiria un proceso tipo ransomware",
+      "description": "Disco del host al 97% (29 GB libres). El guest VM-WIN-SI tiene 32 GB libres de 58.9 internos — el problema es solo del host (vdi de 61 GB + OVA de 32 GB)",
       "type": "technical",
-      "workaround": "Anotado en la guia del instructor para decirlo en voz alta"
+      "workaround": "Borrar ova/VM-WIN-SI.ova; re-exportable desde el snapshot 01-MISION-CONTROLES"
     },
     {
       "description": "No se midio si VirtualBox corre degradado por Hyper-V/VBS; solo se confirmo que la VM arranca en las 20 maquinas",
       "type": "external",
       "workaround": "Buscar el icono de tortuga en la barra inferior de la ventana de VirtualBox"
-    },
-    {
-      "description": "Disco del host al 97% (29 GB libres, empeoro desde 94%); ova/VM-WIN-SI.ova (32 GB) ya no tiene funcion: importado en las 20 maquinas, SHA-256 registrado",
-      "type": "technical",
-      "workaround": "Borrar el OVA; re-exportable desde el snapshot 01-MISION-CONTROLES si hiciera falta"
-    },
-    {
-      "description": "Red del aula a 100 Mb/s reales 98; volvera a importar con VM-LNX-SI",
-      "type": "external",
-      "workaround": "USB 3.0 para distribuir imagenes"
     }
   ],
   "async_jobs": [],
   "human_actions_pending": [
     {
-      "action": "Responder si las clases del 14 ago ya se dictaron",
-      "context": "Determina si el ensayo de E13/E14 sigue siendo urgente o si el frente pasa a disco y P0-1",
-      "blocking": true
-    },
-    {
       "action": "Ensayar los ejercicios 13 y 14 antes de dictar Antivirus P1",
-      "context": "Unico hueco de verificacion en el material que se dicta hoy. Diez minutos.",
+      "context": "La clase no se dicto el 14-ago, asi que el ensayo vuelve a ser obligatorio. Diez minutos sobre 01-MISION-CONTROLES.",
       "blocking": true
     },
     {
-      "action": "Comprobar el icono de tortuga en una estacion",
-      "context": "Descartar que VirtualBox corra degradado por VBS en el Windows 11 Pro anfitrion",
+      "action": "Ejecutar el borrado de ova/VM-WIN-SI.ova",
+      "context": "Disco del host al 97%. OK tecnico dado (importado en las 20 estaciones, SHA-256 registrado), falta ejecutarlo.",
       "blocking": false
     },
     {
-      "action": "Confirmar que los teclados fisicos del aula son espanoles",
-      "context": "AltGr+1 para la tuberia esta documentado; con teclados US los alumnos pelearian con casi todos los comandos",
-      "blocking": false
-    },
-    {
-      "action": "Decidir sobre la contrasena de tec_admin publicada",
-      "context": "123inictel456 esta en el sitio publico y en el historial de Git. Cambiarla en la VM no la despublica. Si se parece a credenciales reales de INICTEL, cambiarlas alli.",
+      "action": "Identificar la segunda interfaz de red de la VM",
+      "context": "La salida de netstat muestra 169.254.47.53 (APIPA): hay un adaptador sin DHCP ademas del NAT 10.0.2.15. Saber cual es antes de que un alumno pregunte.",
       "blocking": false
     }
   ],
   "decisions": [
     {
+      "decision": "Modo de trabajo de las sesiones de estudio: el usuario estudia la leccion con el agente y cada duda se resuelve Y se corrige en el material publicado, con bitacora en .continue-here.md",
+      "rationale": "Peticion explicita del usuario el 16-ago. Las clases estan en curso; las mejoras deben llegar al sitio antes de la siguiente sesion de aula.",
+      "phase": null
+    },
+    {
+      "decision": "Desde la leccion Los cuatro componentes en adelante, cada cambio del material del alumno se refleja tambien en la guia del instructor (artifact)",
+      "rationale": "Peticion explicita del usuario. Los cambios se acumulan en .continue-here.md y se vuelcan al artifact por lotes.",
+      "phase": null
+    },
+    {
+      "decision": "netstat -ano como comando canonico de la leccion (antes netstat -an)",
+      "rationale": "Sin PID es imposible atribuir un puerto a su servicio; deducir por numero de puerto es solo convencion IANA y los puertos son configurables. La salida real de la VM quedo pegada y analizada en el material.",
+      "phase": null
+    },
+    {
       "decision": "La teoria publicada es la espina dorsal; la practica se inserta, no la sustituye",
-      "rationale": "El usuario rechazo dictar los borradores reescritos: entrar a clase con un texto nunca dictado es un riesgo que el ahorro de trabajo no compensa. Resultado: 265 lineas anadidas, 1 borrada.",
-      "phase": null
-    },
-    {
-      "decision": "Los laboratorios absorben las horas de teoria, no se suman",
-      "rationale": "4h+1h de teoria y 4h+1h de laboratorio son el mismo bloque de 5 horas. Por eso los bloques de exposicion viven dentro de la clase.",
-      "phase": null
-    },
-    {
-      "decision": "La Parte 1 solo observa; la Parte 2 corrige",
-      "rationale": "Todas las practicas de P1 son de lectura y sin elevacion. Que 4 de 6 controles CIS no se puedan verificar sin privilegios se convirtio en leccion explicita.",
-      "phase": null
-    },
-    {
-      "decision": "Evidencia antes que correccion, y nunca borrar una cuenta",
-      "rationale": "Deshabilitar antes de registrar destruye informacion y avisa al atacante. Retirar privilegio y deshabilitar es reversible y conserva el SID.",
-      "phase": null
-    },
-    {
-      "decision": "EICAR como unico escenario de deteccion, partido en dos mitades",
-      "rationale": "Metodo estandar y seguro para ver una cuarentena real sin malware. Partido para que Defender no ponga en cuarentena los archivos del propio curso al clonar el repo.",
-      "phase": null
-    },
-    {
-      "decision": "Toda exclusion de Defender creada en clase se revierte en la misma practica",
-      "rationale": "Sin Remove-MpPreference la estacion quedaba con una zona ciega permanente.",
-      "phase": null
-    },
-    {
-      "decision": "Identificar objetos de Windows por RID/SID/GUID, nunca por nombre",
-      "rationale": "La VM es es-ES: Guest es Invitado y Administrators es Administradores. Los comandos en ingles fallaban en las 20 estaciones.",
-      "phase": null
-    },
-    {
-      "decision": "Las credenciales de laboratorio se publican en el sitio abierto",
-      "rationale": "Autorizado explicitamente por el usuario. Imagen desechable, identica en las 20 estaciones, no sale de la red del aula.",
+      "rationale": "Decision del 14-ago, sigue vigente y gobierna las correcciones en vivo.",
       "phase": null
     }
   ],
-  "uncommitted_files": [
-    ".planning/.continue-here.md",
-    ".planning/HANDOFF.json",
-    ".planning/STATE.md"
-  ],
-  "next_action": "Preguntar si las clases del 14 ago ya se dictaron. Si no: arrancar VM-WIN-SI desde 01-MISION-CONTROLES y ejecutar a mano los ejercicios 13 y 14 de antivirus-avanzados-p1.md: crear el archivo EICAR y comprobar que Defender lo retira, crear la exclusion, comprobar que el archivo sobrevive dentro de ella, y revertirla. Confirmar que Tamper Protection no bloquee Add-MpPreference y anotar el ThreatName exacto en espanol. Restaurar el snapshot al terminar.",
-  "context_notes": "La sesion nacio de una pregunta del usuario que resulto ser la correcta: por que el material separaba toda la teoria de toda la practica. Investigarlo revelo que los borradores de laboratorio ya alternaban internamente pero duplicaban la teoria en version empobrecida. El dato que desatasco el diseno fue el presupuesto de horas: teoria y laboratorio ocupan el mismo bloque de 5 horas. La revision urgente llego despues y confirmo errores que ninguna lectura de texto habria detectado: comandos en ingles sobre un Windows en espanol, una evidencia pedida y nunca creada, y una exclusion de Defender que dejaba una zona ciega permanente. Todos salieron de contrastar el documento contra la maquina real."
+  "uncommitted_files": [],
+  "next_action": "Continuar el estudio guiado de controles-defensivos-p1.md en el componente 2. Servicios en ejecucion. Cada duda del usuario se resuelve y se corrige en el material; los cambios se anotan en la bitacora de .continue-here.md y se acumulan para la guia del instructor. Antes de dictar Antivirus P1: ensayo E13/E14.",
+  "context_notes": "Sesion de estudio guiado iniciada por el usuario el 16-ago: estudia el resto de la leccion con el agente y se implementan mejoras en la guia en vivo. Se reviso a fondo la seccion Puertos abiertos: la pregunta del usuario sobre netstat -an (no muestra PID, y puerto->servicio es solo convencion) forzo el cambio a netstat -ano con salida real de la VM y una lectura por columna. Sus otras dos preguntas (que es esperando instrucciones, y que significa 0.0.0.0:0 remoto) destaparon imprecisiones reales del texto que quedaron corregidas. Patron util: las preguntas del usuario estan encontrando los puntos debiles del material — tratarlas como hallazgos de revision, no como consultas."
 }

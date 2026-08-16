@@ -142,18 +142,75 @@ Pensemos en analogía militar: cuando se establece un perímetro de seguridad al
 
 ### Los cuatro componentes de la superficie de ataque
 
-**1. Puertos abiertos:** Cada puerto que escucha conexiones de red es una puerta potencial. Un puerto abierto indica que hay un servicio esperando instrucciones de la red. Si ese servicio tiene una vulnerabilidad, es un punto de entrada.
+**1. Puertos abiertos:** Cada puerto que escucha conexiones de red es una puerta potencial. **Un puerto abierto indica que hay un servicio a la escucha, esperando que un cliente se conecte y le envíe datos conforme a su protocolo.** El servicio interpreta esos datos — y ahí está el riesgo: si tiene una vulnerabilidad, unos datos construidos a propósito se convierten en un punto de entrada.
 
 Para visualizar los puertos que escucha un equipo Windows 11, abrir CMD y ejecutar:
 
-```cmd
-netstat -an
+```powershell
+netstat -aon
+```
+
+Para numerar cada línea:
+
+```powershell
+$i = 0; netstat -ano | ForEach-Object { "{0,4}: {1}" -f ++$i, $_ }
 ```
 
 !!! note "No hace falta elevación para mirar"
-    Enumerar puertos es una operación de lectura: funciona con una cuenta estándar. Se necesitan privilegios para *cambiar* la configuración, no para observarla. En la práctica de esta clase se usa el equivalente en PowerShell, que además indica **qué proceso** tiene abierto cada puerto — el dato que permite justificarlo.
+    Enumerar puertos es una operación de lectura: funciona con una cuenta estándar. Se necesitan privilegios para *cambiar* la configuración, no para observarla.
 
-La salida muestra columnas: Proto, Dirección local, Dirección extranjera, Estado. Las líneas con estado `LISTENING` son puertos abiertos esperando conexiones entrantes. El Técnico debe poder responder: ¿por qué está abierto este puerto? ¿Qué servicio lo usa? ¿Esa funcionalidad es necesaria en este equipo?
+Salida real de la VM del curso, recortada (la salida completa supera las 90 líneas; en clase no coincidirá con esta — los PID y los puertos dinámicos cambian en cada arranque):
+
+```text
+Conexiones activas
+
+  Proto  Dirección local          Dirección remota        Estado           PID
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       916
+  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:5040           0.0.0.0:0              LISTENING       4484
+  TCP    0.0.0.0:7680           0.0.0.0:0              LISTENING       6760
+  TCP    0.0.0.0:49664          0.0.0.0:0              LISTENING       880
+  TCP    0.0.0.0:49668          0.0.0.0:0              LISTENING       2960
+  TCP    10.0.2.15:139          0.0.0.0:0              LISTENING       4
+  TCP    10.0.2.15:49672        20.190.173.65:443      TIME_WAIT       0
+  TCP    10.0.2.15:51824        72.154.7.110:443       ESTABLISHED     6760
+  TCP    [::]:445               [::]:0                 LISTENING       4
+  UDP    0.0.0.0:5355           *:*                                    2036
+  UDP    10.0.2.15:137          *:*                                    4
+```
+
+Seis lecturas salen de esta tabla — una por columna, y una más al final:
+
+1. **Proto.** 
+    - TCP y UDP son los dos protocolos de transporte de Internet, y son los únicos que usan puertos — por eso `netstat` solo lista estos dos (otros protocolos, como ICMP, no aparecen en esta tabla). 
+    - TCP establece una conexión antes de intercambiar datos y garantiza entrega y orden: es el transporte de la web, SMB o RDP. 
+    - UDP envía datagramas sueltos, sin conexión ni confirmación: DNS, resolución de nombres NetBIOS, streaming.
+2. **Dirección local** 
+    - Dice *dónde* escucha el servicio. `0.0.0.0` es el comodín que significa «en todas las direcciones IPv4 de esta máquina a la vez», lo que incluye:
+        - `127.0.0.1` (*localhost*, alcanzable solo desde el propio equipo) y 
+        - `10.0.2.15` (la IP de la interfaz de red, alcanzable desde fuera). 
+    - Una IP concreta limita la escucha: `10.0.2.15:139`, el servicio que toma control de ese puerto atiende solo por esa interfaz, y
+    - un servicio ligado únicamente a `127.0.0.1` no es alcanzable desde la red.
+    - `[::]` es el mismo comodín en IPv6. 
+    - Cuanto más amplio el enlace, mayor la exposición.
+3. **Dirección remota.** 
+    - En una línea `LISTENING`, dado que el puerto origen está a la escucha, la dirección remota sera `0.0.0.0:0` el cual es el valor «aún no hay interlocutor» (el puerto `0` ni siquiera es un puerto válido). 
+    - Cuando un cliente se conecta, aparece otra línea con la dirección remota concreta — las `ESTABLISHED` de la salida. 
+    - El `*:*` de las líneas UDP dice lo mismo a su manera: como UDP no tiene conexiones, el socket simplemente acepta datagramas de cualquier origen.
+4. **Estado.** 
+    - `LISTENING` es una puerta abierta esperando clientes. 
+    - `ESTABLISHED` es una conversación en curso — la dirección remota dice con quién. 
+    - `TIME_WAIT` es una conexión ya cerrada, en periodo de drenaje; nótese su PID `0`: ya no tiene proceso dueño.
+    - Las líneas UDP no tienen estado: sin conexión, no hay nada que rastrear.
+5. **PID** permite la atribución: qué proceso abre cada puerto. 
+    - El PID `4` es siempre el proceso *System* — SMB (445) y NetBIOS (139, 137) los sirve el propio núcleo de Windows, no una aplicación.
+6. **El número de puerto no identifica el servicio.** 
+    - Los puertos `49664`–`49669` de la salida pertenecen al rango dinámico: el sistema los asigna en cada arranque. 
+    - Deducir el servicio por el número solo funciona con las convenciones de IANA para *puertos bien conocidos* (445 SMB, 3389 RDP, 135 RPC...), y cualquier servicio puede configurarse en un puerto arbitrario — el número **sugiere, pero no demuestra**.
+
+`netstat -aon` entrega el PID, pero no el nombre del proceso: cruzarlo exige abrir el Administrador de tareas (pestaña *Detalles*) o ejecutar `tasklist /fi "PID eq 916"`. La práctica de esta clase usa el equivalente en PowerShell, que resuelve puerto, PID y nombre de proceso en una sola consulta.
+
+Con esa herramienta, el Técnico debe poder responder: ¿por qué está abierto este puerto? ¿Qué proceso lo abre? ¿Esa funcionalidad es necesaria en este equipo?
 
 **2. Servicios en ejecución:** Cada servicio de Windows que corre en segundo plano es código que procesa datos, recibe entradas y tiene acceso al sistema operativo. Si un servicio tiene un error de programación (vulnerabilidad), un atacante puede aprovecharlo para ejecutar código malicioso.
 
@@ -162,7 +219,7 @@ La salida muestra columnas: Proto, Dirección local, Dirección extranjera, Esta
 **4. Software instalado:** Cada aplicación instalada es código adicional que puede contener vulnerabilidades. El software desactualizado es especialmente peligroso porque sus vulnerabilidades ya son públicas y los atacantes las conocen.
 
 !!! example "Aplicación en entorno castrense"
-    Un equipo de reconocimiento despliega un puesto de mando avanzado. Antes de conectar el ordenador a la red de unidad, el Técnico de comunicaciones realiza una evaluación rápida de superficie de ataque: ejecuta `netstat -an` en CMD y verifica qué puertos están escuchando. Identifica que el puerto 445 (SMB) está abierto — necesario para compartir archivos en red, pero también el vector del ransomware WannaCry que en 2017 afectó a hospitales y empresas en todo el mundo. El Técnico confirma que la versión SMBv1 está deshabilitada antes de conectar el equipo. Esta verificación de cinco minutos puede evitar que un incidente de seguridad interrumpa la misión.
+    Un equipo de reconocimiento despliega un puesto de mando avanzado. Antes de conectar el ordenador a la red de unidad, el Técnico de comunicaciones realiza una evaluación rápida de superficie de ataque: ejecuta `netstat -ano` en CMD y verifica qué puertos están escuchando. Identifica que el puerto 445 (SMB) está abierto — necesario para compartir archivos en red, pero también el vector del ransomware WannaCry que en 2017 afectó a hospitales y empresas en todo el mundo. El Técnico confirma que la versión SMBv1 está deshabilitada antes de conectar el equipo. Esta verificación de cinco minutos puede evitar que un incidente de seguridad interrumpa la misión.
 
 ### ▸ Práctica 2 — Enumerar la superficie de ataque de la estación
 
