@@ -365,6 +365,51 @@ La misma información existe en gráfico: `lusrmgr.msc` (**Usuarios y grupos loc
 
 **4. Software instalado:** Cada aplicación instalada es código adicional que puede contener vulnerabilidades. El software desactualizado es especialmente peligroso porque sus vulnerabilidades ya son públicas y los atacantes las conocen.
 
+Un servicio corre; una aplicación instalada puede pasar meses sin abrirse. Aun así cuenta: es código residente en el disco, con sus bibliotecas y sus asociaciones de archivo. Si su versión tiene una vulnerabilidad publicada, el atacante no necesita encontrarla abierta — le basta con lograr que se abra: un documento adjunto, un enlace, un archivo en una memoria USB. Por eso el software instalado es superficie de ataque **se use o no**.
+
+Windows anota cada programa instalado en el Registro, en dos ramas (aplicaciones de 64 y de 32 bits). Para leerlas, en la ventana de PowerShell ya abierta:
+
+```powershell
+$RutasSoftware = @(
+    'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
+    'HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*'
+)
+
+Get-ItemProperty $RutasSoftware -ErrorAction SilentlyContinue |
+    Where-Object DisplayName |
+    Select-Object DisplayName, DisplayVersion, Publisher |
+    Sort-Object DisplayName -Unique
+```
+
+Salida real de la VM del curso — una imagen recién instalada:
+
+```text
+DisplayName                              DisplayVersion Publisher
+-----------                              -------------- ---------
+Microsoft Edge                           151.0.4129.78  Microsoft Corporation
+Oracle VirtualBox Guest Additions 7.2.14 7.2.14.174565  Oracle and/or its affi…
+WebView2 Runtime de Microsoft Edge       151.0.4129.78  Microsoft Corporation
+```
+
+Cuatro lecturas salen de esta lista:
+
+1. **DisplayVersion — la columna que convierte el inventario en evaluación.**
+    - El nombre solo dice *qué* hay; la versión dice *qué vulnerabilidades públicas le aplican*. Las bases de datos de vulnerabilidades (CVE) se consultan exactamente con ese par: producto + versión.
+    - De aquí sale la definición operativa de «desactualizado»: existe una versión posterior que corrige vulnerabilidades conocidas. Sin la versión anotada, esa pregunta ni siquiera puede formularse.
+2. **Publisher — atribución, otra vez.**
+    - Igual que un puerto se atribuye a un proceso y un servicio a una cuenta, cada programa se atribuye a un editor. Una entrada sin editor, o de un editor que nadie reconoce, es un hallazgo que requiere investigación.
+3. **Lo que esta lista no muestra.**
+    - Esas dos ramas cubren lo instalado **para todo el equipo**. Quedan fuera: lo instalado solo para el usuario actual (rama `HKCU:` equivalente), las aplicaciones de la Tienda de Windows (se enumeran con `Get-AppxPackage`), y el software **portable** — un ejecutable copiado a una carpeta no pasa por instalador y no deja entrada en el Registro.
+    - Es decir: este inventario es necesario pero no completo. Un atacante que quiera pasar desapercibido preferirá justamente la vía que no deja registro.
+4. **Tres entradas no significan «poca superficie».**
+    - Esta imagen está recién instalada; una estación de trabajo real acumula decenas de entradas. La disciplina es la misma a cualquier escala: cada entrada exige poder responder *para qué está y quién responde por ella*.
+    - Y el inventario es prerrequisito de todo lo demás: **no se puede parchear lo que no se sabe que existe.** El control 6 del CIS L1 (Windows Update, más adelante) mantiene al día el sistema; las aplicaciones de terceros son responsabilidad de quien administra el inventario.
+
+!!! warning "El comando que no hay que usar: `Win32_Product`"
+    En internet abunda la receta `Get-CimInstance Win32_Product`. No usarla: enumerar esa clase dispara una verificación de consistencia del instalador MSI sobre **cada** paquete — es lenta y puede reconfigurar software solo por haber consultado. La vía del Registro es lectura pura y no toca nada.
+
+La misma información existe en gráfico: **Configuración → Aplicaciones → Aplicaciones instaladas**. Como siempre: el panel resume, el Registro da el dato exacto — con la versión completa y exportable al parte.
+
 !!! example "Aplicación en entorno castrense"
     Un equipo de reconocimiento despliega un puesto de mando avanzado. Antes de conectar el ordenador a la red de unidad, el Técnico de comunicaciones realiza una evaluación rápida de superficie de ataque: ejecuta `netstat -aon` y verifica qué puertos están escuchando. Identifica que el puerto 445 (SMB) está abierto — necesario para compartir archivos en red, pero también el vector del ransomware WannaCry que en 2017 afectó a hospitales y empresas en todo el mundo. El Técnico confirma que la versión SMBv1 está deshabilitada antes de conectar el equipo. Esta verificación de cinco minutos puede evitar que un incidente de seguridad interrumpa la misión.
 
@@ -567,7 +612,7 @@ Para los Técnicos del Ejército, el objetivo inicial es cumplir el Level 1. Los
 
 | Control CIS L1 | Por qué importa | Cómo verificar |
 |----------------|-----------------|---------------|
-| **1. Deshabilitar la cuenta Invitado** | La cuenta Invitado (*Guest*) permite acceso sin contraseña. Es el primer vector que un atacante prueba en un sistema nuevo. | Localizarla por **RID 501**, no por nombre: `Get-LocalUser \| Where-Object { ($_.SID.Value -split '-')[-1] -eq '501' }` — debe mostrar `Enabled: False` |
+| **1. Deshabilitar la cuenta Invitado** | La cuenta Invitado (*Guest*) permite acceso sin contraseña. Es el primer vector que un atacante prueba en un sistema nuevo. | Localizarla por **RID 501**, no por nombre. El listado de la Práctica 4 ya la muestra: la fila con RID `501` debe tener `Enabled: False` |
 | **2. Contraseña mínima de 14 caracteres** | Contraseñas cortas son vulnerables a ataques de fuerza bruta. 14 caracteres con complejidad tardan años en romperse con hardware actual. | `net.exe accounts` — la línea *Longitud mínima de contraseña* debe ser ≥ 14 |
 | **3. Umbral de bloqueo: 5 intentos** | Limita los intentos de adivinar contraseñas. Después de 5 intentos fallidos, la cuenta se bloquea. | `net.exe accounts` — la línea *Umbral de bloqueo* debe ser 5, no `Nunca` |
 | **4. Deshabilitar SMBv1** | SMBv1 es el protocolo que explotó WannaCry en 2017 para propagarse entre equipos. No tiene uso legítimo en redes modernas. | `Get-WindowsOptionalFeature -Online -FeatureName SMB1Protocol` — debe mostrar `State: Disabled` |
@@ -576,6 +621,14 @@ Para los Técnicos del Ejército, el objetivo inicial es cumplir el Level 1. Los
 
 !!! tip "Por qué un GUID en el control 5"
     El nombre de la subcategoría de auditoría está traducido en un Windows en español, así que `auditpol` no la encuentra si se la pide por nombre en inglés. El GUID `{0CCE9215-…}` identifica *Inicio de sesión* en cualquier idioma. Es el mismo principio que usar el RID 501 en lugar de «Guest».
+
+    ¿De dónde sale ese GUID? No es de esta máquina: es una **constante definida por Microsoft**, idéntica en toda instalación de Windows desde Vista. La lista completa se puede consultar en el propio equipo:
+
+    ```powershell
+    auditpol.exe /list /subcategory:* /v
+    ```
+
+    Ese comando imprime cada subcategoría de auditoría con su nombre (en el idioma del sistema) y su GUID. Ahí aparece `{0CCE9215-69AE-11D9-BED3-505054503030}` junto a *Inicio de sesión*.
 
 Estos seis controles son el mínimo absoluto antes de conectar cualquier equipo a la red de unidad. No son opcionales.
 
