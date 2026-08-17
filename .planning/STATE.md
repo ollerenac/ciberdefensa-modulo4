@@ -56,8 +56,8 @@ All 4 phases shipped, code-reviewed, fixed, and verified. The MkDocs Material co
 
 ## Session Continuity
 
-Last session: 2026-08-16
-Stopped at: Resume 16-ago — clases del 14-ago avanzaron solo hasta controles-defensivos-p1.md:143 («Los cuatro componentes de la superficie de ataque»). P2 y Antivirus P1 sin dictar: el ensayo E13/E14 sigue pendiente antes de dictar Antivirus P1. BRIEF.md, SCENARIOS_ES.md y temas.txt añadidos a .gitignore.
+Last session: 2026-08-17
+Stopped at: Estudio guiado 17-ago — cuatro componentes de superficie de ataque expandidos, CIS L1 ampliado a siete controles (control 7 servicios innecesarios + cruce puertos↔servicios), arreglos en P2 (anatomía Stop/Disabled, GUID auditpol). Commits 8d0d3ee y 54b15f5 + WIP del tip netstat. Reanudar: secciones finales de P1 y luego P2. Ensayos pendientes: cruce puertos↔servicios y E13/E14 antes de Antivirus P1. Disco al 98 % — borrar ova/VM-WIN-SI.ova sigue pendiente.
 Resume file: .planning/.continue-here.md
 Leak confirmed 2026-08-13: los 5 exámenes publican su clave de respuestas inline en bloques `!!! danger "Solo instructor"` (renderizan visibles), y docs/instructor/ publica 7 soluciones por URL directa pese a estar fuera del nav
 

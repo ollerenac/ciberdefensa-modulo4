@@ -208,6 +208,15 @@ Seis lecturas salen de esta tabla — una por columna, y una más al final:
     - Los puertos `49664`–`49669` de la salida pertenecen al rango dinámico: el sistema los asigna en cada arranque. 
     - Deducir el servicio por el número solo funciona con las convenciones de IANA para *puertos bien conocidos* (445 SMB, 3389 RDP, 135 RPC...), y cualquier servicio puede configurarse en un puerto arbitrario — el número **sugiere, pero no demuestra**.
 
+!!! tip "Ver solo los puertos a la escucha"
+    Con la salida completa delante, la pregunta natural es cómo quedarse solo con las líneas `LISTENING`:
+
+    ```powershell
+    netstat -aon | findstr LISTENING
+    ```
+
+    `findstr` deja pasar solo las líneas que contienen ese texto — en mayúsculas, porque `findstr` distingue mayúsculas por defecto y netstat imprime los estados en inglés incluso en un Windows en español. Dos cosas se pierden con el filtro: la cabecera de columnas y **todas las líneas UDP** — que no tienen estado y por tanto nunca dicen `LISTENING`. Para un inventario completo de puertos abiertos, UDP se revisa aparte. La Práctica 2 usa la forma robusta: `Get-NetTCPConnection -State Listen` filtra por la propiedad del objeto, no por texto impreso.
+
 `netstat -aon` entrega el PID, pero no el nombre del proceso: cruzarlo exige abrir el Administrador de tareas (pestaña *Detalles*) o ejecutar `tasklist /fi "PID eq 916"`. La práctica de esta clase usa el equivalente en PowerShell, que resuelve puerto, PID y nombre de proceso en una sola consulta.
 
 Con esa herramienta, el Técnico debe poder responder: ¿por qué está abierto este puerto? ¿Qué proceso lo abre? ¿Esa funcionalidad es necesaria en este equipo?
