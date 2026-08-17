@@ -78,7 +78,7 @@ Los controles se clasifican según **el momento en que actúan** respecto al inc
 
 Durante todo el curso, cada vez que se configure una protección conviene preguntarse dos cosas: **qué dimensión de la Triada CIA protege** y **de qué tipo de control se trata**.
 
----
+<hr style="height:3px; background-color:black;">
 
 ## Triada CIA
 
@@ -130,7 +130,7 @@ Completar cada línea en el Bloc de notas y **guardar antes de cerrar**.
 !!! note "Por qué `C:\Mision` es de solo lectura"
     Intentar escribir en esa carpeta devuelve *Acceso denegado*. Es intencional: el parte de misión es evidencia, y la evidencia no se altera. Las respuestas van a `C:\Lab\Evidencias`.
 
----
+<hr style="height:3px; background-color:black;">
 
 ## La Superficie de Ataque del Ordenador
 
@@ -144,7 +144,7 @@ Pensemos en analogía militar: cuando se establece un perímetro de seguridad al
 
 **1. Puertos abiertos:** Cada puerto que escucha conexiones de red es una puerta potencial. **Un puerto abierto indica que hay un servicio a la escucha, esperando que un cliente se conecte y le envíe datos conforme a su protocolo.** El servicio interpreta esos datos — y ahí está el riesgo: si tiene una vulnerabilidad, unos datos construidos a propósito se convierten en un punto de entrada.
 
-Para visualizar los puertos que escucha un equipo Windows 11, abrir CMD y ejecutar:
+Para visualizar los puertos que escucha un equipo Windows 11, ejecutar en la ventana de PowerShell ya abierta:
 
 ```powershell
 netstat -aon
@@ -153,7 +153,7 @@ netstat -aon
 Para numerar cada línea:
 
 ```powershell
-$i = 0; netstat -ano | ForEach-Object { "{0,4}: {1}" -f ++$i, $_ }
+$i = 0; netstat -aon | ForEach-Object { "{0,4}: {1}" -f ++$i, $_ }
 ```
 
 !!! note "No hace falta elevación para mirar"
@@ -192,10 +192,10 @@ Seis lecturas salen de esta tabla — una por columna, y una más al final:
     - Una IP concreta limita la escucha: `10.0.2.15:139`, el servicio que toma control de ese puerto atiende solo por esa interfaz, y
     - un servicio ligado únicamente a `127.0.0.1` no es alcanzable desde la red.
     - `[::]` es el mismo comodín en IPv6. 
-    - Cuanto más amplio el enlace, mayor la exposición.
+    - Cuanto más amplio el vínculo (*binding*), mayor la exposición.
 3. **Dirección remota.** 
-    - En una línea `LISTENING`, dado que el puerto origen está a la escucha, la dirección remota sera `0.0.0.0:0` el cual es el valor «aún no hay interlocutor» (el puerto `0` ni siquiera es un puerto válido). 
-    - Cuando un cliente se conecta, aparece otra línea con la dirección remota concreta — las `ESTABLISHED` de la salida. 
+    - En una línea `LISTENING`, dado que el puerto está a la escucha, la dirección remota será `0.0.0.0:0`, el valor que significa «aún no hay interlocutor» (el puerto `0` ni siquiera es un puerto válido).
+    - Una conexión en curso muestra la dirección remota concreta — las `ESTABLISHED` de la salida. Ojo: `ESTABLISHED` no distingue quién inició la conexión. Las dos de esta salida son conexiones **salientes** de la VM actuando como cliente, y la pista es el puerto local: `51824` pertenece al rango dinámico. Un cliente externo entrante habría llegado *a* uno de los puertos en escucha (139, 445...).
     - El `*:*` de las líneas UDP dice lo mismo a su manera: como UDP no tiene conexiones, el socket simplemente acepta datagramas de cualquier origen.
 4. **Estado.** 
     - `LISTENING` es una puerta abierta esperando clientes. 
@@ -212,20 +212,167 @@ Seis lecturas salen de esta tabla — una por columna, y una más al final:
 
 Con esa herramienta, el Técnico debe poder responder: ¿por qué está abierto este puerto? ¿Qué proceso lo abre? ¿Esa funcionalidad es necesaria en este equipo?
 
+!!! question "Análisis guiado — ¿qué entradas investigarías primero?"
+    La siguiente salida es **simulada, pero técnicamente plausible**. Corresponde a una estación de trabajo que no debería ofrecer servicios al exterior ni aceptar administración remota. El operador solo reconoce haber abierto el navegador para consultar el portal de instrucción.
+
+    ```text
+    Proto  Dirección local          Dirección remota         Estado           PID
+    TCP    0.0.0.0:135             0.0.0.0:0               LISTENING       916
+    TCP    0.0.0.0:445             0.0.0.0:0               LISTENING       4
+    TCP    127.0.0.1:49673         0.0.0.0:0               LISTENING       6120
+    TCP    0.0.0.0:3389            0.0.0.0:0               LISTENING       1180
+    TCP    0.0.0.0:4444            0.0.0.0:0               LISTENING       7312
+    TCP    10.0.2.15:51824         192.0.2.20:443          ESTABLISHED     6760
+    TCP    10.0.2.15:51891         203.0.113.77:8081       ESTABLISHED     7312
+    TCP    10.0.2.15:3389          198.51.100.46:53122     ESTABLISHED     1180
+    TCP    10.0.2.15:49672         192.0.2.55:443          TIME_WAIT       0
+    ```
+
+    Las direcciones `192.0.2.0/24`, `198.51.100.0/24` y `203.0.113.0/24` están reservadas para documentación: representan equipos externos ficticios, no destinos reales identificados como maliciosos.
+
+    Trabajar en parejas. Cada respuesta debe señalar la fila, el endpoint o el PID exacto que la sustenta:
+
+    1. ¿Qué PID aparece simultáneamente en un socket `LISTENING` y en una conexión `ESTABLISHED`?
+    2. ¿Cuáles son los dos endpoints asociados con ese PID? Escriban el endpoint local que escucha y el par local-remoto de la conexión establecida.
+    3. Entre `0.0.0.0:4444` y `127.0.0.1:49673`, ¿cuál tiene mayor exposición a la red y qué diferencia exacta entre ambas direcciones lo demuestra?
+    4. ¿Qué fila demuestra que RDP no solo está disponible, sino que existe una sesión activa? Copien sus endpoints local y remoto.
+    5. ¿Cuál es la dirección IP y el puerto de origen del equipo que mantiene esa sesión RDP?
+    6. ¿Qué fila representa una conexión que ya terminó y por qué no puede atribuirse a un proceso activo mediante su PID?
+    7. ¿Qué puerto en escucha está asociado al PID `4` y qué servicio de Windows sugiere esa combinación?
+    8. ¿Qué conexión `ESTABLISHED` es más compatible con la navegación web reconocida por el operador y qué PID habría que comprobar para confirmarlo?
+    9. Escriban el comando exacto de `tasklist` para identificar el proceso que mantiene tanto el puerto `4444` en escucha como la conexión hacia el puerto remoto `8081`.
+    10. A partir únicamente de esta salida, ¿cuál de estas dos conclusiones es técnicamente válida sobre el PID `7312`: «malware confirmado» o «actividad anómala que exige atribución»? Indiquen el dato mínimo que todavía falta obtener.
+
+    **Regla de análisis:** un puerto o una conexión inusual inicia una investigación; no demuestra por sí solo que exista malware. La fuerza del hallazgo aumenta cuando varias pistas coinciden — por ejemplo, un puerto no autorizado, una conexión externa activa y un mismo PID.
+
+---
 **2. Servicios en ejecución:** Cada servicio de Windows que corre en segundo plano es código que procesa datos, recibe entradas y tiene acceso al sistema operativo. Si un servicio tiene un error de programación (vulnerabilidad), un atacante puede aprovecharlo para ejecutar código malicioso.
 
+Un **servicio** es un programa que Windows arranca y gestiona en segundo plano, sin ventana propia y muchas veces sin que ningún usuario haya iniciado sesión. Para enumerar los que están corriendo, con los tres datos que un análisis de superficie necesita:
+
+```powershell
+Get-CimInstance Win32_Service -Filter "State='Running'" |
+    Select-Object Name, StartMode, StartName, PathName |
+    Sort-Object Name
+```
+
+!!! note "Por qué `Win32_Service` y no `Get-Service`"
+    `Get-Service` lista nombres y estados, pero no dice **con qué cuenta corre** el servicio ni **qué ejecutable** hay detrás — y esos dos datos son justamente los que importan. Igual que con los puertos, enumerar servicios es lectura: no requiere elevación.
+
+Salida típica de un Windows 11, recortada (la lista completa supera los 70 servicios; los directorios de versión y el orden varían por equipo):
+
+```text
+Name          StartMode  StartName                    PathName
+----          ---------  ---------                    --------
+Dhcp          Auto       NT Authority\LocalService    C:\Windows\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+Dnscache      Auto       NT AUTHORITY\NetworkService  C:\Windows\system32\svchost.exe -k NetworkService -p
+LanmanServer  Auto       LocalSystem                  C:\Windows\system32\svchost.exe -k netsvcs -p
+Spooler       Auto       LocalSystem                  C:\Windows\System32\spoolsv.exe
+TermService   Manual     NT Authority\NetworkService  C:\Windows\System32\svchost.exe -k NetworkService
+WinDefend     Auto       LocalSystem                  "C:\ProgramData\Microsoft\Windows Defender\Platform\...\MsMpEng.exe"
+wuauserv      Manual     LocalSystem                  C:\Windows\system32\svchost.exe -k netsvcs -p
+```
+
+Cuatro lecturas salen de esta tabla:
+
+1. **StartMode.**
+    - `Auto` significa que el servicio arranca con el sistema, sin intervención de nadie: es superficie de ataque **permanente**.
+    - `Manual` arranca solo cuando algo lo solicita: superficie bajo demanda.
+    - Un servicio en `Auto` que el equipo no necesita es exposición gratuita — el primer candidato del hardening.
+2. **StartName.**
+    - Es la cuenta con la que corre el servicio, y por tanto **el privilegio que hereda quien lo comprometa**.
+    - `LocalSystem` es más poderoso que Administrador: un servicio así comprometido entrega el equipo completo.
+    - `LocalService` y `NetworkService` son cuentas deliberadamente limitadas: el principio de mínimo privilegio aplicado a procesos, no solo a personas.
+3. **PathName.**
+    - Dice qué ejecutable es realmente el servicio. Muchos comparten `svchost.exe`, cada uno con su grupo `-k`; otros, como `Spooler`, tienen ejecutable propio (`spoolsv.exe`).
+    - Heurística de triage: un servicio cuyo ejecutable vive **fuera** de `C:\Windows` o `C:\Program Files` merece investigación antes que ningún otro.
+4. **El puente con los puertos.**
+    - `netstat -aon` entrega un PID, pero un mismo `svchost.exe` aloja varios servicios — el PID solo no dice *cuál*.
+    - `tasklist /svc /fi "PID eq 916"` lista los servicios que viven dentro de ese proceso. En el ejercicio simulado de la sección anterior, este comando es el que revelaría que el PID `1180` del puerto 3389 corresponde a `TermService` — Escritorio remoto.
+
+La misma información existe en gráfico: `services.msc` (o **Administración de equipos → Servicios**). Como con Seguridad de Windows, el panel resume y el cmdlet da el dato exacto.
+
+!!! question "Análisis guiado — ¿qué servicio merece investigación?"
+    La siguiente salida es **simulada, pero técnicamente plausible**. Todos los servicios mostrados están en ejecución en una estación de trabajo. La unidad no ha autorizado herramientas de soporte remoto ni cuentas personales para ejecutar servicios; la estación tampoco tiene impresora asignada.
+
+    ```text
+    Name           StartMode  StartName       PathName
+    ----           ---------  ---------       --------
+    WinDefend      Auto       LocalSystem     "C:\ProgramData\Microsoft\Windows Defender\Platform\...\MsMpEng.exe"
+    wuauserv       Manual     LocalSystem     C:\Windows\system32\svchost.exe -k netsvcs -p
+    Spooler        Auto       LocalSystem     C:\Windows\System32\spoolsv.exe
+    WinUpdateSvc   Auto       LocalSystem     C:\Users\Public\svchost.exe -service
+    RemoteSupport  Auto       LocalSystem     C:\Program Files\Remote Support\agent.exe -service
+    LogCollector   Auto       .\operador_temp  "C:\Program Files\Log Collector\collector.exe" -service
+    ```
+
+    Una ruta de ejecutable que contiene espacios debe encerrar entre comillas la parte correspondiente al archivo. Sin ellas, la separación entre el ejecutable y sus argumentos queda ambigua: por ejemplo, antes de llegar a `C:\Program Files\...`, Windows puede intentar interpretar `C:\Program.exe` como ejecutable.
+
+    Responder con el nombre, campo, valor o comando exacto solicitado:
+
+    1. ¿Qué servicio intenta parecer un componente de Windows Update, pero ejecuta un archivo fuera de `C:\Windows` y `C:\Program Files`?
+    2. ¿Qué combinación exacta de `StartMode` y `StartName` hace que ese servicio obtenga persistencia desde el arranque y privilegios máximos?
+    3. ¿Cuál es la ruta completa del ejecutable que contradice el nombre aparentemente legítimo de ese servicio?
+    4. ¿Qué servicio contiene espacios en `PathName`, pero no encierra entre comillas la ruta de su ejecutable?
+    5. ¿Qué nombre de ejecutable podría intentar interpretar Windows primero debido a esa ruta ambigua?
+    6. ¿Qué servicio se ejecuta con una cuenta local creada para un usuario temporal, y cuál es esa cuenta?
+    7. ¿Qué columna demuestra la identidad con la que corre ese servicio, sin demostrar que la persona haya iniciado una sesión interactiva?
+    8. ¿Qué servicio puede ser legítimo, pero aumenta innecesariamente la superficie de ataque según el contexto de una estación sin impresora?
+    9. Escriban el comando exacto para consultar únicamente `WinUpdateSvc`.
+    10. ¿Esta salida permite afirmar «malware confirmado» para `WinUpdateSvc`? Respondan sí o no e indiquen una evidencia mínima que todavía faltaría obtener del ejecutable.
+
+    **Regla de análisis:** un nombre parecido al de Windows no vuelve legítimo a un servicio. Se correlacionan nombre, ubicación del ejecutable, modo de inicio, cuenta de ejecución y necesidad operativa antes de emitir una conclusión.
+
+---
+
 **3. Cuentas de usuario:** Cada cuenta de usuario es una identidad que puede ser suplantada. Cuentas con contraseñas débiles, cuentas sin uso activo (huérfanas), o cuentas con privilegios excesivos son vectores de ataque de alto valor para los atacantes.
+
+A diferencia de un puerto o un servicio, una cuenta no es código que pueda tener errores: es una **llave**. El atacante no la explota — la usa. Para enumerar las cuentas locales del equipo:
+
+```powershell
+Get-LocalUser |
+    Select-Object Name, Enabled, LastLogon, SID
+```
+
+Salida típica de un Windows 11 (los SID cambian en cada equipo; aquí se recortan por legibilidad):
+
+```text
+Name               Enabled LastLogon           SID
+----               ------- ---------           ---
+Administrador      False                       S-1-5-21-3814504823-909563556-1708538438-500
+DefaultAccount     False                       S-1-5-21-…-503
+Invitado           False                       S-1-5-21-…-501
+operador_alumno    True    15/08/2026 8:12:04  S-1-5-21-…-1001
+WDAGUtilityAccount False                       S-1-5-21-…-504
+```
+
+Cuatro lecturas salen de esta tabla:
+
+1. **Enabled.**
+    - Una cuenta deshabilitada no está borrada: existe, conserva su perfil y puede rehabilitarse. Lo que impide es **iniciar sesión** — un control preventivo.
+    - Las cuentas integradas de Windows (las cuatro de la salida sin fecha de sesión) deben estar en `False`; ninguna es para uso diario.
+2. **LastLogon.**
+    - Una cuenta habilitada con `LastLogon` vacío o muy antiguo es candidata a **huérfana**: nadie la usa, nadie la vigila, y sigue siendo una llave válida.
+    - El caso inverso también informa: una fecha de sesión reciente en una cuenta que nadie reconoce es un hallazgo prioritario.
+3. **SID.**
+    - La estructura es fija: `S-1-5-21-<identificador de la máquina>-<RID>`. El tramo final —el **RID**— identifica el rol de la cuenta: `500` Administrador integrado, `501` Invitado, `≥1000` cuentas creadas en este equipo.
+    - El nombre depende del idioma (`Guest` aquí se llama `Invitado`); el SID no. Por eso toda verificación seria filtra por RID, nunca por nombre — la Práctica 4 audita la estación exactamente así.
+4. **Lo que esta tabla no muestra.**
+    - Ni la **fortaleza de la contraseña** (la gobierna la política del equipo — controles 2 y 3 del CIS L1, más adelante) ni los **grupos** a los que pertenece cada cuenta.
+    - Es decir: los tres vectores del párrafo inicial no se ven igual. La huérfana se detecta aquí (`LastLogon`); la contraseña débil y el privilegio excesivo exigen otras consultas. Una lista de cuentas «limpia» no autoriza a concluir que las cuentas están bien.
+
+La misma información existe en gráfico: `lusrmgr.msc` (**Usuarios y grupos locales**, ediciones Pro). Como siempre: el panel resume, el cmdlet da el dato exacto.
 
 **4. Software instalado:** Cada aplicación instalada es código adicional que puede contener vulnerabilidades. El software desactualizado es especialmente peligroso porque sus vulnerabilidades ya son públicas y los atacantes las conocen.
 
 !!! example "Aplicación en entorno castrense"
-    Un equipo de reconocimiento despliega un puesto de mando avanzado. Antes de conectar el ordenador a la red de unidad, el Técnico de comunicaciones realiza una evaluación rápida de superficie de ataque: ejecuta `netstat -ano` en CMD y verifica qué puertos están escuchando. Identifica que el puerto 445 (SMB) está abierto — necesario para compartir archivos en red, pero también el vector del ransomware WannaCry que en 2017 afectó a hospitales y empresas en todo el mundo. El Técnico confirma que la versión SMBv1 está deshabilitada antes de conectar el equipo. Esta verificación de cinco minutos puede evitar que un incidente de seguridad interrumpa la misión.
+    Un equipo de reconocimiento despliega un puesto de mando avanzado. Antes de conectar el ordenador a la red de unidad, el Técnico de comunicaciones realiza una evaluación rápida de superficie de ataque: ejecuta `netstat -aon` y verifica qué puertos están escuchando. Identifica que el puerto 445 (SMB) está abierto — necesario para compartir archivos en red, pero también el vector del ransomware WannaCry que en 2017 afectó a hospitales y empresas en todo el mundo. El Técnico confirma que la versión SMBv1 está deshabilitada antes de conectar el equipo. Esta verificación de cinco minutos puede evitar que un incidente de seguridad interrumpa la misión.
 
 ### ▸ Práctica 2 — Enumerar la superficie de ataque de la estación
 
 **Tiempo:** 45 minutos.
 
-Los cuatro componentes que se acaban de explicar se van a enumerar ahora sobre la VM, uno por uno. Se usa PowerShell en lugar de `netstat -an` porque permite relacionar cada puerto con el proceso que lo tiene abierto — el dato que de verdad permite justificarlo.
+Los cuatro componentes que se acaban de explicar se van a enumerar ahora sobre la VM, uno por uno. Se usa PowerShell en lugar de `netstat -aon` porque permite relacionar cada puerto con el proceso que lo tiene abierto — el dato que de verdad permite justificarlo.
 
 **Paso 1 — Puertos TCP en escucha, con su proceso**
 
@@ -245,7 +392,12 @@ Get-NetTCPConnection -State Listen |
 **Si no aparece:** si algún nombre de proceso queda vacío, conservar el PID como evidencia. Si la consulta entera falla, no avanzar y avisar al instructor.
 
 !!! question "Interpretación"
-    Elegir al menos **dos** entradas que requieran justificación. Para cada una: ¿qué proceso la abre? ¿qué función cumpliría en una estación militar? ¿qué información adicional haría falta antes de llamarla vulnerabilidad?
+    Elegir **dos** entradas de la tabla: una ligada a `0.0.0.0` (o `[::]`) y otra ligada a `127.0.0.1`. Para cada una responder, en este orden:
+
+    1. **Atribución.** ¿Qué proceso la abre? Si es `svchost`, el nombre no basta: ejecutar `tasklist /svc /fi "PID eq <pid>"` y anotar el servicio concreto.
+    2. **Exposición.** Según su dirección local, ¿quién puede alcanzar este puerto — cualquier equipo de la red, o solo procesos de esta misma máquina? ¿Cambia eso la urgencia del hallazgo?
+    3. **Necesidad.** ¿El rol de esta estación requiere esa función? Si no se sabe, ¿a quién se le pregunta o qué documento lo establece?
+    4. **Veredicto de parte.** Redactar una línea: «hallazgo justificado» o «requiere investigación» — con su porqué. La palabra *vulnerabilidad* solo se usa si se demostró necesidad ausente, configuración incorrecta o exposición indebida.
 
 **Paso 2 — Servicios en ejecución, cuentas locales y software instalado**
 
