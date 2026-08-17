@@ -608,7 +608,7 @@ El **Center for Internet Security (CIS)** publica benchmarks para los sistemas o
 - **Level 1:** Configuraciones aplicables en cualquier entorno, sin impacto operacional significativo. Todo equipo debe cumplir Level 1.
 - **Level 2:** Configuraciones más restrictivas para entornos de alta seguridad. Pueden interferir con algunas funcionalidades comunes — evaluar antes de aplicar en producción.
 
-Para los Técnicos del Ejército, el objetivo inicial es cumplir el Level 1. Los seis controles más relevantes para Windows 11 en entorno militar son:
+Para los Técnicos del Ejército, el objetivo inicial es cumplir el Level 1. Los siete controles más relevantes para Windows 11 en entorno militar son:
 
 | Control CIS L1 | Por qué importa | Cómo verificar |
 |----------------|-----------------|---------------|
@@ -618,6 +618,7 @@ Para los Técnicos del Ejército, el objetivo inicial es cumplir el Level 1. Los
 | **4. Deshabilitar SMBv1** | SMBv1 es el protocolo que explotó WannaCry en 2017 para propagarse entre equipos. No tiene uso legítimo en redes modernas. | `Get-WindowsOptionalFeature -Online -FeatureName SMB1Protocol` — debe mostrar `State: Disabled` |
 | **5. Habilitar auditoría de inicio de sesión** | Registra cada intento de inicio de sesión (exitoso y fallido) en el Visor de eventos. Esencial para detectar ataques de fuerza bruta. | `auditpol.exe /get /subcategory:"{0CCE9215-69AE-11D9-BED3-505054503030}"` — debe indicar *Correcto y error* |
 | **6. Windows Update al día** | Los parches de seguridad corrigen vulnerabilidades conocidas. Un sistema sin parches recientes tiene vulnerabilidades públicas que cualquier atacante puede explotar. | **Configuración → Windows Update → Buscar actualizaciones** — debe mostrar «Está todo actualizado» |
+| **7. Deshabilitar servicios innecesarios** | Cada servicio en ejecución es código con acceso al sistema; si además escucha un puerto, es alcanzable desde la red. Un servicio que no cumple función para el rol del equipo es superficie de ataque gratuita — Print Spooler (PrintNightmare, CVE-2021-34527) y Remote Registry son los casos clásicos en estaciones de trabajo. | `(Get-Service Spooler).StartType` y `(Get-Service RemoteRegistry).StartType` — ambos deben devolver `Disabled`. El método completo para *encontrar* candidatos está en la subsección siguiente |
 
 !!! tip "Por qué un GUID en el control 5"
     El nombre de la subcategoría de auditoría está traducido en un Windows en español, así que `auditpol` no la encuentra si se la pide por nombre en inglés. El GUID `{0CCE9215-…}` identifica *Inicio de sesión* en cualquier idioma. Es el mismo principio que usar el RID 501 en lugar de «Guest».
@@ -630,13 +631,39 @@ Para los Técnicos del Ejército, el objetivo inicial es cumplir el Level 1. Los
 
     Ese comando imprime cada subcategoría de auditoría con su nombre (en el idioma del sistema) y su GUID. Ahí aparece `{0CCE9215-69AE-11D9-BED3-505054503030}` junto a *Inicio de sesión*.
 
-Estos seis controles son el mínimo absoluto antes de conectar cualquier equipo a la red de unidad. No son opcionales.
+Estos siete controles son el mínimo absoluto antes de conectar cualquier equipo a la red de unidad. No son opcionales.
+
+### El cruce puertos ↔ servicios: cómo encontrar candidatos
+
+El control 7 tiene un problema que los otros seis no tienen: **no hay una lista fija que comprobar.** La Práctica 2 contó 91 servicios en ejecución en la estación del curso — revisarlos uno a uno a ojo no es un método, y la mayoría son necesarios para que Windows funcione. Hace falta un criterio de prioridad.
+
+Ese criterio sale de juntar dos componentes de la superficie de ataque ya estudiados: un servicio en ejecución es código explotable; un servicio que **además escucha un puerto** es explotable *desde la red*. Los servicios que cumplen ambas condiciones se revisan primero. El cruce, sin elevación:
+
+```powershell
+$escucha = Get-NetTCPConnection -State Listen
+
+Get-CimInstance Win32_Service -Filter "State='Running'" |
+    Where-Object { $_.ProcessId -in $escucha.OwningProcess } |
+    Select-Object ProcessId, Name, StartMode, DisplayName |
+    Sort-Object ProcessId
+```
+
+La primera línea guarda los puertos en escucha con el PID de su proceso; la segunda consulta filtra los servicios en ejecución quedándose con los que viven en uno de esos PID. El resultado es la lista de servicios alcanzables desde la red — la porción de los 91 que más urge justificar.
+
+!!! warning "svchost comparte proceso"
+    Varios servicios de Windows conviven dentro de un mismo `svchost.exe`, así que un PID en escucha puede devolver más de un servicio en este cruce. El cruce entrega **candidatos por proceso**; la atribución fina — qué servicio concreto dentro de ese PID abre el puerto — se hace con `tasklist /svc /fi "PID eq <pid>"`, como en la Práctica 2.
+
+El hallazgo ya está en los datos de esta clase. En la salida real de la Práctica 2, `spoolsv` — la cola de impresión, servicio `Spooler` — aparece **en ejecución, con arranque automático y escuchando** en un puerto del rango dinámico. Esta estación no tiene impresora: el servicio no cumple ninguna función aquí y aun así es alcanzable desde la red. Innecesario **y** expuesto — el candidato perfecto, y no es teórico: PrintNightmare (CVE-2021-34527) explotó exactamente este servicio para ejecutar código como SYSTEM.
+
+El caso inverso también enseña. `RemoteRegistry` está `Stopped` con arranque `Manual`: sin proceso vivo no aparece en el cruce — y sin embargo **incumple el control 7**. Un servicio parado en `Manual` puede arrancarse a demanda: por otro proceso, o por un atacante que ya consiguió privilegios y quiere abrir esa puerta. El cruce **prioriza** la revisión; no la sustituye. Por eso el control exige `Disabled`, no «parado».
+
+En esta parte no se toca nada — la sesión no tiene privilegios y ese es el diseño: los candidatos se anotan en el parte de la Práctica 5. La corrección (comandos, dependencias, reversión) se ejecuta en la Parte 2 con `tec_admin`.
 
 ### ▸ Práctica 5 — Levantar el parte de conformidad CIS L1
 
 **Tiempo:** 25 minutos.
 
-Se recorre la tabla de los seis controles y se anota el estado **observado** de cada uno. Sin elevación no se pueden comprobar todos, y eso también se registra: un parte honesto distingue «cumple», «no cumple» y «no verificable con los privilegios disponibles».
+Se recorre la tabla de los siete controles y se anota el estado **observado** de cada uno. Sin elevación no se pueden comprobar todos, y eso también se registra: un parte honesto distingue «cumple», «no cumple» y «no verificable con los privilegios disponibles».
 
 **Paso 1 — Control 1: cuenta Invitado deshabilitada**
 
@@ -651,6 +678,17 @@ Get-LocalUser |
 **Paso 2 — Control 6: estado de Windows Update**
 
 Abrir **Configuración → Windows Update** y anotar la fecha de la última comprobación y si hay actualizaciones pendientes. No instalar nada durante la clase.
+
+**Paso 2b — Control 7: servicios innecesarios**
+
+Ejecutar el cruce puertos ↔ servicios de la subsección anterior y anotar los candidatos. Comprobar además el tipo de arranque de los dos servicios de la tabla:
+
+```powershell
+(Get-Service Spooler).StartType
+(Get-Service RemoteRegistry).StartType
+```
+
+**Se espera ver:** dos valores. Si alguno no es `Disabled`, el control no se cumple — aunque el servicio esté parado.
 
 **Paso 3 — Levantar el parte de conformidad**
 
@@ -681,13 +719,16 @@ Estados admitidos: CUMPLE / NO CUMPLE / NO VERIFICABLE SIN ELEVACION
 6. Windows Update al dia .....................
    Comprobado con: Configuracion > Windows Update
 
+7. Servicios innecesarios deshabilitados .....
+   Comprobado con: cruce puertos-servicios y (Get-Service <nombre>).StartType
+
 OBSERVACIONES:
 '@ | Set-Content C:\Lab\Evidencias\01-conformidad-CIS.txt -Encoding UTF8
 
 notepad.exe C:\Lab\Evidencias\01-conformidad-CIS.txt
 ```
 
-Rellenar los seis estados y **guardar antes de cerrar**. Los controles que no se puedan comprobar con la sesión actual se marcan `NO VERIFICABLE SIN ELEVACION` — no se dejan en blanco ni se dan por buenos.
+Rellenar los siete estados y **guardar antes de cerrar**. Los controles que no se puedan comprobar con la sesión actual se marcan `NO VERIFICABLE SIN ELEVACION` — no se dejan en blanco ni se dan por buenos.
 
 **Paso 4 — Revisar la evidencia y cerrar la transcripción**
 
@@ -703,8 +744,8 @@ Stop-Transcript
 **Si no aparece:** si algún parte está vacío, volver a abrirlo, completarlo y repetir el paso. Si falta la captura `.png`, revisar el procedimiento de guardado antes de cerrar la transcripción.
 
 !!! question "Cierre"
-    1. Cuatro de los seis controles no se pudieron verificar. ¿Es eso un fallo del procedimiento o el resultado esperado? ¿Qué dice sobre el nivel de privilegio con el que debe trabajar un operador en su jornada normal?
-    2. Clasificar los seis controles CIS como **preventivos**, **detectivos** o **correctivos**. ¿Cuántos de cada tipo hay? ¿Qué revela ese reparto sobre lo que el benchmark prioriza?
+    1. Cuatro de los siete controles no se pudieron verificar. ¿Es eso un fallo del procedimiento o el resultado esperado? ¿Qué dice sobre el nivel de privilegio con el que debe trabajar un operador en su jornada normal?
+    2. Clasificar los siete controles CIS como **preventivos**, **detectivos** o **correctivos**. ¿Cuántos de cada tipo hay? ¿Qué revela ese reparto sobre lo que el benchmark prioriza?
 
 ---
 
@@ -728,7 +769,7 @@ Al terminar la Parte 1, en `C:\Lab\Evidencias` deben existir:
 - [ ] `01-reconocimiento.txt` — transcripción completa, con marca de cierre
 - [ ] `01-CIA.txt` — los cuatro incidentes clasificados y justificados
 - [ ] `01-seguridad-windows.png` — captura del panel de Seguridad de Windows
-- [ ] `01-conformidad-CIS.txt` — los seis controles con su estado observado
+- [ ] `01-conformidad-CIS.txt` — los siete controles con su estado observado
 
 Comprobación final:
 
@@ -772,7 +813,7 @@ Las cuatro filas deben decir `True`. Estos archivos son el punto de partida de l
 3. La **superficie de ataque** incluye puertos abiertos, servicios en ejecución, cuentas de usuario y software instalado — reducirla es el objetivo del hardening.
 4. El **Windows Security Center** proporciona una vista de estado unificada de todas las protecciones; un panel rojo requiere acción antes de conectar el equipo a la red.
 5. El **principio de mínimo privilegio** dicta que nadie — ni usuarios ni procesos — debe tener más acceso del estrictamente necesario para su función.
-6. El **CIS Benchmark Level 1** establece seis controles mínimos para Windows 11: deshabilitar la cuenta Invitado, contraseña de 14 caracteres, umbral de bloqueo en 5 intentos, deshabilitar SMBv1, auditoría de inicio de sesión activada, y Windows Update al día.
+6. El **CIS Benchmark Level 1** establece siete controles mínimos para Windows 11: deshabilitar la cuenta Invitado, contraseña de 14 caracteres, umbral de bloqueo en 5 intentos, deshabilitar SMBv1, auditoría de inicio de sesión activada, Windows Update al día, y servicios innecesarios deshabilitados — priorizando los que escuchan puertos.
 7. Los identificadores del sistema (**SID**, **RID**, **GUID**) no dependen del idioma; los nombres sí. En un Windows en español, `Guest` es `Invitado` y `Administrators` es `Administradores` — por eso se identifica por SID.
 
 ## Para profundizar

@@ -7,7 +7,7 @@
 
 > **Duración:** 1 hora | **Asignatura:** Seguridad de la Información y Criptografía | **Unidad:** En el Ordenador | Continuación de Parte 1
 
-En la Parte 1 establecimos el marco conceptual: la Triada CIA como referencia, la superficie de ataque como lo que el atacante ve, el Windows Security Center como panel de estado, el principio de mínimo privilegio y los seis controles CIS L1 que todo equipo debe cumplir. En esta Parte 2 aplicamos esos conceptos con comandos concretos: auditamos las cuentas locales del equipo, revisamos la política de contraseñas y deshabilitamos los servicios que amplían la superficie de ataque sin aportar valor a la misión.
+En la Parte 1 establecimos el marco conceptual: la Triada CIA como referencia, la superficie de ataque como lo que el atacante ve, el Windows Security Center como panel de estado, el principio de mínimo privilegio y los siete controles CIS L1 que todo equipo debe cumplir. En esta Parte 2 aplicamos esos conceptos con comandos concretos: auditamos las cuentas locales del equipo, revisamos la política de contraseñas y deshabilitamos los servicios que amplían la superficie de ataque sin aportar valor a la misión.
 
 ## Objetivo de la clase
 
@@ -246,6 +246,30 @@ Los tres servicios que se deben deshabilitar en la mayoría de estaciones de tra
 | **Remote Registry** | Permite modificar el registro de Windows de forma remota. Nadie debe poder alterar el registro de un equipo desde la red — si se necesita hacer cambios, el Técnico debe estar físicamente frente al equipo. | `Stop-Service RemoteRegistry; Set-Service RemoteRegistry -StartupType Disabled` |
 | **SMBv1 (protocolo, no servicio)** | El protocolo SMB versión 1 es el vector que explotó WannaCry en 2017 para propagarse entre equipos en segundos. La versión moderna SMBv2/3 lo reemplaza completamente. | `Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol` |
 
+### Anatomía del comando: por qué son dos pasos
+
+Cada celda de la tabla encadena dos comandos, y los dos hacen falta:
+
+- `Stop-Service` detiene el servicio **ahora** — pero si se queda ahí, el servicio revive en el siguiente reinicio, porque su tipo de arranque no cambió.
+- `Set-Service -StartupType Disabled` impide que **vuelva a arrancar** — pero si se queda ahí, el servicio sigue corriendo hasta el próximo reinicio.
+
+Uno actúa sobre el presente, el otro sobre el futuro. Omitir cualquiera de los dos deja el control a medias — y a medias significa que un reinicio (o la ausencia de uno) lo deshace.
+
+El tipo de arranque tiene tres valores, y la diferencia entre los dos últimos importa:
+
+| StartupType | Comportamiento |
+|-------------|----------------|
+| `Automatic` | Arranca solo, con el sistema |
+| `Manual` | No arranca con el sistema, pero **puede arrancarse a demanda** — por otro proceso, por un desencadenador del sistema, o por un atacante con privilegios |
+| `Disabled` | No arranca por ninguna vía hasta que alguien cambie este valor |
+
+`Manual` reduce ruido, no superficie: el código sigue disponible para ejecutarse. El control CIS pide `Disabled`.
+
+Dos precauciones completan el procedimiento:
+
+- **Dependencias.** Otros servicios pueden depender del que se va a deshabilitar. Comprobarlo antes: `(Get-Service Spooler).DependentServices` — si la lista no está vacía, evaluar el impacto antes de actuar.
+- **Reversión.** El cambio es reversible, y documentarlo es parte del parte: `Set-Service Spooler -StartupType Automatic; Start-Service Spooler` restaura el estado original.
+
 Verificar el estado actual de estos servicios antes de deshabilitar:
 
 ```powershell
@@ -273,6 +297,14 @@ La auditoría se consulta y se configura con `auditpol.exe`, identificando la su
 
 !!! note "Por qué un GUID y no el nombre"
     El nombre de la subcategoría está traducido en un Windows en español. Pedirla como *"Logon"* falla; pedirla como *"Inicio de sesión"* funciona solo en español. El GUID es el mismo en todas las instalaciones del mundo. Es el tercer caso del mismo patrón que ya vimos con el RID 501 y el SID `S-1-5-32-544`.
+
+    ¿Y de dónde se copia el GUID la primera vez? De la lista que trae el propio sistema:
+
+    ```powershell
+    auditpol.exe /list /subcategory:* /v
+    ```
+
+    Ese comando —que a diferencia de `/get` no requiere elevación— imprime cada subcategoría con su nombre en el idioma del equipo y su GUID al lado. El flujo del Técnico es: localizar la fila por el nombre en *su* idioma, copiar el GUID, y a partir de ahí escribir todos los comandos y scripts con el GUID — que funcionan igual en cualquier Windows.
 
 ### ▸ Práctica 9 — Reducir la superficie y activar el registro
 
