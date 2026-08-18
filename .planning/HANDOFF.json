@@ -1,0 +1,139 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-08-18T08:06:11.507Z",
+  "phase": null,
+  "phase_name": null,
+  "phase_dir": null,
+  "plan": null,
+  "task": null,
+  "total_tasks": null,
+  "status": "paused",
+  "context_type": "research",
+  "completed_tasks": [
+    {
+      "id": 1,
+      "name": "Validar una demostración segura de firmas con Microsoft Defender y EICAR",
+      "status": "done",
+      "commit": "f98cc65",
+      "progress": "Defender detectó EICAR; evento 1116 RecordId 545 y evento 1117 RecordId 548 confirmaron detección y cuarentena."
+    },
+    {
+      "id": 2,
+      "name": "Delimitar correctamente el papel de OpenCTI",
+      "status": "done",
+      "progress": "OpenCTI queda como contexto de Observable, Indicator y Observed Data; no se fabricará un Sighting ni una alerta atribuida a Defender."
+    },
+    {
+      "id": 3,
+      "name": "Añadir precondiciones antes de la Práctica 14 de exclusiones",
+      "status": "done",
+      "commit": "f98cc65",
+      "progress": "Se documentaron elevación, protección en tiempo real y línea base de exclusiones."
+    },
+    {
+      "id": 4,
+      "name": "Normalizar la terminología Firewall y diseñar una demostración visible inbound/outbound",
+      "status": "done",
+      "commit": "15f0d73",
+      "progress": "WSL fue sustituido por VirtualBox Host-only; la documentación compila con mkdocs --strict y los bloques Bash pasan bash -n."
+    },
+    {
+      "id": 5,
+      "name": "Validar la comunicación outbound de línea base",
+      "status": "done",
+      "progress": "Windows 192.168.56.101 alcanzó Linux 192.168.56.1:18081; Test-NetConnection=True e Invoke-WebRequest=200."
+    }
+  ],
+  "remaining_tasks": [
+    {
+      "id": 6,
+      "name": "Ejecutar de principio a fin la prueba outbound publicada",
+      "status": "in_progress",
+      "progress": "La línea base está validada; falta confirmar bloqueo, ausencia de GET, deshabilitación y recuperación."
+    },
+    {
+      "id": 7,
+      "name": "Ejecutar de principio a fin la prueba inbound publicada",
+      "status": "not_started"
+    },
+    {
+      "id": 8,
+      "name": "Ejecutar y validar la Práctica 14 de exclusiones de Defender",
+      "status": "not_started"
+    },
+    {
+      "id": 9,
+      "name": "Ajustar el contenido si las salidas reales difieren y confirmar los cambios",
+      "status": "not_started"
+    }
+  ],
+  "blockers": [],
+  "async_jobs": [],
+  "human_actions_pending": [
+    {
+      "action": "Comprobar y retirar la regla manual LAB - Bloquear salida TCP 18081 al anfitrion si quedó creada.",
+      "context": "El ensayo interactivo utilizó un nombre distinto del guion final y no se confirmó su limpieza.",
+      "blocking": true
+    },
+    {
+      "action": "Detener con Ctrl+C cualquier python3 -m http.server 18081 que siga abierto en el anfitrión.",
+      "context": "El servidor fue iniciado manualmente fuera del entorno Codex; no puede verificarse desde esta sesión.",
+      "blocking": false
+    },
+    {
+      "action": "Tras cualquier restauración de snapshot, comprobar Adaptador 2 Host-only y las direcciones 192.168.56.1/192.168.56.101.",
+      "context": "VirtualBox puede restaurar también la configuración de hardware de la VM.",
+      "blocking": true
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "No instalar WSL en la VM.",
+      "rationale": "La imagen no lo incluye; instalarlo exige elevación y puede introducir reinicios y dependencias innecesarias.",
+      "phase": null
+    },
+    {
+      "decision": "Usar NAT más un segundo adaptador VirtualBox Host-only.",
+      "rationale": "Mantiene Internet por NAT y proporciona dos extremos reales, aislados de la red física, para demostrar ambas direcciones.",
+      "phase": null
+    },
+    {
+      "decision": "Interpretar inbound y outbound siempre desde Windows.",
+      "rationale": "Windows→Linux es outbound; Linux→Windows es inbound.",
+      "phase": null
+    },
+    {
+      "decision": "No presentar objetos OpenCTI manuales como telemetría automática.",
+      "rationale": "No existe un conector Defender→OpenCTI en el laboratorio; fabricar relaciones o Sightings falsearía la evidencia.",
+      "phase": null
+    },
+    {
+      "decision": "Mantener los nombres internos cortafuegos-p1.md y cortafuegos-p2.md.",
+      "rationale": "Solo cambió el texto visible a Firewall para no romper enlaces existentes.",
+      "phase": null
+    }
+  ],
+  "blocking_constraints": [
+    {
+      "severity": "blocking",
+      "name": "WSL no está instalado",
+      "description": "wsl.exe --list mostró el instalador y requirió elevación; la demo no debe volver a depender de WSL.",
+      "mitigation": "Usar exclusivamente el anfitrión Linux mediante vboxnet0."
+    },
+    {
+      "severity": "blocking",
+      "name": "Restaurar snapshots puede retirar el Adaptador 2",
+      "description": "VirtualBox restaura configuración de máquina además del disco.",
+      "mitigation": "Ejecutar el preflight de red Host-only después de cada restauración."
+    },
+    {
+      "severity": "blocking",
+      "name": "OpenCTI no recibe telemetría de Defender",
+      "description": "No hay conector ni SIEM que publique los eventos 1116/1117 en OpenCTI.",
+      "mitigation": "Mantener la evidencia en Windows y mostrar OpenCTI solo como modelado CTI opcional."
+    }
+  ],
+  "uncommitted_files": [],
+  "next_action": "Limpiar el estado manual del laboratorio, confirmar vboxnet0 y las IP, y ejecutar desde el Paso 1 la Prueba 1 outbound de cortafuegos-p1.md; después ejecutar la Prueba 2 inbound.",
+  "context_notes": "El usuario pule el material ejecutando cada demostración antes de aprobarla. Prefiere pruebas visibles, resultados esperados inequívocos y explicación paso a paso. main está limpio y sincronizado con origin/main en 15f0d73."
+}
