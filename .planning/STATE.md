@@ -56,8 +56,8 @@ All 4 phases shipped, code-reviewed, fixed, and verified. The MkDocs Material co
 
 ## Session Continuity
 
-Last session: 2026-08-17
-Stopped at: Estudio guiado 17-ago — cuatro componentes de superficie de ataque expandidos, CIS L1 ampliado a siete controles (control 7 servicios innecesarios + cruce puertos↔servicios), arreglos en P2 (anatomía Stop/Disabled, GUID auditpol). Commits 8d0d3ee y 54b15f5 + WIP del tip netstat. Reanudar: secciones finales de P1 y luego P2. Ensayos pendientes: cruce puertos↔servicios y E13/E14 antes de Antivirus P1. Disco al 98 % — borrar ova/VM-WIN-SI.ova sigue pendiente.
+Last session: 2026-08-17 (tarde)
+Stopped at: Sesión de solo-análisis — el usuario cuestionó las prácticas de Antivirus P1 (query-labs no son laboratorio real). Se entregó catálogo de 12 laboratorios alternativos sin malware (exclusiones plantadas, AMSI, Tamper Protection, forense Event Log, variantes EICAR, cuarentena MpCmdRun, CFA anti-ransomware, MAPS/PUA/Network Protection AMTSO, firmas offline, GetFiles). Material SIN editar — decisión pendiente del usuario: cuáles integrar. Detalle en .continue-here.md bitácora #12. Pendientes previos vigentes: secciones finales de P1 y P2; ensayos cruce puertos↔servicios y E13/E14 antes de Antivirus P1; disco al 98 % — borrar ova/VM-WIN-SI.ova.
 Resume file: .planning/.continue-here.md
 Leak confirmed 2026-08-13: los 5 exámenes publican su clave de respuestas inline en bloques `!!! danger "Solo instructor"` (renderizan visibles), y docs/instructor/ publica 7 soluciones por URL directa pese a estar fuera del nav
 
