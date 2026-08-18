@@ -343,13 +343,39 @@ Se acaba de leer que cada exclusión es una zona ciega. Aquí se comprueba que e
 !!! danger "Esta práctica termina obligatoriamente en el Paso 5"
     Se va a crear deliberadamente un punto ciego en el antivirus. **La estación no puede quedar así.** Si suena el timbre a mitad de la práctica, se ejecuta el Paso 5 antes de levantarse.
 
-**Paso 1 — Registrar las exclusiones existentes**
+**Paso 1 — Confirmar la elevación y registrar las exclusiones existentes**
+
+Antes de modificar Defender se comprueban dos precondiciones. Ambas deben cumplirse para que el resultado de la práctica pueda atribuirse únicamente a la exclusión que se va a crear.
+
+**Comprobación 1 — Confirmar que PowerShell está elevado**
+
+```powershell
+([Security.Principal.WindowsPrincipal](
+    [Security.Principal.WindowsIdentity]::GetCurrent()
+)).IsInRole(
+    [Security.Principal.WindowsBuiltInRole]::Administrator
+)
+```
+
+**Qué hace:** obtiene la identidad de Windows de la consola actual y pregunta si su token pertenece al rol integrado `Administrator`.
+
+**Por qué se ejecuta:** `Add-MpPreference` y `Remove-MpPreference` modifican la configuración de seguridad. Sin elevación, la práctica fallará o Defender ocultará información sensible.
+
+**Se espera ver:** `True`. Si devuelve `False`, cerrar la consola y abrir **Windows PowerShell → Ejecutar como administrador** con `tec_admin` antes de continuar.
+
+**Comprobación 2 — Registrar las exclusiones iniciales**
 
 ```powershell
 Get-MpPreference | Format-List ExclusionPath, ExclusionExtension, ExclusionProcess
 ```
 
+**Qué hace:** consulta las exclusiones de rutas, extensiones y procesos que Defender tiene configuradas antes del ejercicio.
+
+**Por qué se ejecuta:** establece la línea base. Así se demuestra que el cambio de comportamiento de EICAR se debe a `C:\Lab\ZonaExcluida` y no a una exclusión anterior.
+
 **Se espera ver:** las tres listas vacías. Es lo correcto en una estación recién entregada: **ninguna exclusión sin justificar**.
+
+Si aparece `N/A: Must be an administrator to view exclusions`, la consola no está elevada. Si aparece una exclusión real, no continuar ni eliminarla sin identificarla; restaurar el estado limpio del laboratorio.
 
 **Paso 2 — Crear la carpeta y excluirla**
 
