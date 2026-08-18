@@ -3,7 +3,7 @@
 # Tipo: Teoría
 ---
 
-# Cortafuegos: Reglas Avanzadas y Logging (Parte 2)
+# Firewall: Reglas Avanzadas y Logging (Parte 2)
 
 > **Duración:** 2 horas | **Asignatura:** Seguridad de la Información y Criptografía | **Unidad:** En el Ordenador | Continuación de Parte 1
 

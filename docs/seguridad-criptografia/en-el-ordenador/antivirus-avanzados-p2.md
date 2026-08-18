@@ -170,4 +170,4 @@ El dashboard muestra el estado actual. Pero si hubo una detección ayer, una cua
 
 ---
 
-*Siguiente: [Cortafuegos (Parte 1)](cortafuegos-p1.md)*
+*Siguiente: [Firewall (Parte 1)](cortafuegos-p1.md)*

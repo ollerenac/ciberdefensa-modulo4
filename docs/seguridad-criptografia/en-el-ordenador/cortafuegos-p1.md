@@ -1,9 +1,9 @@
 ---
 # Horas asignadas: 2 hrs
-# Tipo: Teoría
+# Tipo: Teoría con demostración guiada
 ---
 
-# Cortafuegos: Protección Perimetral Local (Parte 1)
+# Firewall: Protección Perimetral Local (Parte 1)
 
 > **Duración:** 2 horas | **Asignatura:** Seguridad de la Información y Criptografía | **Unidad:** En el Ordenador
 
@@ -11,27 +11,31 @@
 
 Al finalizar esta clase, el alumno será capaz de:
 
-- Explicar la diferencia entre un host firewall (cortafuegos de host) y un firewall perimetral de red.
+- Explicar la diferencia entre un host firewall y un firewall perimetral de red.
 - Describir el filtrado stateful vs. stateless y por qué Windows Defender Firewall es stateful.
 - Navegar Windows Defender Firewall with Advanced Security (WFAS) e interpretar las reglas existentes.
-- Crear reglas de entrada y salida básicas por puerto, protocolo y aplicación.
+- Crear y comprobar reglas inbound y outbound por puerto y protocolo.
 - Explicar los tres perfiles de red (Domain, Private, Public) y cuándo aplica cada uno.
 
 ---
 
-## ¿Qué es un Cortafuegos?
+## ¿Qué es un Firewall?
 
-Un cortafuegos (firewall) es un sistema que inspecciona el tráfico de red y decide si lo permite o lo bloquea, basándose en un conjunto de reglas predefinidas. La analogía más precisa es la del portero de un edificio: decide quién puede entrar, pero también controla a dónde pueden ir los que ya están adentro, y quién puede salir.
+Un firewall inspecciona el tráfico de red y decide si lo permite o lo bloquea mediante reglas predefinidas.
 
-Hay dos tipos de cortafuegos que necesitamos entender como distintos — no son excluyentes, sino complementarios:
+La analogía más precisa es el portero de un edificio: decide quién entra, controla a dónde pueden ir quienes están dentro y quién puede salir.
 
-**Host firewall (cortafuegos de host):** Corre en el propio ordenador que protege. Windows Defender Firewall es un host firewall. Protege ese equipo específico del tráfico de red que llega a él o sale de él. Es el que estudiamos en esta clase.
+Hay dos tipos de firewall que debemos distinguir. No son excluyentes, sino complementarios:
 
-**Firewall perimetral de red:** Corre en un dispositivo dedicado — un router, un appliance de seguridad, o una UTM (Unified Threat Management appliance) — situado entre la red interna de la unidad y el exterior (internet u otras redes). Protege toda la red, no un equipo individual.
+**Host firewall:** corre en el ordenador que protege. Windows Defender Firewall controla el tráfico que llega a ese equipo o sale de él. Es el que estudiamos en esta clase.
 
-**¿Por qué necesitamos ambos?** El firewall perimetral es la primera línea de defensa: protege contra amenazas externas que intentan entrar a la red. Pero si un atacante ya está dentro de la red — porque comprometió un equipo, porque se conectó a la WiFi sin autorización, o porque un dispositivo infectado entró físicamente — el firewall perimetral ya no lo ve. Es entonces cuando el host firewall de cada equipo importa: previene el movimiento lateral, es decir, que el atacante se mueva de un equipo comprometido a otro dentro de la misma red.
+**Firewall perimetral de red:** corre en un router, un dispositivo dedicado o una UTM, entre la red interna y el exterior. Protege la red completa, no un único equipo.
 
-En operaciones militares esto es especialmente relevante: las redes de unidad pueden tener múltiples dispositivos conectados, no todos controlados directamente, y la amenaza interna (un equipo comprometido o un dispositivo no autorizado) es tan real como la amenaza externa.
+**¿Por qué necesitamos ambos?** El firewall perimetral protege la red frente a conexiones procedentes del exterior.
+
+Si el atacante ya comprometió un equipo o conectó un dispositivo no autorizado, ese tráfico puede no cruzar el perímetro. El host firewall limita entonces el movimiento lateral entre equipos internos.
+
+En una red de unidad no todos los dispositivos están bajo el mismo control. Por eso una amenaza interna puede ser tan relevante como una conexión procedente del exterior.
 
 ---
 
@@ -39,23 +43,29 @@ En operaciones militares esto es especialmente relevante: las redes de unidad pu
 
 La diferencia entre filtrado stateful y stateless es fundamental para entender cómo funciona cualquier firewall moderno.
 
-**Filtrado stateless (sin estado):** El firewall examina cada paquete de red de forma completamente independiente. Solo considera la dirección IP de origen, la dirección IP de destino, el puerto y el protocolo. No recuerda nada de paquetes anteriores. Cada paquete se evalúa solo, sin contexto de conversación.
+**Filtrado stateless (sin estado):** el firewall examina cada paquete de forma independiente. Considera datos como las IP, el puerto y el protocolo.
 
-**Filtrado stateful (con estado):** El firewall mantiene una tabla de conexiones activas — recuerda qué conexiones se han iniciado, desde dónde, hacia dónde, y en qué estado están. Si el ordenador inició una conexión TCP hacia un servidor web (el ordenador envió la petición), el firewall stateful permite automáticamente que los paquetes de respuesta del servidor entren — porque recuerda que esa conversación fue iniciada por el equipo local.
+No recuerda los paquetes anteriores ni el contexto de la conversación.
+
+**Filtrado stateful (con estado):** el firewall mantiene una tabla de conexiones activas. Recuerda qué conexión se inició, sus extremos y su estado.
+
+Si el equipo inicia una conexión TCP, el firewall permite las respuestas asociadas porque reconoce que pertenecen a esa conversación.
 
 | Escenario | Stateless | Stateful |
 |-----------|-----------|---------|
 | El ordenador solicita una página web (puerto 80 saliente) | Debe haber una regla explícita de ENTRADA que permita las respuestas del servidor | Permite automáticamente las respuestas porque recuerda que la petición fue iniciada localmente |
 | Un atacante externo envía paquetes al puerto 80 del ordenador | Se evalúa igual que cualquier otro paquete — si hay regla de entrada que permita el puerto 80, entra | Se evalúa como nueva conexión iniciada externamente — si no hay regla de entrada explícita, se bloquea |
-| Escaneo de puertos externo | Puede pasar algunos paquetes si los puertos tienen reglas de permiso | Detecta el patrón de múltiples conexiones a diferentes puertos y puede bloquearlo |
+| Escaneo de puertos externo | Cada paquete se evalúa sin contexto | Cada intento es una conexión nueva y se evalúa contra la política inbound; mantener estado no equivale a ser un IDS |
 
-**Windows Defender Firewall es stateful.** Esto significa que cuando configuras una regla de salida que permite tráfico, no necesitas crear también una regla de entrada que permita las respuestas — el estado de la conexión las maneja automáticamente. Esta es una ventaja práctica importante cuando se configuran reglas.
+**Windows Defender Firewall es stateful.** Si una regla permite iniciar una conexión outbound, no hace falta otra regla inbound para sus respuestas.
+
+El firewall reconoce el estado de esa conversación y permite el tráfico de retorno asociado.
 
 ---
 
 ## Los Tres Perfiles de Red
 
-Windows Defender Firewall no aplica el mismo conjunto de reglas en todos los entornos. Tiene tres perfiles, y el perfil activo determina qué conjunto de reglas se aplica. El sistema selecciona el perfil automáticamente basándose en el tipo de red detectado.
+Windows Defender Firewall utiliza tres perfiles. El perfil activo determina qué reglas se aplican y Windows lo selecciona según el tipo de red detectado.
 
 | Perfil | Cuándo aplica | Comportamiento por defecto | Relevancia militar |
 |--------|--------------|--------------------------|-------------------|
@@ -66,30 +76,467 @@ Windows Defender Firewall no aplica el mismo conjunto de reglas en todos los ent
 El perfil Public es la postura más restrictiva y debe aplicarse siempre en entornos no controlados.
 
 !!! example "Aplicación en entorno castrense"
-    Un Técnico conecta su laptop a la red WiFi del hotel durante una misión en otra ciudad. Windows detecta que es una red nueva, no marcada como privada o dominio. El perfil Public se activa automáticamente. Esto significa que: el descubrimiento de red está deshabilitado (otros usuarios de la WiFi no pueden ver el equipo), el tráfico entrante no solicitado está bloqueado, y se aplican las reglas más restrictivas disponibles.
+    Un Técnico conecta su laptop a la red WiFi de un hotel. Windows detecta una red nueva, no marcada como privada ni asociada al dominio, y activa el perfil Public.
 
-    Error común: Windows puede preguntar "¿Esta es una red pública o privada?" cuando se conecta por primera vez. Si el usuario selecciona "Privada" en una red de hotel o en la WiFi de un cliente, el perfil se relaja innecesariamente. La regla en entornos militares: si hay duda, siempre marcar como Pública.
+    El descubrimiento de red queda deshabilitado y el tráfico inbound no solicitado recibe la política más restrictiva.
+
+    Error común: seleccionar «Privada» en una red de hotel o de un cliente relaja el perfil sin justificación.
+
+    En un entorno militar, una red no verificada se marca como Pública.
 
 ---
 
-## Reglas de Entrada vs. Reglas de Salida
+## Reglas de Entrada (Inbound) vs. Reglas de Salida (Outbound)
 
-**Reglas de entrada (Inbound):** Controlan qué tráfico puede llegar al ordenador desde la red. Un paquete que llega desde fuera debe tener una regla de entrada que lo permita — de lo contrario, se bloquea silenciosamente.
+La dirección siempre se determina desde el equipo protegido. En esta clase, ese equipo es la VM Windows.
 
-**Reglas de salida (Outbound):** Controlan qué tráfico puede el ordenador enviar hacia la red. Por defecto, Windows Defender Firewall permite todo el tráfico saliente que no tenga una regla de bloqueo explícita.
+**Inbound:** otra máquina inicia una conexión cuyo destino es Windows. La regla decide si esa conexión puede llegar a un servicio local.
 
-Este comportamiento predeterminado — bloquear todo entrante, permitir todo saliente — es el apropiado para la mayoría de estaciones de trabajo, pero tiene una implicación importante: el tráfico saliente de malware no está bloqueado por defecto.
+**Outbound:** Windows inicia una conexión cuyo destino es otra máquina. La regla decide si esa conexión puede salir del equipo.
+
+La postura usual bloquea inbound no solicitado y permite outbound. Esto implica que el firewall no detiene por defecto todas las conexiones salientes de un malware.
 
 !!! warning "El outbound permisivo es explotado por el malware moderno"
-    La mayoría de los administradores solo configura reglas de entrada — verifican que nadie pueda conectarse al equipo desde afuera. Pero el malware moderno abusa del outbound permisivo: una vez que un troyano se instala en el equipo, puede conectarse a sus servidores de Comando y Control (C2) en internet usando el puerto 443 (HTTPS) — un puerto que nadie bloquea saliente porque es el puerto del navegador web.
+    Muchos administradores se concentran en inbound. Sin embargo, un troyano instalado puede iniciar conexiones outbound hacia su servidor de Comando y Control.
 
-    Configurar reglas de salida que limiten qué aplicaciones pueden conectarse a internet es una medida de defensa en profundidad relevante para entornos de alta seguridad. En operaciones militares, los equipos de puesto de mando podrían tener reglas de salida que solo permiten a aplicaciones específicas (el cliente de correo, el browser autorizado) conectarse, y bloquean todo lo demás.
+    El malware puede usar TCP 443 porque ese puerto también transporta HTTPS legítimo y suele estar permitido.
+
+    En equipos de alta seguridad, las reglas outbound pueden limitar qué aplicaciones y destinos están autorizados. Esta medida complementa al antivirus y a los controles de red.
 
 **Comportamiento predeterminado resumido:**
 
 - **Inbound sin regla de permiso:** Bloqueado silenciosamente.
 - **Outbound sin regla de bloqueo:** Permitido.
 - **Regla de bloqueo vs. regla de permiso:** Las reglas de bloqueo tienen precedencia sobre las de permiso. Si existe una regla de bloqueo y una de permiso para el mismo tráfico, el bloqueo gana.
+
+---
+
+## Demostración visible de Inbound y Outbound
+
+La VM conserva su adaptador NAT para Internet y utiliza un segundo adaptador Host-only para esta demostración. La red Host-only comunica la VM con el anfitrión, pero no con la red física.
+
+```text
+INBOUND:  Linux 192.168.56.1 ──► Windows 192.168.56.101:18080
+          Linux inicia; la conexión entra en Windows.
+
+OUTBOUND: Windows 192.168.56.101 ──► Linux 192.168.56.1:18081
+          Windows inicia; la conexión sale de Windows.
+```
+
+Los nombres inbound y outbound no describen la ubicación del servidor. Describen quién inicia la conexión respecto de Windows.
+
+!!! note "Por qué no usamos localhost"
+    El tráfico sobre `127.0.0.1` no representa una conexión entre dos equipos. Host-only proporciona extremos y direcciones diferentes, por lo que el sentido del flujo puede comprobarse.
+
+| Prueba | Iniciador | Destino | Dirección para Windows | Puerto que se filtra |
+|---|---|---|---|---|
+| 1 | Windows | Servidor en Linux | Outbound | Remoto `18081` |
+| 2 | Linux | Servicio en Windows | Inbound | Local `18080` |
+
+### Preparación
+
+La demostración utiliza tres terminales. Cada instrucción indica en cuál debe ejecutarse:
+
+1. **Linux anfitrión:** ejecuta el segundo extremo de cada conexión.
+2. **PowerShell — Alumno:** crea servicios y conexiones en la VM Windows.
+3. **PowerShell — Administrador:** administra exclusivamente las reglas del firewall.
+
+Mantener las tres terminales abiertas. Las variables de PowerShell solo existen en la consola donde fueron definidas.
+
+#### Preparar la red Host-only
+
+Con la VM apagada, conservar **Adaptador 1: NAT**. Habilitar **Adaptador 2**, seleccionar **Adaptador solo-anfitrión**, elegir `vboxnet0` y marcar **Cable conectado**.
+
+En VirtualBox, `vboxnet0` debe utilizar `192.168.56.1/24`. El DHCP debe entregar direcciones desde `192.168.56.101`. Esta red no reemplaza al adaptador NAT.
+
+En **Linux anfitrión**, confirmar la dirección de `vboxnet0`:
+
+```bash
+ip -4 address show vboxnet0
+```
+
+**Se espera ver:** `192.168.56.1/24`. Si no aparece, detener la demostración y revisar la configuración Host-only.
+
+En **PowerShell — Alumno**, identificar las direcciones de la VM:
+
+```powershell
+Get-NetIPConfiguration |
+    Format-List InterfaceAlias, IPv4Address, IPv4DefaultGateway
+```
+
+**Se espera ver:** `192.168.56.101` sin puerta de enlace y `10.0.2.15` con puerta de enlace. La primera pertenece a Host-only; la segunda pertenece a NAT.
+
+Una dirección `169.254.x.x` pertenece a otra interfaz sin DHCP. No debe utilizarse en esta demostración.
+
+Si la dirección Host-only no es `192.168.56.101`, reemplazar ese valor en todos los comandos siguientes. No sustituirlo por la dirección NAT.
+
+#### Comprobar privilegios y estado del firewall
+
+Abrir **PowerShell — Administrador** y confirmar la elevación:
+
+```powershell
+([Security.Principal.WindowsPrincipal]::new(
+    [Security.Principal.WindowsIdentity]::GetCurrent()
+)).IsInRole(
+    [Security.Principal.WindowsBuiltInRole]::Administrator
+)
+```
+
+**Se espera ver:** `True`. Si devuelve `False`, no crear ni eliminar reglas.
+
+En esa misma consola, confirmar que los perfiles del firewall están habilitados:
+
+```powershell
+Get-NetFirewallProfile |
+    Format-Table Name, Enabled, DefaultInboundAction, DefaultOutboundAction
+```
+
+**Se espera ver:** `Enabled = True` en los perfiles. `NotConfigured` en una acción indica que Windows usa la política heredada; no significa que el firewall esté desactivado.
+
+Comprobar que no quedaron reglas de una ejecución anterior:
+
+```powershell
+$ReglasAnteriores = Get-NetFirewallRule `
+    -DisplayName 'LAB-FW-*' `
+    -ErrorAction SilentlyContinue
+
+if ($ReglasAnteriores) {
+    throw 'Existen reglas LAB-FW de una ejecucion anterior. Avisar al instructor.'
+}
+```
+
+### Prueba 1 — Regla Outbound
+
+Windows solicitará una página a un servidor HTTP del anfitrión Linux. Como Windows inicia la conexión, el flujo es outbound.
+
+#### Paso 1 — Levantar el servidor de destino en Linux
+
+En **Linux anfitrión**:
+
+```bash
+mkdir -p "$HOME/firewall-demo"
+cd "$HOME/firewall-demo"
+printf '%s\n' 'OUTBOUND PERMITIDO' > index.html
+python3 -m http.server 18081 --bind 192.168.56.1
+```
+
+Mantener la terminal abierta. Cada conexión permitida producirá una línea `GET /` visible en Linux.
+
+#### Paso 2 — Confirmar la línea base permitida
+
+En **PowerShell — Alumno**:
+
+```powershell
+$LinuxHostIp = '192.168.56.1'
+$OutboundPort = 18081
+$OutboundUri = "http://${LinuxHostIp}:$OutboundPort/"
+
+Test-NetConnection $LinuxHostIp -Port $OutboundPort |
+    Format-List ComputerName, RemotePort, InterfaceAlias, `
+        SourceAddress, TcpTestSucceeded
+
+$Respuesta = Invoke-WebRequest `
+    -Uri $OutboundUri `
+    -UseBasicParsing `
+    -TimeoutSec 5
+
+"RESULTADO OUTBOUND: PERMITIDA (HTTP $($Respuesta.StatusCode))"
+```
+
+**Se espera ver:** origen `192.168.56.101`, `TcpTestSucceeded = True` y `HTTP 200`. Linux registra `GET /`.
+
+Esta línea base demuestra que el servidor y la ruta funcionan antes de modificar el firewall. Sin ella, un fallo posterior sería ambiguo.
+
+#### Paso 3 — Crear el bloqueo outbound
+
+En **PowerShell — Administrador**:
+
+```powershell
+$ReglaSalida = 'LAB-FW-OUT-BLOCK-18081'
+
+New-NetFirewallRule `
+    -DisplayName $ReglaSalida `
+    -Direction Outbound `
+    -Action Block `
+    -Protocol TCP `
+    -LocalAddress 192.168.56.101 `
+    -RemoteAddress 192.168.56.1 `
+    -RemotePort 18081 `
+    -Profile Any
+
+Get-NetFirewallRule -DisplayName $ReglaSalida |
+    Format-List DisplayName, Enabled, Direction, Action, Profile
+```
+
+`RemotePort` es `18081` porque el puerto pertenece al servidor remoto. Las direcciones limitan la regla a la red Host-only y evitan afectar otras conexiones.
+
+#### Paso 4 — Comprobar el bloqueo
+
+En **PowerShell — Alumno**:
+
+```powershell
+Test-NetConnection 192.168.56.1 -Port 18081 |
+    Format-List SourceAddress, RemoteAddress, RemotePort, `
+        TcpTestSucceeded
+
+try {
+    Invoke-WebRequest `
+        -Uri 'http://192.168.56.1:18081/' `
+        -UseBasicParsing `
+        -TimeoutSec 5 `
+        -ErrorAction Stop
+
+    'ERROR: la conexion todavia esta permitida.'
+}
+catch {
+    'RESULTADO OUTBOUND: BLOQUEADA por la regla.'
+}
+```
+
+**Se espera ver:** `TcpTestSucceeded = False` y `RESULTADO OUTBOUND: BLOQUEADA`. Linux no registra otro `GET` porque la conexión no salió de Windows.
+
+#### Paso 5 — Deshabilitar la regla y comprobar la recuperación
+
+En **PowerShell — Administrador**:
+
+```powershell
+Disable-NetFirewallRule -DisplayName 'LAB-FW-OUT-BLOCK-18081'
+```
+
+En **PowerShell — Alumno**:
+
+```powershell
+$Respuesta = Invoke-WebRequest `
+    -Uri 'http://192.168.56.1:18081/' `
+    -UseBasicParsing `
+    -TimeoutSec 5
+
+"RESULTADO OUTBOUND: RECUPERADA (HTTP $($Respuesta.StatusCode))"
+```
+
+**Se espera ver:** `HTTP 200` y un nuevo `GET /` en Linux. El servidor no cambió; solo cambió el estado de la regla outbound.
+
+### Prueba 2 — Regla Inbound
+
+Linux enviará un mensaje a un servicio TCP de Windows. Como Linux inicia la conexión y Windows la recibe, el flujo es inbound.
+
+#### Paso 1 — Levantar el servicio local en Windows
+
+En **PowerShell — Alumno**:
+
+```powershell
+$WindowsLabIp = '192.168.56.101'
+$InboundPort = 18080
+
+$ServidorWindows = Start-Job `
+    -ArgumentList $WindowsLabIp, $InboundPort `
+    -ScriptBlock {
+        param($Address, $Port)
+
+        $Ip = [System.Net.IPAddress]::Parse($Address)
+        $Listener = [System.Net.Sockets.TcpListener]::new($Ip, $Port)
+        $Listener.Start()
+
+        try {
+            while ($true) {
+                $Client = $Listener.AcceptTcpClient()
+
+                try {
+                    $Remote = $Client.Client.RemoteEndPoint
+                    $Reader = [System.IO.StreamReader]::new(
+                        $Client.GetStream()
+                    )
+
+                    $Mensaje = $Reader.ReadLine()
+                    "ACEPTADA desde $Remote | Mensaje: $Mensaje"
+                    $Reader.Dispose()
+                }
+                finally {
+                    $Client.Dispose()
+                }
+            }
+        }
+        finally {
+            $Listener.Stop()
+        }
+    }
+
+Start-Sleep -Seconds 2
+
+Get-NetTCPConnection `
+    -LocalAddress $WindowsLabIp `
+    -LocalPort $InboundPort `
+    -State Listen |
+    Format-Table LocalAddress, LocalPort, State
+```
+
+**Se espera ver:** una fila `Listen` en `192.168.56.101:18080`. Esto prueba que el servicio existe, pero todavía no demuestra que Linux pueda alcanzarlo.
+
+Si Windows solicita permiso para PowerShell, cancelar el cuadro. Las reglas `LAB-FW-*` controlarán la prueba de forma explícita.
+
+#### Paso 2 — Crear un permiso inbound limitado al laboratorio
+
+En **PowerShell — Administrador**:
+
+```powershell
+$ReglaEntradaPermitida = 'LAB-FW-IN-ALLOW-18080'
+
+New-NetFirewallRule `
+    -DisplayName $ReglaEntradaPermitida `
+    -Direction Inbound `
+    -Action Allow `
+    -Protocol TCP `
+    -LocalAddress 192.168.56.101 `
+    -RemoteAddress 192.168.56.1 `
+    -LocalPort 18080 `
+    -Profile Any
+```
+
+`LocalPort` es `18080` porque el servicio se ejecuta en Windows. `RemoteAddress` restringe el permiso al anfitrión del laboratorio.
+
+#### Paso 3 — Confirmar que Linux puede entrar
+
+En **Linux anfitrión**:
+
+```bash
+if timeout 5 bash -c \
+  'printf "%s\n" "INBOUND_DESDE_LINUX" > /dev/tcp/192.168.56.101/18080'; then
+  printf '%s\n' 'RESULTADO INBOUND: PERMITIDA'
+else
+  printf '%s\n' 'RESULTADO INBOUND: BLOQUEADA'
+fi
+```
+
+**Se espera ver en Linux:** `RESULTADO INBOUND: PERMITIDA`.
+
+En **PowerShell — Alumno**, consumir la evidencia recibida por el servicio:
+
+```powershell
+Start-Sleep -Seconds 1
+Receive-Job -Job $ServidorWindows
+```
+
+**Se espera ver en Windows:** `ACEPTADA desde 192.168.56.1` y `Mensaje: INBOUND_DESDE_LINUX`.
+
+Esta doble evidencia prueba que Linux inició la conexión y que el proceso local de Windows recibió su contenido.
+
+#### Paso 4 — Crear un bloqueo inbound
+
+En **PowerShell — Administrador**:
+
+```powershell
+$ReglaEntradaBloqueada = 'LAB-FW-IN-BLOCK-18080'
+
+New-NetFirewallRule `
+    -DisplayName $ReglaEntradaBloqueada `
+    -Direction Inbound `
+    -Action Block `
+    -Protocol TCP `
+    -LocalAddress 192.168.56.101 `
+    -RemoteAddress 192.168.56.1 `
+    -LocalPort 18080 `
+    -Profile Any
+
+Get-NetFirewallRule -DisplayName 'LAB-FW-IN-*' |
+    Format-Table DisplayName, Enabled, Direction, Action
+```
+
+Ahora existen un permiso y un bloqueo que coinciden con el mismo flujo. El bloqueo tiene precedencia, por lo que la siguiente conexión debe fallar.
+
+#### Paso 5 — Comprobar el bloqueo inbound
+
+Repetir en **Linux anfitrión** el comando del Paso 3.
+
+**Se espera ver:** `RESULTADO INBOUND: BLOQUEADA` después del tiempo de espera.
+
+En **PowerShell — Alumno**, confirmar que el servicio sigue escuchando y no recibió otro mensaje:
+
+```powershell
+Get-NetTCPConnection `
+    -LocalAddress 192.168.56.101 `
+    -LocalPort 18080 `
+    -State Listen |
+    Format-Table LocalAddress, LocalPort, State
+
+$NuevaEvidencia = Receive-Job -Job $ServidorWindows
+
+if ($NuevaEvidencia) {
+    $NuevaEvidencia
+}
+else {
+    'SIN MENSAJE NUEVO: el firewall detuvo la conexion.'
+}
+```
+
+El estado `Listen` demuestra que el servicio no se detuvo. La ausencia de un mensaje nuevo atribuye el fallo a la regla, no al proceso.
+
+#### Paso 6 — Deshabilitar el bloqueo y recuperar la entrada
+
+En **PowerShell — Administrador**:
+
+```powershell
+Disable-NetFirewallRule -DisplayName 'LAB-FW-IN-BLOCK-18080'
+```
+
+Repetir en **Linux anfitrión** el comando del Paso 3. Debe mostrar `RESULTADO INBOUND: PERMITIDA`.
+
+En **PowerShell — Alumno**:
+
+```powershell
+Start-Sleep -Seconds 1
+Receive-Job -Job $ServidorWindows
+```
+
+**Se espera ver:** un segundo mensaje `ACEPTADA`. El servicio no cambió; solo se deshabilitó la regla inbound de bloqueo.
+
+### Qué se acaba de comprobar
+
+| Flujo respecto de Windows | Puerto evaluado | Regla aplicada | Evidencia |
+|---|---:|---|---|
+| Outbound: Windows → Linux | Remoto `18081` | Línea base; Block; Disabled | HTTP 200; fallo; HTTP 200. |
+| Inbound: Linux → Windows | Local `18080` | Allow; Block; Block disabled | Mensaje recibido; fallo; mensaje recibido. |
+
+Las respuestas de una conexión permitida pueden regresar sin crear una regla en la dirección contraria. Windows Defender Firewall recuerda el estado de la conversación.
+
+### Limpieza obligatoria
+
+En **Linux anfitrión**, pulsar `Ctrl+C` en el servidor HTTP. Después retirar sus archivos:
+
+```bash
+cd
+rm "$HOME/firewall-demo/index.html"
+rmdir "$HOME/firewall-demo"
+```
+
+En **PowerShell — Administrador**, retirar solo las reglas de esta demostración:
+
+```powershell
+@(
+    'LAB-FW-OUT-BLOCK-18081',
+    'LAB-FW-IN-ALLOW-18080',
+    'LAB-FW-IN-BLOCK-18080'
+) | ForEach-Object {
+    Remove-NetFirewallRule -DisplayName $_ -ErrorAction SilentlyContinue
+}
+
+Get-NetFirewallRule `
+    -DisplayName 'LAB-FW-*' `
+    -ErrorAction SilentlyContinue
+```
+
+En **PowerShell — Alumno**, detener el receptor y comprobar el puerto:
+
+```powershell
+Stop-Job -Job $ServidorWindows -ErrorAction SilentlyContinue
+Remove-Job -Job $ServidorWindows -Force -ErrorAction SilentlyContinue
+
+Get-NetTCPConnection `
+    -State Listen `
+    -LocalPort $InboundPort `
+    -ErrorAction SilentlyContinue
+```
+
+**Se espera ver:** ninguna regla `LAB-FW-*` y ningún receptor en `18080`. El adaptador Host-only puede conservarse para repetir la práctica.
 
 ---
 
@@ -122,14 +569,16 @@ La consola WFAS tiene cuatro secciones principales en el panel izquierdo:
 | Remote Port | Puerto remoto |
 
 !!! tip "Filtrar reglas para ver solo las activas"
-    La lista de Inbound Rules puede tener cientos de entradas. Para ver solo las que están activas: hacer clic en el encabezado de la columna "Enabled" para ordenar por estado, y las reglas habilitadas (Yes) se agrupan al principio. También se puede filtrar por perfil desde el menú Action → Filter by Profile.
+    La lista de Inbound Rules puede tener cientos de entradas. Ordenar por la columna `Enabled` agrupa primero las reglas habilitadas.
+
+    También se puede usar **Action → Filter by Profile** para mostrar únicamente el perfil que se está investigando.
 
 ---
 
 ## Contexto militar
 
 !!! example "Aplicación en entorno castrense"
-    En una red de unidad, los ordenadores de los oficiales deben poder recibir conexiones de escritorio remoto (RDP, puerto TCP 3389) para que el Técnico de comunicaciones pueda administrarlos de forma remota desde el servidor de administración (IP: 192.168.10.5). Sin embargo, no se debe permitir RDP desde ningún otro equipo de la red — solo desde esa IP específica.
+    Los equipos de los oficiales reciben administración remota mediante RDP, TCP 3389, pero solo desde el servidor autorizado `192.168.10.5`.
 
     El Técnico crea una regla en WFAS:
 
@@ -140,11 +589,11 @@ La consola WFAS tiene cuatro secciones principales en el panel izquierdo:
     - **Remote IP (en Advanced → Remote IP address):** This IP address or subnet: 192.168.10.5
     - **Name:** "RDP desde servidor de administración únicamente"
 
-    Y adicionalmente, crea una regla que bloquea RDP desde cualquier otra IP:
+    No se añade una regla `Block` para cualquier IP. Esa regla también coincidiría con `192.168.10.5` y el bloqueo tendría precedencia sobre el permiso.
 
-    - Misma configuración pero Action: Block the connection, Remote IP: Any IP address, con prioridad más alta.
+    La regla `Allow` está limitada al servidor autorizado. La política inbound predeterminada bloquea las conexiones procedentes de las demás direcciones.
 
-    El resultado: solo la IP 192.168.10.5 puede iniciar una sesión RDP. Cualquier otro equipo de la red, incluido un atacante que haya comprometido otro ordenador, recibe un bloqueo silencioso al intentar conectarse al puerto 3389.
+    El resultado es que solo `192.168.10.5` puede iniciar RDP. Cualquier otro equipo recibe un bloqueo silencioso.
 
 ---
 
@@ -156,6 +605,13 @@ La consola WFAS tiene cuatro secciones principales en el panel izquierdo:
 4. Por defecto, todo el **tráfico entrante** sin regla de permiso se bloquea; todo el **tráfico saliente** sin regla de bloqueo se permite — las reglas de bloqueo siempre tienen precedencia sobre las de permiso.
 5. WFAS se abre con `wf.msc` — las reglas se leen por columnas: Enabled, Action, Protocol, Local Port, Remote Port, Program.
 
+## Para profundizar
+
+> Recursos opcionales — no requeridos para el examen.
+
+- [Oracle VirtualBox: redes Host-only](https://docs.oracle.com/en/virtualization/virtualbox/7.0/user/networkingdetails.html#networkingdetails-hostonly)
+- [Microsoft Learn: `New-NetFirewallRule`](https://learn.microsoft.com/es-es/powershell/module/netsecurity/new-netfirewallrule)
+
 ---
 
-*Siguiente: [Cortafuegos (Parte 2)](cortafuegos-p2.md)*
+*Siguiente: [Firewall (Parte 2)](cortafuegos-p2.md)*
