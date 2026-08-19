@@ -1,0 +1,99 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-08-19T04:23:57-05:00",
+  "phase": "2.1",
+  "phase_name": "Corrección Labs iptables",
+  "phase_dir": ".planning/phases/02.1-correccion-iptables",
+  "plan": 1,
+  "task": 6,
+  "total_tasks": 6,
+  "status": "paused",
+  "context_type": "phase",
+  "completed_tasks": [
+    {
+      "id": 1,
+      "name": "Insertar fase 2.1 en ROADMAP.md (edición manual, estilo raya)",
+      "status": "done",
+      "commit": "local-only",
+      "progress": "ROADMAP.md es gitignored; sección Phase 2.1 insertada tras Phase 2."
+    },
+    {
+      "id": 2,
+      "name": "Reescribir lab-iptables-p1.md para VM Ubuntu 24.04",
+      "status": "done",
+      "commit": "a553a6b"
+    },
+    {
+      "id": 3,
+      "name": "Reescribir lab-iptables-p2.md (subred derivada, LOG limit, persistencia real)",
+      "status": "done",
+      "commit": "a553a6b"
+    },
+    {
+      "id": 4,
+      "name": "Alinear las dos soluciones del instructor",
+      "status": "done",
+      "commit": "a553a6b"
+    },
+    {
+      "id": 5,
+      "name": "Validación estática: mkdocs build --strict + cierre 13/13 hallazgos",
+      "status": "done",
+      "commit": "a553a6b",
+      "progress": "Build verde; grep de residuos WSL/eth0/22.04/-m state/172.16 = cero; tabla de cierre en 02.1-01-SUMMARY.md."
+    }
+  ],
+  "remaining_tasks": [
+    {
+      "id": 6,
+      "name": "UAT real en la VM Ubuntu 24.04 (P1 y P2 de principio a fin)",
+      "status": "not_started"
+    }
+  ],
+  "blockers": [
+    {
+      "description": "La VM Ubuntu 24.04 no existe todavía; la UAT no puede ejecutarse.",
+      "type": "human_action",
+      "workaround": "Ninguno — el material ya está publicado como validado estáticamente; la UAT es el cierre definitivo de la fase."
+    }
+  ],
+  "async_jobs": [],
+  "human_actions_pending": [
+    {
+      "action": "Liberar espacio en disco del anfitrión (98 % usado; retirar ova/VM-WIN-SI.ova de 32 GB).",
+      "context": "Crear la VM y sus snapshots requiere espacio que hoy no hay.",
+      "blocking": true
+    },
+    {
+      "action": "Crear la VM Ubuntu 24.04 en VirtualBox con adaptadores NAT + Host-only desde isos/ubuntu-24.04.4-desktop-amd64.iso y completar la 'Preparación previa' de lab-iptables-p1.md (incluye snapshot base-limpia).",
+      "context": "Prerequisito de la Tarea 6 (UAT).",
+      "blocking": true
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "Listener HTTP del lab en puerto 80 con sudo (alternativa 8080 documentada como nota).",
+      "rationale": "Coherencia con las reglas del escenario.",
+      "phase": "2.1"
+    },
+    {
+      "decision": "Persistencia: opción real (netfilter-persistent + reboot) manteniendo iptables-save/restore como ejercicio renombrado 'backup manual'.",
+      "rationale": "La VM permite reiniciar de verdad; el contraste manual-vs-automático es el contenido didáctico central de P2.",
+      "phase": "2.1"
+    },
+    {
+      "decision": "Comentarios de reglas con -m comment dentro del ruleset.",
+      "rationale": "Sobreviven a save/restore y eliminan la salida imposible (comentarios inline) de la solución anterior.",
+      "phase": "2.1"
+    },
+    {
+      "decision": "ROADMAP editado a mano en lugar de phase.insert.",
+      "rationale": "El parser espera 'Phase N:' y el roadmap usa raya 'Phase N —'.",
+      "phase": "2.1"
+    }
+  ],
+  "blocking_constraints": [],
+  "uncommitted_files": [],
+  "next_action": "Cuando exista la VM: ejecutar la Tarea 6 del plan (UAT completa de P1 y P2 en la VM, host Windows como segundo extremo), registrar desviaciones entre salidas reales y documentadas, corregir el material y cerrar la fase 2.1 actualizando 02.1-01-SUMMARY.md (status: complete).",
+  "context_notes": "main sincronizada con origin/main en a553a6b; GitHub Actions ya desplegó (o está desplegando) el sitio con los labs corregidos. Tareas 1-5 del plan 02.1-01 completas. PLAN, SUMMARY y ROADMAP viven solo en local (.planning/ es gitignored; únicamente STATE.md y HANDOFF.json se fuerzan al repo). Verificaciones puntuales de UAT: prueba DROP por orden con contadores (P1 Paso 10), sonda 8080 con log + contador (P2 Paso 9), ruleset vivo tras systemctl reboot (P2 Paso 11), re-save de limpieza (P2 Paso 12). Directorio .superpowers/ apareció untracked — artefacto de plugin, no del curso."
+}
