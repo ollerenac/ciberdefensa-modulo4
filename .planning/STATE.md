@@ -56,9 +56,9 @@ All 4 phases shipped, code-reviewed, fixed, and verified. The MkDocs Material co
 
 ## Session Continuity
 
-Last session: 2026-08-19T03:31:30-05:00
-Stopped at: Auditoría de las lecciones iptables terminada y decisión de plataforma confirmada. Las lecciones aún no fueron editadas. Próximo paso: crear y revisar un plan correctivo secuencial para Ubuntu 24.04 en VM separada, con una sola etapa inicial de preparación del sistema fresco. Detalle completo en `.planning/.continue-here.md` y `.planning/HANDOFF.json`.
-Resume file: .planning/.continue-here.md
+Last session: 2026-08-19T04:00:00-05:00
+Stopped at: Fase 2.1 tareas 1-5 ejecutadas y commiteadas en `20d9f75`: ROADMAP con fase 2.1, las 4 lecciones iptables reescritas para VM Ubuntu 24.04, build estricto verde, 13/13 hallazgos cerrados (tabla en 02.1-01-SUMMARY.md). Pendiente: push a origin (no solicitado) y Tarea 6 (UAT real) bloqueada hasta crear la VM Ubuntu 24.04 con NAT + Host-only.
+Resume file: .planning/phases/02.1-correccion-iptables/02.1-01-SUMMARY.md
 Leak confirmed 2026-08-13: los 5 exámenes publican su clave de respuestas inline en bloques `!!! danger "Solo instructor"` (renderizan visibles), y docs/instructor/ publica 7 soluciones por URL directa pese a estar fuera del nav
 Carried concern: el disco del anfitrión se reportó al 98 % en la sesión anterior; `ova/VM-WIN-SI.ova` (32 GB) seguía pendiente de retiro. Revalidar espacio antes de trabajo intensivo con snapshots o exportaciones.
 Resume reconciliation: `main` está sincronizada con `origin/main` en `45761d7`. Los cambios de Defender y Windows Firewall ya fueron publicados; el trabajo pendiente se limita a planificar, corregir y validar iptables.

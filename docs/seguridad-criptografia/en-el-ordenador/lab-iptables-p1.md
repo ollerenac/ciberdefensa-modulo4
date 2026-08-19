@@ -3,7 +3,7 @@
 # Tipo: Laboratorio (versión alumno)
 ---
 
-# Lab: Filtrado de Paquetes con iptables en WSL2 (Parte 1)
+# Lab: Filtrado de Paquetes con iptables en Ubuntu (Parte 1)
 
 > **Duración:** 1 hora | **Unidad:** En el Ordenador
 
@@ -16,40 +16,85 @@
 
 Al finalizar este laboratorio, el alumno habrá:
 
-- Verificado que WSL2 Ubuntu está operativo y que iptables está disponible
+- Preparado y verificado una VM Ubuntu 24.04 con red NAT + Host-only
 - Entendido el modelo de tablas y cadenas de iptables con un diagrama visual
-- Aplicado una política por defecto DROP en INPUT y reglas selectivas de permiso
-- Leído el ruleset con `iptables -L -v -n` e interpretado cada columna
-- Verificado que las reglas funcionan con pruebas de conectividad
+- Capturado el ruleset inicial y aplicado un reset seguro antes de trabajar
+- Aplicado una política por defecto DROP en INPUT con reglas selectivas de permiso
+- Probado cada regla inbound con un servicio real escuchando y una conexión desde Windows
+- Demostrado con contadores que el **orden** de las reglas decide el resultado
+- Restaurado el ruleset original al terminar
 
-## Prerrequisitos
+## Preparación previa (antes de la clase)
 
-| Requisito | Verificación |
-|-----------|-------------|
-| WSL2 instalado con Ubuntu 22.04 | `wsl --list --verbose` muestra Ubuntu con estado Running |
-| Ubuntu con permisos de root en WSL2 | `sudo -l` no pide contraseña adicional |
-| Windows Terminal o PowerShell disponible | Abrir desde el menú Inicio |
-| Acceso a internet desde WSL2 | `ping -c 3 8.8.8.8` desde dentro de Ubuntu responde |
+Esta sección se completa **una sola vez antes del laboratorio**, sobre una VM Ubuntu
+24.04 recién instalada en VirtualBox con dos adaptadores de red:
 
-!!! tip "Antes de empezar"
-    Verificar cada prerrequisito antes de continuar. El laboratorio no funciona
-    correctamente si falta alguno. Si WSL2 no está instalado, solicitar asistencia al
-    instructor antes de intentar instalarlo durante el lab.
+| Adaptador | Modo | Propósito |
+|-----------|------|-----------|
+| Adaptador 1 | NAT | Salida a internet (actualizaciones, APT) |
+| Adaptador 2 | Host-only | Red de laboratorio con el host Windows |
+
+**[VM Ubuntu — Bash]**
+
+```bash
+# 1. Inspeccionar y respaldar las fuentes APT (formato deb822 de Ubuntu 24.04)
+cat /etc/apt/sources.list.d/ubuntu.sources
+sudo cp /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources.bak
+
+# 2. Actualizar el sistema
+sudo apt update && sudo apt full-upgrade -y
+
+# 3. Instalar los paquetes del laboratorio
+#    (python3 y curl ya vienen incluidos en Ubuntu 24.04)
+sudo apt install -y openssh-server netfilter-persistent tcpdump
+
+# 4. Verificaciones
+iptables --version          # se espera: iptables v1.8.x (nf_tables)
+ss -lntp | grep :22         # sshd debe estar escuchando
+curl -4 -I http://example.com   # debe devolver una respuesta HTTP (exit code 0)
+```
+
+!!! note "No modificar las fuentes APT"
+    Ubuntu 24.04 usa el formato deb822 en `/etc/apt/sources.list.d/ubuntu.sources`.
+    El respaldo es una precaución: **no** sobrescribir el archivo legado
+    `/etc/apt/sources.list` ni añadir repositorios de terceros. Los paquetes del lab
+    vienen todos de los repositorios oficiales.
+
+!!! note "iptables sobre backend nftables"
+    En Ubuntu 24.04, `iptables` es la variante `iptables-nft`: la sintaxis clásica de
+    iptables administrando el backend moderno nftables del kernel. Por eso la versión
+    muestra `(nf_tables)`. En este lab usamos **solo** comandos `iptables` — no
+    mezclar con comandos `nft` ni con `iptables-legacy`.
+
+!!! warning "netfilter-persistent al instalar"
+    Si el instalador pregunta si desea guardar las reglas actuales (IPv4/IPv6),
+    responder **Sí**. Este paquete se usará en la Parte 2.
+
+Al terminar: apagar la VM y tomar un **snapshot de VirtualBox** llamado `base-limpia`.
+Ese snapshot es el punto de partida garantizado de ambas partes del laboratorio.
 
 ## Entorno de laboratorio
 
 ```
-Windows 11 Host
-└── WSL2 (Hyper-V VM interna)
-    └── Ubuntu 22.04
-        └── iptables (firewall de red del subsistema Linux)
-            Interfaz: eth0 (IP interna WSL2, ej: 172.x.x.x)
+Host Windows 11 (VirtualBox)
+├── Adaptador NAT       → VM: internet (APT, curl)
+└── Adaptador Host-only → VM: red de laboratorio
+        Host Windows ←──────→ VM Ubuntu 24.04
+        (segundo extremo         (iptables/Netfilter
+         de prueba)               en el kernel Linux)
 ```
 
 !!! note ""
-    WSL2 tiene su propia pila de red separada de Windows. Las reglas iptables que
-    configuramos en Ubuntu **NO afectan el firewall de Windows** ni el tráfico del
-    equipo anfitrión. Estamos operando dentro del subsistema Linux de forma aislada.
+    Las reglas iptables que configuramos operan sobre Netfilter, el firewall del
+    kernel **de la VM Ubuntu**. No afectan el firewall de Windows ni el tráfico del
+    equipo anfitrión. El host Windows participa solo como cliente de prueba a través
+    de la red Host-only.
+
+!!! warning "Alcance: solo IPv4"
+    `iptables` administra reglas **IPv4**. El filtrado IPv6 requiere `ip6tables` (o
+    nftables en familia `inet`) y queda fuera de este laboratorio. Por eso todas las
+    pruebas fuerzan IPv4 con la opción `-4`. Una política DROP en iptables **no**
+    protege el tráfico IPv6.
 
 ## Conceptos Clave: Tablas y Cadenas
 
@@ -66,10 +111,10 @@ qué hacer con cada paquete.
 **Flujo de paquetes (simplificado):**
 
 ```
-Internet → [INPUT] → Proceso local
-                          │
-                          ▼
-Internet ← [OUTPUT] ← Proceso local
+Red → [INPUT] → Proceso local
+                     │
+                     ▼
+Red ← [OUTPUT] ← Proceso local
 ```
 
 !!! note "Tabla filter"
@@ -79,57 +124,94 @@ Internet ← [OUTPUT] ← Proceso local
 
 ## Pasos del Laboratorio
 
-### Parte 1: Preparación del entorno
+### Parte 1: Identificar el entorno de red
 
-**Paso 1 — Abrir Ubuntu en WSL2 y verificar iptables**
+**Paso 1 — Identificar interfaces y direcciones**
 
-En Windows Terminal, abrir una sesión Ubuntu. Verificar que tenemos acceso a iptables:
+**[VM Ubuntu — Bash]**
 
 ```bash
-# Verificar que iptables está disponible
-sudo iptables --version
-# Salida esperada: iptables v1.8.x (nf_tables)
+# Ver las interfaces IPv4 de la VM (una por adaptador + loopback)
+ip -4 addr
+```
+
+Identificar cuál interfaz pertenece a la red **Host-only** (comparte subred con el
+host Windows; en VirtualBox suele ser la segunda, con un nombre como `enp0s8`, y una
+IP tipo `192.168.56.x` — el nombre y el rango reales pueden variar). Definir las
+variables del lab:
+
+```bash
+# Sustituir enp0s8 por el nombre real de la interfaz Host-only
+LAB_IF=enp0s8
+LAB_IP=$(ip -4 addr show "$LAB_IF" | awk '/inet /{print $2}' | cut -d/ -f1)
+echo "Interfaz: $LAB_IF — IP de la VM: $LAB_IP"
+```
+
+**[Windows — PowerShell]**
+
+```powershell
+# IP del host Windows en la red Host-only (adaptador "VirtualBox Host-Only Network")
+ipconfig
+# Anotar esa IP como WIN_IP. Verificar conectividad hacia la VM:
+ping <IP-de-la-VM>
 ```
 
 !!! question "Verificación"
-    ¿Aparece la versión de iptables? Si el comando no existe, ejecutar
-    `sudo apt-get install iptables -y` y reintentar.
+    ¿El ping desde Windows hacia la IP Host-only de la VM responde? Sin esta
+    conectividad base, las pruebas inbound de los pasos siguientes no funcionan.
+    Anotar en el cuaderno: nombre de interfaz, IP de la VM, IP del host Windows.
 
-**Paso 2 — Ver el estado inicial del firewall**
+### Parte 2: Estado inicial y reset seguro
+
+**Paso 2 — Capturar el ruleset inicial (OBLIGATORIO)**
+
+Antes de tocar cualquier regla, guardar el estado actual para restaurarlo al final:
+
+**[VM Ubuntu — Bash]**
 
 ```bash
-# Listar todas las reglas actuales con detalles
+# Exportar el ruleset actual a un archivo
+sudo iptables-save | sudo tee ~/ruleset-inicial.txt
+# Ver el estado actual con detalles
 sudo iptables -L -v -n
 ```
 
-!!! question "Verificación"
-    El resultado debe mostrar tres cadenas (INPUT, FORWARD, OUTPUT) con política
-    `ACCEPT` y 0 reglas. Este es el estado vacío — todo el tráfico pasa sin filtros.
-    Las columnas `pkts` y `bytes` deben mostrar 0.
+!!! note "Por qué capturar primero"
+    Una máquina real no siempre arranca con el firewall vacío. Trabajar sin snapshot
+    significa no poder volver al estado anterior. Regla profesional: **capturar antes
+    de modificar** — igual que un backup antes de un cambio en producción.
 
-**Paso 3 — Limpiar cualquier regla existente**
+**Paso 3 — Reset seguro: políticas primero, flush después**
+
+**[VM Ubuntu — Bash]**
 
 ```bash
-# Eliminar todas las reglas existentes (flush)
+# 1. PRIMERO asegurar políticas ACCEPT en las cadenas integradas
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+# 2. DESPUÉS eliminar reglas, cadenas personalizadas y contadores
 sudo iptables -F
-# Eliminar cadenas personalizadas si existen
 sudo iptables -X
-# Resetear contadores de paquetes y bytes
 sudo iptables -Z
 # Confirmar estado limpio
 sudo iptables -L -v -n
 ```
 
-!!! note ""
-    Este paso asegura que partimos de un estado conocido. Si hay reglas anteriores
-    de otra sesión, este flush las elimina. La política por defecto (ACCEPT o DROP)
-    **no** se modifica con `-F`.
+!!! warning "El orden del reset importa"
+    `iptables -F` elimina reglas pero **no** cambia las políticas. Si la política
+    INPUT ya fuera DROP y se hiciera flush primero, desaparecerían las reglas ACCEPT
+    y todo el tráfico entrante (incluida una sesión SSH) quedaría cortado.
+    Por eso: **políticas en ACCEPT primero, flush después.**
 
-### Parte 2: Política por defecto DROP
+!!! question "Verificación"
+    Las tres cadenas deben mostrar política `ACCEPT`, sin reglas, y contadores en 0.
+
+### Parte 3: Construir la política DROP
 
 **Paso 4 — Agregar regla de loopback primero (OBLIGATORIO)**
 
-Antes de cambiar la política por defecto, siempre agregar la regla de loopback:
+**[VM Ubuntu — Bash]**
 
 ```bash
 # Permitir todo el tráfico en la interfaz loopback (lo)
@@ -145,33 +227,91 @@ sudo iptables -A OUTPUT -o lo -j ACCEPT
 
 **Paso 5 — Permitir conexiones establecidas**
 
+**[VM Ubuntu — Bash]**
+
 ```bash
 # Permitir tráfico de respuesta a conexiones que el equipo inició
-# Sin esta regla, el comando curl no puede recibir respuesta
-sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+# Sin esta regla, curl no puede recibir la respuesta del servidor
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 ```
 
 !!! note "Filtrado stateful (seguimiento de conexiones)"
-    Esta regla usa el módulo `state` (conntrack). Le dice a iptables: "si este paquete
-    es parte de una conexión que yo inicié, déjalo pasar." Es la base del filtrado
+    Esta regla usa el módulo `conntrack`. Le dice a iptables: "si este paquete es
+    parte de una conexión que yo inicié, déjalo pasar." Es la base del filtrado
     stateful — el kernel recuerda las conexiones activas y permite sus respuestas
     aunque la política general sea DROP.
+    (El módulo antiguo `state` sigue existiendo, pero es un subconjunto de
+    `conntrack`; usamos la forma moderna.)
 
-**Paso 6 — Permitir puertos específicos**
+**Paso 6 — Permitir SSH y probarlo de verdad**
+
+Una regla inbound solo está probada cuando hay **un servicio escuchando** y **una
+conexión desde otro equipo**. sshd ya está instalado desde la preparación previa:
+
+**[VM Ubuntu — Bash]**
 
 ```bash
-# Permitir SSH entrante (puerto 22)
+# Confirmar que sshd escucha en el puerto 22
+ss -lntp | grep :22
+# Permitir SSH entrante
 sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-# Permitir HTTP entrante (puerto 80)
+```
+
+**[Windows — PowerShell]**
+
+```powershell
+# Probar la conexión SSH desde el host Windows (sustituir usuario e IP de la VM)
+ssh usuario@<IP-de-la-VM>
+# Alternativa sin sesión interactiva:
+Test-NetConnection <IP-de-la-VM> -Port 22
+```
+
+!!! question "Verificación"
+    `Test-NetConnection` debe mostrar `TcpTestSucceeded : True`. En la VM,
+    `sudo iptables -L INPUT -v -n` debe mostrar `pkts > 0` en la regla tcp:22 —
+    el contador es la evidencia de que **esa** regla capturó la conexión.
+
+**Paso 7 — Permitir HTTP y probarlo de verdad**
+
+**[VM Ubuntu — Bash]**
+
+```bash
+# Levantar un servidor HTTP real en el puerto 80 (dejarlo corriendo en esta terminal)
+sudo python3 -m http.server 80
+```
+
+En una **segunda terminal** de la VM:
+
+```bash
+# Confirmar que escucha
+ss -lntp | grep :80
+# Permitir HTTP entrante
 sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 ```
 
-**Paso 7 — Aplicar política por defecto DROP**
+**[Windows — PowerShell]**
+
+```powershell
+# Probar desde el host Windows (curl.exe, no el alias de PowerShell)
+curl.exe -4 -I http://<IP-de-la-VM>/
+# Alternativa:
+Test-NetConnection <IP-de-la-VM> -Port 80
+```
+
+!!! question "Verificación"
+    La respuesta debe ser un encabezado HTTP válido del servidor de Python
+    (`HTTP/1.0 200 OK` u otro código válido). El contador de la regla tcp:80 debe
+    incrementarse. Si se prefiere no usar sudo para el listener, puede usarse el
+    puerto 8080 — ajustando la regla y la prueba en ambos lados.
+
+**Paso 8 — Aplicar política por defecto DROP**
+
+**[VM Ubuntu — Bash]**
 
 ```bash
 # CAMBIAR política por defecto: bloquear todo lo que no tenga regla explícita
 sudo iptables -P INPUT DROP
-# OUTPUT lo dejamos en ACCEPT (podemos salir a cualquier destino)
+# OUTPUT queda en ACCEPT (podemos salir a cualquier destino)
 sudo iptables -P OUTPUT ACCEPT
 ```
 
@@ -180,13 +320,28 @@ sudo iptables -P OUTPUT ACCEPT
     que lo hayamos permitido explícitamente con una regla. Todo lo que no coincida con
     una regla de ACCEPT cae a la política DROP y es silenciosamente descartado.
 
-### Parte 3: Verificación y pruebas
+Prueba negativa observable:
 
-**Paso 8 — Leer el ruleset completo**
+**[Windows — PowerShell]**
+
+```powershell
+# Un puerto sin regla ACCEPT debe fallar ahora
+Test-NetConnection <IP-de-la-VM> -Port 9999
+```
+
+!!! question "Verificación"
+    `TcpTestSucceeded : False`. Mientras tanto, SSH (22) y HTTP (80) deben seguir
+    funcionando — repetir sus pruebas para confirmarlo.
+
+### Parte 4: Leer, demostrar el orden y restaurar
+
+**Paso 9 — Leer el ruleset completo**
+
+**[VM Ubuntu — Bash]**
 
 ```bash
 # Ver todas las reglas con estadísticas de paquetes y bytes
-sudo iptables -L -v -n
+sudo iptables -L -v -n --line-numbers
 ```
 
 Anotar en el cuaderno el significado de cada columna:
@@ -197,39 +352,69 @@ Anotar en el cuaderno el significado de cada columna:
 | bytes | Bytes totales de los paquetes que coincidieron |
 | target | Acción a tomar (ACCEPT, DROP, LOG, REJECT) |
 | prot | Protocolo (tcp, udp, icmp, all) |
-| in/out | Interfaz de entrada/salida (eth0, lo, etc.) |
+| in/out | Interfaz de entrada/salida (enp0s8, lo, etc.) |
 | source | IP origen del paquete (0.0.0.0/0 = cualquiera) |
 | destination | IP destino del paquete |
 
-**Paso 9 — Probar conectividad**
+**Paso 10 — Demostrar que el orden decide: bloqueo con `-I`**
+
+Vamos a bloquear las respuestas de `8.8.8.8`. La posición de la regla es lo que
+importa: si se agregara con `-A` (al final), la respuesta al ping — que pertenece a
+una conexión ya rastreada — coincidiría **antes** con la regla ESTABLISHED y el
+bloqueo no tendría efecto. Por eso se inserta **al inicio** con `-I INPUT 1`:
+
+**[VM Ubuntu — Bash]**
 
 ```bash
-# Prueba 1: loopback debe funcionar (regla de lo ACCEPT)
-ping -c 3 127.0.0.1
-
-# Prueba 2: acceso HTTP a internet
-# Debe funcionar: OUTPUT es ACCEPT y ESTABLISHED permite la respuesta entrante
-curl -I http://example.com
-
-# Prueba 3: bloquear IP específica (añadir regla de bloqueo)
-sudo iptables -A INPUT -s 8.8.8.8 -j DROP
-# Intentar ping a esa IP (debe fallar: timeout sin respuesta)
-ping -c 3 8.8.8.8
+# Insertar el bloqueo en la posición 1 (antes que loopback y ESTABLISHED)
+sudo iptables -I INPUT 1 -s 8.8.8.8 -j DROP
+# Probar: el ping debe fallar (forzamos IPv4)
+ping -4 -c 3 8.8.8.8
+# La evidencia: el contador de la regla 1 debe incrementarse
+sudo iptables -L INPUT -v -n --line-numbers
 ```
 
 !!! question "Verificación"
-    - ¿El ping a 127.0.0.1 responde con 3 paquetes recibidos?
-    - ¿El curl a example.com devuelve `HTTP/1.1 200 OK`?
-    - ¿El ping a 8.8.8.8 no recibe respuesta (timeout o sin contestación)?
+    - El ping muestra `100% packet loss`.
+    - La regla `num 1` (DROP para 8.8.8.8) muestra `pkts` ≥ 3 — cada respuesta
+      descartada suma al contador.
+    - Reflexión para el cuaderno: ¿qué pasaría si la misma regla se agregara con
+      `-A` al final mientras hay un ping activo? ¿Qué regla capturaría los paquetes?
+
+```bash
+# Eliminar la regla de prueba al terminar
+sudo iptables -D INPUT -s 8.8.8.8 -j DROP
+```
+
+**Paso 11 — Restaurar el ruleset original (OBLIGATORIO)**
+
+Cerrar el servidor HTTP de Python (Ctrl+C en su terminal) y devolver el firewall a
+su estado inicial:
+
+**[VM Ubuntu — Bash]**
+
+```bash
+# Restaurar el snapshot capturado en el Paso 2
+sudo iptables-restore < ~/ruleset-inicial.txt
+# Verificar que coincide con el estado inicial
+sudo iptables -L -v -n
+```
+
+!!! note "Ciclo completo"
+    Capturar → trabajar → restaurar. Ningún laboratorio debe dejar el sistema en un
+    estado distinto al que tenía al empezar. La Parte 2 repite este mismo patrón.
 
 ## Validación final
 
 Al terminar todas las partes, verificar:
 
-- [ ] `sudo iptables --version` muestra la versión instalada (v1.8.x o similar)
-- [ ] `sudo iptables -L -n` muestra política INPUT DROP con reglas de loopback y ESTABLISHED
-- [ ] `curl -I http://example.com` devuelve código HTTP (no error de conexión)
-- [ ] El ping a la IP bloqueada (8.8.8.8) no recibe respuesta (timeout)
+- [ ] `iptables --version` muestra la versión instalada (v1.8.x, backend nf_tables)
+- [ ] Existe `~/ruleset-inicial.txt` con el estado previo al laboratorio
+- [ ] Con la política DROP activa: SSH (22) y HTTP (80) accesibles desde Windows,
+      puerto 9999 inaccesible
+- [ ] La regla DROP insertada con `-I INPUT 1` bloqueó el ping a 8.8.8.8 y su
+      contador lo demuestra
+- [ ] El ruleset final (tras `iptables-restore`) coincide con el inicial
 
 ## Complemento OFFen
 
@@ -247,11 +432,14 @@ Al terminar todas las partes, verificar:
 
 El alumno debe entregar:
 
-1. Captura de pantalla de `sudo iptables -L -v -n` con las reglas del Paso 7 aplicadas
-   (debe mostrar las 4 reglas: loopback ACCEPT, ESTABLISHED ACCEPT, tcp:22 ACCEPT, tcp:80 ACCEPT)
-2. Resultado de la Prueba 1 (ping loopback — debe mostrar 3 paquetes recibidos)
-3. Resultado de la Prueba 2 (curl example.com — debe mostrar HTTP 200)
-4. Resultado de la Prueba 3 (ping 8.8.8.8 — debe mostrar timeout o sin respuesta)
+1. Captura de `sudo iptables -L -v -n --line-numbers` con la política DROP y las
+   4 reglas aplicadas (loopback, conntrack ESTABLISHED, tcp:22, tcp:80)
+2. Captura de las pruebas inbound desde PowerShell: `Test-NetConnection` al puerto
+   22 y al 80 (`True`) y al 9999 (`False`)
+3. Captura del Paso 10: ping fallido a 8.8.8.8 **y** el contador de la regla
+   insertada con `pkts` > 0
+4. Captura del ruleset restaurado (Paso 11) junto al contenido de
+   `~/ruleset-inicial.txt`
 
 ---
 
