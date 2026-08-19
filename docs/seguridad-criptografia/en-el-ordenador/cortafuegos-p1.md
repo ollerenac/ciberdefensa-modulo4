@@ -322,7 +322,7 @@ Linux enviará un mensaje a un servicio TCP de Windows. Como Linux inicia la con
 
 #### Paso 1 — Preparar el permiso antes de levantar el servicio
 
-En **PowerShell — Administrador**, identificar las reglas `Query User` que Windows crea cuando se cancela el aviso de acceso para PowerShell. Estas reglas son bloqueos explícitos y prevalecen sobre el permiso del laboratorio, por lo que se deshabilitan temporalmente desde su almacén de origen.
+En **PowerShell — Administrador**, crear primero el permiso limitado al laboratorio. Después identificar exclusivamente las reglas automáticas `TCP/UDP Query User` que Windows creó al cancelar el aviso de acceso para PowerShell. Estos bloqueos explícitos prevalecen sobre el permiso, por lo que se deshabilitan temporalmente desde su almacén de origen.
 
 ```powershell
 $WindowsLabIp = '192.168.56.102'
@@ -330,6 +330,22 @@ $LinuxHostIp = '192.168.56.1'
 $InboundPort = 18080
 $ReglaEntradaPermitida = 'LAB-FW-IN-ALLOW-18080'
 $PowerShellExe = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
+
+New-NetFirewallRule `
+    -DisplayName $ReglaEntradaPermitida `
+    -Direction Inbound `
+    -Action Allow `
+    -Protocol TCP `
+    -LocalAddress $WindowsLabIp `
+    -RemoteAddress $LinuxHostIp `
+    -LocalPort $InboundPort `
+    -Profile Any
+
+Get-NetFirewallRule `
+    -PolicyStore ActiveStore `
+    -DisplayName $ReglaEntradaPermitida |
+    Format-List DisplayName, Enabled, Direction, Action, `
+        Profile, EnforcementStatus
 
 $BloqueosPowerShell = @(
     Get-NetFirewallApplicationFilter `
@@ -339,6 +355,7 @@ $BloqueosPowerShell = @(
         } |
         Get-NetFirewallRule |
         Where-Object {
+            $_.Name -match '^(TCP|UDP) Query User\{' -and
             $_.Enabled -eq 'True' -and
             $_.Direction -eq 'Inbound' -and
             $_.Action -eq 'Block' -and
@@ -361,27 +378,27 @@ if ($NombresBloqueoPowerShell.Count -gt 0) {
         -Name $NombresBloqueoPowerShell |
         Format-Table DisplayName, Enabled, Direction, Action, Profile
 }
-
-New-NetFirewallRule `
-    -DisplayName $ReglaEntradaPermitida `
-    -Direction Inbound `
-    -Action Allow `
-    -Protocol TCP `
-    -LocalAddress $WindowsLabIp `
-    -RemoteAddress $LinuxHostIp `
-    -LocalPort $InboundPort `
-    -Profile Any
-
-Get-NetFirewallRule `
-    -PolicyStore ActiveStore `
-    -DisplayName $ReglaEntradaPermitida |
-    Format-List DisplayName, Enabled, Direction, Action, `
-        Profile, EnforcementStatus
 ```
 
 **Se espera ver:** si existían los dos bloqueos `Windows PowerShell`, deben aparecer con `Enabled = False`. La regla `LAB-FW-IN-ALLOW-18080` debe mostrar `Enabled = True`, `Action = Allow` y un estado que incluya `Enforced`.
 
 No cerrar esta consola: `$NombresBloqueoPowerShell` conserva exactamente las reglas que estaban habilitadas y que deben restaurarse durante la limpieza. Si la lista estaba vacía, no se modifica ninguna regla de PowerShell.
+
+!!! danger "Restauración de emergencia"
+    Si la práctica se interrumpe después de deshabilitar los bloqueos, ejecutar esto **antes de cerrar PowerShell — Administrador**:
+
+    ```powershell
+    if ($NombresBloqueoPowerShell.Count -gt 0) {
+        Enable-NetFirewallRule `
+            -PolicyStore PersistentStore `
+            -Name $NombresBloqueoPowerShell
+    }
+
+    Get-NetFirewallRule `
+        -DisplayName 'LAB-FW-*' `
+        -ErrorAction SilentlyContinue |
+        Remove-NetFirewallRule
+    ```
 
 #### Paso 2 — Levantar el servicio local en Windows
 
