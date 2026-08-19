@@ -32,18 +32,63 @@ Un escaneo completo del disco duro puede tomar varias horas y consumir recursos 
 
 **¿Por qué los escaneos completos van los fines de semana?** En entornos militares operativos, los equipos se usan de forma intensiva durante el horario de servicio. Un Full Scan que empieza un martes a las 10:00 puede hacer que el equipo sea prácticamente inutilizable hasta la tarde. La práctica correcta es programarlos para el sábado temprano o domingo, cuando los equipos están encendidos pero sin actividad de usuario.
 
-**Programar escaneo via PowerShell:**
+### Demostración — Programar un Full Scan para dentro de cinco minutos
+
+Abrir **PowerShell como administrador**. La demostración calcula el día y la hora a partir del reloj de la estación, configura un examen completo y elimina las dos condiciones que harían impredecible una prueba en vivo: la aleatorización y la espera por inactividad.
 
 ```powershell
-# Programar escaneo completo todos los sábados a las 02:00
-Set-MpPreference -ScanScheduleDay Saturday -ScanScheduleTime 02:00:00
+# Calcular el momento objetivo: cinco minutos desde ahora
+$Objetivo = (Get-Date).AddMinutes(5)
+$Dia = $Objetivo.DayOfWeek.ToString()
+$Hora = $Objetivo.ToString('HH:mm:ss')
+$InicioPrueba = Get-Date
 
-# Verificar la configuración de escaneo programado
-Get-MpPreference | Select-Object Scan*
+# Programar un Full Scan semanal en el día y la hora calculados
+Set-MpPreference `
+    -ScanParameters FullScan `
+    -ScanScheduleDay $Dia `
+    -ScanScheduleTime $Hora `
+    -RandomizeScheduleTaskTimes $false `
+    -ScanOnlyIfIdleEnabled $false
+
+"FULL SCAN PROGRAMADO PARA: $($Objetivo.ToString('dd/MM/yyyy HH:mm:ss'))"
+
+# Comprobar la configuración efectiva antes de esperar
+Get-MpPreference | Format-List `
+    ScanParameters, `
+    ScanScheduleDay, `
+    ScanScheduleTime, `
+    ScanScheduleOffset, `
+    RandomizeScheduleTaskTimes, `
+    SchedulerRandomizationTime, `
+    ScanOnlyIfIdleEnabled, `
+    EnableFullScanOnBatteryPower
 ```
 
-**Programar escaneo via GUI:**
-Windows Security → Virus & threat protection → Scan options → Windows Defender Offline Scan (para el escaneo fuera de línea más profundo que requiere reinicio).
+**Criterio para continuar:** `ScanParameters` debe ser `2`, `ScanScheduleTime` debe coincidir con `$Hora`, `RandomizeScheduleTaskTimes` debe ser `False` y `ScanOnlyIfIdleEnabled` debe ser `False`. Si la hora aparece como `00:00:00`, no esperar: repetir el bloque sin agregar `-ScanScheduleOffset 0`.
+
+!!! warning "No combinar la hora con un offset igual a cero"
+    En la versión de Defender instalada en la VM, incluir `-ScanScheduleTime $Hora` y `-ScanScheduleOffset 0` en el mismo comando hizo que prevaleciera el offset y dejó la hora efectiva en `00:00:00`. Esta demostración configura únicamente `ScanScheduleTime`; `ScanScheduleOffset` se consulta como evidencia, pero no se modifica.
+
+Mantener la VM encendida, sin suspensión y conectada a corriente. Al llegar la hora objetivo, comprobar los eventos generados desde el inicio de la prueba:
+
+```powershell
+Get-WinEvent -FilterHashtable @{
+    LogName   = 'Microsoft-Windows-Windows Defender/Operational'
+    Id        = 1000, 1001, 1002
+    StartTime = $InicioPrueba
+} |
+    Sort-Object TimeCreated |
+    Select-Object TimeCreated, Id, Message |
+    Format-List
+```
+
+El evento `1000` demuestra que el examen comenzó; su mensaje debe indicar `Full Scan` y mostrar el usuario `NT AUTHORITY\SYSTEM`. El evento `1001` demuestra que terminó y debe contener el mismo `Scan ID`. Un evento `1002` indica que comenzó, pero fue cancelado.
+
+En **Seguridad de Windows → Protección contra virus y amenazas → Amenazas actuales** se muestra el último examen, su duración y la cantidad de archivos examinados. La aplicación no conserva una lista completa de exámenes limpios; para esa trazabilidad se utiliza el registro `Windows Defender/Operational`.
+
+**Opciones de examen desde la interfaz:**
+Seguridad de Windows → Protección contra virus y amenazas → Opciones de examen permite iniciar exámenes bajo demanda. **Microsoft Defender Antivirus (examen sin conexión)** requiere reiniciar y no configura una programación.
 
 Para configurar el escaneo programado estándar con el Programador de tareas: `Win+R → taskschd.msc → Task Scheduler Library → Microsoft → Windows → Windows Defender → Windows Defender Scheduled Scan`.
 
@@ -163,7 +208,7 @@ El dashboard muestra el estado actual. Pero si hubo una detección ayer, una cua
 
 ## Resumen
 
-1. Los **escaneos completos** deben programarse fuera del horario de operaciones criticas — `Set-MpPreference -ScanScheduleDay Saturday -ScanScheduleTime 02:00:00` — y los escaneos rápidos pueden ejecutarse antes de conectar equipos a la red.
+1. Los **escaneos completos** deben programarse fuera del horario de operaciones críticas. La demostración calcula una ejecución para dentro de cinco minutos, configura explícitamente `FullScan` y verifica el resultado mediante los eventos `1000`, `1001` y `1002`; los escaneos rápidos pueden ejecutarse antes de conectar equipos a la red.
 2. La **cuarentena** es temporal: `Get-MpThreat` muestra los elementos retenidos; nunca restaurar sin confirmación del oficial de seguridad y sin verificar que es un falso positivo.
 3. El **Protection History** registra toda la actividad de Defender — los nombres de amenaza siguen la taxonomía `Tipo:Plataforma/Familia.Variante`; un Worm requiere aislamiento inmediato de la red.
 4. El **Windows Security Center Dashboard** muestra el estado actual pero no reemplaza revisar los logs de Protection History y el Visor de Eventos para entender el historial de incidentes.
