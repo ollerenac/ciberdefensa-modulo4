@@ -116,10 +116,10 @@ La postura usual bloquea inbound no solicitado y permite outbound. Esto implica 
 La VM conserva su adaptador NAT para Internet y utiliza un segundo adaptador Host-only para esta demostración. La red Host-only comunica la VM con el anfitrión, pero no con la red física.
 
 ```text
-INBOUND:  Linux 192.168.56.1 ──► Windows 192.168.56.101:18080
+INBOUND:  Linux 192.168.56.1 ──► Windows 192.168.56.102:18080
           Linux inicia; la conexión entra en Windows.
 
-OUTBOUND: Windows 192.168.56.101 ──► Linux 192.168.56.1:18081
+OUTBOUND: Windows 192.168.56.102 ──► Linux 192.168.56.1:18081
           Windows inicia; la conexión sale de Windows.
 ```
 
@@ -164,11 +164,11 @@ Get-NetIPConfiguration |
     Format-List InterfaceAlias, IPv4Address, IPv4DefaultGateway
 ```
 
-**Se espera ver:** `192.168.56.101` sin puerta de enlace y `10.0.2.15` con puerta de enlace. La primera pertenece a Host-only; la segunda pertenece a NAT.
+**Se espera ver:** `192.168.56.102` sin puerta de enlace y `10.0.2.15` con puerta de enlace. La primera pertenece a Host-only; la segunda pertenece a NAT.
 
 Una dirección `169.254.x.x` pertenece a otra interfaz sin DHCP. No debe utilizarse en esta demostración.
 
-Si la dirección Host-only no es `192.168.56.101`, reemplazar ese valor en todos los comandos siguientes. No sustituirlo por la dirección NAT.
+Si la dirección Host-only no es `192.168.56.102`, reemplazar ese valor en todos los comandos siguientes. No sustituirlo por la dirección NAT.
 
 #### Comprobar privilegios y estado del firewall
 
@@ -243,7 +243,7 @@ $Respuesta = Invoke-WebRequest `
 "RESULTADO OUTBOUND: PERMITIDA (HTTP $($Respuesta.StatusCode))"
 ```
 
-**Se espera ver:** origen `192.168.56.101`, `TcpTestSucceeded = True` y `HTTP 200`. Linux registra `GET /`.
+**Se espera ver:** origen `192.168.56.102`, `TcpTestSucceeded = True` y `HTTP 200`. Linux registra `GET /`.
 
 Esta línea base demuestra que el servidor y la ruta funcionan antes de modificar el firewall. Sin ella, un fallo posterior sería ambiguo.
 
@@ -259,7 +259,7 @@ New-NetFirewallRule `
     -Direction Outbound `
     -Action Block `
     -Protocol TCP `
-    -LocalAddress 192.168.56.101 `
+    -LocalAddress 192.168.56.102 `
     -RemoteAddress 192.168.56.1 `
     -RemotePort 18081 `
     -Profile Any
@@ -320,12 +320,75 @@ $Respuesta = Invoke-WebRequest `
 
 Linux enviará un mensaje a un servicio TCP de Windows. Como Linux inicia la conexión y Windows la recibe, el flujo es inbound.
 
-#### Paso 1 — Levantar el servicio local en Windows
+#### Paso 1 — Preparar el permiso antes de levantar el servicio
+
+En **PowerShell — Administrador**, identificar las reglas `Query User` que Windows crea cuando se cancela el aviso de acceso para PowerShell. Estas reglas son bloqueos explícitos y prevalecen sobre el permiso del laboratorio, por lo que se deshabilitan temporalmente desde su almacén de origen.
+
+```powershell
+$WindowsLabIp = '192.168.56.102'
+$LinuxHostIp = '192.168.56.1'
+$InboundPort = 18080
+$ReglaEntradaPermitida = 'LAB-FW-IN-ALLOW-18080'
+$PowerShellExe = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
+
+$BloqueosPowerShell = @(
+    Get-NetFirewallApplicationFilter `
+        -PolicyStore PersistentStore |
+        Where-Object {
+            $_.Program -ieq $PowerShellExe
+        } |
+        Get-NetFirewallRule |
+        Where-Object {
+            $_.Enabled -eq 'True' -and
+            $_.Direction -eq 'Inbound' -and
+            $_.Action -eq 'Block' -and
+            $_.Profile -eq 'Public'
+        }
+)
+
+$NombresBloqueoPowerShell = @(
+    $BloqueosPowerShell |
+        Select-Object -ExpandProperty Name
+)
+
+if ($NombresBloqueoPowerShell.Count -gt 0) {
+    Disable-NetFirewallRule `
+        -PolicyStore PersistentStore `
+        -Name $NombresBloqueoPowerShell
+
+    Get-NetFirewallRule `
+        -PolicyStore PersistentStore `
+        -Name $NombresBloqueoPowerShell |
+        Format-Table DisplayName, Enabled, Direction, Action, Profile
+}
+
+New-NetFirewallRule `
+    -DisplayName $ReglaEntradaPermitida `
+    -Direction Inbound `
+    -Action Allow `
+    -Protocol TCP `
+    -LocalAddress $WindowsLabIp `
+    -RemoteAddress $LinuxHostIp `
+    -LocalPort $InboundPort `
+    -Profile Any
+
+Get-NetFirewallRule `
+    -PolicyStore ActiveStore `
+    -DisplayName $ReglaEntradaPermitida |
+    Format-List DisplayName, Enabled, Direction, Action, `
+        Profile, EnforcementStatus
+```
+
+**Se espera ver:** si existían los dos bloqueos `Windows PowerShell`, deben aparecer con `Enabled = False`. La regla `LAB-FW-IN-ALLOW-18080` debe mostrar `Enabled = True`, `Action = Allow` y un estado que incluya `Enforced`.
+
+No cerrar esta consola: `$NombresBloqueoPowerShell` conserva exactamente las reglas que estaban habilitadas y que deben restaurarse durante la limpieza. Si la lista estaba vacía, no se modifica ninguna regla de PowerShell.
+
+#### Paso 2 — Levantar el servicio local en Windows
 
 En **PowerShell — Alumno**:
 
 ```powershell
-$WindowsLabIp = '192.168.56.101'
+$WindowsLabIp = '192.168.56.102'
 $InboundPort = 18080
 
 $ServidorWindows = Start-Job `
@@ -370,27 +433,9 @@ Get-NetTCPConnection `
     Format-Table LocalAddress, LocalPort, State
 ```
 
-**Se espera ver:** una fila `Listen` en `192.168.56.101:18080`. Esto prueba que el servicio existe, pero todavía no demuestra que Linux pueda alcanzarlo.
+**Se espera ver:** una fila `Listen` en `192.168.56.102:18080`. Esto prueba que el servicio existe, pero todavía no demuestra que Linux pueda alcanzarlo.
 
-Si Windows solicita permiso para PowerShell, cancelar el cuadro. Las reglas `LAB-FW-*` controlarán la prueba de forma explícita.
-
-#### Paso 2 — Crear un permiso inbound limitado al laboratorio
-
-En **PowerShell — Administrador**:
-
-```powershell
-$ReglaEntradaPermitida = 'LAB-FW-IN-ALLOW-18080'
-
-New-NetFirewallRule `
-    -DisplayName $ReglaEntradaPermitida `
-    -Direction Inbound `
-    -Action Allow `
-    -Protocol TCP `
-    -LocalAddress 192.168.56.101 `
-    -RemoteAddress 192.168.56.1 `
-    -LocalPort 18080 `
-    -Profile Any
-```
+El permiso se creó antes de iniciar el listener para evitar el aviso automático. **No cancelar ese aviso si apareciera:** Windows crearía dos reglas `Block` para `powershell.exe`, una TCP y otra UDP, que anularían el permiso del laboratorio. En ese caso, detener la práctica y avisar al instructor.
 
 `LocalPort` es `18080` porque el servicio se ejecuta en Windows. `RemoteAddress` restringe el permiso al anfitrión del laboratorio.
 
@@ -400,7 +445,7 @@ En **Linux anfitrión**:
 
 ```bash
 if timeout 5 bash -c \
-  'printf "%s\n" "INBOUND_DESDE_LINUX" > /dev/tcp/192.168.56.101/18080'; then
+  'printf "%s\n" "INBOUND_DESDE_LINUX" > /dev/tcp/192.168.56.102/18080'; then
   printf '%s\n' 'RESULTADO INBOUND: PERMITIDA'
 else
   printf '%s\n' 'RESULTADO INBOUND: BLOQUEADA'
@@ -432,7 +477,7 @@ New-NetFirewallRule `
     -Direction Inbound `
     -Action Block `
     -Protocol TCP `
-    -LocalAddress 192.168.56.101 `
+    -LocalAddress 192.168.56.102 `
     -RemoteAddress 192.168.56.1 `
     -LocalPort 18080 `
     -Profile Any
@@ -453,7 +498,7 @@ En **PowerShell — Alumno**, confirmar que el servicio sigue escuchando y no re
 
 ```powershell
 Get-NetTCPConnection `
-    -LocalAddress 192.168.56.101 `
+    -LocalAddress 192.168.56.102 `
     -LocalPort 18080 `
     -State Listen |
     Format-Table LocalAddress, LocalPort, State
@@ -522,6 +567,17 @@ En **PowerShell — Administrador**, retirar solo las reglas de esta demostraci�
 Get-NetFirewallRule `
     -DisplayName 'LAB-FW-*' `
     -ErrorAction SilentlyContinue
+
+if ($NombresBloqueoPowerShell.Count -gt 0) {
+    Enable-NetFirewallRule `
+        -PolicyStore PersistentStore `
+        -Name $NombresBloqueoPowerShell
+
+    Get-NetFirewallRule `
+        -PolicyStore PersistentStore `
+        -Name $NombresBloqueoPowerShell |
+        Format-Table DisplayName, Enabled, Direction, Action, Profile
+}
 ```
 
 En **PowerShell — Alumno**, detener el receptor y comprobar el puerto:
@@ -536,7 +592,7 @@ Get-NetTCPConnection `
     -ErrorAction SilentlyContinue
 ```
 
-**Se espera ver:** ninguna regla `LAB-FW-*` y ningún receptor en `18080`. El adaptador Host-only puede conservarse para repetir la práctica.
+**Se espera ver:** ninguna regla `LAB-FW-*`, ningún receptor en `18080` y, si al comenzar existían bloqueos de Windows PowerShell, todos nuevamente con `Enabled = True`. El adaptador Host-only puede conservarse para repetir la práctica.
 
 ---
 
