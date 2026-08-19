@@ -1,69 +1,56 @@
 {
   "version": "1.0",
-  "timestamp": "2026-08-18T08:06:11.507Z",
+  "timestamp": "2026-08-19T08:31:30.853Z",
   "phase": null,
   "phase_name": null,
   "phase_dir": null,
   "plan": null,
-  "task": null,
-  "total_tasks": null,
+  "task": 5,
+  "total_tasks": 7,
   "status": "paused",
   "context_type": "research",
   "completed_tasks": [
     {
       "id": 1,
-      "name": "Validar una demostración segura de firmas con Microsoft Defender y EICAR",
+      "name": "Corregir y publicar la demostración de Full Scan programado de Defender",
       "status": "done",
-      "commit": "f98cc65",
-      "progress": "Defender detectó EICAR; evento 1116 RecordId 545 y evento 1117 RecordId 548 confirmaron detección y cuarentena."
+      "commit": "886fbd2",
+      "progress": "Programación a cinco minutos, correlación de eventos y restauración segura publicadas en ee5448d y 886fbd2."
     },
     {
       "id": 2,
-      "name": "Delimitar correctamente el papel de OpenCTI",
+      "name": "Diagnosticar y corregir la prueba inbound de Windows Firewall",
       "status": "done",
-      "progress": "OpenCTI queda como contexto de Observable, Indicator y Observed Data; no se fabricará un Sighting ni una alerta atribuida a Defender."
+      "commit": "45761d7",
+      "progress": "Las reglas automáticas Query User de PowerShell se gestionan de forma acotada y reversible; cambios publicados en c14a2e3 y 45761d7."
     },
     {
       "id": 3,
-      "name": "Añadir precondiciones antes de la Práctica 14 de exclusiones",
+      "name": "Auditar las cuatro lecciones de iptables",
       "status": "done",
-      "commit": "f98cc65",
-      "progress": "Se documentaron elevación, protección en tiempo real y línea base de exclusiones."
+      "progress": "Hallazgos y fuentes documentados en .planning/research/IPTABLES-LESSON-AUDIT.md."
     },
     {
       "id": 4,
-      "name": "Normalizar la terminología Firewall y diseñar una demostración visible inbound/outbound",
+      "name": "Definir plataforma y estrategia de corrección",
       "status": "done",
-      "commit": "15f0d73",
-      "progress": "WSL fue sustituido por VirtualBox Host-only; la documentación compila con mkdocs --strict y los bloques Bash pasan bash -n."
-    },
-    {
-      "id": 5,
-      "name": "Validar la comunicación outbound de línea base",
-      "status": "done",
-      "progress": "Windows 192.168.56.101 alcanzó Linux 192.168.56.1:18081; Test-NetConnection=True e Invoke-WebRequest=200."
+      "progress": "Ubuntu 24.04 en VM separada; una sola etapa de preparación fresca y plan integral antes de editar."
     }
   ],
   "remaining_tasks": [
     {
+      "id": 5,
+      "name": "Crear y revisar el plan correctivo secuencial",
+      "status": "not_started"
+    },
+    {
       "id": 6,
-      "name": "Ejecutar de principio a fin la prueba outbound publicada",
-      "status": "in_progress",
-      "progress": "La línea base está validada; falta confirmar bloqueo, ausencia de GET, deshabilitación y recuperación."
+      "name": "Corregir las lecciones P1/P2 y las soluciones del instructor",
+      "status": "not_started"
     },
     {
       "id": 7,
-      "name": "Ejecutar de principio a fin la prueba inbound publicada",
-      "status": "not_started"
-    },
-    {
-      "id": 8,
-      "name": "Ejecutar y validar la Práctica 14 de exclusiones de Defender",
-      "status": "not_started"
-    },
-    {
-      "id": 9,
-      "name": "Ajustar el contenido si las salidas reales difieren y confirmar los cambios",
+      "name": "Validar MkDocs y ejecutar UAT en Ubuntu 24.04",
       "status": "not_started"
     }
   ],
@@ -71,69 +58,30 @@
   "async_jobs": [],
   "human_actions_pending": [
     {
-      "action": "Comprobar y retirar la regla manual LAB - Bloquear salida TCP 18081 al anfitrion si quedó creada.",
-      "context": "El ensayo interactivo utilizó un nombre distinto del guion final y no se confirmó su limpieza.",
-      "blocking": true
-    },
-    {
-      "action": "Detener con Ctrl+C cualquier python3 -m http.server 18081 que siga abierto en el anfitrión.",
-      "context": "El servidor fue iniciado manualmente fuera del entorno Codex; no puede verificarse desde esta sesión.",
+      "action": "Crear la VM Ubuntu 24.04 con NAT y Host-only antes de la UAT final.",
+      "context": "El plan y la edición documental pueden avanzar sin ella, pero la prueba integral requiere el sistema real.",
       "blocking": false
-    },
-    {
-      "action": "Tras cualquier restauración de snapshot, comprobar Adaptador 2 Host-only y las direcciones 192.168.56.1/192.168.56.101.",
-      "context": "VirtualBox puede restaurar también la configuración de hardware de la VM.",
-      "blocking": true
     }
   ],
   "decisions": [
     {
-      "decision": "No instalar WSL en la VM.",
-      "rationale": "La imagen no lo incluye; instalarlo exige elevación y puede introducir reinicios y dependencias innecesarias.",
-      "phase": null
+      "decision": "Migrar los laboratorios de WSL2 a una VM Ubuntu 24.04 independiente.",
+      "rationale": "Proporciona un kernel Linux y una topología de red reproducible para validar INPUT, OUTPUT, FORWARD y persistencia.",
+      "phase": "2.1"
     },
     {
-      "decision": "Usar NAT más un segundo adaptador VirtualBox Host-only.",
-      "rationale": "Mantiene Internet por NAT y proporciona dos extremos reales, aislados de la red física, para demostrar ambas direcciones.",
-      "phase": null
+      "decision": "Planificar la corrección completa antes de modificar cada error.",
+      "rationale": "Las partes 1 y 2 forman una secuencia y los cambios de topología, estado y limpieza se afectan mutuamente.",
+      "phase": "2.1"
     },
     {
-      "decision": "Interpretar inbound y outbound siempre desde Windows.",
-      "rationale": "Windows→Linux es outbound; Linux→Windows es inbound.",
-      "phase": null
-    },
-    {
-      "decision": "No presentar objetos OpenCTI manuales como telemetría automática.",
-      "rationale": "No existe un conector Defender→OpenCTI en el laboratorio; fabricar relaciones o Sightings falsearía la evidencia.",
-      "phase": null
-    },
-    {
-      "decision": "Mantener los nombres internos cortafuegos-p1.md y cortafuegos-p2.md.",
-      "rationale": "Solo cambió el texto visible a Firewall para no romper enlaces existentes.",
-      "phase": null
+      "decision": "Concentrar la preparación de Ubuntu fresco en un solo paso.",
+      "rationale": "Debe cubrir fuentes APT oficiales, actualización, herramientas esenciales, monitoreo, verificación y snapshot sin desplazar el objetivo de iptables.",
+      "phase": "2.1"
     }
   ],
-  "blocking_constraints": [
-    {
-      "severity": "blocking",
-      "name": "WSL no está instalado",
-      "description": "wsl.exe --list mostró el instalador y requirió elevación; la demo no debe volver a depender de WSL.",
-      "mitigation": "Usar exclusivamente el anfitrión Linux mediante vboxnet0."
-    },
-    {
-      "severity": "blocking",
-      "name": "Restaurar snapshots puede retirar el Adaptador 2",
-      "description": "VirtualBox restaura configuración de máquina además del disco.",
-      "mitigation": "Ejecutar el preflight de red Host-only después de cada restauración."
-    },
-    {
-      "severity": "blocking",
-      "name": "OpenCTI no recibe telemetría de Defender",
-      "description": "No hay conector ni SIEM que publique los eventos 1116/1117 en OpenCTI.",
-      "mitigation": "Mantener la evidencia en Windows y mostrar OpenCTI solo como modelado CTI opcional."
-    }
-  ],
+  "blocking_constraints": [],
   "uncommitted_files": [],
-  "next_action": "Limpiar el estado manual del laboratorio, confirmar vboxnet0 y las IP, y ejecutar desde el Paso 1 la Prueba 1 outbound de cortafuegos-p1.md; después ejecutar la Prueba 2 inbound.",
-  "context_notes": "El usuario pule el material ejecutando cada demostración antes de aprobarla. Prefiere pruebas visibles, resultados esperados inequívocos y explicación paso a paso. main está limpio y sincronizado con origin/main en 15f0d73."
+  "next_action": "Leer .planning/research/IPTABLES-LESSON-AUDIT.md y crear un plan correctivo integral para la fase de seguimiento 2.1 antes de editar las cuatro lecciones.",
+  "context_notes": "La rama main está sincronizada con origin/main en 45761d7. Las lecciones iptables no fueron editadas. El subagente de investigación fue interrumpido y no hay procesos de fondo. Revisar el formato de headings de ROADMAP antes de usar phase.insert: actualmente usa raya y el parser espera dos puntos."
 }

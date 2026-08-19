@@ -56,10 +56,12 @@ All 4 phases shipped, code-reviewed, fixed, and verified. The MkDocs Material co
 
 ## Session Continuity
 
-Last session: 2026-08-17 (tarde)
-Stopped at: Sesión de solo-análisis — el usuario cuestionó las prácticas de Antivirus P1 (query-labs no son laboratorio real). Se entregó catálogo de 12 laboratorios alternativos sin malware (exclusiones plantadas, AMSI, Tamper Protection, forense Event Log, variantes EICAR, cuarentena MpCmdRun, CFA anti-ransomware, MAPS/PUA/Network Protection AMTSO, firmas offline, GetFiles). Material SIN editar — decisión pendiente del usuario: cuáles integrar. Detalle en .continue-here.md bitácora #12. Pendientes previos vigentes: secciones finales de P1 y P2; ensayos cruce puertos↔servicios y E13/E14 antes de Antivirus P1; disco al 98 % — borrar ova/VM-WIN-SI.ova.
+Last session: 2026-08-19T03:31:30-05:00
+Stopped at: Auditoría de las lecciones iptables terminada y decisión de plataforma confirmada. Las lecciones aún no fueron editadas. Próximo paso: crear y revisar un plan correctivo secuencial para Ubuntu 24.04 en VM separada, con una sola etapa inicial de preparación del sistema fresco. Detalle completo en `.planning/.continue-here.md` y `.planning/HANDOFF.json`.
 Resume file: .planning/.continue-here.md
 Leak confirmed 2026-08-13: los 5 exámenes publican su clave de respuestas inline en bloques `!!! danger "Solo instructor"` (renderizan visibles), y docs/instructor/ publica 7 soluciones por URL directa pese a estar fuera del nav
+Carried concern: el disco del anfitrión se reportó al 98 % en la sesión anterior; `ova/VM-WIN-SI.ova` (32 GB) seguía pendiente de retiro. Revalidar espacio antes de trabajo intensivo con snapshots o exportaciones.
+Resume reconciliation: `main` está sincronizada con `origin/main` en `45761d7`. Los cambios de Defender y Windows Firewall ya fueron publicados; el trabajo pendiente se limita a planificar, corregir y validar iptables.
 
 ## Phase 01 — Site Foundation ✅
 
