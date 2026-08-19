@@ -1,99 +1,80 @@
 {
   "version": "1.0",
-  "timestamp": "2026-08-19T04:23:57-05:00",
-  "phase": "2.1",
-  "phase_name": "Corrección Labs iptables",
-  "phase_dir": ".planning/phases/02.1-correccion-iptables",
-  "plan": 1,
-  "task": 6,
+  "timestamp": "2026-08-19T09:23:39.624Z",
+  "context": "research",
+  "phase": null,
+  "phase_name": "moodlecloud-examen-parcial",
+  "phase_dir": null,
+  "plan": 0,
+  "task": 0,
   "total_tasks": 6,
   "status": "paused",
-  "context_type": "phase",
   "completed_tasks": [
     {
-      "id": 1,
-      "name": "Insertar fase 2.1 en ROADMAP.md (edición manual, estilo raya)",
+      "id": 0,
+      "name": "Diseño y plan de implementación aprobados",
       "status": "done",
-      "commit": "local-only",
-      "progress": "ROADMAP.md es gitignored; sección Phase 2.1 insertada tras Phase 2."
-    },
-    {
-      "id": 2,
-      "name": "Reescribir lab-iptables-p1.md para VM Ubuntu 24.04",
-      "status": "done",
-      "commit": "a553a6b"
-    },
-    {
-      "id": 3,
-      "name": "Reescribir lab-iptables-p2.md (subred derivada, LOG limit, persistencia real)",
-      "status": "done",
-      "commit": "a553a6b"
-    },
-    {
-      "id": 4,
-      "name": "Alinear las dos soluciones del instructor",
-      "status": "done",
-      "commit": "a553a6b"
-    },
-    {
-      "id": 5,
-      "name": "Validación estática: mkdocs build --strict + cierre 13/13 hallazgos",
-      "status": "done",
-      "commit": "a553a6b",
-      "progress": "Build verde; grep de residuos WSL/eth0/22.04/-m state/172.16 = cero; tabla de cierre en 02.1-01-SUMMARY.md."
+      "commit": "9494298,2a05934"
     }
   ],
   "remaining_tasks": [
-    {
-      "id": 6,
-      "name": "UAT real en la VM Ubuntu 24.04 (P1 y P2 de principio a fin)",
-      "status": "not_started"
-    }
+    {"id": 1, "name": "Proteger secretos y validar bancos GIFT", "status": "not_started"},
+    {"id": 2, "name": "Redactar y auditar el banco privado", "status": "not_started"},
+    {"id": 3, "name": "Generar cuentas numeradas", "status": "not_started"},
+    {"id": 4, "name": "Sustituir el examen público y añadir runbook", "status": "not_started"},
+    {"id": 5, "name": "Configurar MoodleCloud con usuario piloto", "status": "not_started"},
+    {"id": 6, "name": "Preparar contingencia, cargar clase y ejecutar UAT", "status": "not_started"}
   ],
   "blockers": [
     {
-      "description": "La VM Ubuntu 24.04 no existe todavía; la UAT no puede ejecutarse.",
+      "description": "La credencial administrativa compartida en la conversación debe considerarse comprometida y ser rotada.",
       "type": "human_action",
-      "workaround": "Ninguno — el material ya está publicado como validado estáticamente; la UAT es el cierre definitivo de la fase."
+      "workaround": "Confirmar la rotación sin compartir la nueva credencial; el usuario la introduce directamente en MoodleCloud."
+    },
+    {
+      "description": "Falta autorización explícita para crear el worktree aislado.",
+      "type": "human_action",
+      "workaround": "Autorizar `.worktrees/examen-moodlecloud` o rechazarlo expresamente para decidir el modo seguro de trabajo."
     }
   ],
   "async_jobs": [],
   "human_actions_pending": [
     {
-      "action": "Liberar espacio en disco del anfitrión (98 % usado; retirar ova/VM-WIN-SI.ova de 32 GB).",
-      "context": "Crear la VM y sus snapshots requiere espacio que hoy no hay.",
+      "action": "Rotar la contraseña administrativa que fue compartida en el chat.",
+      "context": "La credencial expuesta no debe reutilizarse ni conservarse.",
       "blocking": true
     },
     {
-      "action": "Crear la VM Ubuntu 24.04 en VirtualBox con adaptadores NAT + Host-only desde isos/ubuntu-24.04.4-desktop-amd64.iso y completar la 'Preparación previa' de lab-iptables-p1.md (incluye snapshot base-limpia).",
-      "context": "Prerequisito de la Tarea 6 (UAT).",
+      "action": "Autorizar la creación de `.worktrees/examen-moodlecloud`.",
+      "context": "El flujo de desarrollo con subagentes exige aislamiento antes de modificar archivos.",
       "blocking": true
+    },
+    {
+      "action": "Proporcionar más adelante un patrón real de emails o aliases controlados.",
+      "context": "Moodle requiere identidades únicas; el agente no debe inventar correos.",
+      "blocking": false
     }
   ],
   "decisions": [
     {
-      "decision": "Listener HTTP del lab en puerto 80 con sudo (alternativa 8080 documentada como nota).",
-      "rationale": "Coherencia con las reglas del escenario.",
-      "phase": "2.1"
+      "decision": "Usar MoodleCloud y no desarrollar una aplicación propia.",
+      "rationale": "Proporciona usuarios, banco aleatorio, intentos y calificaciones administradas.",
+      "phase": null
     },
     {
-      "decision": "Persistencia: opción real (netfilter-persistent + reboot) manteniendo iptables-save/restore como ejercicio renombrado 'backup manual'.",
-      "rationale": "La VM permite reiniciar de verdad; el contraste manual-vs-automático es el contenido didáctico central de P2.",
-      "phase": "2.1"
+      "decision": "Banco privado 6 CDE + 6 DEF + 6 FWA + 2 GEN; intento 3+3+3+1.",
+      "rationale": "Cubre equilibradamente las seis lecciones con diez preguntas fáciles por alumno.",
+      "phase": null
     },
     {
-      "decision": "Comentarios de reglas con -m comment dentro del ruleset.",
-      "rationale": "Sobreviven a save/restore y eliminan la salida imposible (comentarios inline) de la solución anterior.",
-      "phase": "2.1"
-    },
-    {
-      "decision": "ROADMAP editado a mano en lugar de phase.insert.",
-      "rationale": "El parser espera 'Phase N:' y el roadmap usa raya 'Phase N —'.",
-      "phase": "2.1"
+      "decision": "Ejecutar el plan mediante subagentes con revisión por tarea.",
+      "rationale": "El usuario eligió explícitamente la opción recomendada 1.",
+      "phase": null
     }
   ],
-  "blocking_constraints": [],
-  "uncommitted_files": [],
-  "next_action": "Cuando exista la VM: ejecutar la Tarea 6 del plan (UAT completa de P1 y P2 en la VM, host Windows como segundo extremo), registrar desviaciones entre salidas reales y documentadas, corregir el material y cerrar la fase 2.1 actualizando 02.1-01-SUMMARY.md (status: complete).",
-  "context_notes": "main sincronizada con origin/main en a553a6b; GitHub Actions ya desplegó (o está desplegando) el sitio con los labs corregidos. Tareas 1-5 del plan 02.1-01 completas. PLAN, SUMMARY y ROADMAP viven solo en local (.planning/ es gitignored; únicamente STATE.md y HANDOFF.json se fuerzan al repo). Verificaciones puntuales de UAT: prueba DROP por orden con contadores (P1 Paso 10), sonda 8080 con log + contador (P2 Paso 9), ruleset vivo tras systemctl reboot (P2 Paso 11), re-save de limpieza (P2 Paso 12). Directorio .superpowers/ apareció untracked — artefacto de plugin, no del curso."
+  "uncommitted_files": [
+    ".superpowers/ (artefactos temporales sin seguimiento; no commitear)"
+  ],
+  "next_action": "Confirmar rotación de la credencial y obtener autorización para crear `.worktrees/examen-moodlecloud`; luego inicializar el workspace/ledger SDD y ejecutar su preflight antes de la Tarea 1.",
+  "context_notes": "Diseño y plan están aprobados en 9494298 y 2a05934. Ninguna tarea de implementación comenzó. No almacenar URL operativa, identidad administrativa ni contraseñas. Main está dos commits delante de origin/main."
 }

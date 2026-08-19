@@ -116,10 +116,10 @@ La postura usual bloquea inbound no solicitado y permite outbound. Esto implica 
 La VM conserva su adaptador NAT para Internet y utiliza un segundo adaptador Host-only para esta demostración. La red Host-only comunica la VM con el anfitrión, pero no con la red física.
 
 ```text
-INBOUND:  Anfitrión 192.168.56.1 ──► VM Windows 192.168.56.102:18080
+INBOUND:  Anfitrión 192.168.56.1 ──► VM Windows 192.168.56.101:18080
           El anfitrión inicia; la conexión entra en la VM.
 
-OUTBOUND: VM Windows 192.168.56.102 ──► Anfitrión 192.168.56.1:18081
+OUTBOUND: VM Windows 192.168.56.101 ──► Anfitrión 192.168.56.1:18081
           La VM inicia; la conexión sale de la VM.
 ```
 
@@ -165,11 +165,11 @@ Get-NetIPConfiguration |
     Format-List InterfaceAlias, IPv4Address, IPv4DefaultGateway
 ```
 
-**Se espera ver:** `192.168.56.102` sin puerta de enlace y `10.0.2.15` con puerta de enlace. La primera pertenece a Host-only; la segunda pertenece a NAT.
+**Se espera ver:** `192.168.56.101` sin puerta de enlace y `10.0.2.15` con puerta de enlace. La primera pertenece a Host-only; la segunda pertenece a NAT.
 
 Una dirección `169.254.x.x` pertenece a otra interfaz sin DHCP. No debe utilizarse en esta demostración.
 
-Si la dirección Host-only no es `192.168.56.102`, reemplazar ese valor en todos los comandos siguientes. No sustituirlo por la dirección NAT.
+Si la dirección Host-only no es `192.168.56.101`, reemplazar ese valor en todos los comandos siguientes. No sustituirlo por la dirección NAT.
 
 #### Comprobar privilegios y estado del firewall
 
@@ -225,7 +225,7 @@ New-NetFirewallRule `
     -Action Allow `
     -Protocol TCP `
     -LocalAddress 192.168.56.1 `
-    -RemoteAddress 192.168.56.102 `
+    -RemoteAddress 192.168.56.101 `
     -LocalPort 18081 `
     -Profile Any
 ```
@@ -280,7 +280,7 @@ $Respuesta = Invoke-WebRequest `
 "RESULTADO OUTBOUND: PERMITIDA (HTTP $($Respuesta.StatusCode))"
 ```
 
-**Se espera ver:** origen `192.168.56.102`, `TcpTestSucceeded = True` y `HTTP 200`. El anfitrión registra una línea `GET /`.
+**Se espera ver:** origen `192.168.56.101`, `TcpTestSucceeded = True` y `HTTP 200`. El anfitrión registra una línea `GET /`.
 
 Esta línea base demuestra que el servidor y la ruta funcionan antes de modificar el firewall. Sin ella, un fallo posterior sería ambiguo.
 
@@ -296,7 +296,7 @@ New-NetFirewallRule `
     -Direction Outbound `
     -Action Block `
     -Protocol TCP `
-    -LocalAddress 192.168.56.102 `
+    -LocalAddress 192.168.56.101 `
     -RemoteAddress 192.168.56.1 `
     -RemotePort 18081 `
     -Profile Any
@@ -362,7 +362,7 @@ El anfitrión enviará un mensaje a un servicio TCP de la VM Windows. Como el an
 En **PowerShell — Administrador**, crear primero el permiso limitado al laboratorio. Después identificar exclusivamente las reglas automáticas `TCP/UDP Query User` que Windows creó al cancelar el aviso de acceso para PowerShell. Estos bloqueos explícitos prevalecen sobre el permiso, por lo que se deshabilitan temporalmente desde su almacén de origen.
 
 ```powershell
-$WindowsLabIp = '192.168.56.102'
+$WindowsLabIp = '192.168.56.101'
 $AnfitrionIp = '192.168.56.1'
 $InboundPort = 18080
 $ReglaEntradaPermitida = 'LAB-FW-IN-ALLOW-18080'
@@ -442,7 +442,7 @@ No cerrar esta consola: `$NombresBloqueoPowerShell` conserva exactamente las reg
 En **PowerShell — Alumno**:
 
 ```powershell
-$WindowsLabIp = '192.168.56.102'
+$WindowsLabIp = '192.168.56.101'
 $InboundPort = 18080
 
 $ServidorWindows = Start-Job `
@@ -487,7 +487,7 @@ Get-NetTCPConnection `
     Format-Table LocalAddress, LocalPort, State
 ```
 
-**Se espera ver:** una fila `Listen` en `192.168.56.102:18080`. Esto prueba que el servicio existe, pero todavía no demuestra que el anfitrión pueda alcanzarlo.
+**Se espera ver:** una fila `Listen` en `192.168.56.101:18080`. Esto prueba que el servicio existe, pero todavía no demuestra que el anfitrión pueda alcanzarlo.
 
 El permiso se creó antes de iniciar el listener para evitar el aviso automático. **No cancelar ese aviso si apareciera:** Windows crearía dos reglas `Block` para `powershell.exe`, una TCP y otra UDP, que anularían el permiso del laboratorio. En ese caso, detener la práctica y avisar al instructor.
 
@@ -501,7 +501,7 @@ En **PowerShell — Anfitrión** (el servidor HTTP de la Prueba 1 sigue en su bu
 $Cliente = [System.Net.Sockets.TcpClient]::new()
 
 try {
-    if ($Cliente.ConnectAsync('192.168.56.102', 18080).Wait(5000)) {
+    if ($Cliente.ConnectAsync('192.168.56.101', 18080).Wait(5000)) {
         $Escritor = [System.IO.StreamWriter]::new($Cliente.GetStream())
         $Escritor.WriteLine('INBOUND_DESDE_ANFITRION')
         $Escritor.Flush()
@@ -546,7 +546,7 @@ New-NetFirewallRule `
     -Direction Inbound `
     -Action Block `
     -Protocol TCP `
-    -LocalAddress 192.168.56.102 `
+    -LocalAddress 192.168.56.101 `
     -RemoteAddress 192.168.56.1 `
     -LocalPort 18080 `
     -Profile Any
@@ -567,7 +567,7 @@ En **PowerShell — Alumno**, confirmar que el servicio sigue escuchando y no re
 
 ```powershell
 Get-NetTCPConnection `
-    -LocalAddress 192.168.56.102 `
+    -LocalAddress 192.168.56.101 `
     -LocalPort 18080 `
     -State Listen |
     Format-Table LocalAddress, LocalPort, State

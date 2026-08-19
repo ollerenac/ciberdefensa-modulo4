@@ -1,0 +1,74 @@
+<h2>Así vería el alumno el examen</h2>
+<p class="subtitle">Un único sistema crea una combinación distinta de 10 preguntas para cada intento. No hay que preparar 20 exámenes manualmente.</p>
+
+<div class="section">
+  <div class="label">PASO COMÚN · IDENTIFICACIÓN</div>
+  <div class="mockup">
+    <div class="mockup-header">Examen parcial — Seguridad en el ordenador</div>
+    <div class="mockup-body">
+      <h3>Identifícate para comenzar</h3>
+      <input class="mock-input" placeholder="Nombres y apellidos">
+      <input class="mock-input" placeholder="DNI o código de alumno">
+      <input class="mock-input" placeholder="Código del examen entregado por el instructor">
+      <p>Recibirás 10 preguntas seleccionadas al azar de un banco de 20.</p>
+      <button class="mock-button">Comenzar examen</button>
+    </div>
+  </div>
+</div>
+
+<h3>¿Qué navegación prefieres?</h3>
+<p class="subtitle">Ambas muestran una sola pregunta por pantalla y una barra de progreso.</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="margin:0">
+        <div class="mockup-header">Pregunta 3 de 10 · 07:42 restantes</div>
+        <div class="mockup-body">
+          <div style="height:8px;background:#dbe4ff;border-radius:8px;margin-bottom:18px"><div style="width:30%;height:8px;background:#4f6bed;border-radius:8px"></div></div>
+          <p><strong>¿Qué función cumple principalmente un antivirus?</strong></p>
+          <label style="display:block;margin:9px 0"><input type="radio" name="q-a"> Detectar y bloquear software malicioso</label>
+          <label style="display:block;margin:9px 0"><input type="radio" name="q-a"> Aumentar la velocidad de Internet</label>
+          <label style="display:block;margin:9px 0"><input type="radio" name="q-a"> Crear copias impresas</label>
+          <label style="display:block;margin:9px 0"><input type="radio" name="q-a"> Cambiar la contraseña de Windows</label>
+          <div style="display:flex;justify-content:space-between;margin-top:18px">
+            <button class="mock-button">← Anterior</button>
+            <button class="mock-button">Guardar y continuar →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A · Con revisión final — Recomendada</h3>
+      <p>Puede volver a preguntas anteriores. Al finalizar ve cuáles dejó sin responder, revisa y recién entrega.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="margin:0">
+        <div class="mockup-header">Pregunta 3 de 10 · Respuesta definitiva</div>
+        <div class="mockup-body">
+          <div style="height:8px;background:#dbe4ff;border-radius:8px;margin-bottom:18px"><div style="width:30%;height:8px;background:#4f6bed;border-radius:8px"></div></div>
+          <p><strong>¿Qué función cumple principalmente un antivirus?</strong></p>
+          <label style="display:block;margin:9px 0"><input type="radio" name="q-b"> Detectar y bloquear software malicioso</label>
+          <label style="display:block;margin:9px 0"><input type="radio" name="q-b"> Aumentar la velocidad de Internet</label>
+          <label style="display:block;margin:9px 0"><input type="radio" name="q-b"> Crear copias impresas</label>
+          <label style="display:block;margin:9px 0"><input type="radio" name="q-b"> Cambiar la contraseña de Windows</label>
+          <div style="display:flex;justify-content:flex-end;margin-top:18px">
+            <button class="mock-button">Confirmar respuesta →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B · Estrictamente secuencial</h3>
+      <p>Cada respuesta queda bloqueada al avanzar. Reduce cambios entre alumnos, pero genera más presión y castiga errores de clic.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:28px">
+  <div class="label">ENTREGA</div>
+  <p>Al pulsar <strong>Entregar examen</strong>, el sistema guarda identidad, 10 preguntas recibidas, respuestas, nota y hora. El alumno recibe un comprobante; la clave correcta puede mantenerse oculta hasta que el instructor cierre el examen.</p>
+</div>
