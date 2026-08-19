@@ -37,6 +37,16 @@ Un escaneo completo del disco duro puede tomar varias horas y consumir recursos 
 Abrir **PowerShell como administrador**. La demostración calcula el día y la hora a partir del reloj de la estación, configura un examen completo y elimina las dos condiciones que harían impredecible una prueba en vivo: la aleatorización y la espera por inactividad.
 
 ```powershell
+# Guardar la configuración actual para restaurarla al terminar la prueba
+$Preferencias = Get-MpPreference
+$ConfigInicial = [pscustomobject]@{
+    ScanParameters             = $Preferencias.ScanParameters
+    ScanScheduleDay            = $Preferencias.ScanScheduleDay
+    ScanScheduleTime           = $Preferencias.ScanScheduleTime
+    RandomizeScheduleTaskTimes = $Preferencias.RandomizeScheduleTaskTimes
+    ScanOnlyIfIdleEnabled      = $Preferencias.ScanOnlyIfIdleEnabled
+}
+
 # Calcular el momento objetivo: cinco minutos desde ahora
 $Objetivo = (Get-Date).AddMinutes(5)
 $Dia = $Objetivo.DayOfWeek.ToString()
@@ -65,7 +75,7 @@ Get-MpPreference | Format-List `
     EnableFullScanOnBatteryPower
 ```
 
-**Criterio para continuar:** `ScanParameters` debe ser `2`, `ScanScheduleTime` debe coincidir con `$Hora`, `RandomizeScheduleTaskTimes` debe ser `False` y `ScanOnlyIfIdleEnabled` debe ser `False`. Si la hora aparece como `00:00:00`, no esperar: repetir el bloque sin agregar `-ScanScheduleOffset 0`.
+**Criterio para continuar:** `ScanParameters` debe ser `2`, `ScanScheduleTime` debe coincidir con `$Hora`, `RandomizeScheduleTaskTimes` debe ser `False` y `ScanOnlyIfIdleEnabled` debe ser `False`. Si `ScanScheduleTime` no coincide con `$Hora`, no esperar: repetir el bloque sin agregar `-ScanScheduleOffset 0`. Una salida `00:00:00` solo es correcta cuando `$Hora` también corresponde exactamente a medianoche.
 
 !!! warning "No combinar la hora con un offset igual a cero"
     En la versión de Defender instalada en la VM, incluir `-ScanScheduleTime $Hora` y `-ScanScheduleOffset 0` en el mismo comando hizo que prevaleciera el offset y dejó la hora efectiva en `00:00:00`. Esta demostración configura únicamente `ScanScheduleTime`; `ScanScheduleOffset` se consulta como evidencia, pero no se modifica.
@@ -73,17 +83,86 @@ Get-MpPreference | Format-List `
 Mantener la VM encendida, sin suspensión y conectada a corriente. Al llegar la hora objetivo, comprobar los eventos generados desde el inicio de la prueba:
 
 ```powershell
-Get-WinEvent -FilterHashtable @{
+$EventosPrueba = Get-WinEvent -FilterHashtable @{
     LogName   = 'Microsoft-Windows-Windows Defender/Operational'
     Id        = 1000, 1001, 1002
     StartTime = $InicioPrueba
-} |
-    Sort-Object TimeCreated |
+} | Sort-Object TimeCreated
+
+$EventosPrueba |
+    Select-Object TimeCreated, Id, Message |
+    Format-List
+
+# Aislar el evento 1000 que ocurrió alrededor de la hora programada
+$EventosPrueba |
+    Where-Object {
+        $_.Id -eq 1000 -and
+        $_.TimeCreated -ge $Objetivo.AddMinutes(-1) -and
+        $_.TimeCreated -le $Objetivo.AddMinutes(2)
+    } |
     Select-Object TimeCreated, Id, Message |
     Format-List
 ```
 
-El evento `1000` demuestra que el examen comenzó; su mensaje debe indicar `Full Scan` y mostrar el usuario `NT AUTHORITY\SYSTEM`. El evento `1001` demuestra que terminó y debe contener el mismo `Scan ID`. Un evento `1002` indica que comenzó, pero fue cancelado.
+El evento `1000` demuestra que un examen comenzó, pero no contiene el nombre de la tarea que lo originó. Para atribuirlo a esta demostración deben cumplirse juntas estas condiciones: no iniciar otro examen durante la prueba, encontrar el `1000` dentro de la ventana mostrada, y comprobar que su mensaje indica `Full Scan` y el usuario `NT AUTHORITY\SYSTEM`. El evento `1001` demuestra que terminó y debe contener el mismo `Scan ID`. Un evento `1002` indica que comenzó, pero fue cancelado.
+
+`LastFullScanSource = 2` confirma además que el último Full Scan fue iniciado por el sistema (`1` significaría iniciado por el usuario):
+
+```powershell
+Get-MpComputerStatus | Format-List `
+    FullScanStartTime, `
+    FullScanEndTime, `
+    LastFullScanSource
+```
+
+Como evidencia complementaria se puede consultar el contenedor de la tarea. Un `LastRunTime` cercano a `$Objetivo` refuerza la correlación, pero por sí solo no demuestra que Defender inició el examen; la prueba del inicio sigue siendo el evento `1000`.
+
+```powershell
+Get-ScheduledTaskInfo `
+    -TaskPath '\Microsoft\Windows\Windows Defender\' `
+    -TaskName 'Windows Defender Scheduled Scan' |
+    Format-List LastRunTime, LastTaskResult, NextRunTime
+```
+
+#### Restaurar la configuración al terminar
+
+Si el objetivo de la clase es observar solamente el inicio, cancelar el examen con `MpCmdRun.exe -Scan -Cancel` después de confirmar el evento `1000`; esto debe producir un evento `1002`. Si se necesita demostrar la finalización correcta, no detenerlo y esperar el evento `1001`.
+
+**Opcional — cancelar después de demostrar el inicio:**
+
+```powershell
+$MpCmdRun = Get-ChildItem `
+    "$env:ProgramData\Microsoft\Windows Defender\Platform\*\MpCmdRun.exe" `
+    -ErrorAction SilentlyContinue |
+    Sort-Object FullName -Descending |
+    Select-Object -First 1
+
+if (-not $MpCmdRun) {
+    $MpCmdRun = Get-Item "$env:ProgramFiles\Windows Defender\MpCmdRun.exe"
+}
+
+$MpCmdRunPath = $MpCmdRun.FullName
+& $MpCmdRunPath -Scan -Cancel
+```
+
+**Obligatorio — restaurar las preferencias tanto después del evento `1001` como del `1002`:**
+
+```powershell
+Set-MpPreference `
+    -ScanParameters ($ConfigInicial.ScanParameters) `
+    -ScanScheduleDay ($ConfigInicial.ScanScheduleDay) `
+    -ScanScheduleTime ($ConfigInicial.ScanScheduleTime) `
+    -RandomizeScheduleTaskTimes ($ConfigInicial.RandomizeScheduleTaskTimes) `
+    -ScanOnlyIfIdleEnabled ($ConfigInicial.ScanOnlyIfIdleEnabled)
+
+# Confirmar que la estación regresó a su estado inicial
+Get-MpPreference | Format-List `
+    ScanParameters, `
+    ScanScheduleDay, `
+    ScanScheduleTime, `
+    RandomizeScheduleTaskTimes, `
+    ScanOnlyIfIdleEnabled
+```
 
 En **Seguridad de Windows → Protección contra virus y amenazas → Amenazas actuales** se muestra el último examen, su duración y la cantidad de archivos examinados. La aplicación no conserva una lista completa de exámenes limpios; para esa trazabilidad se utiliza el registro `Windows Defender/Operational`.
 
