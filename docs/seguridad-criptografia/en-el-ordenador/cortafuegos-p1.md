@@ -116,46 +116,47 @@ La postura usual bloquea inbound no solicitado y permite outbound. Esto implica 
 La VM conserva su adaptador NAT para Internet y utiliza un segundo adaptador Host-only para esta demostración. La red Host-only comunica la VM con el anfitrión, pero no con la red física.
 
 ```text
-INBOUND:  Linux 192.168.56.1 ──► Windows 192.168.56.102:18080
-          Linux inicia; la conexión entra en Windows.
+INBOUND:  Anfitrión 192.168.56.1 ──► VM Windows 192.168.56.102:18080
+          El anfitrión inicia; la conexión entra en la VM.
 
-OUTBOUND: Windows 192.168.56.102 ──► Linux 192.168.56.1:18081
-          Windows inicia; la conexión sale de Windows.
+OUTBOUND: VM Windows 192.168.56.102 ──► Anfitrión 192.168.56.1:18081
+          La VM inicia; la conexión sale de la VM.
 ```
 
-Los nombres inbound y outbound no describen la ubicación del servidor. Describen quién inicia la conexión respecto de Windows.
+Los nombres inbound y outbound no describen la ubicación del servidor. Describen quién inicia la conexión respecto de la VM Windows, que es el equipo cuyo firewall se está probando.
 
 !!! note "Por qué no usamos localhost"
     El tráfico sobre `127.0.0.1` no representa una conexión entre dos equipos. Host-only proporciona extremos y direcciones diferentes, por lo que el sentido del flujo puede comprobarse.
 
-| Prueba | Iniciador | Destino | Dirección para Windows | Puerto que se filtra |
+| Prueba | Iniciador | Destino | Dirección para la VM | Puerto que se filtra |
 |---|---|---|---|---|
-| 1 | Windows | Servidor en Linux | Outbound | Remoto `18081` |
-| 2 | Linux | Servicio en Windows | Inbound | Local `18080` |
+| 1 | VM Windows | Servidor en el anfitrión | Outbound | Remoto `18081` |
+| 2 | Anfitrión | Servicio en la VM | Inbound | Local `18080` |
 
 ### Preparación
 
-La demostración utiliza tres terminales. Cada instrucción indica en cuál debe ejecutarse:
+La demostración utiliza tres consolas de PowerShell. Cada instrucción indica en cuál debe ejecutarse:
 
-1. **Linux anfitrión:** ejecuta el segundo extremo de cada conexión.
-2. **PowerShell — Alumno:** crea servicios y conexiones en la VM Windows.
-3. **PowerShell — Administrador:** administra exclusivamente las reglas del firewall.
+1. **PowerShell — Anfitrión:** se abre **en el Windows anfitrión** (fuera de la VM), **como Administrador**. Ejecuta el segundo extremo de cada conexión.
+2. **PowerShell — Alumno:** se abre dentro de la VM Windows. Crea servicios y conexiones.
+3. **PowerShell — Administrador:** se abre dentro de la VM Windows, como Administrador. Administra exclusivamente las reglas del firewall de la VM.
 
-Mantener las tres terminales abiertas. Las variables de PowerShell solo existen en la consola donde fueron definidas.
+Mantener las tres consolas abiertas. Las variables de PowerShell solo existen en la consola donde fueron definidas.
 
 #### Preparar la red Host-only
 
-Con la VM apagada, conservar **Adaptador 1: NAT**. Habilitar **Adaptador 2**, seleccionar **Adaptador solo-anfitrión**, elegir `vboxnet0` y marcar **Cable conectado**.
+Con la VM apagada, conservar **Adaptador 1: NAT**. Habilitar **Adaptador 2**, seleccionar **Adaptador solo-anfitrión**, elegir **VirtualBox Host-Only Ethernet Adapter** y marcar **Cable conectado**.
 
-En VirtualBox, `vboxnet0` debe utilizar `192.168.56.1/24`. El DHCP debe entregar direcciones desde `192.168.56.101`. Esta red no reemplaza al adaptador NAT.
+En VirtualBox (**Archivo → Herramientas → Network Manager**), esa red Host-only debe utilizar `192.168.56.1/24`. El DHCP debe entregar direcciones desde `192.168.56.101`. Esta red no reemplaza al adaptador NAT.
 
-En **Linux anfitrión**, confirmar la dirección de `vboxnet0`:
+En **PowerShell — Anfitrión**, confirmar la dirección del adaptador Host-only:
 
-```bash
-ip -4 address show vboxnet0
+```powershell
+Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias '*VirtualBox*' |
+    Format-List InterfaceAlias, IPAddress, PrefixLength
 ```
 
-**Se espera ver:** `192.168.56.1/24`. Si no aparece, detener la demostración y revisar la configuración Host-only.
+**Se espera ver:** `IPAddress = 192.168.56.1` con `PrefixLength = 24`. Si no aparece, detener la demostración y revisar la configuración Host-only.
 
 En **PowerShell — Alumno**, identificar las direcciones de la VM:
 
@@ -184,6 +185,8 @@ Abrir **PowerShell — Administrador** y confirmar la elevación:
 
 **Se espera ver:** `True`. Si devuelve `False`, no crear ni eliminar reglas.
 
+Repetir la misma comprobación en **PowerShell — Anfitrión**: también debe devolver `True`, porque esa consola creará una regla en el firewall del anfitrión y levantará un servidor HTTP.
+
 En esa misma consola, confirmar que los perfiles del firewall están habilitados:
 
 ```powershell
@@ -207,31 +210,65 @@ if ($ReglasAnteriores) {
 
 ### Prueba 1 — Regla Outbound
 
-Windows solicitará una página a un servidor HTTP del anfitrión Linux. Como Windows inicia la conexión, el flujo es outbound.
+La VM Windows solicitará una página a un servidor HTTP del anfitrión. Como la VM inicia la conexión, el flujo es outbound para la VM.
 
-#### Paso 1 — Levantar el servidor de destino en Linux
+#### Paso 1 — Levantar el servidor de destino en el anfitrión
 
-En **Linux anfitrión**:
+El anfitrión también ejecuta Windows Defender Firewall, y su política inbound bloquearía la conexión de la VM hacia el puerto `18081`. Antes de levantar el servidor, crear un permiso limitado al laboratorio.
 
-```bash
-mkdir -p "$HOME/firewall-demo"
-cd "$HOME/firewall-demo"
-printf '%s\n' 'OUTBOUND PERMITIDO' > index.html
-python3 -m http.server 18081 --bind 192.168.56.1
+En **PowerShell — Anfitrión**:
+
+```powershell
+New-NetFirewallRule `
+    -DisplayName 'LAB-FW-HOST-ALLOW-18081' `
+    -Direction Inbound `
+    -Action Allow `
+    -Protocol TCP `
+    -LocalAddress 192.168.56.1 `
+    -RemoteAddress 192.168.56.102 `
+    -LocalPort 18081 `
+    -Profile Any
 ```
 
-Mantener la terminal abierta. Cada conexión permitida producirá una línea `GET /` visible en Linux.
+Esta regla vive en el firewall del anfitrión, no en el de la VM. La ruta completa atraviesa dos firewalls: el outbound de la VM y el inbound del anfitrión.
+
+En la misma consola, levantar el servidor HTTP:
+
+```powershell
+$Listener = [System.Net.HttpListener]::new()
+$Listener.Prefixes.Add('http://192.168.56.1:18081/')
+$Listener.Start()
+
+'Servidor OUTBOUND escuchando en http://192.168.56.1:18081/'
+
+$Cuerpo = [System.Text.Encoding]::UTF8.GetBytes("OUTBOUND PERMITIDO`n")
+
+while ($Listener.IsListening) {
+    $Tarea = $Listener.GetContextAsync()
+
+    while (-not $Tarea.AsyncWaitHandle.WaitOne(500)) { }
+
+    $Contexto = $Tarea.GetAwaiter().GetResult()
+    "GET $($Contexto.Request.RawUrl) desde $($Contexto.Request.RemoteEndPoint)"
+
+    $Contexto.Response.ContentType = 'text/plain'
+    $Contexto.Response.OutputStream.Write($Cuerpo, 0, $Cuerpo.Length)
+    $Contexto.Response.Close()
+}
+```
+
+Mantener la consola abierta con el bucle en ejecución. Cada conexión permitida producirá una línea `GET /` visible en el anfitrión. El bucle se detendrá con `Ctrl+C` durante la limpieza.
 
 #### Paso 2 — Confirmar la línea base permitida
 
 En **PowerShell — Alumno**:
 
 ```powershell
-$LinuxHostIp = '192.168.56.1'
+$AnfitrionIp = '192.168.56.1'
 $OutboundPort = 18081
-$OutboundUri = "http://${LinuxHostIp}:$OutboundPort/"
+$OutboundUri = "http://${AnfitrionIp}:$OutboundPort/"
 
-Test-NetConnection $LinuxHostIp -Port $OutboundPort |
+Test-NetConnection $AnfitrionIp -Port $OutboundPort |
     Format-List ComputerName, RemotePort, InterfaceAlias, `
         SourceAddress, TcpTestSucceeded
 
@@ -243,7 +280,7 @@ $Respuesta = Invoke-WebRequest `
 "RESULTADO OUTBOUND: PERMITIDA (HTTP $($Respuesta.StatusCode))"
 ```
 
-**Se espera ver:** origen `192.168.56.102`, `TcpTestSucceeded = True` y `HTTP 200`. Linux registra `GET /`.
+**Se espera ver:** origen `192.168.56.102`, `TcpTestSucceeded = True` y `HTTP 200`. El anfitrión registra una línea `GET /`.
 
 Esta línea base demuestra que el servidor y la ruta funcionan antes de modificar el firewall. Sin ella, un fallo posterior sería ambiguo.
 
@@ -293,7 +330,7 @@ catch {
 }
 ```
 
-**Se espera ver:** `TcpTestSucceeded = False` y `RESULTADO OUTBOUND: BLOQUEADA`. Linux no registra otro `GET` porque la conexión no salió de Windows.
+**Se espera ver:** `TcpTestSucceeded = False` y `RESULTADO OUTBOUND: BLOQUEADA`. El anfitrión no registra otro `GET` porque la conexión no salió de la VM.
 
 #### Paso 5 — Deshabilitar la regla y comprobar la recuperación
 
@@ -314,11 +351,11 @@ $Respuesta = Invoke-WebRequest `
 "RESULTADO OUTBOUND: RECUPERADA (HTTP $($Respuesta.StatusCode))"
 ```
 
-**Se espera ver:** `HTTP 200` y un nuevo `GET /` en Linux. El servidor no cambió; solo cambió el estado de la regla outbound.
+**Se espera ver:** `HTTP 200` y un nuevo `GET /` en el anfitrión. El servidor no cambió; solo cambió el estado de la regla outbound.
 
 ### Prueba 2 — Regla Inbound
 
-Linux enviará un mensaje a un servicio TCP de Windows. Como Linux inicia la conexión y Windows la recibe, el flujo es inbound.
+El anfitrión enviará un mensaje a un servicio TCP de la VM Windows. Como el anfitrión inicia la conexión y la VM la recibe, el flujo es inbound para la VM.
 
 #### Paso 1 — Preparar el permiso antes de levantar el servicio
 
@@ -326,7 +363,7 @@ En **PowerShell — Administrador**, crear primero el permiso limitado al labora
 
 ```powershell
 $WindowsLabIp = '192.168.56.102'
-$LinuxHostIp = '192.168.56.1'
+$AnfitrionIp = '192.168.56.1'
 $InboundPort = 18080
 $ReglaEntradaPermitida = 'LAB-FW-IN-ALLOW-18080'
 $PowerShellExe = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
@@ -337,7 +374,7 @@ New-NetFirewallRule `
     -Action Allow `
     -Protocol TCP `
     -LocalAddress $WindowsLabIp `
-    -RemoteAddress $LinuxHostIp `
+    -RemoteAddress $AnfitrionIp `
     -LocalPort $InboundPort `
     -Profile Any
 
@@ -450,26 +487,41 @@ Get-NetTCPConnection `
     Format-Table LocalAddress, LocalPort, State
 ```
 
-**Se espera ver:** una fila `Listen` en `192.168.56.102:18080`. Esto prueba que el servicio existe, pero todavía no demuestra que Linux pueda alcanzarlo.
+**Se espera ver:** una fila `Listen` en `192.168.56.102:18080`. Esto prueba que el servicio existe, pero todavía no demuestra que el anfitrión pueda alcanzarlo.
 
 El permiso se creó antes de iniciar el listener para evitar el aviso automático. **No cancelar ese aviso si apareciera:** Windows crearía dos reglas `Block` para `powershell.exe`, una TCP y otra UDP, que anularían el permiso del laboratorio. En ese caso, detener la práctica y avisar al instructor.
 
 `LocalPort` es `18080` porque el servicio se ejecuta en Windows. `RemoteAddress` restringe el permiso al anfitrión del laboratorio.
 
-#### Paso 3 — Confirmar que Linux puede entrar
+#### Paso 3 — Confirmar que el anfitrión puede entrar
 
-En **Linux anfitrión**:
+En **PowerShell — Anfitrión** (el servidor HTTP de la Prueba 1 sigue en su bucle; abrir una segunda pestaña o consola de anfitrión para este comando):
 
-```bash
-if timeout 5 bash -c \
-  'printf "%s\n" "INBOUND_DESDE_LINUX" > /dev/tcp/192.168.56.102/18080'; then
-  printf '%s\n' 'RESULTADO INBOUND: PERMITIDA'
-else
-  printf '%s\n' 'RESULTADO INBOUND: BLOQUEADA'
-fi
+```powershell
+$Cliente = [System.Net.Sockets.TcpClient]::new()
+
+try {
+    if ($Cliente.ConnectAsync('192.168.56.102', 18080).Wait(5000)) {
+        $Escritor = [System.IO.StreamWriter]::new($Cliente.GetStream())
+        $Escritor.WriteLine('INBOUND_DESDE_ANFITRION')
+        $Escritor.Flush()
+        $Escritor.Dispose()
+
+        'RESULTADO INBOUND: PERMITIDA'
+    }
+    else {
+        'RESULTADO INBOUND: BLOQUEADA'
+    }
+}
+catch {
+    'RESULTADO INBOUND: BLOQUEADA'
+}
+finally {
+    $Cliente.Dispose()
+}
 ```
 
-**Se espera ver en Linux:** `RESULTADO INBOUND: PERMITIDA`.
+**Se espera ver en el anfitrión:** `RESULTADO INBOUND: PERMITIDA`.
 
 En **PowerShell — Alumno**, consumir la evidencia recibida por el servicio:
 
@@ -478,9 +530,9 @@ Start-Sleep -Seconds 1
 Receive-Job -Job $ServidorWindows
 ```
 
-**Se espera ver en Windows:** `ACEPTADA desde 192.168.56.1` y `Mensaje: INBOUND_DESDE_LINUX`.
+**Se espera ver en la VM:** `ACEPTADA desde 192.168.56.1` y `Mensaje: INBOUND_DESDE_ANFITRION`.
 
-Esta doble evidencia prueba que Linux inició la conexión y que el proceso local de Windows recibió su contenido.
+Esta doble evidencia prueba que el anfitrión inició la conexión y que el proceso local de la VM recibió su contenido.
 
 #### Paso 4 — Crear un bloqueo inbound
 
@@ -507,9 +559,9 @@ Ahora existen un permiso y un bloqueo que coinciden con el mismo flujo. El bloqu
 
 #### Paso 5 — Comprobar el bloqueo inbound
 
-Repetir en **Linux anfitrión** el comando del Paso 3.
+Repetir en **PowerShell — Anfitrión** el comando del Paso 3.
 
-**Se espera ver:** `RESULTADO INBOUND: BLOQUEADA` después del tiempo de espera.
+**Se espera ver:** `RESULTADO INBOUND: BLOQUEADA` después del tiempo de espera de 5 segundos.
 
 En **PowerShell — Alumno**, confirmar que el servicio sigue escuchando y no recibió otro mensaje:
 
@@ -540,7 +592,7 @@ En **PowerShell — Administrador**:
 Disable-NetFirewallRule -DisplayName 'LAB-FW-IN-BLOCK-18080'
 ```
 
-Repetir en **Linux anfitrión** el comando del Paso 3. Debe mostrar `RESULTADO INBOUND: PERMITIDA`.
+Repetir en **PowerShell — Anfitrión** el comando del Paso 3. Debe mostrar `RESULTADO INBOUND: PERMITIDA`.
 
 En **PowerShell — Alumno**:
 
@@ -553,24 +605,27 @@ Receive-Job -Job $ServidorWindows
 
 ### Qué se acaba de comprobar
 
-| Flujo respecto de Windows | Puerto evaluado | Regla aplicada | Evidencia |
+| Flujo respecto de la VM | Puerto evaluado | Regla aplicada | Evidencia |
 |---|---:|---|---|
-| Outbound: Windows → Linux | Remoto `18081` | Línea base; Block; Disabled | HTTP 200; fallo; HTTP 200. |
-| Inbound: Linux → Windows | Local `18080` | Allow; Block; Block disabled | Mensaje recibido; fallo; mensaje recibido. |
+| Outbound: VM → Anfitrión | Remoto `18081` | Línea base; Block; Disabled | HTTP 200; fallo; HTTP 200. |
+| Inbound: Anfitrión → VM | Local `18080` | Allow; Block; Block disabled | Mensaje recibido; fallo; mensaje recibido. |
 
 Las respuestas de una conexión permitida pueden regresar sin crear una regla en la dirección contraria. Windows Defender Firewall recuerda el estado de la conversación.
 
 ### Limpieza obligatoria
 
-En **Linux anfitrión**, pulsar `Ctrl+C` en el servidor HTTP. Después retirar sus archivos:
+En **PowerShell — Anfitrión**, pulsar `Ctrl+C` en la consola del servidor HTTP. Después liberar el puerto y retirar la regla del anfitrión:
 
-```bash
-cd
-rm "$HOME/firewall-demo/index.html"
-rmdir "$HOME/firewall-demo"
+```powershell
+$Listener.Stop()
+$Listener.Close()
+
+Remove-NetFirewallRule `
+    -DisplayName 'LAB-FW-HOST-ALLOW-18081' `
+    -ErrorAction SilentlyContinue
 ```
 
-En **PowerShell — Administrador**, retirar solo las reglas de esta demostración:
+En **PowerShell — Administrador** (dentro de la VM), retirar solo las reglas de esta demostración:
 
 ```powershell
 @(
