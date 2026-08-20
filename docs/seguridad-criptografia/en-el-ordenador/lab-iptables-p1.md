@@ -54,21 +54,53 @@ iptables --version          # se espera: iptables v1.8.x (nf_tables)
 sudo ss -lntp | grep :22    # sshd debe estar escuchando
 curl -4 -I http://example.com   # debe devolver una respuesta HTTP (exit code 0)
 
-# 5. Guest Additions (integración VM ↔ anfitrión)
-sudo apt install -y virtualbox-guest-utils virtualbox-guest-x11
+# 5. Dependencias para las Guest Additions (el instalador compila un driver)
+sudo apt install -y build-essential dkms linux-headers-$(uname -r)
+```
+
+**6. Guest Additions (integración VM ↔ anfitrión).** Instalarlas desde el CD
+virtual de VirtualBox — así la versión coincide exactamente con la del VirtualBox
+del host:
+
+1. En la **ventana de VirtualBox** de la VM: menú **Dispositivos → Insertar
+   imagen de CD de las «Guest Additions»...** (*Devices → Insert Guest Additions
+   CD image...*).
+2. El CD aparece montado en `/media/$USER/VBox_GAs_<versión>`. En la terminal
+   de la VM:
+
+**[VM Ubuntu — Bash]**
+
+```bash
+# Ejecutar el instalador del CD
+sudo sh /media/$USER/VBox_GAs_*/VBoxLinuxAdditions.run
+
+# Si el CD no se montó solo:
+#   sudo mount /dev/cdrom /mnt && sudo sh /mnt/VBoxLinuxAdditions.run
+
 sudo reboot
 ```
 
-Tras el reinicio, en la **ventana de VirtualBox** de la VM activar el portapapeles
-compartido: menú **Dispositivos → Portapapeles compartido → Bidireccional**
-(en inglés: *Devices → Shared Clipboard → Bidirectional*). Con esto se puede
-copiar y pegar texto entre el host Windows y la VM en ambos sentidos.
+!!! warning "No usar los paquetes virtualbox-guest-* de APT"
+    Los paquetes `virtualbox-guest-utils` / `virtualbox-guest-x11` de los
+    repositorios de Ubuntu suelen ser de una versión más antigua que el
+    VirtualBox del host, y con esa mezcla el redimensionado de pantalla y el
+    portapapeles compartido no funcionan. Si ya se instalaron, retirarlos antes
+    de usar el CD: `sudo apt remove -y virtualbox-guest-utils virtualbox-guest-x11`.
 
-!!! tip "Si copiar/pegar no funciona"
-    Ubuntu 24.04 inicia sesión con Wayland por defecto y el portapapeles
-    compartido puede fallar ahí. Solución: cerrar sesión, y en la pantalla de
-    inicio de sesión pulsar el **engranaje** (abajo a la derecha) y elegir
-    **"Ubuntu on Xorg"** antes de entrar. Probar de nuevo el copiar/pegar.
+Tras el reinicio, en la **ventana de VirtualBox** de la VM:
+
+- **Dispositivos → Portapapeles compartido → Bidireccional** (*Devices → Shared
+  Clipboard → Bidirectional*) — copiar y pegar texto entre host y VM en ambos
+  sentidos.
+- **Ver → Ajustar automáticamente el tamaño de pantalla del invitado** (*View →
+  Auto-resize Guest Display*) debe estar marcado — el escritorio de la VM sigue
+  la forma de la ventana al redimensionarla.
+
+!!! tip "Si copiar/pegar o el ajuste de pantalla no funcionan"
+    Ubuntu 24.04 inicia sesión con Wayland por defecto y ahí el portapapeles
+    compartido y el redimensionado pueden fallar. Solución: cerrar sesión, y en
+    la pantalla de inicio de sesión pulsar el **engranaje** (abajo a la derecha)
+    y elegir **"Ubuntu on Xorg"** antes de entrar. Probar de nuevo.
 
 !!! note "No modificar las fuentes APT"
     Ubuntu 24.04 usa el formato deb822 en `/etc/apt/sources.list.d/ubuntu.sources`.
