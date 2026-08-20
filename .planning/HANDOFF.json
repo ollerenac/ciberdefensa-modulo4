@@ -1,0 +1,132 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-08-20T11:27:12.973Z",
+  "context": "research",
+  "phase": null,
+  "phase_name": "moodlecloud-examen-parcial",
+  "phase_dir": null,
+  "plan": 1,
+  "task": 5,
+  "total_tasks": 6,
+  "status": "paused",
+  "completed_tasks": [
+    {
+      "id": 0,
+      "name": "Diseño y plan del examen MoodleCloud",
+      "status": "done",
+      "commit": "9494298,2a05934,b0ed7d9"
+    },
+    {
+      "id": 1,
+      "name": "Proteger secretos y validar bancos GIFT",
+      "status": "done",
+      "commit": "7334ad6"
+    },
+    {
+      "id": 2,
+      "name": "Redactar y auditar técnicamente el banco privado",
+      "status": "done",
+      "commit": "private-no-commit"
+    },
+    {
+      "id": 3,
+      "name": "Generar cuentas numeradas",
+      "status": "done",
+      "commit": "d6dae34,9c33e79,cab18fd"
+    },
+    {
+      "id": 4,
+      "name": "Sustituir el examen público y añadir el runbook",
+      "status": "done",
+      "commit": "1c53854,71c552d,4c9b867,f99fab7"
+    }
+  ],
+  "remaining_tasks": [
+    {
+      "id": 5,
+      "name": "Checkpoint del instructor y configuración MoodleCloud con piloto",
+      "status": "in_progress",
+      "progress": "Vista ciega lista; falta aprobación pedagógica, confirmar aliases controlados y ejecutar la configuración manual del sitio."
+    },
+    {
+      "id": 6,
+      "name": "Contingencia, carga completa y UAT final",
+      "status": "not_started"
+    },
+    {
+      "id": 7,
+      "name": "Revisión integral y preparación de la rama para integración",
+      "status": "not_started"
+    }
+  ],
+  "blockers": [
+    {
+      "description": "El banco aún requiere aprobación pedagógica ciega del instructor.",
+      "type": "human_action",
+      "workaround": "Abrir sólo `.private/examen-parcial/revision-instructor.md`; responder `Banco aprobado` o listar IDs con observaciones sin consultar la clave."
+    },
+    {
+      "description": "No se ha confirmado un patrón real de emails o aliases únicos controlados.",
+      "type": "human_action",
+      "workaround": "Confirmar si el buzón institucional admite aliases con `+`; no compartir contraseñas ni inventar correos."
+    },
+    {
+      "description": "MoodleCloud requiere acciones manuales del administrador para crear curso, importar banco, configurar quiz y ensayar el piloto.",
+      "type": "external",
+      "workaround": "El agente guía y registra evidencia privada; el usuario introduce credenciales y valores secretos directamente en MoodleCloud."
+    },
+    {
+      "description": "La rama `feature/examen-moodlecloud` partió de `511354c`, mientras `main` avanzó a `160355b` con cambios de laboratorios.",
+      "type": "technical",
+      "workaround": "No implementar en `main`; continuar en el worktree y reconciliar con `main` únicamente durante el cierre de rama."
+    }
+  ],
+  "async_jobs": [],
+  "human_actions_pending": [
+    {
+      "action": "Revisar la vista ciega de 20 preguntas y aprobarla o indicar observaciones por ID.",
+      "context": "La validación automática y la revisión factual ya pasaron; falta el juicio pedagógico del instructor.",
+      "blocking": true
+    },
+    {
+      "action": "Confirmar si dispone de un correo controlado que acepte aliases con `+` o de 20 emails institucionales únicos.",
+      "context": "El generador no debe inventar identidades ni producir el CSV definitivo sin direcciones controladas.",
+      "blocking": true
+    },
+    {
+      "action": "Configurar MoodleCloud y ejecutar el piloto siguiendo el runbook cuando se superen los dos checkpoints anteriores.",
+      "context": "Las credenciales administrativas y la URL operativa nunca se entregan al agente ni se guardan en Git.",
+      "blocking": true
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "MoodleCloud aloja el examen; no se desarrolla una aplicación propia.",
+      "rationale": "Proporciona usuarios, banco aleatorio, intentos y calificaciones administradas.",
+      "phase": null
+    },
+    {
+      "decision": "Banco privado de 20 preguntas: 6 CDE, 6 DEF, 6 FWA y 2 GEN; cada intento usa 3+3+3+1.",
+      "rationale": "Asegura cobertura equilibrada con diez preguntas fáciles por alumno.",
+      "phase": null
+    },
+    {
+      "decision": "Preguntas, respuestas, CSV, URL, evidencias y contingencia viven bajo `.private/examen-parcial/`.",
+      "rationale": "Ningún secreto del examen debe aparecer en Git, MkDocs o el chat.",
+      "phase": null
+    },
+    {
+      "decision": "El piloto recomendado usa una cuenta independiente de las 20 finales.",
+      "rationale": "Evita consumir el único intento de un alumno; el runbook documenta también el saneamiento excepcional.",
+      "phase": null
+    },
+    {
+      "decision": "Mantener el foco exclusivo en MoodleCloud y el método de examen.",
+      "rationale": "El usuario pidió que cualquier desvío temático sea señalado y pospuesto.",
+      "phase": null
+    }
+  ],
+  "uncommitted_files": [],
+  "next_action": "Reanudar en `/home/researcher/Teaching/inictel/clase_al_ejercito_2026/.worktrees/examen-moodlecloud`; leer el ledger SDD; pedir al instructor el veredicto de la vista ciega y la confirmación del método de aliases. Después generar los CSV privados y ejecutar la Tarea 5 mediante checkpoints manuales.",
+  "context_notes": "Implementación aislada en `.worktrees/examen-moodlecloud`, rama `feature/examen-moodlecloud`, HEAD `f99fab7`, árbol limpio. Tareas locales 1-4 implementadas y revisadas. Validador GIFT: 20 preguntas 6+6+6+2. Generador: 30 pruebas verdes. MkDocs strict y escaneos de fuga verdes tras Tarea 4. Artefactos privados y ledger están ignorados. El plan/diseño fue retirado del sitio público en `b0ed7d9` y sólo existe como copia privada bajo `.planning/resume/moodlecloud/` dentro del worktree. No hay agentes, servidores ni trabajos asíncronos activos."
+}
