@@ -73,11 +73,17 @@ curl -4 -I http://example.com   # debe devolver una respuesta HTTP (exit code 0)
 
     Todos los paquetes de este lab provienen de `main`.
 
-!!! note "iptables sobre backend nftables"
-    En Ubuntu 24.04, `iptables` es la variante `iptables-nft`: la sintaxis clásica de
-    iptables administrando el backend moderno nftables del kernel. Por eso la versión
-    muestra `(nf_tables)`. En este lab usamos **solo** comandos `iptables` — no
-    mezclar con comandos `nft` ni con `iptables-legacy`.
+!!! note "¿Qué es iptables?"
+    `iptables` es el cortafuegos de Linux: el programa con el que se decide qué
+    conexiones de red pueden entrar o salir de la máquina. Se le dan **reglas** —
+    "lo que venga a este puerto, déjalo pasar; todo lo demás, descártalo" — y el
+    sistema las revisa en orden con cada paquete que llega. Cumple el mismo papel
+    que el Firewall de Windows visto en el laboratorio anterior, pero se maneja
+    por completo desde la terminal.
+
+    Al verificar la versión aparecerá `(nf_tables)`: es el nombre del motor
+    interno que iptables usa por debajo en Ubuntu 24.04. No afecta al laboratorio
+    — aquí se usan únicamente comandos `iptables`.
 
 !!! warning "netfilter-persistent al instalar"
     Si el instalador pregunta si desea guardar las reglas actuales (IPv4/IPv6),
