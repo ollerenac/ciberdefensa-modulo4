@@ -47,7 +47,7 @@ sudo apt update && sudo apt full-upgrade -y
 # 3. Instalar los paquetes del laboratorio
 #    (python3 ya viene incluido en Ubuntu 24.04; curl y bash-completion se
 #    instalan explícitamente por si la instalación fue mínima)
-sudo apt install -y openssh-server netfilter-persistent tcpdump curl bash-completion
+sudo apt install -y openssh-server netfilter-persistent tcpdump curl bash-completion conntrack
 
 # 4. Verificaciones
 iptables --version          # se espera: iptables v1.8.x (nf_tables)
@@ -367,10 +367,9 @@ sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
 ??? info "Para profundizar: ver la tabla de conexiones en vivo"
     La tabla que consulta esta regla se puede inspeccionar con la herramienta
-    `conntrack` (no viene instalada por defecto):
+    `conntrack` (instalada en la preparación previa):
 
     ```bash
-    sudo apt install -y conntrack
     sudo conntrack -L
     ```
 
