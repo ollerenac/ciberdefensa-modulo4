@@ -160,8 +160,13 @@ debe ser idéntico al del Paso 7 — incluidos los comentarios `/* */`, que viaj
 el archivo porque son parte de las reglas (`-m comment`). Ese es el argumento de
 venta del módulo: comentarios que sobreviven al ciclo save/restore.
 
-**Problema común con permisos:** si `>` falla, el alumno usó redirección de su
-shell sin permisos sobre el destino. La lección ya usa `| sudo tee`, que lo evita.
+**Problemas comunes con la captura:** archivo **vacío** = ejecutó `iptables-save`
+sin `sudo` (sin root no lee las tablas, y la redirección crea el archivo igual).
+*Permission denied* al escribir = quedó un archivo previo propiedad de root (de un
+intento con `sudo tee`); se elimina con `sudo rm` y se recaptura. Por eso la
+lección usa `sudo iptables-save > archivo`: sudo para leer las tablas, redirección
+del shell del alumno para que el archivo quede a su nombre. El `cat` inmediato
+detecta la captura vacía en el acto.
 
 ### Paso 11 — Persistencia real
 

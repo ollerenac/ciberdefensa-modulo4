@@ -90,7 +90,8 @@ echo "Interfaz: $LAB_IF — IP: $LAB_IP — Subred del lab: $LAB_NET"
 
 ```bash
 # Capturar el estado actual antes de trabajar
-sudo iptables-save | sudo tee ~/ruleset-inicial-p2.txt
+sudo iptables-save > ~/ruleset-inicial-p2.txt
+cat ~/ruleset-inicial-p2.txt    # verificar: nunca debe quedar vacío
 
 # Reset seguro: políticas ACCEPT PRIMERO, flush después
 sudo iptables -P INPUT ACCEPT
@@ -261,7 +262,7 @@ que restaurar a mano.
 
 ```bash
 # Exportar el ruleset del escenario a un archivo
-sudo iptables-save | sudo tee ~/mis-reglas-iptables.txt
+sudo iptables-save > ~/mis-reglas-iptables.txt
 # Ver el archivo: las reglas incluyen los comentarios -m comment
 cat ~/mis-reglas-iptables.txt
 

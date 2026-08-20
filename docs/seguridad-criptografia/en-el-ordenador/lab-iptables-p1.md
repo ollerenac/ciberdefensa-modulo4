@@ -255,7 +255,10 @@ Antes de tocar cualquier regla, guardar el estado actual para restaurarlo al fin
 
 ```bash
 # Exportar el ruleset actual a un archivo
-sudo iptables-save | sudo tee ~/ruleset-inicial.txt
+# (sudo lee las tablas; la redirección > deja el archivo como propiedad del alumno)
+sudo iptables-save > ~/ruleset-inicial.txt
+# Verificar la captura: debe mostrar *filter ... COMMIT — NUNCA quedar vacío
+cat ~/ruleset-inicial.txt
 # Ver el estado actual con detalles
 sudo iptables -L -v -n
 ```
