@@ -327,6 +327,70 @@ sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
     (El módulo antiguo `state` sigue existiendo, pero es un subconjunto de
     `conntrack`; usamos la forma moderna.)
 
+??? info "Para profundizar: el comando pieza por pieza"
+    El kernel Linux corre **siempre** un registro de conexiones (`nf_conntrack`):
+    una tabla en memoria donde anota cada conexión que pasa, identificada por su
+    **tupla** `(protocolo, IP origen, puerto origen, IP destino, puerto destino)`.
+    Esta regla no "enciende" ese registro — solo lo **consulta**:
+
+    | Parte | Qué hace |
+    |-------|----------|
+    | `-A INPUT` | Añade la regla al final de la cadena INPUT |
+    | `-m conntrack` | Carga el módulo que consulta la tabla de conexiones |
+    | `--ctstate ESTABLISHED,RELATED` | Coincide según el estado registrado (ver abajo) |
+    | `-j ACCEPT` | Deja pasar el paquete |
+
+    **ESTABLISHED** cubre dos casos, no solo uno:
+
+    1. Respuestas a conexiones que **esta máquina inició** hacia afuera
+       (apt, curl, DNS…).
+    2. Todos los paquetes siguientes de una conexión **entrante ya aceptada**:
+       del SSH del Paso 6, solo el primer paquete necesita la regla del puerto
+       22 — el resto de la sesión entra por esta regla.
+
+    **RELATED** = conexión nueva pero "hija" de una existente: el canal de datos
+    de FTP, o un mensaje ICMP de error referido a una conexión tuya.
+
+    **El mecanismo, con ejemplo:** al ejecutar `curl example.com`, el primer
+    paquete sale por OUTPUT y conntrack crea la entrada de esa tupla. Cuando
+    llega la respuesta, el kernel busca la tupla invertida en la tabla, la
+    encuentra, y el paquete queda marcado ESTABLISHED → esta regla lo acepta.
+    Sin ella, con política DROP, **toda respuesta a tus propias conexiones
+    moriría**.
+
+    Funciona igual con UDP e ICMP, que no tienen conexiones reales: conntrack
+    les crea pseudo-conexiones por tupla con un tiempo de vida.
+
+    Por eso la regla va al inicio del ruleset: la mayoría de los paquetes de una
+    sesión son ESTABLISHED y se resuelven con una sola consulta a la tabla, sin
+    recorrer las demás reglas.
+
+??? info "Para profundizar: ver la tabla de conexiones en vivo"
+    La tabla que consulta esta regla se puede inspeccionar con la herramienta
+    `conntrack` (no viene instalada por defecto):
+
+    ```bash
+    sudo apt install -y conntrack
+    sudo conntrack -L
+    ```
+
+    Una entrada típica (una consulta DNS de la VM por el adaptador NAT):
+
+    ```
+    udp  17  12  src=10.0.2.15 dst=10.0.2.3 sport=56069 dport=53  src=10.0.2.3 dst=10.0.2.15 sport=53 dport=56069  mark=0 use=1
+    ```
+
+    | Campo | Lectura |
+    |-------|---------|
+    | `udp` / `17` | Protocolo y su número |
+    | `12` | Segundos de vida restantes; si no pasa más tráfico, la entrada se borra |
+    | 1.ª tupla (ida) | La VM (`10.0.2.15`) preguntó al DNS del NAT de VirtualBox (`10.0.2.3:53`) desde el puerto efímero 56069 |
+    | 2.ª tupla (vuelta) | La misma invertida — con ella el kernel reconoce la respuesta como ESTABLISHED |
+    | sin `[UNREPLIED]` | Ya hubo tráfico en ambas direcciones; si apareciera, solo pasó la ida |
+
+    Ejercicio de 30 segundos: ejecutar `curl -4 -I http://example.com` y de
+    inmediato `sudo conntrack -L | grep 80` — ahí está la tupla de esa conexión.
+
 **Paso 6 — Permitir SSH y probarlo de verdad**
 
 Una regla inbound solo está probada cuando hay **un servicio escuchando** y **una
