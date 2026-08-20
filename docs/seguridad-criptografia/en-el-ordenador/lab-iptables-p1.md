@@ -377,15 +377,17 @@ sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
     Una entrada típica (una consulta DNS de la VM por el adaptador NAT):
 
     ```
-    udp  17  12  src=10.0.2.15 dst=10.0.2.3 sport=56069 dport=53  src=10.0.2.3 dst=10.0.2.15 sport=53 dport=56069  mark=0 use=1
+    udp   17   12   src=10.0.2.15 dst=10.0.2.3 sport=56069 dport=53   src=10.0.2.3 dst=10.0.2.15 sport=53 dport=56069   mark=0 use=1
+     │     │    │   └──────── tupla ORIGINAL (ida) ────────┘          └──────── tupla REPLY (vuelta) ─────────┘
+     │     │    └─ segundos de vida que le quedan (timeout)
+     │     └─ 17 = número de protocolo UDP
+     └─ protocolo
     ```
 
-    | Campo | Lectura |
+    | Parte | Lectura |
     |-------|---------|
-    | `udp` / `17` | Protocolo y su número |
-    | `12` | Segundos de vida restantes; si no pasa más tráfico, la entrada se borra |
-    | 1.ª tupla (ida) | La VM (`10.0.2.15`) preguntó al DNS del NAT de VirtualBox (`10.0.2.3:53`) desde el puerto efímero 56069 |
-    | 2.ª tupla (vuelta) | La misma invertida — con ella el kernel reconoce la respuesta como ESTABLISHED |
+    | Tupla ORIGINAL | La VM (`10.0.2.15`) preguntó al DNS del NAT de VirtualBox (`10.0.2.3:53`) desde el puerto efímero 56069 |
+    | Tupla REPLY | La misma invertida — con ella el kernel reconoce la respuesta como ESTABLISHED |
     | sin `[UNREPLIED]` | Ya hubo tráfico en ambas direcciones; si apareciera, solo pasó la ida |
 
     Ejercicio de 30 segundos: ejecutar `curl -4 -I http://example.com` y de
