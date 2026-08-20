@@ -45,8 +45,9 @@ sudo cp /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.so
 sudo apt update && sudo apt full-upgrade -y
 
 # 3. Instalar los paquetes del laboratorio
-#    (python3 y curl ya vienen incluidos en Ubuntu 24.04)
-sudo apt install -y openssh-server netfilter-persistent tcpdump
+#    (python3 ya viene incluido en Ubuntu 24.04; curl se instala explícitamente
+#    por si la instalación fue mínima)
+sudo apt install -y openssh-server netfilter-persistent tcpdump curl
 
 # 4. Verificaciones
 iptables --version          # se espera: iptables v1.8.x (nf_tables)
@@ -59,6 +60,18 @@ curl -4 -I http://example.com   # debe devolver una respuesta HTTP (exit code 0)
     El respaldo es una precaución: **no** sobrescribir el archivo legado
     `/etc/apt/sources.list` ni añadir repositorios de terceros. Los paquetes del lab
     vienen todos de los repositorios oficiales.
+
+    Dentro del repositorio oficial, los paquetes se agrupan en cuatro componentes
+    según licencia y quién los mantiene:
+
+    | Componente | Licencia | Mantenimiento |
+    |------------|----------|---------------|
+    | `main` | libre | Canonical (garantiza parches) |
+    | `universe` | libre | comunidad |
+    | `restricted` | propietario | Canonical (drivers NVIDIA, firmware) |
+    | `multiverse` | propietario | comunidad |
+
+    Todos los paquetes de este lab provienen de `main`.
 
 !!! note "iptables sobre backend nftables"
     En Ubuntu 24.04, `iptables` es la variante `iptables-nft`: la sintaxis clásica de

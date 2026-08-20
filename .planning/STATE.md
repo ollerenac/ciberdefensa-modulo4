@@ -56,8 +56,8 @@ All 4 phases shipped, code-reviewed, fixed, and verified. The MkDocs Material co
 
 ## Session Continuity
 
-Last session: 2026-08-19T04:23:57-05:00
-Stopped at: Pausa limpia tras completar y pushear las tareas 1-5 de la fase 2.1 (`a553a6b`, main = origin/main, sitio desplegándose). Solo queda la Tarea 6 (UAT real en la VM), bloqueada por dos acciones humanas: liberar disco (98 %, retirar ova/VM-WIN-SI.ova) y crear la VM Ubuntu 24.04 con NAT + Host-only. Detalle en `.planning/HANDOFF.json` y `.planning/phases/02.1-correccion-iptables/.continue-here.md`.
+Last session: 2026-08-20T01:50:00-05:00
+Stopped at: Sesión reanudada, retomando Tarea 6 (UAT iptables en VM). Bloqueadores re-verificados: disco al 90 % (98 GB libres, ova aún presente); VM-Ubuntu ya existe pero corriendo con solo NAT — watcher en background aplicará Host-only (vboxnet0) a nic2 al apagarse. Falta snapshot `base-limpia`. HANDOFF.json (MoodleCloud, tarea 0/6) sigue pausado con sus 2 bloqueos humanos.
 Resume file: .planning/phases/02.1-correccion-iptables/.continue-here.md
 Leak confirmed 2026-08-13: los 5 exámenes publican su clave de respuestas inline en bloques `!!! danger "Solo instructor"` (renderizan visibles), y docs/instructor/ publica 7 soluciones por URL directa pese a estar fuera del nav
 Carried concern: el disco del anfitrión se reportó al 98 % en la sesión anterior; `ova/VM-WIN-SI.ova` (32 GB) seguía pendiente de retiro. Revalidar espacio antes de trabajo intensivo con snapshots o exportaciones.
