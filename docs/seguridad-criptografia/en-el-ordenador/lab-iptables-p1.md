@@ -463,6 +463,8 @@ En una **segunda terminal** de la VM:
 sudo ss -lntp | grep :80
 # Permitir HTTP entrante
 sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+# Verificar que la regla quedó registrada (última de la lista, contadores en 0)
+sudo iptables -L INPUT -v -n --line-numbers | grep 'dpt:80'
 ```
 
 **[Windows — PowerShell]**
