@@ -173,9 +173,16 @@ hay respuesta y que el contador de tcp:80 incrementa.
 Chain INPUT (policy DROP)
 ```
 
-`Test-NetConnection <IP> -Port 9999` → `TcpTestSucceeded : False` (tarda unos
-segundos: el paquete se descarta en silencio y Windows agota el timeout — buen
-momento para explicar la diferencia DROP vs. REJECT).
+La prueba negativa usa un listener real (`python3 -m http.server 8080`) en un
+puerto **sin** regla ACCEPT: `Test-NetConnection <IP> -Port 8080` →
+`TcpTestSucceeded : False` a pesar de que `sudo ss -lntp | grep :8080` muestra el
+servicio escuchando. Así se aísla al firewall como causa: un puerto sin servicio
+fallaría igual con el firewall abierto (con RST inmediato del kernel), y probar
+el 22/80 daría `True` porque tienen regla.
+
+El fallo tarda ~20 segundos: el paquete se descarta en silencio y Windows agota
+el timeout — buen momento para explicar DROP vs. REJECT (REJECT respondería un
+ICMP/RST y el fallo sería instantáneo, revelando que hay un firewall).
 
 SSH y HTTP deben seguir funcionando después del cambio de política.
 

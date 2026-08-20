@@ -498,18 +498,36 @@ sudo iptables -P OUTPUT ACCEPT
     que lo hayamos permitido explícitamente con una regla. Todo lo que no coincida con
     una regla de ACCEPT cae a la política DROP y es silenciosamente descartado.
 
-Prueba negativa observable:
+Prueba negativa observable. Para demostrar que es el **firewall** quien bloquea
+(y no la ausencia de servicio), levantar un servicio real en un puerto **sin**
+regla ACCEPT:
+
+**[VM Ubuntu — Bash]** (en una terminal libre)
+
+```bash
+# Servidor escuchando en 8080 — puerto SIN regla ACCEPT
+python3 -m http.server 8080
+```
 
 **[Windows — PowerShell]**
 
 ```powershell
-# Un puerto sin regla ACCEPT debe fallar ahora
-Test-NetConnection <IP-de-la-VM> -Port 9999
+# Hay servicio detrás, pero ninguna regla lo permite
+Test-NetConnection <IP-de-la-VM> -Port 8080
 ```
 
 !!! question "Verificación"
-    `TcpTestSucceeded : False`. Mientras tanto, SSH (22) y HTTP (80) deben seguir
-    funcionando — repetir sus pruebas para confirmarlo.
+    `TcpTestSucceeded : False` — **a pesar de que el servicio está escuchando**
+    (comprobar con `sudo ss -lntp | grep :8080`). La única explicación posible es
+    la política DROP: el paquete nunca llegó al servicio. Notar además que el
+    fallo es **lento** (~20 s): DROP descarta en silencio, sin avisar al emisor.
+    Si se probara un puerto sin servicio con el firewall abierto, el fallo sería
+    instantáneo — el kernel respondería "connection refused". El **cómo** falla
+    delata el **porqué**.
+
+    Mientras tanto, SSH (22) y HTTP (80) deben seguir funcionando — repetir sus
+    pruebas para confirmarlo. Al terminar, cerrar el servidor del 8080 con
+    `Ctrl+C`.
 
 ### Parte 4: Leer, demostrar el orden y restaurar
 
@@ -589,7 +607,7 @@ Al terminar todas las partes, verificar:
 - [ ] `iptables --version` muestra la versión instalada (v1.8.x, backend nf_tables)
 - [ ] Existe `~/ruleset-inicial.txt` con el estado previo al laboratorio
 - [ ] Con la política DROP activa: SSH (22) y HTTP (80) accesibles desde Windows,
-      puerto 9999 inaccesible
+      puerto 8080 (con servicio escuchando y sin regla) inaccesible
 - [ ] La regla DROP insertada con `-I INPUT 1` bloqueó el ping a 8.8.8.8 y su
       contador lo demuestra
 - [ ] El ruleset final (tras `iptables-restore`) coincide con el inicial
@@ -613,7 +631,7 @@ El alumno debe entregar:
 1. Captura de `sudo iptables -L -v -n --line-numbers` con la política DROP y las
    4 reglas aplicadas (loopback, conntrack ESTABLISHED, tcp:22, tcp:80)
 2. Captura de las pruebas inbound desde PowerShell: `Test-NetConnection` al puerto
-   22 y al 80 (`True`) y al 9999 (`False`)
+   22 y al 80 (`True`) y al 8080 con servicio escuchando (`False`)
 3. Captura del Paso 10: ping fallido a 8.8.8.8 **y** el contador de la regla
    insertada con `pkts` > 0
 4. Captura del ruleset restaurado (Paso 11) junto al contenido de
