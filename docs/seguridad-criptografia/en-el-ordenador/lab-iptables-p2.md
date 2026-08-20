@@ -36,7 +36,7 @@ Al finalizar este laboratorio, el alumno habrá:
 |-----------|-------------|
 | Parte 1 completada | Existe `~/ruleset-inicial.txt`; snapshot `base-limpia` tomado |
 | VM Ubuntu 24.04 con NAT + Host-only | `ip -4 addr` muestra ambas interfaces |
-| Paquetes de la preparación previa | `sudo netfilter-persistent status` responde (instalado en P1) |
+| Paquetes de la preparación previa | `systemctl is-enabled netfilter-persistent` responde `enabled` (instalado en P1) |
 | Conectividad con el host Windows | `ping <IP-de-la-VM>` desde PowerShell responde |
 
 ## Escenario de la Parte 2
@@ -84,6 +84,10 @@ echo "Interfaz: $LAB_IF — IP: $LAB_IP — Subred del lab: $LAB_NET"
     `LAB_NET` debe tener formato CIDR (por ejemplo `192.168.56.0/24`) y contener
     tanto la IP de la VM como la IP del host Windows anotada en la Parte 1.
 
+    **Importante:** las variables de shell viven solo en esta terminal. Ejecutar
+    los Pasos 1 a 7 en esta misma terminal — si se cierra o se abre otra,
+    re-derivar las variables antes de continuar (`echo $LAB_NET` para comprobar).
+
 **Paso 2 — Capturar estado y reset seguro (patrón de la Parte 1)**
 
 **[VM Ubuntu — Bash]**
@@ -119,7 +123,7 @@ sudo iptables -A INPUT -i lo -m comment --comment "loopback siempre permitido" -
 sudo iptables -A OUTPUT -o lo -j ACCEPT
 # Regla 2: Permitir conexiones establecidas (stateful)
 sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED \
-  -m comment --comment "respuestas a conexiones propias" -j ACCEPT
+  -m comment --comment "conexiones ya aprobadas (stateful)" -j ACCEPT
 ```
 
 **Paso 4 — SSH restringido a la subred derivada**
@@ -210,6 +214,19 @@ El orden correcto debe ser:
 sudo python3 -m http.server 80
 ```
 
+En una **segunda terminal** de la VM (la regla 443 también merece su prueba real):
+
+```bash
+# Listener para la regla HTTPS — sirve HTTP plano, pero la prueba es de conexión TCP
+sudo python3 -m http.server 443
+```
+
+En la terminal de trabajo, confirmar ambos listeners (patrón de la Parte 1):
+
+```bash
+sudo ss -lntp | grep -E ':80 |:443 '
+```
+
 **[Windows — PowerShell]**
 
 ```powershell
@@ -217,11 +234,16 @@ sudo python3 -m http.server 80
 Test-NetConnection <IP-de-la-VM> -Port 22
 # HTTP permitido desde cualquier origen
 curl.exe -4 -I http://<IP-de-la-VM>/
+# HTTPS permitido desde cualquier origen (prueba de conexión TCP a la regla 5)
+Test-NetConnection <IP-de-la-VM> -Port 443
 ```
 
 !!! question "Verificación"
-    Ambas pruebas exitosas. En la VM, `sudo iptables -L INPUT -v -n` muestra
-    contadores `pkts > 0` en las reglas tcp:22 y tcp:80.
+    Las tres pruebas exitosas. En la VM, `sudo iptables -L INPUT -v -n` muestra
+    contadores `pkts > 0` en las reglas tcp:22, tcp:80 y tcp:443. Recordar la
+    lección de la Parte 1: una regla ACCEPT sin servicio detrás daría fallo
+    instantáneo (refused) aunque el firewall la permita — por eso cada prueba
+    tiene su listener.
 
 **Paso 9 — Generar tráfico bloqueado y verificarlo dos veces**
 
@@ -245,7 +267,9 @@ sudo iptables -L INPUT -v -n --line-numbers
 ```
 
 !!! question "Verificación"
-    - `TcpTestSucceeded : False` en PowerShell.
+    - `TcpTestSucceeded : False` en PowerShell, y **lento** (~20 s): la firma del
+      DROP silencioso vista en la Parte 1 — el emisor agota su timeout sin recibir
+      respuesta alguna.
     - El log muestra una línea `IPTABLES-DROP:` con `SRC=<IP-Windows>`,
       `DST=<IP-VM>`, `PROTO=TCP` y `DPT=8080`.
     - La regla LOG muestra `pkts > 0`.
@@ -287,8 +311,8 @@ sudo iptables -L -v -n --line-numbers   # el ruleset volvió, con política DROP
 ```bash
 # Guardar el ruleset actual como el ruleset de arranque
 sudo netfilter-persistent save
-# Ver dónde quedó guardado
-cat /etc/iptables/rules.v4
+# Ver dónde quedó guardado (el archivo es de root y solo root puede leerlo)
+sudo cat /etc/iptables/rules.v4
 
 # Reiniciar la VM de verdad
 sudo systemctl reboot
@@ -346,7 +370,7 @@ MASQUERADE en la tabla `nat`. Faltando cualquiera, no hay router.
 **[VM Ubuntu — Bash]**
 
 ```bash
-# Cerrar el servidor HTTP de Python si sigue corriendo (Ctrl+C en su terminal)
+# Cerrar los servidores de Python (80 y 443) si siguen corriendo (Ctrl+C en sus terminales)
 
 # Restaurar el ruleset capturado al inicio de este lab
 sudo iptables-restore < ~/ruleset-inicial-p2.txt
@@ -368,6 +392,7 @@ Al terminar todas las partes, verificar:
 
 - [ ] `LAB_NET` se derivó de `ip -4 route` y aparece en la regla SSH del ruleset
 - [ ] El ruleset del escenario tiene 6 reglas de INPUT + política DROP, en el orden correcto
+- [ ] Las tres reglas de servicio (22, 80, 443) probadas con un servicio real escuchando
 - [ ] La regla LOG incluye `limit: avg 5/min burst 10` en la salida de `iptables -L -v -n`
 - [ ] La sonda al puerto 8080 desde Windows quedó registrada en el log **y** en el contador
 - [ ] `iptables-restore` reprodujo el ruleset exacto tras el flush simulado (Paso 10)

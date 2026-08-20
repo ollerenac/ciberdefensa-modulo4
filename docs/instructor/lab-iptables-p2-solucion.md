@@ -23,7 +23,7 @@ no produce comentarios inline y un archivo editado a mano con ellos no restaurar
 :FORWARD ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
 -A INPUT -i lo -m comment --comment "loopback siempre permitido" -j ACCEPT
--A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -m comment --comment "respuestas a conexiones propias" -j ACCEPT
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -m comment --comment "conexiones ya aprobadas (stateful)" -j ACCEPT
 -A INPUT -s 192.168.56.0/24 -p tcp -m tcp --dport 22 -m comment --comment "SSH solo desde subred del lab" -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 80 -m comment --comment "HTTP abierto" -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 443 -m comment --comment "HTTPS abierto" -j ACCEPT
@@ -93,7 +93,7 @@ $ sudo iptables -L INPUT -v -n --line-numbers
 Chain INPUT (policy DROP)
 num   pkts bytes target  prot opt in  out  source           destination
 1        0     0 ACCEPT  0    --  lo  *    0.0.0.0/0        0.0.0.0/0    /* loopback siempre permitido */
-2        0     0 ACCEPT  0    --  *   *    0.0.0.0/0        0.0.0.0/0    ctstate RELATED,ESTABLISHED /* respuestas a conexiones propias */
+2        0     0 ACCEPT  0    --  *   *    0.0.0.0/0        0.0.0.0/0    ctstate RELATED,ESTABLISHED /* conexiones ya aprobadas (stateful) */
 3        0     0 ACCEPT  6    --  *   *    192.168.56.0/24  0.0.0.0/0    tcp dpt:22 /* SSH solo desde subred del lab */
 4        0     0 ACCEPT  6    --  *   *    0.0.0.0/0        0.0.0.0/0    tcp dpt:80 /* HTTP abierto */
 5        0     0 ACCEPT  6    --  *   *    0.0.0.0/0        0.0.0.0/0    tcp dpt:443 /* HTTPS abierto */
@@ -122,10 +122,15 @@ Desde PowerShell (host dentro de `LAB_NET`, por eso SSH funciona):
 ```
 Test-NetConnection 192.168.56.101 -Port 22   → TcpTestSucceeded : True
 curl.exe -4 -I http://192.168.56.101/        → HTTP/1.0 200 OK (SimpleHTTP/Python)
+Test-NetConnection 192.168.56.101 -Port 443  → TcpTestSucceeded : True
 ```
 
 Aceptar cualquier respuesta HTTP válida del listener. Tras las pruebas, contadores
-pkts > 0 en las reglas 3 y 4.
+pkts > 0 en las reglas 3, 4 y 5. El listener del 443 es `python3 -m http.server 443`
+(HTTP plano): la prueba valida la **conexión TCP** que la regla permite, no TLS —
+por eso se usa `Test-NetConnection` y no `curl https://`. Sin listener, la prueba
+al 443 daría `False` instantáneo (refused del kernel) pese a la regla ACCEPT — la
+lección de la prueba negativa de P1 aplicada al caso positivo.
 
 **Sobre probar la restricción de origen del SSH:** `ssh localhost` **no** la prueba
 — el tráfico a localhost entra por `lo` y coincide con la regla 1 (loopback) antes
@@ -174,7 +179,8 @@ detecta la captura vacía en el acto.
 $ sudo netfilter-persistent save
 run-parts: executing /usr/share/netfilter-persistent/plugins.d/15-ip4tables save
 run-parts: executing /usr/share/netfilter-persistent/plugins.d/25-ip6tables save
-$ cat /etc/iptables/rules.v4     # mismo contenido que el backup manual
+$ sudo cat /etc/iptables/rules.v4   # mismo contenido que el backup manual
+# (el archivo se crea 0640 root:root — cat sin sudo da Permission denied)
 $ sudo systemctl reboot
 ```
 
@@ -200,10 +206,10 @@ este save?"
 | Error | Causa probable | Solución |
 |-------|---------------|----------|
 | La regla SSH da error de sintaxis al crearla | `LAB_NET` vacía (interfaz mal escrita en el Paso 1, o variable definida en otra terminal) | Las variables de shell viven por terminal. Re-ejecutar el bloque de variables del Paso 1 en la terminal actual y verificar con `echo $LAB_NET` |
-| `Test-NetConnection -Port 22` falla | El host no está en `LAB_NET` (probó la IP NAT) o sshd caído | Confirmar IP objetivo = IP Host-only; `ss -lntp \| grep :22` en la VM |
+| `Test-NetConnection -Port 22` falla | El host no está en `LAB_NET` (probó la IP NAT) o sshd caído | Confirmar IP objetivo = IP Host-only; `sudo ss -lntp \| grep :22` en la VM |
 | No aparece nada en dmesg tras la sonda | La sonda fue a un puerto permitido, o `-m limit` agotado por sondas repetidas | Verificar puerto sin regla (8080); esperar 1 min (el limit repone 5/min) y repetir una sola sonda |
 | Cientos de líneas IPTABLES-DROP en el log | Regla LOG creada sin `-m limit` | Es la demostración perfecta de por qué el límite: borrar la regla (`-D`), crearla con limit, comparar |
-| Tras el reboot no hay reglas | No ejecutó `netfilter-persistent save`, o el servicio está deshabilitado | `systemctl status netfilter-persistent` (debe estar enabled); repetir save y reboot |
+| Tras el reboot no hay reglas | No ejecutó `netfilter-persistent save`, o el servicio está deshabilitado | `systemctl is-enabled netfilter-persistent` debe responder `enabled`; repetir save y reboot |
 | Tras el reboot del día siguiente la VM "no tiene red" | Limpieza final incompleta: quedó persistida la política DROP del escenario | Consola VirtualBox: reset seguro (políticas ACCEPT → flush) + `netfilter-persistent save`. Es el error que el Paso 12 previene |
 | El archivo restaurado no tiene comentarios | Escribió los comentarios como texto suelto en el archivo en vez de `-m comment` en las reglas | Mostrar que `iptables-save` solo serializa lo que está EN las reglas; los comentarios de archivo se pierden al regenerar |
 
