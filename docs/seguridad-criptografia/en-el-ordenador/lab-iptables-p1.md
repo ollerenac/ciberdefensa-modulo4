@@ -51,9 +51,24 @@ sudo apt install -y openssh-server netfilter-persistent tcpdump curl
 
 # 4. Verificaciones
 iptables --version          # se espera: iptables v1.8.x (nf_tables)
-ss -lntp | grep :22         # sshd debe estar escuchando
+sudo ss -lntp | grep :22    # sshd debe estar escuchando
 curl -4 -I http://example.com   # debe devolver una respuesta HTTP (exit code 0)
+
+# 5. Guest Additions (integración VM ↔ anfitrión)
+sudo apt install -y virtualbox-guest-utils virtualbox-guest-x11
+sudo reboot
 ```
+
+Tras el reinicio, en la **ventana de VirtualBox** de la VM activar el portapapeles
+compartido: menú **Dispositivos → Portapapeles compartido → Bidireccional**
+(en inglés: *Devices → Shared Clipboard → Bidirectional*). Con esto se puede
+copiar y pegar texto entre el host Windows y la VM en ambos sentidos.
+
+!!! tip "Si copiar/pegar no funciona"
+    Ubuntu 24.04 inicia sesión con Wayland por defecto y el portapapeles
+    compartido puede fallar ahí. Solución: cerrar sesión, y en la pantalla de
+    inicio de sesión pulsar el **engranaje** (abajo a la derecha) y elegir
+    **"Ubuntu on Xorg"** antes de entrar. Probar de nuevo el copiar/pegar.
 
 !!! note "No modificar las fuentes APT"
     Ubuntu 24.04 usa el formato deb822 en `/etc/apt/sources.list.d/ubuntu.sources`.
@@ -271,10 +286,37 @@ conexión desde otro equipo**. sshd ya está instalado desde la preparación pre
 
 ```bash
 # Confirmar que sshd escucha en el puerto 22
-ss -lntp | grep :22
+sudo ss -lntp | grep :22
 # Permitir SSH entrante
 sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 ```
+
+!!! note "Leer la salida de `ss` — el equivalente Linux de `netstat -ano`"
+    En la VM Windows asociamos cada conexión de `netstat -ano` con su proceso en
+    dos pasos: anotar el PID y buscarlo con `tasklist`. En Linux, `ss` hace ambas
+    cosas en un solo comando. Cada flag:
+
+    | Flag | Significado |
+    |------|-------------|
+    | `-l` | Solo sockets en escucha (**l**istening) — servicios esperando conexiones |
+    | `-n` | Mostrar **n**úmeros: puerto `22`, no el nombre `ssh` |
+    | `-t` | Solo **T**CP |
+    | `-p` | Mostrar el **p**roceso dueño de cada socket (requiere `sudo`) |
+
+    Salida típica:
+
+    ```
+    LISTEN  0  128  0.0.0.0:22  0.0.0.0:*  users:(("sshd",pid=812,fd=3))
+    ```
+
+    La parte `users:(("sshd",pid=812,fd=3))` responde de inmediato la pregunta que
+    en Windows requería dos comandos: **¿qué proceso está detrás de este puerto?**
+    Aquí es `sshd` con PID 812. Para ver más detalle de ese proceso:
+    `ps -p 812 -o pid,user,cmd`. Sin `sudo`, la columna del proceso aparece vacía
+    para servicios del sistema — por eso el comando lleva `sudo`.
+
+    Para ver también las conexiones **establecidas** (como ESTABLISHED en
+    netstat), quitar la `-l`: `sudo ss -ntp`.
 
 **[Windows — PowerShell]**
 
@@ -302,8 +344,8 @@ sudo python3 -m http.server 80
 En una **segunda terminal** de la VM:
 
 ```bash
-# Confirmar que escucha
-ss -lntp | grep :80
+# Confirmar que escucha (¿qué proceso y PID aparecen esta vez?)
+sudo ss -lntp | grep :80
 # Permitir HTTP entrante
 sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 ```

@@ -18,7 +18,7 @@ Cada alumno debe llegar con la VM Ubuntu 24.04 ya preparada y el snapshot
 - VirtualBox con **dos adaptadores**: NAT (adaptador 1) y Host-only (adaptador 2).
   Si la red Host-only no existe en el equipo, crearla desde
   VirtualBox → Archivo → Herramientas → Administrador de red.
-- Dentro de la VM: `iptables --version` responde, `ss -lntp` muestra sshd,
+- Dentro de la VM: `iptables --version` responde, `sudo ss -lntp` muestra sshd,
   `curl -4 -I http://example.com` sale con código 0.
 - `netfilter-persistent` instalado (se usa en la Parte 2; instalarlo aquí evita
   tocar APT durante los laboratorios).
@@ -124,7 +124,7 @@ el curl saldría (OUTPUT es ACCEPT) pero la respuesta nunca llegaría."
 ### Paso 6 — SSH probado desde Windows
 
 ```
-$ ss -lntp | grep :22
+$ sudo ss -lntp | grep :22
 LISTEN 0  4096  0.0.0.0:22  0.0.0.0:*  users:(("sshd",...))
 ```
 
@@ -231,7 +231,7 @@ dos capturas del alumno lado a lado.
 
 | Error | Causa probable | Qué decirle al alumno |
 |-------|---------------|----------------------|
-| `Test-NetConnection` al 22/80 falla con las reglas ACCEPT puestas | El servicio no escucha (sshd caído, listener no lanzado) — la regla sin servicio no responde | `ss -lntp` primero: si el puerto no aparece ahí, el problema no es iptables |
+| `Test-NetConnection` al 22/80 falla con las reglas ACCEPT puestas | El servicio no escucha (sshd caído, listener no lanzado) — la regla sin servicio no responde | `sudo ss -lntp` primero: si el puerto no aparece ahí, el problema no es iptables |
 | `Test-NetConnection` falla y el servicio SÍ escucha | Probó contra la IP NAT (10.0.2.x) en lugar de la Host-only | Repasar Paso 1: las pruebas van contra `LAB_IP` de la interfaz Host-only |
 | curl a internet falla dentro de la VM | DNS o NAT de VirtualBox | Diagnosticar sin tocar configuración: `resolvectl status` (¿hay servidor DNS?), `ping -4 1.1.1.1` (¿hay salida IP?). Si hay IP pero no DNS, revisar el adaptador NAT de VirtualBox. **No** sobrescribir `/etc/resolv.conf` — en Ubuntu 24.04 lo gestiona systemd-resolved y el cambio manual se pierde o rompe la resolución local |
 | El ping a 8.8.8.8 sigue vivo tras agregar el DROP | La agregó con `-A` (quedó después de ESTABLISHED) | No es un fallo: es la lección. Mostrar contadores y repetir con `-I INPUT 1` |
