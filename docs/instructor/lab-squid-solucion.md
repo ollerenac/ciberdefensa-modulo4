@@ -6,190 +6,205 @@
 # SOLUCIÓN: Lab Proxy Squid — Control de Navegación (LAB-03)
 
 !!! danger "Solo para instructores"
-    Este documento contiene las configuraciones esperadas, salidas de comandos y criterios de calificación. No mostrarlo en el proyector durante el lab. Está excluido del nav público de MkDocs pero es visible en el repositorio GitHub.
+    Este documento contiene las configuraciones esperadas, salidas de comandos y
+    criterios de calificación. No mostrarlo en el proyector durante el lab. Está
+    excluido del nav público de MkDocs pero es visible en el repositorio GitHub.
 
 ---
 
-## Prerrequisito de Instalación — Verificar ANTES del lab
+## Preparación del aula — verificar ANTES del lab
 
-La parte más crítica de este lab. Verificar estos puntos antes de la clase:
-
-1. **Descargar el instalador de Squid para Windows** desde [squid.diladele.com](http://squid.diladele.com) (archivo `.MSI` de aproximadamente 15 MB). Guardar en USB para distribución offline si la conexión del aula es lenta.
-
-2. **Verificar que Python no está instalado en los equipos del aula** — puede entrar en conflicto con el installer de Squid en algunos sistemas. Si Python está instalado, hacer la prueba de instalación de Squid en un equipo de prueba antes del lab.
-
-3. **Verificar que el Puerto 3128 no está en uso**: abrir CMD como Administrador y ejecutar:
-   ```cmd
-   netstat -an | findstr 3128
-   ```
-   Si muestra algún resultado, hay un conflicto. Identificar el proceso con PID usando `netstat -ano | findstr 3128` y terminarlo desde el Administrador de Tareas antes de la clase.
-
-4. **Tener la URL de un dominio de prueba** que sea claramente no laboral para el ejercicio de bloqueo. Usar algo como `facebook.com` o `instagram.com` — dominios conocidos por los alumnos maximizan el impacto visual del bloqueo.
-
-5. **Instalar VC++ Redistributable 2019 x64** en los equipos del aula si la instalación de Squid falla por error de DLL. Descargable desde microsoft.com sin registro.
+1. **La VM Ubuntu de los labs de iptables existe y arranca**, con NAT + Host-only.
+   El snapshot `base-limpia` disponible como plan B.
+2. **Firewall de la VM limpio**: `sudo iptables -L -n` — políticas ACCEPT, sin
+   reglas. Si quedó persistido el escenario del lab iptables P2 (limpieza
+   incompleta), la política DROP bloqueará el 3128 y el proxy "no funcionará" sin
+   razón aparente. Remedio: reset seguro (políticas ACCEPT → flush) +
+   `netfilter-persistent save`.
+3. **Internet en la VM vía NAT**: `curl -4 -I http://example.com` responde. La
+   instalación usa `apt` (paquete `squid`, componente main, ~unos MB con
+   dependencias). Si el ancho de banda del aula es pobre, pre-descargar en cada
+   VM antes de la clase: `sudo apt install --download-only -y squid`.
+4. **IP Host-only del host Windows**: normalmente `192.168.56.1` (interfaz
+   "VirtualBox Host-Only Network"). Es la IP que aparecerá como cliente en el
+   `access.log`.
 
 ---
 
-## Squid.conf Esperado al Final del Lab
+## Salidas esperadas — Paso 1 (instalación)
 
-El archivo de configuración que el alumno debe tener al terminar todos los ejercicios. Ubicación en Windows: `C:\Squid\etc\squid.conf`
+```
+$ squid -v | head -1
+Squid Cache: Version 6.x        (la 6.x exacta depende del parche de noble)
+
+$ systemctl status squid --no-pager
+● squid.service - Squid Web Proxy Server
+     Loaded: loaded (/usr/lib/systemd/system/squid.service; enabled; ...)
+     Active: active (running) ...
+
+$ sudo ss -lntp | grep 3128
+LISTEN 0 4096  *:3128  *:*  users:(("squid",pid=XXXX,fd=XX))
+```
+
+Puntos de dictado: `enabled` = arranca con la VM (un control de seguridad no puede
+depender de que alguien lo lance a mano); el patrón `ss` puerto→proceso→PID es el
+mismo de los labs de iptables — reforzarlo.
+
+---
+
+## squid.conf esperado por ejercicio
+
+La lección hace **reescribir el archivo completo** en cada ejercicio (no anexar
+bloques) precisamente para evitar reglas duplicadas y orden ambiguo. Config final
+del Ejercicio 2 (acumulativo sobre el 1):
 
 ```text
-# Puerto de escucha
 http_port 3128
-
-# ACL: red local (cliente)
-acl red_local src 127.0.0.1/32
-
-# === EJERCICIO 1: Bloqueo de dominio ===
-acl sitio_bloqueado dstdomain .facebook.com .instagram.com
-http_access deny sitio_bloqueado
-
-# === EJERCICIO 2: Palabras clave bloqueadas ===
-acl palabras_bloqueadas url_regex -i juegos gaming entretenimiento
+acl red_lab src 192.168.56.0/24
+acl sitios_bloqueados dstdomain .facebook.com .instagram.com .twitter.com
+acl palabras_bloqueadas url_regex -i juegos gaming streaming
+http_access deny sitios_bloqueados
 http_access deny palabras_bloqueadas
+http_access allow red_lab
+http_access deny all
+```
 
-# === EJERCICIO 3 (opcional): Whitelist ===
-# acl sitios_permitidos dstdomain .microsoft.com .windows.com .google.com
-# http_access deny !sitios_permitidos
+Config del Ejercicio 3 (whitelist — **sustituye** las reglas de bloqueo):
 
-# Permitir acceso desde red local (siempre al final)
-http_access allow red_local
-
-# Denegar todo lo demás
+```text
+http_port 3128
+acl red_lab src 192.168.56.0/24
+acl sitios_permitidos dstdomain .example.com .wikipedia.org .ubuntu.com
+http_access deny !sitios_permitidos
+http_access allow red_lab
 http_access deny all
 ```
 
 !!! note "Nota para el instructor"
-    Los Ejercicios 1 y 2 son acumulativos — las ACLs se apilan. El Ejercicio 3 (whitelist) reemplaza los anteriores conceptualmente. Si el tiempo lo permite, hacer que el alumno comente los Ejercicios 1 y 2 y pruebe la whitelist por separado para ver la diferencia de comportamiento.
+    El orden `deny` antes de `allow red_lab` es el punto conceptual del lab:
+    primera coincidencia gana, igual que en iptables (`-I` vs `-A`). Si un alumno
+    pone el deny después del allow, el bloqueo es inerte — dejar que lo descubra
+    con la prueba y el log antes de corregirlo: es la mejor lección del día.
 
 ---
 
-## Salidas Esperadas del access.log
+## Salidas esperadas del access.log
 
-Cómo se ve el log para cada tipo de petición. El instructor puede mostrar esto en el proyector cuando explica la sección "Lectura del access.log".
-
-**Log de petición exitosa — TCP_MISS** (petición enviada al servidor de origen, respuesta no cacheada):
+**Petición permitida (Paso 3, momento clave — la IP del cliente es el Windows):**
 ```text
-1718500200.123   142 127.0.0.1 TCP_MISS/200 4521 GET http://example.com/ - DIRECT/93.184.216.34 text/html
+1718500200.123   142 192.168.56.1 TCP_MISS/200 4521 GET http://example.com/ - DIRECT/93.184.216.34 text/html
 ```
 
-**Log de petición bloqueada por ACL — TCP_DENIED** (bloqueada por una regla `http_access deny`):
+**Petición bloqueada por ACL (Ejercicios 1-3):**
 ```text
-1718500210.456     0 127.0.0.1 TCP_DENIED/403 3856 GET http://facebook.com/ - NONE/- text/html
+1718500210.456     0 192.168.56.1 TCP_DENIED/403 3856 GET http://www.facebook.com/ - HIER_NONE/- text/html
 ```
 
-**Log de petición servida desde caché — TCP_HIT** (puede no ocurrir en el lab si solo se hace una petición por recurso):
+**Túnel HTTPS permitido (aparecerá al navegar a sitios https de la whitelist):**
 ```text
-1718500220.789     2 127.0.0.1 TCP_HIT/200 4521 GET http://example.com/ - NONE/- text/html
+1718500220.789  5142 192.168.56.1 TCP_TUNNEL/200 8412 CONNECT wikipedia.org:443 - DIRECT/... -
 ```
 
-**Comando para leer el log en tiempo real desde PowerShell:**
-```powershell
-Get-Content -Wait "C:\Squid\var\log\squid\access.log" | Select-String "127.0.0.1"
-```
+Comentar el `CONNECT dominio:443`: es la evidencia visual de que con HTTPS el
+proxy solo ve el dominio — enlaza con la advertencia del Ejercicio 2 y con SSL
+Bump de la P1. El `curl.exe -x` del Paso 3 debe devolver un encabezado con
+`Via: 1.1 <hostname> (squid/6.x)` — la firma del proxy.
 
-**Explicación de campos del log (mostrar en proyector):**
-
-| Campo | Ejemplo | Significado |
-|-------|---------|-------------|
-| Timestamp Unix | `1718500200.123` | Segundos desde 1970-01-01 UTC + milisegundos |
-| Tiempo de respuesta (ms) | `142` | Cuánto tardó Squid en responder al cliente |
-| IP cliente | `127.0.0.1` | Quien hizo la petición |
-| Resultado Squid/HTTP | `TCP_MISS/200` | Qué hizo Squid + código HTTP del servidor |
-| Tamaño (bytes) | `4521` | Tamaño total de la respuesta |
-| Método HTTP | `GET` | Verbo HTTP |
-| URL | `http://example.com/` | Recurso solicitado |
-| Servidor origen | `DIRECT/93.184.216.34` | IP del servidor destino (NONE si bloqueado) |
-| Tipo MIME | `text/html` | Tipo de contenido |
+Convertir timestamps: `date -d @1718500200` en la VM.
 
 ---
 
-## Verificación de Cada Ejercicio
+## Verificación de cada ejercicio
 
-### Ejercicio 1 — Bloquear dominio
+### Ejercicio 1 — Lista negra
 
-**Verificación:** Navegar a `facebook.com` con el proxy configurado en el navegador debe mostrar la página de error de Squid ("ERR_ACCESS_DENIED" con fondo blanco y texto "The requested URL could not be retrieved"). En el `access.log` debe aparecer `TCP_DENIED/403`.
+**Verificación:** `facebook.com` desde Firefox muestra la página de error de Squid
+("The requested URL could not be retrieved" / Access Denied). Log: `TCP_DENIED/403`.
 
 **Si no funciona:**
 
-- Verificar que Squid fue reiniciado después del cambio al `squid.conf` → `services.msc → Squid → Reiniciar`, o desde CMD como Administrador: `net stop squid && net start squid`
-- Verificar que la ACL de bloqueo está **ANTES** de la línea `http_access allow red_local` en el archivo
-- Verificar que el navegador está configurado para usar el proxy (`localhost:3128`) — abrir `http://example.com` primero para confirmar que el proxy funciona antes de probar el bloqueo
+- ¿Recargó Squid? `sudo systemctl reload squid` tras cada edición — causa #1.
+- ¿`squid -k parse` limpio? Un typo (p. ej. `http_acces`) genera `FATAL` y el
+  reload deja el servicio con la config anterior.
+- ¿El deny está ANTES de `http_access allow red_lab`?
+- ¿Firefox realmente usa el proxy? Probar primero `http://example.com` — si no
+  aparece en el log, el navegador no está enviando el tráfico al proxy.
 
 ### Ejercicio 2 — Palabras clave
 
-**Verificación:** Intentar acceder a una URL que contenga la palabra "juegos" debe ser bloqueada. Por ejemplo: `http://www.juegos.com`. En el log debe aparecer `TCP_DENIED`.
+**Verificación:** `http://www.juegos.com` bloqueado (`TCP_DENIED`).
 
-**Si no funciona:** El regex de `url_regex` es case-sensitive por defecto sin `-i`. Verificar que la regla tiene la opción `-i` para ignorar mayúsculas/minúsculas: `acl palabras_bloqueadas url_regex -i juegos gaming`.
+**Si no funciona:** falta `-i` (el regex distingue mayúsculas por defecto). Si un
+alumno prueba una URL HTTPS con la palabra en la **ruta** y no se bloquea: no es un
+fallo — es la limitación CONNECT explicada en la advertencia del ejercicio;
+convertirlo en pregunta al grupo.
 
-### Ejercicio 3 — Whitelist (si hay tiempo)
+### Ejercicio 3 — Whitelist
 
-**Verificación:** Acceder a `microsoft.com` debe funcionar (log: `TCP_MISS/200`). Acceder a cualquier otro sitio no en la lista debe ser bloqueado (log: `TCP_DENIED`).
+**Verificación:** `example.com` y `wikipedia.org` cargan (`TCP_MISS`/`TCP_TUNNEL`);
+cualquier otro dominio → `TCP_DENIED`.
 
-**Si no funciona:** Verificar que la regla `http_access deny !sitios_permitidos` está **ANTES** de `http_access allow red_local` en el archivo. El orden de las reglas `http_access` es crítico — Squid aplica la primera regla que coincide.
+**Si no funciona:** verificar la negación `!sitios_permitidos` y su posición antes
+del `allow red_lab`.
 
 ---
 
-## Errores Comunes y Cómo Manejarlos
+## Errores comunes y cómo manejarlos
 
 | Error | Causa probable | Solución |
 |-------|---------------|----------|
-| El servicio Squid no inicia | Puerto 3128 en uso por otro proceso | `netstat -ano \| findstr 3128` — identificar el proceso con PID y terminarlo desde el Administrador de Tareas |
-| El navegador da error "connection refused" al usar el proxy | Squid no está corriendo | Verificar en `services.msc`; reiniciar el servicio. Verificar también que `localhost:3128` está en la configuración del proxy del navegador |
-| El sitio bloqueado sigue siendo accesible después de agregar la ACL | Squid no fue reiniciado después del cambio al `squid.conf` | `net stop squid && net start squid` en CMD como Administrador, o reiniciar desde `services.msc` |
-| El log muestra TCP_MISS pero la página cargó — ¿está usando el proxy? | El navegador puede haber cargado desde caché local (no del proxy) | Limpiar caché del navegador (Ctrl+Shift+Delete) y reintentar. Verificar también que el navegador no tiene configurada una excepción de proxy para `localhost` |
-| Squid instalador da error de DLL durante la instalación | Dependencia de Visual C++ Redistributable faltante | Instalar VC++ Redistributable 2019 x64 desde microsoft.com antes de Squid |
-| El `access.log` está vacío o no aparece | El navegador no está usando el proxy | Verificar configuración de proxy en el navegador — confirmar que el proxy es `localhost` puerto `3128`. Navegar a `http://example.com` (HTTP, no HTTPS) para la prueba inicial |
-| HTTPS no funciona a través del proxy | Squid necesita configuración SSL adicional para HTTPS | Para el lab, usar únicamente sitios HTTP (`http://`, no `https://`). La inspección HTTPS requiere instalar un certificado de CA — fuera del alcance del lab |
+| `curl.exe -x` da "connection refused" | IP equivocada (usó la IP NAT `10.0.2.15` en vez de la Host-only) o Squid caído | La IP del proxy es la de `enp0s8` (192.168.56.x); `systemctl status squid` |
+| `curl.exe -x` expira sin respuesta | Firewall de la VM con reglas del lab iptables aún activas | `sudo iptables -L -n` — si hay política DROP, reset seguro + `netfilter-persistent save` |
+| "Mi regla no funciona" | Editó squid.conf sin recargar | El ciclo completo: editar → `squid -k parse` → `systemctl reload squid` → probar |
+| El servicio no levanta tras un cambio | Error de sintaxis en squid.conf | `sudo squid -k parse` muestra la línea exacta del `FATAL`; corregir y `systemctl restart squid` |
+| Todo da `TCP_DENIED`, incluso example.com | El `deny all` quedó antes del `allow red_lab`, o la ACL `red_lab` tiene una subred equivocada | Revisar orden y subred (debe ser la Host-only real, `ip -4 route` en la VM) |
+| El log no muestra nada al navegar | Firefox sin el proxy configurado, o con excepción activa | Revisar Configuración manual del proxy; probar con `curl.exe -x` para aislar |
+| `tail: cannot open access.log` | Falta sudo — el log pertenece al servicio | `sudo tail -f /var/log/squid/access.log` |
+| Bloqueó facebook pero "sigue cargando" | Caché del navegador | Ctrl+Shift+R (recarga forzada) o modo privado |
 
 ---
 
-## Notas de Dictado
+## Notas de dictado
 
-### Timing sugerido (total: ~90 minutos de lab)
+### Timing sugerido (~3 horas)
 
-**Instalación (15 min):** Hacer que todos instalen Squid al mismo tiempo. Si algún equipo falla, agrupar con un compañero en lugar de retrasar al grupo. El instalador MSI es rápido si ya está descargado en USB.
-
-**Configuración inicial y verificación de proxy en el navegador (10 min):** Verificar que **TODOS** tienen el proxy funcionando antes de avanzar a las ACLs. Este es el prerrequisito crítico para el resto del lab. La señal de éxito: el alumno abre `http://example.com` y el log muestra `TCP_MISS`.
-
-**Ejercicio 1 — bloqueo de dominio (20 min):** El momento más impactante del lab — cuando el alumno ve por primera vez que Squid bloquea el acceso. Pausar aquí y pedir que lean la página de error de Squid — el mensaje explica qué regla bloqueó la petición.
-
-**Lectura del access.log (15 min):** Mostrar en proyector cómo hacer `Get-Content -Wait` y leer el log en tiempo real mientras otro alumno navega. Demostrar la diferencia entre `TCP_MISS` y `TCP_DENIED`. Pedir que un alumno navegue al dominio bloqueado y señalar la entrada en el log.
-
-**Ejercicios 2 y 3 (30 min):** Los alumnos más rápidos pueden llegar a la whitelist; los más lentos hacen el Ejercicio 2. Ambas trayectorias son válidas para la rúbrica.
+- Recap P1 + presentación de la topología (proxy en la VM, Windows cliente): ~10 min
+- Paso 1 — instalación y verificación del servicio: ~15 min
+- Paso 2 — squid.conf mínimo + ciclo parse/reload: ~25 min (el bloque conceptual denso)
+- Paso 3 — conectar Windows: curl.exe primero, Firefox después, log en vivo: ~25 min
+    - **El momento clave del lab:** el `tail -f` proyectado mientras un alumno
+      navega desde Windows — la IP del cliente en el log hace tangible el "control
+      centralizado" de la P1.
+- Ejercicio 1 — lista negra: ~20 min (pausar en el porqué del orden deny/allow)
+- Ejercicio 2 — regex + limitación HTTPS: ~20 min
+- Ejercicio 3 — whitelist: ~20 min
+- Lectura del access.log con anotación de campos: ~15 min
+- Demo de bypass (con el log en silencio como evidencia): ~15 min
+- Limpieza + entrega y cierre: ~15 min
 
 ### Momento pedagógico clave
 
-La demostración de bypass al final: desactivar el proxy en el navegador (o abrirlo en modo privado que puede tener configuración diferente) y acceder al dominio bloqueado. El impacto visual de ver que Squid no puede proteger si el cliente no lo usa es el mensaje más importante del lab. Conectar esto con la pregunta del examen: "¿Qué necesita una organización además de Squid para asegurar que todos los equipos usen el proxy?"
+El bypass: el alumno desactiva el proxy en Firefox, el dominio bloqueado carga, y
+el `tail -f` proyectado **no imprime nada**. La ausencia de la línea es la
+evidencia. Pregunta de cierre para conectar con la P1 y con el examen: "¿Qué
+necesita una organización además de Squid para asegurar que todos los equipos usen
+el proxy?" — Respuesta: la regla de firewall que bloquea la salida 80/443 a todo
+proceso que no sea el proxy (o un proxy transparente).
 
 ---
 
-## Rúbrica de Calificación
+## Rúbrica de calificación
 
 | Criterio | Puntos | Cómo verificar |
 |----------|--------|----------------|
-| Squid instalado y corriendo | 1 | `services.msc` muestra "Squid" con estado "En ejecución" |
-| Navegador conecta a `http://example.com` via proxy | 1 | El log muestra `TCP_MISS` para `example.com` (alumno muestra captura del log) |
-| Dominio bloqueado (Ejercicio 1) muestra error Squid | 2 | Captura de pantalla de la página de error "ERR_ACCESS_DENIED" de Squid |
-| Log muestra `TCP_DENIED` correctamente | 1 | Al menos 1 línea `TCP_DENIED` en el extracto entregado por el alumno |
-| Análisis del log: 5 líneas anotadas con identificación de campos | 3 | Entregable con timestamp, IP cliente, código Squid/HTTP y URL identificados en cada línea |
-| Demostración de bypass documentada (dominio accesible sin proxy) | 2 | Captura de pantalla del sitio cargando con el proxy desactivado |
+| Squid activo y escuchando en el 3128 | 1 | Captura de `systemctl status` + `sudo ss -lntp \| grep 3128` |
+| Cliente Windows navegando vía proxy | 1 | Línea del log con `192.168.56.1` como IP cliente (captura) |
+| Dominio bloqueado (Ejercicio 1) con error de Squid | 2 | Captura de la página de error + línea `TCP_DENIED` del log |
+| Whitelist funcionando (Ejercicio 3) | 2 | Dominio autorizado carga y uno no autorizado da `TCP_DENIED` (capturas) |
+| Análisis del log: 5 líneas anotadas | 2 | Timestamp, IP cliente, código Squid/HTTP y URL identificados en cada línea |
+| Bypass documentado con doble evidencia | 2 | Página cargando sin proxy **y** log sin líneas nuevas |
 
 **Total: 10 puntos**
-
----
-
-## Material de Apoyo para el Instructor
-
-Recursos que el instructor puede mostrar en el proyector si hay preguntas:
-
-- **Documentación de directivas squid.conf:** http://www.squid-cache.org/Doc/config/
-- **Convertir timestamp Unix a fecha legible** (si el alumno pregunta qué significa el número en el log):
-  ```cmd
-  python -c "import datetime; print(datetime.datetime.fromtimestamp(1718500200))"
-  ```
-  Resultado: `2024-06-15 19:30:00` (aproximado — el valor exacto depende del timestamp).
 
 ---
 

@@ -53,7 +53,7 @@ Cuando el navegador está configurado para usar un proxy, el flujo de una petici
 Cliente (navegador)
    │ 1. Petición HTTP al proxy (no al servidor destino)
    ▼
-Proxy Squid (localhost:3128)
+Proxy Squid (servidor de la red, puerto 3128)
    │ 2. Proxy evalúa ACLs (¿está permitido este dominio?)
    │ 3. Si está permitido: proxy hace la petición al servidor destino
    ▼
