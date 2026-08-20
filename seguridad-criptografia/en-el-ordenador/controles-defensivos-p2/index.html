@@ -1,0 +1,2762 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/seguridad-criptografia/en-el-ordenador/controles-defensivos-p2/">
+      
+      
+        <link rel="prev" href="../controles-defensivos-p1/">
+      
+      
+        <link rel="next" href="../antivirus-avanzados-p1/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Controles Defensivos (Parte 2) - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#horas-asignadas-1-hr" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Controles Defensivos (Parte 2)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laboratorio-vm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🖥 Laboratorio virtual — accesos y credenciales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-iptables-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27000-generalidades-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27001-requisitos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Responsabilidad Social
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Responsabilidad Social
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/responsabilidad-social/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/responsabilidad-social/impacto-responsabilidad-social/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Impacto de la Responsabilidad Social
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Operaciones de Paz
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Operaciones de Paz
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/operaciones-paz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/operaciones-paz/operaciones-paz-globales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operaciones de Paz en Entornos Globales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<h1 id="horas-asignadas-1-hr">Horas asignadas: 1 hr<a class="headerlink" href="#horas-asignadas-1-hr" title="Permanent link">&para;</a></h1>
+<h1 id="tipo-teoria-laboratorio">Tipo: Teoría + Laboratorio<a class="headerlink" href="#tipo-teoria-laboratorio" title="Permanent link">&para;</a></h1>
+<hr />
+<h1 id="controles-defensivos-en-el-ordenador-parte-2">Controles Defensivos en el Ordenador (Parte 2)<a class="headerlink" href="#controles-defensivos-en-el-ordenador-parte-2" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Duración:</strong> 1 hora | <strong>Asignatura:</strong> Seguridad de la Información y Criptografía | <strong>Unidad:</strong> En el Ordenador | Continuación de Parte 1</p>
+</blockquote>
+<p>En la Parte 1 establecimos el marco conceptual: la Triada CIA como referencia, la superficie de ataque como lo que el atacante ve, el Windows Security Center como panel de estado, el principio de mínimo privilegio y los siete controles CIS L1 que todo equipo debe cumplir. En esta Parte 2 aplicamos esos conceptos con comandos concretos: auditamos las cuentas locales del equipo, revisamos la política de contraseñas y deshabilitamos los servicios que amplían la superficie de ataque sin aportar valor a la misión.</p>
+<h2 id="objetivo-de-la-clase">Objetivo de la clase<a class="headerlink" href="#objetivo-de-la-clase" title="Permanent link">&para;</a></h2>
+<p>Al finalizar esta clase, el alumno será capaz de:</p>
+<ul>
+<li>Auditar las cuentas de usuario locales de un equipo Windows 11 usando PowerShell e identificar cuentas con privilegios excesivos o sin uso.</li>
+<li>Verificar y configurar la política de contraseñas local siguiendo las recomendaciones CIS Level 1.</li>
+<li>Deshabilitar servicios innecesarios (Print Spooler, Remote Registry, SMBv1) usando PowerShell para reducir la superficie de ataque.</li>
+<li>Habilitar la auditoría de inicio de sesión y dejar constancia verificable de cada cambio aplicado.</li>
+</ul>
+<hr />
+<h2 id="entorno-de-laboratorio">Entorno de laboratorio<a class="headerlink" href="#entorno-de-laboratorio" title="Permanent link">&para;</a></h2>
+<p>Esta parte <strong>corrige</strong> la estación que la Parte 1 se limitó a observar. Cambia todo respecto a la sesión anterior: aquí sí se modifica el sistema, y por tanto se trabaja <strong>con privilegios elevados</strong>.</p>
+<div class="admonition danger">
+<p class="admonition-title">Esta parte modifica el sistema</p>
+<p>En la Parte 1 la consigna era observar sin tocar. Aquí se aplican cambios reales sobre la estación. Cada modificación se hace <strong>después</strong> de haber registrado el estado previo, nunca antes. Un cambio sin línea base es un cambio que no se puede auditar ni revertir.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Requisito</th>
+<th>Verificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>La Parte 1 está completa</td>
+<td>Existen los cuatro archivos en <code>C:\Lab\Evidencias</code></td>
+</tr>
+<tr>
+<td>Se conocen las credenciales de <code>tec_admin</code></td>
+<td>Ver la página <a href="../laboratorio-vm/">Laboratorio virtual</a></td>
+</tr>
+<tr>
+<td>La VM no se ha reiniciado desde la Parte 1</td>
+<td>Si se restauró el snapshot, repetir antes la Práctica 0 de la Parte 1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="practica-6-elevar-privilegios-y-abrir-el-registro-de-cambios">▸ Práctica 6 — Elevar privilegios y abrir el registro de cambios<a class="headerlink" href="#practica-6-elevar-privilegios-y-abrir-el-registro-de-cambios" title="Permanent link">&para;</a></h3>
+<p><strong>Tiempo:</strong> 5 minutos.</p>
+<p>Cerrar la ventana de PowerShell de la Parte 1 y abrir una <strong>nueva, elevada</strong>: menú Inicio → <code>Windows PowerShell</code> → clic derecho → <strong>Ejecutar como administrador</strong>. Windows pedirá credenciales porque <code>operador_alumno</code> no es administrador: introducir <strong><code>tec_admin</code></strong> y su contraseña.</p>
+<p>Confirmar que la elevación funcionó y abrir la transcripción de esta sesión:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="no">[Security.Principal.WindowsPrincipal]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="no">[Security.Principal.WindowsIdentity]</span><span class="p">::</span><span class="n">GetCurrent</span><span class="p">()</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">).</span><span class="n">IsInRole</span><span class="p">(</span><span class="no">[Security.Principal.WindowsBuiltInRole]</span><span class="p">::</span><span class="n">Administrator</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">Start-Transcript</span> <span class="n">-Path</span> <span class="n">C</span><span class="p">:\</span><span class="n">Lab</span><span class="p">\</span><span class="n">Evidencias</span><span class="p">\</span><span class="n">02-correccion</span><span class="p">.</span><span class="n">txt</span> <span class="n">-Force</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> <code>True</code>, y la confirmación de que la transcripción comenzó.</p>
+<p><strong>Si no aparece:</strong> si devuelve <code>False</code>, la consola no está elevada — cerrarla y repetir el procedimiento. No continuar: los comandos de esta parte fallarían a medias, dejando la estación en un estado inconsistente.</p>
+<div class="admonition note">
+<p class="admonition-title">Por qué se abre una transcripción nueva</p>
+<p><code>01-reconocimiento.txt</code> registra lo que se observó; <code>02-correccion.txt</code> registrará lo que se cambió. Separar observación de intervención es lo que permite demostrar después qué estado se encontró y qué estado se produjo.</p>
+</div>
+<hr />
+<h2 id="auditoria-de-cuentas-locales">Auditoría de Cuentas Locales<a class="headerlink" href="#auditoria-de-cuentas-locales" title="Permanent link">&para;</a></h2>
+<p>Toda cuenta de usuario que existe en un equipo es una identidad que puede ser comprometida. Cuentas que nadie usa actualmente, cuentas con nombres genéricos, o cuentas que tienen privilegios de Administrador sin justificación son vectores de ataque que un adversario buscará.</p>
+<p>El primer paso de la auditoría es listar todas las cuentas locales con su estado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># Listar todas las cuentas locales con nombre, estado y último inicio de sesión</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">Get-LocalUser</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Enabled</span><span class="p">,</span> <span class="n">LastLogon</span>
+</code></pre></div>
+<p>La salida típica muestra columnas: Name (nombre de la cuenta), Enabled (si está habilitada o no), LastLogon (cuándo se usó por última vez). Una cuenta con <code>Enabled: True</code> y <code>LastLogon</code> de hace más de 90 días debe investigarse — ¿por qué existe esta cuenta y quién la usa?</p>
+<p>Para identificar qué cuentas tienen privilegios de Administrador local:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># Listar todos los miembros del grupo Administradores local</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">Get-LocalGroupMember</span> <span class="n">-SID</span> <span class="s1">'S-1-5-32-544'</span>
+</code></pre></div>
+<p>En un equipo correctamente configurado, este comando debería mostrar solo las cuentas que tienen justificación explícita para tener privilegios administrativos. Si aparece una cuenta con nombre como "admin", "temp", "prueba" o "usuario2", debe investigarse inmediatamente.</p>
+<div class="admonition warning">
+<p class="admonition-title">Se pide por SID, no por nombre</p>
+<p>El grupo se llama <code>Administrators</code> en un Windows en inglés y <code>Administradores</code> en uno en español. Pedirlo por nombre falla en la mitad de los equipos. El SID <strong><code>S-1-5-32-544</code></strong> identifica al grupo Administradores integrado en cualquier idioma y en cualquier versión de Windows. Igual que el RID 501 para la cuenta Invitado, es el identificador el que no cambia.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Señales de alerta en cuentas locales</p>
+<p>Las siguientes situaciones requieren investigación inmediata y posiblemente reporte al oficial de seguridad:</p>
+<ul>
+<li>Cuenta con nombre genérico ("admin", "temp", "test", "prueba") con estado habilitado.</li>
+<li>Cuenta en el grupo Administrators que no corresponde a personal autorizado.</li>
+<li>Cuenta con LastLogon de una fecha durante un período en que nadie debería haber usado el equipo (fines de semana, vacaciones, etc.).</li>
+<li>La cuenta Guest (<code>Invitado</code> en español) aparece con estado habilitado — debe estar siempre deshabilitada.</li>
+</ul>
+</div>
+<h3 id="que-hacer-al-encontrar-una-cuenta-con-privilegios-injustificados">Qué hacer al encontrar una cuenta con privilegios injustificados<a class="headerlink" href="#que-hacer-al-encontrar-una-cuenta-con-privilegios-injustificados" title="Permanent link">&para;</a></h3>
+<p>El orden importa, y la tentación es equivocarse en él. Deshabilitar primero destruye información: si la cuenta está siendo usada por un atacante, se le avisa de que ha sido detectado; si pertenece a un procedimiento legítimo que nadie documentó, se interrumpe un servicio sin saberlo.</p>
+<p>El procedimiento correcto es:</p>
+<ol>
+<li><strong>Preservar la evidencia.</strong> Registrar nombre, SID, estado, último inicio de sesión y pertenencia a grupos, tal como se encontraron.</li>
+<li><strong>Contrastar contra la autorización.</strong> Comparar la identidad observada con el acta de identidades autorizadas de la estación. Sin ese documento no hay forma de decir si una cuenta sobra.</li>
+<li><strong>Documentar la decisión.</strong> Anotar qué se va a hacer y por qué, antes de hacerlo.</li>
+<li><strong>Corregir.</strong> Retirar el privilegio y, si procede, deshabilitar la cuenta.</li>
+<li><strong>Verificar y reportar.</strong> Comprobar que el cambio surtió efecto y elevar el parte al oficial de seguridad.</li>
+</ol>
+<div class="admonition danger">
+<p class="admonition-title">No borrar nunca la cuenta</p>
+<p>Retirar el privilegio y deshabilitar es reversible y conserva la evidencia. <strong>Borrar</strong> una cuenta destruye su SID, su historial y la posibilidad de investigar qué hizo. Una cuenta deshabilitada no puede iniciar sesión: el riesgo ya está contenido.</p>
+</div>
+<h3 id="practica-7-auditar-identidades-contra-el-acta-de-autorizaciones">▸ Práctica 7 — Auditar identidades contra el acta de autorizaciones<a class="headerlink" href="#practica-7-auditar-identidades-contra-el-acta-de-autorizaciones" title="Permanent link">&para;</a></h3>
+<p><strong>Tiempo:</strong> 15 minutos.</p>
+<p><strong>Paso 1 — Registrar el estado encontrado</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">Get-LocalGroupMember</span> <span class="n">-SID</span> <span class="s1">'S-1-5-32-544'</span> <span class="p">|</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="nb">Format-Table</span> <span class="n">Name</span><span class="p">,</span> <span class="n">ObjectClass</span><span class="p">,</span> <span class="n">PrincipalSource</span><span class="p">,</span> <span class="n">SID</span> <span class="n">-AutoSize</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nb">Get-LocalUser</span> <span class="p">|</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="nb">Format-Table</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Enabled</span><span class="p">,</span> <span class="n">LastLogon</span><span class="p">,</span> <span class="n">SID</span> <span class="n">-AutoSize</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> el grupo Administradores con <strong>tres</strong> miembros, y el listado completo de cuentas locales.</p>
+<p><strong>Paso 2 — Leer el acta de identidades autorizadas</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">Get-Content</span> <span class="n">C</span><span class="p">:\</span><span class="n">Mision</span><span class="p">\</span><span class="n">autorizaciones</span><span class="p">.</span><span class="n">txt</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> el acta de entrega de la estación, que autoriza únicamente a <code>operador_alumno</code> y <code>tec_admin</code>.</p>
+<div class="admonition question">
+<p class="admonition-title">El hallazgo</p>
+<p>Comparar las dos listas. ¿Qué cuenta aparece en el grupo Administradores sin figurar como autorizada en el acta? ¿Qué dice su descripción sobre cómo llegó ahí? Anotarlo antes de tocar nada.</p>
+</div>
+<p><strong>Paso 3 — Corregir, con la evidencia ya registrada</strong></p>
+<p>Solo después de haber documentado el hallazgo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">$CuentaTemporal</span> <span class="p">=</span> <span class="nb">Get-LocalUser</span> <span class="n">-Name</span> <span class="s1">'operador_temp'</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nb">Remove-LocalGroupMember</span> <span class="n">-SID</span> <span class="s1">'S-1-5-32-544'</span> <span class="n">-Member</span> <span class="nv">$CuentaTemporal</span> <span class="n">-Confirm</span><span class="p">:</span><span class="nv">$false</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nb">Disable-LocalUser</span> <span class="n">-InputObject</span> <span class="nv">$CuentaTemporal</span>
+</code></pre></div>
+<p><strong>Paso 4 — Verificar que el cambio surtió efecto</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">Get-LocalUser</span> <span class="n">-Name</span> <span class="s1">'operador_temp'</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Enabled</span><span class="p">,</span> <span class="n">SID</span> <span class="n">-AutoSize</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">Get-LocalGroupMember</span> <span class="n">-SID</span> <span class="s1">'S-1-5-32-544'</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">Name</span><span class="p">,</span> <span class="n">SID</span> <span class="n">-AutoSize</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> <code>operador_temp</code> con <code>Enabled: False</code>, y el grupo Administradores reducido a <strong>dos</strong> miembros: la cuenta Administrador integrada y <code>tec_admin</code>.</p>
+<p><strong>Si no aparece:</strong> si <code>Remove-LocalGroupMember</code> da error, comprobar que la consola está elevada. No repetir el comando a ciegas: volver a listar el grupo y ver el estado real.</p>
+<div class="admonition note">
+<p class="admonition-title">Por qué se retiró el privilegio y además se deshabilitó</p>
+<p>Son dos controles distintos. Retirar del grupo elimina la <strong>capacidad</strong> de hacer daño administrativo; deshabilitar elimina la <strong>posibilidad de iniciar sesión</strong>. El acta no autoriza esa identidad en absoluto, así que corresponden ambos. Si el acta la hubiera autorizado como cuenta estándar, se habría retirado solo el privilegio.</p>
+</div>
+<hr />
+<h2 id="politica-de-contrasenas">Política de Contraseñas<a class="headerlink" href="#politica-de-contrasenas" title="Permanent link">&para;</a></h2>
+<p>La política de contraseñas define las reglas que Windows aplica a todas las contraseñas de cuentas locales. Se puede consultar y modificar de dos formas: por interfaz gráfica (<code>Win+R → secpol.msc → Directivas de cuenta → Directiva de contraseñas</code>) o por línea de comandos con <code>net.exe accounts</code>.</p>
+<p>En este laboratorio se usa <strong><code>net.exe accounts</code></strong>, por dos razones: su salida sirve como evidencia registrable en la transcripción, y no depende de navegar menús cuyos nombres cambian con el idioma del sistema.</p>
+<p>Las configuraciones recomendadas por el CIS Benchmark Level 1 son:</p>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Línea en <code>net accounts</code></th>
+<th>Valor CIS L1</th>
+<th>Por qué importa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Longitud mínima de contraseña</td>
+<td><em>Longitud mínima de contraseña</em></td>
+<td>14 caracteres</td>
+<td>Contraseñas cortas son vulnerables a ataques de diccionario y fuerza bruta</td>
+</tr>
+<tr>
+<td>Vigencia máxima de contraseña</td>
+<td><em>Duración máx. de contraseña (días)</em></td>
+<td>60 días</td>
+<td>Limita el tiempo de exposición si una contraseña es comprometida</td>
+</tr>
+<tr>
+<td>Requisitos de complejidad</td>
+<td><em>(no aparece — ver nota)</em></td>
+<td>Habilitado</td>
+<td>Exige mayúsculas, minúsculas, números y símbolos</td>
+</tr>
+<tr>
+<td>Umbral de bloqueo de cuenta</td>
+<td><em>Umbral de bloqueo</em></td>
+<td>5 intentos</td>
+<td>Bloquea la cuenta tras N intentos fallidos — previene fuerza bruta</td>
+</tr>
+<tr>
+<td>Duración del bloqueo</td>
+<td><em>Duración de bloqueo (minutos)</em></td>
+<td>15 minutos</td>
+<td>Tiempo que la cuenta permanece bloqueada antes de desbloquearse</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">La complejidad no se ve con <code>net accounts</code></p>
+<p>El requisito de complejidad no aparece en la salida de <code>net accounts</code>: es una directiva de seguridad, no un parámetro de cuentas. Se consulta exportando la política con <code>secedit.exe</code>, que es justo lo que hace el último paso de la práctica siguiente.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Aplicación en entorno castrense</p>
+<p>Los sistemas de comunicaciones militares frecuentemente requieren contraseñas más robustas que el estándar corporativo. En un puesto de mando, los equipos que acceden a sistemas de comunicaciones cifradas deben tener contraseñas de al menos 16 caracteres, rotadas cada 30 días, con historial de contraseñas configurado para que no se pueda reusar ninguna de las últimas 24. El oficial de seguridad establece estas políticas mediante directiva; el Técnico verifica que estén implementadas antes de conectar el equipo a la red clasificada.</p>
+</div>
+<h3 id="practica-8-aplicar-la-politica-de-contrasenas-y-dejarla-probada">▸ Práctica 8 — Aplicar la política de contraseñas y dejarla probada<a class="headerlink" href="#practica-8-aplicar-la-politica-de-contrasenas-y-dejarla-probada" title="Permanent link">&para;</a></h3>
+<p><strong>Tiempo:</strong> 8 minutos.</p>
+<p><strong>Paso 1 — Registrar la política encontrada</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">net</span><span class="p">.</span><span class="n">exe</span> <span class="n">accounts</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> una estación sin política. En concreto, <em>Longitud mínima de contraseña</em> en <code>0</code> y <em>Umbral de bloqueo</em> en <code>Nunca</code>. Es decir: se admite cualquier contraseña, incluso vacía, y se puede intentar adivinarla infinitas veces.</p>
+<div class="admonition question">
+<p class="admonition-title">Interpretación</p>
+<p>¿Cuál de los dos defectos es más grave para una estación conectada a una red de unidad? Justificar en términos de qué le costaría a un atacante aprovechar cada uno.</p>
+</div>
+<p><strong>Paso 2 — Aplicar los valores CIS L1</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">net</span><span class="p">.</span><span class="n">exe</span> <span class="n">accounts</span> <span class="p">/</span><span class="n">minpwlen</span><span class="p">:</span><span class="n">14</span> <span class="p">/</span><span class="n">maxpwage</span><span class="p">:</span><span class="n">60</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">net</span><span class="p">.</span><span class="n">exe</span> <span class="n">accounts</span> <span class="p">/</span><span class="n">lockoutthreshold</span><span class="p">:</span><span class="n">5</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">net</span><span class="p">.</span><span class="n">exe</span> <span class="n">accounts</span> <span class="p">/</span><span class="n">lockoutduration</span><span class="p">:</span><span class="n">15</span> <span class="p">/</span><span class="n">lockoutwindow</span><span class="p">:</span><span class="n">15</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> <em>Se ha completado el comando correctamente</em> tres veces.</p>
+<p><strong>Paso 3 — Verificar el cambio</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">net</span><span class="p">.</span><span class="n">exe</span> <span class="n">accounts</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> <em>Longitud mínima de contraseña</em> en <code>14</code>, <em>Duración máx. de contraseña</em> en <code>60</code>, <em>Umbral de bloqueo</em> en <code>5</code>, y ambas duraciones de bloqueo en <code>15</code>.</p>
+<p><strong>Paso 4 — Exportar la política como evidencia</strong></p>
+<p>La salida de un comando en pantalla se pierde; un archivo de política exportado es evidencia que se puede adjuntar a un parte.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">secedit</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">export</span> <span class="p">/</span><span class="n">cfg</span> <span class="n">C</span><span class="p">:\</span><span class="n">Lab</span><span class="p">\</span><span class="n">Evidencias</span><span class="p">\</span><span class="n">02-politica</span><span class="p">.</span><span class="n">inf</span> <span class="p">/</span><span class="n">areas</span> <span class="n">SECURITYPOLICY</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">Select-String</span> <span class="n">-Path</span> <span class="n">C</span><span class="p">:\</span><span class="n">Lab</span><span class="p">\</span><span class="n">Evidencias</span><span class="p">\</span><span class="n">02-politica</span><span class="p">.</span><span class="n">inf</span> <span class="p">`</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">-Pattern</span> <span class="s1">'MinimumPasswordLength|MaximumPasswordAge|LockoutBadCount|LockoutDuration|ResetLockoutCount|PasswordComplexity'</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> <em>La tarea se ha completado correctamente</em>, seguido de las líneas del archivo con los valores aplicados: <code>MinimumPasswordLength = 14</code>, <code>MaximumPasswordAge = 60</code>, <code>LockoutBadCount = 5</code>, <code>LockoutDuration = 15</code>, <code>ResetLockoutCount = 15</code>.</p>
+<p><strong>Si no aparece:</strong> si <code>secedit</code> falla, comprobar que la consola sigue elevada y que <code>C:\Lab\Evidencias</code> existe.</p>
+<hr />
+<h2 id="deshabilitar-servicios-innecesarios">Deshabilitar Servicios Innecesarios<a class="headerlink" href="#deshabilitar-servicios-innecesarios" title="Permanent link">&para;</a></h2>
+<p>Cada servicio de Windows que está en ejecución es código activo con acceso al sistema operativo. Si ese servicio tiene una vulnerabilidad, un atacante puede explotarla — incluso si la vulnerabilidad no tiene nada que ver con el trabajo que realiza el usuario en ese equipo.</p>
+<p>El principio es simple: si un servicio no cumple ninguna función útil en este equipo específico, debe estar deshabilitado. Cada servicio deshabilitado reduce la superficie de ataque.</p>
+<p>Los tres servicios que se deben deshabilitar en la mayoría de estaciones de trabajo militares que no cumplen funciones de servidor de impresión ni de administración remota:</p>
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Por qué deshabilitar</th>
+<th>Comando PowerShell</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Print Spooler</strong></td>
+<td>Vector del exploit PrintNightmare (CVE-2021-34527) — permite escalación de privilegios a SYSTEM y ejecución remota de código. Si el equipo no imprime, este servicio no tiene propósito.</td>
+<td><code>Stop-Service Spooler; Set-Service Spooler -StartupType Disabled</code></td>
+</tr>
+<tr>
+<td><strong>Remote Registry</strong></td>
+<td>Permite modificar el registro de Windows de forma remota. Nadie debe poder alterar el registro de un equipo desde la red — si se necesita hacer cambios, el Técnico debe estar físicamente frente al equipo.</td>
+<td><code>Stop-Service RemoteRegistry; Set-Service RemoteRegistry -StartupType Disabled</code></td>
+</tr>
+<tr>
+<td><strong>SMBv1 (protocolo, no servicio)</strong></td>
+<td>El protocolo SMB versión 1 es el vector que explotó WannaCry en 2017 para propagarse entre equipos en segundos. La versión moderna SMBv2/3 lo reemplaza completamente.</td>
+<td><code>Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="anatomia-del-comando-por-que-son-dos-pasos">Anatomía del comando: por qué son dos pasos<a class="headerlink" href="#anatomia-del-comando-por-que-son-dos-pasos" title="Permanent link">&para;</a></h3>
+<p>Cada celda de la tabla encadena dos comandos, y los dos hacen falta:</p>
+<ul>
+<li><code>Stop-Service</code> detiene el servicio <strong>ahora</strong> — pero si se queda ahí, el servicio revive en el siguiente reinicio, porque su tipo de arranque no cambió.</li>
+<li><code>Set-Service -StartupType Disabled</code> impide que <strong>vuelva a arrancar</strong> — pero si se queda ahí, el servicio sigue corriendo hasta el próximo reinicio.</li>
+</ul>
+<p>Uno actúa sobre el presente, el otro sobre el futuro. Omitir cualquiera de los dos deja el control a medias — y a medias significa que un reinicio (o la ausencia de uno) lo deshace.</p>
+<p>El tipo de arranque tiene tres valores, y la diferencia entre los dos últimos importa:</p>
+<table>
+<thead>
+<tr>
+<th>StartupType</th>
+<th>Comportamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Automatic</code></td>
+<td>Arranca solo, con el sistema</td>
+</tr>
+<tr>
+<td><code>Manual</code></td>
+<td>No arranca con el sistema, pero <strong>puede arrancarse a demanda</strong> — por otro proceso, por un desencadenador del sistema, o por un atacante con privilegios</td>
+</tr>
+<tr>
+<td><code>Disabled</code></td>
+<td>No arranca por ninguna vía hasta que alguien cambie este valor</td>
+</tr>
+</tbody>
+</table>
+<p><code>Manual</code> reduce ruido, no superficie: el código sigue disponible para ejecutarse. El control CIS pide <code>Disabled</code>.</p>
+<p>Dos precauciones completan el procedimiento:</p>
+<ul>
+<li><strong>Dependencias.</strong> Otros servicios pueden depender del que se va a deshabilitar. Comprobarlo antes: <code>(Get-Service Spooler).DependentServices</code> — si la lista no está vacía, evaluar el impacto antes de actuar.</li>
+<li><strong>Reversión.</strong> El cambio es reversible, y documentarlo es parte del parte: <code>Set-Service Spooler -StartupType Automatic; Start-Service Spooler</code> restaura el estado original.</li>
+</ul>
+<p>Verificar el estado actual de estos servicios antes de deshabilitar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c"># Verificar estado de los servicios y del protocolo SMBv1</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">Get-Service</span> <span class="n">-Name</span> <span class="n">Spooler</span><span class="p">,</span> <span class="n">RemoteRegistry</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Status</span><span class="p">,</span> <span class="n">StartType</span> <span class="n">-AutoSize</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">Get-WindowsOptionalFeature</span> <span class="n">-Online</span> <span class="n">-FeatureName</span> <span class="n">SMB1Protocol</span> <span class="p">|</span> <span class="nb">Format-List</span> <span class="n">FeatureName</span><span class="p">,</span> <span class="n">State</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Un <code>Format-List</code> por cada tipo de objeto</p>
+<p>Los dos comandos anteriores devuelven objetos de <strong>tipo distinto</strong>. Si se encadenan con <code>Select-Object</code> en una sola tubería, PowerShell formatea la tabla según el primer objeto que recibe y <strong>descarta el resto en silencio</strong>, sin dar error. El resultado es una verificación que parece haberse hecho y no se hizo. Por eso cada bloque de verificación lleva su propio <code>Format-Table</code> o <code>Format-List</code>.</p>
+</div>
+<hr />
+<h2 id="auditoria-de-inicio-de-sesion">Auditoría de Inicio de Sesión<a class="headerlink" href="#auditoria-de-inicio-de-sesion" title="Permanent link">&para;</a></h2>
+<p>Deshabilitar servicios es un control <strong>preventivo</strong>: reduce lo que un atacante puede alcanzar. Pero si alguien intenta entrar de todos modos, hace falta un control <strong>detectivo</strong> que deje constancia. Ese es el papel de la auditoría de inicio de sesión.</p>
+<p>Con la auditoría activada, Windows escribe en el Visor de eventos cada intento de inicio de sesión, exitoso o fallido. Sin ella, un ataque de fuerza bruta contra la estación no deja el menor rastro: el atacante puede probar contraseñas durante semanas y nadie podrá demostrarlo después.</p>
+<p>La auditoría se consulta y se configura con <code>auditpol.exe</code>, identificando la subcategoría por su <strong>GUID</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>{0CCE9215-69AE-11D9-BED3-505054503030}   →   Inicio de sesión
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Por qué un GUID y no el nombre</p>
+<p>El nombre de la subcategoría está traducido en un Windows en español. Pedirla como <em>"Logon"</em> falla; pedirla como <em>"Inicio de sesión"</em> funciona solo en español. El GUID es el mismo en todas las instalaciones del mundo. Es el tercer caso del mismo patrón que ya vimos con el RID 501 y el SID <code>S-1-5-32-544</code>.</p>
+<p>¿Y de dónde se copia el GUID la primera vez? De la lista que trae el propio sistema:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">auditpol</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">list</span> <span class="p">/</span><span class="n">subcategory</span><span class="p">:*</span> <span class="p">/</span><span class="n">v</span>
+</code></pre></div>
+<p>Ese comando —que a diferencia de <code>/get</code> no requiere elevación— imprime cada subcategoría con su nombre en el idioma del equipo y su GUID al lado. El flujo del Técnico es: localizar la fila por el nombre en <em>su</em> idioma, copiar el GUID, y a partir de ahí escribir todos los comandos y scripts con el GUID — que funcionan igual en cualquier Windows.</p>
+</div>
+<h3 id="practica-9-reducir-la-superficie-y-activar-el-registro">▸ Práctica 9 — Reducir la superficie y activar el registro<a class="headerlink" href="#practica-9-reducir-la-superficie-y-activar-el-registro" title="Permanent link">&para;</a></h3>
+<p><strong>Tiempo:</strong> 8 minutos.</p>
+<p><strong>Paso 1 — Registrar la línea base antes de tocar nada</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">Get-Service</span> <span class="n">-Name</span> <span class="n">Spooler</span><span class="p">,</span> <span class="n">RemoteRegistry</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Status</span><span class="p">,</span> <span class="n">StartType</span> <span class="n">-AutoSize</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nb">Get-WindowsOptionalFeature</span> <span class="n">-Online</span> <span class="n">-FeatureName</span> <span class="n">SMB1Protocol</span> <span class="p">|</span> <span class="nb">Format-List</span> <span class="n">FeatureName</span><span class="p">,</span> <span class="n">State</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">auditpol</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">get</span> <span class="p">/</span><span class="n">subcategory</span><span class="p">:</span><span class="s2">"{0CCE9215-69AE-11D9-BED3-505054503030}"</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> <code>Spooler</code> en <code>Running</code> / <code>Automatic</code>, <code>RemoteRegistry</code> detenido con inicio <code>Manual</code>, SMBv1 en un estado distinto de <code>Enabled</code>, y la auditoría de inicio de sesión <strong>sin configurar</strong>.</p>
+<div class="admonition question">
+<p class="admonition-title">Interpretación</p>
+<p>De estos cuatro elementos, tres son hallazgos y uno ya está correcto. ¿Cuál está bien? ¿Y por qué la auditoría desactivada es el hallazgo más difícil de detectar de todos los que se han visto en las dos partes?</p>
+</div>
+<p><strong>Paso 2 — Deshabilitar los servicios innecesarios</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="s1">'Spooler'</span><span class="p">,</span> <span class="s1">'RemoteRegistry'</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="nb">Stop-Service</span> <span class="n">-Name</span> <span class="nv">$_</span> <span class="n">-Force</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="nb">Set-Service</span> <span class="n">-Name</span> <span class="nv">$_</span> <span class="n">-StartupType</span> <span class="n">Disabled</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Paso 3 — Activar la auditoría de inicio de sesión</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">auditpol</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="nb">set </span><span class="p">/</span><span class="n">subcategory</span><span class="p">:</span><span class="s2">"{0CCE9215-69AE-11D9-BED3-505054503030}"</span> <span class="p">/</span><span class="n">success</span><span class="p">:</span><span class="n">enable</span> <span class="p">/</span><span class="n">failure</span><span class="p">:</span><span class="n">enable</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">auditpol</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">get</span> <span class="p">/</span><span class="n">subcategory</span><span class="p">:</span><span class="s2">"{0CCE9215-69AE-11D9-BED3-505054503030}"</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> la subcategoría <em>Inicio de sesión</em> configurada como <strong>Correcto y error</strong>.</p>
+<p><strong>Si no aparece:</strong> <code>auditpol</code> exige elevación. Si devuelve un error de acceso, la consola no está elevada.</p>
+<div class="admonition danger">
+<p class="admonition-title">Deshabilitar Spooler deja el equipo sin imprimir</p>
+<p>Es la decisión correcta en una estación que no imprime, y es exactamente lo que este laboratorio pide. Pero en un equipo real esa consecuencia se consulta antes de aplicarla: un control de seguridad que impide cumplir la misión no es un control, es una avería. Documentar el impacto forma parte del cambio.</p>
+</div>
+<h3 id="practica-10-validacion-final-y-entrega">▸ Práctica 10 — Validación final y entrega<a class="headerlink" href="#practica-10-validacion-final-y-entrega" title="Permanent link">&para;</a></h3>
+<p><strong>Tiempo:</strong> 9 minutos.</p>
+<p><strong>Paso 1 — Validar los ocho criterios de una sola vez</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nv">$EstadoDefender</span>     <span class="p">=</span> <span class="nb">Get-MpComputerStatus</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nv">$CuentaInvitado</span>     <span class="p">=</span> <span class="nb">Get-LocalUser</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">SID</span><span class="p">.</span><span class="n">Value</span> <span class="o">-match</span> <span class="s1">'-501$'</span> <span class="p">}</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nv">$CuentaTemporal</span>     <span class="p">=</span> <span class="nb">Get-LocalUser</span> <span class="n">-Name</span> <span class="s1">'operador_temp'</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nv">$SidsAdministradores</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-LocalGroupMember</span> <span class="n">-SID</span> <span class="s1">'S-1-5-32-544'</span><span class="p">).</span><span class="n">SID</span><span class="p">.</span><span class="n">Value</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="no">[pscustomobject]</span><span class="p">@{</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    <span class="n">InvitadoDeshabilitado</span>       <span class="p">=</span> <span class="o">-not</span> <span class="nv">$CuentaInvitado</span><span class="p">.</span><span class="n">Enabled</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    <span class="n">TemporalDeshabilitada</span>       <span class="p">=</span> <span class="o">-not</span> <span class="nv">$CuentaTemporal</span><span class="p">.</span><span class="n">Enabled</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>    <span class="n">TemporalYaNoEsAdministrador</span> <span class="p">=</span> <span class="o">-not</span> <span class="p">(</span><span class="nv">$SidsAdministradores</span> <span class="o">-contains</span> <span class="nv">$CuentaTemporal</span><span class="p">.</span><span class="n">SID</span><span class="p">.</span><span class="n">Value</span><span class="p">)</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>    <span class="n">SpoolerDeshabilitado</span>        <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Service</span> <span class="n">Spooler</span><span class="p">).</span><span class="n">StartType</span> <span class="o">-eq</span> <span class="s1">'Disabled'</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>    <span class="n">RemoteRegistryDeshabilitado</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Service</span> <span class="n">RemoteRegistry</span><span class="p">).</span><span class="n">StartType</span> <span class="o">-eq</span> <span class="s1">'Disabled'</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>    <span class="n">SMB1Deshabilitado</span>           <span class="p">=</span> <span class="p">(</span><span class="nb">Get-WindowsOptionalFeature</span> <span class="n">-Online</span> <span class="n">-FeatureName</span> <span class="n">SMB1Protocol</span><span class="p">).</span><span class="n">State</span> <span class="o">-ne</span> <span class="s1">'Enabled'</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>    <span class="n">DefenderTiempoRealActivo</span>    <span class="p">=</span> <span class="nv">$EstadoDefender</span><span class="p">.</span><span class="n">RealTimeProtectionEnabled</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>    <span class="n">FirmasDesactualizadas</span>       <span class="p">=</span> <span class="nv">$EstadoDefender</span><span class="p">.</span><span class="n">DefenderSignaturesOutOfDate</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="p">}</span> <span class="p">|</span> <span class="nb">Format-List</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> los siete primeros criterios en <code>True</code> y el último, <code>FirmasDesactualizadas</code>, en <code>False</code>. Cualquier otra combinación significa que un paso quedó a medias: revisarlo antes de entregar.</p>
+<p><strong>Paso 2 — Empaquetar la evidencia y sellarla con su hash</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nb">Stop-Transcript</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nv">$Paquete</span> <span class="p">=</span> <span class="s2">"C:\Evidencias-$env:USERNAME.zip"</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nb">Compress-Archive</span> <span class="n">-Path</span> <span class="n">C</span><span class="p">:\</span><span class="n">Lab</span><span class="p">\</span><span class="n">Evidencias</span><span class="p">\*</span> <span class="n">-DestinationPath</span> <span class="nv">$Paquete</span> <span class="n">-Force</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nb">Get-FileHash</span> <span class="nv">$Paquete</span> <span class="n">-Algorithm</span> <span class="n">SHA256</span> <span class="p">|</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>    <span class="nb">Format-List</span> <span class="n">Algorithm</span><span class="p">,</span> <span class="n">Hash</span><span class="p">,</span> <span class="n">Path</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="nb">Get-FileHash</span> <span class="nv">$Paquete</span> <span class="n">-Algorithm</span> <span class="n">SHA256</span> <span class="p">|</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>    <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">Hash</span> <span class="p">|</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>    <span class="nb">Set-Content</span> <span class="s2">"$Paquete.sha256"</span>
+</code></pre></div>
+<p><strong>Se espera ver:</strong> el ZIP creado en <code>C:\</code>, su hash SHA-256 en pantalla, y un archivo <code>.sha256</code> junto al paquete.</p>
+<div class="admonition note">
+<p class="admonition-title">Para qué sirve el hash</p>
+<p>El hash es la huella digital del paquete. Si un solo byte cambia entre la entrega y la revisión, el hash deja de coincidir. Es el mismo principio de <strong>integridad</strong> del Incidente 2 de la Parte 1, aplicado ahora al propio trabajo del alumno.</p>
+</div>
+<p><strong>Paso 3 — Entregar</strong></p>
+<p>Comunicar al instructor el nombre del paquete y su hash, por el medio que él indique. El instructor recogerá <code>C:\Evidencias-&lt;usuario&gt;.zip</code> y su archivo <code>.sha256</code>.</p>
+<div class="admonition danger">
+<p class="admonition-title">El snapshot se restaura al terminar</p>
+<p>Todo lo que quede dentro de la máquina virtual desaparece cuando el instructor restaura <code>01-MISION-CONTROLES</code>. <strong>La entrega no está hecha hasta que el instructor la confirma.</strong></p>
+</div>
+<hr />
+<h2 id="contexto-militar">Contexto militar<a class="headerlink" href="#contexto-militar" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Aplicación en entorno castrense</p>
+<p>Antes de conectar una estación de trabajo a la red de unidad, el Técnico ejecuta la siguiente secuencia de auditoría:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c"># 1. Auditar cuentas locales</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nb">Get-LocalUser</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Enabled</span><span class="p">,</span> <span class="n">LastLogon</span><span class="p">,</span> <span class="n">SID</span> <span class="n">-AutoSize</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c"># 2. Verificar miembros del grupo Administradores (por SID, no por nombre)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="nb">Get-LocalGroupMember</span> <span class="n">-SID</span> <span class="s1">'S-1-5-32-544'</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">Name</span><span class="p">,</span> <span class="n">SID</span> <span class="n">-AutoSize</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c"># 3. Verificar estado de servicios críticos</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="nb">Get-Service</span> <span class="n">-Name</span> <span class="n">Spooler</span><span class="p">,</span> <span class="n">RemoteRegistry</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Status</span><span class="p">,</span> <span class="n">StartType</span> <span class="n">-AutoSize</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="c"># 4. Verificar SMBv1 (debe estar deshabilitado)</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="nb">Get-WindowsOptionalFeature</span> <span class="n">-Online</span> <span class="n">-FeatureName</span> <span class="n">SMB1Protocol</span> <span class="p">|</span> <span class="nb">Format-List</span> <span class="n">FeatureName</span><span class="p">,</span> <span class="n">State</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="c"># 5. Verificar que la auditoría de inicio de sesión está activa</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="n">auditpol</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">get</span> <span class="p">/</span><span class="n">subcategory</span><span class="p">:</span><span class="s2">"{0CCE9215-69AE-11D9-BED3-505054503030}"</span>
+</code></pre></div>
+<p>Los resultados se documentan en el registro de auditoría del equipo: fecha, nombre del Técnico, estado encontrado y acciones correctivas tomadas. Este registro se reporta al oficial de seguridad de la unidad antes de la integración a la red. El control no es burocrático — es la evidencia de que el equipo fue verificado antes de conectarse y que alguien es responsable de su estado.</p>
+</div>
+<hr />
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<ol>
+<li>La auditoría de cuentas locales (<code>Get-LocalUser</code> y <code>Get-LocalGroupMember -SID 'S-1-5-32-544'</code>) revela identidades con acceso al sistema — cualquier cuenta con privilegios de Administrador que no figure en el acta de autorizaciones es una señal de alarma.</li>
+<li><strong>Una identidad no se juzga sola, se contrasta contra su autorización.</strong> Sin el acta de la estación no hay forma de decidir si una cuenta sobra: lo que convierte a <code>operador_temp</code> en hallazgo no es su nombre, es su ausencia del documento.</li>
+<li><strong>El orden es evidencia → contraste → decisión documentada → corrección → verificación.</strong> Deshabilitar antes de registrar destruye información y avisa a un posible atacante. Y nunca se borra una cuenta: se retira el privilegio y se deshabilita, que es reversible.</li>
+<li>La política de contraseñas se aplica con <code>net.exe accounts</code> y se conserva como evidencia con <code>secedit.exe /export</code> — el mínimo CIS L1 es 14 caracteres, vigencia de 60 días y bloqueo a los 5 intentos fallidos.</li>
+<li>Print Spooler, Remote Registry y SMBv1 deben estar deshabilitados en equipos que no los necesitan — cada uno tiene vulnerabilidades críticas documentadas (PrintNightmare, administración remota del registro, WannaCry).</li>
+<li>La <strong>auditoría de inicio de sesión</strong> es el control detectivo que acompaña a los preventivos: sin ella, un ataque de fuerza bruta contra la estación no deja rastro alguno.</li>
+<li>Los identificadores que no dependen del idioma son la única forma fiable de escribir comandos que funcionen en las veinte estaciones: <strong>RID 501</strong> (Invitado), <strong>SID <code>S-1-5-32-544</code></strong> (Administradores), <strong>GUID <code>{0CCE9215-…}</code></strong> (Inicio de sesión).</li>
+<li>Todo hallazgo de auditoría se documenta, se sella con su hash y se reporta al oficial de seguridad antes de conectar el equipo a la red.</li>
+</ol>
+<hr />
+<p><em>Siguiente: <a href="../antivirus-avanzados-p1/">Antivirus Avanzados (Parte 1)</a></em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
