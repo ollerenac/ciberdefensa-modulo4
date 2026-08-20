@@ -82,10 +82,17 @@ sudo poweroff
 ```
 
 **7. Con la VM apagada**, en el **VirtualBox Manager** seleccionar la VM →
-**Configuración → Pantalla** (*Settings → Display*) y subir **Memoria de vídeo**
-(*Video Memory*) a **128 MB** (el valor por defecto puede quedarse corto para el
-escritorio). Verificar también en **Configuración → Red** que el Adaptador 2 esté
-en modo **Solo-anfitrión** (*Host-only*). Luego **encender la VM**.
+**Configuración** (*Settings*) y ajustar:
+
+| Sección | Ajuste | Valor |
+|---------|--------|-------|
+| **General → Features** | Portapapeles compartido (*Shared Clipboard*) | **Bidireccional** |
+| **Display** | Memoria de vídeo (*Video Memory*) | **128 MB** |
+| **Display** | Aceleración 3D (*3D Acceleration*) | **Desactivada** |
+| **Red / Network** | Adaptador 2 | **Solo-anfitrión** (*Host-only*) |
+
+Luego **encender la VM**. El portapapeles bidireccional permite copiar y pegar
+texto entre el host y la VM en ambos sentidos.
 
 !!! warning "No usar los paquetes virtualbox-guest-* de APT"
     Los paquetes `virtualbox-guest-utils` / `virtualbox-guest-x11` de los
@@ -94,14 +101,10 @@ en modo **Solo-anfitrión** (*Host-only*). Luego **encender la VM**.
     portapapeles compartido no funcionan. Si ya se instalaron, retirarlos antes
     de usar el CD: `sudo apt remove -y virtualbox-guest-utils virtualbox-guest-x11`.
 
-Ya con la VM encendida de nuevo, en la **ventana de VirtualBox** de la VM:
-
-- **Dispositivos → Portapapeles compartido → Bidireccional** (*Devices → Shared
-  Clipboard → Bidirectional*) — copiar y pegar texto entre host y VM en ambos
-  sentidos.
-- **Ver → Ajustar automáticamente el tamaño de pantalla del invitado** (*View →
-  Auto-resize Guest Display*) debe estar marcado — el escritorio de la VM sigue
-  la forma de la ventana al redimensionarla.
+Ya con la VM encendida de nuevo, en la **ventana de VirtualBox** de la VM
+verificar que **Ver → Ajustar automáticamente el tamaño de pantalla del invitado**
+(*View → Auto-resize Guest Display*) esté marcado — el escritorio de la VM debe
+seguir la forma de la ventana al redimensionarla.
 
 !!! tip "Si copiar/pegar o el ajuste de pantalla no funcionan"
     Ubuntu 24.04 inicia sesión con Wayland por defecto y ahí el portapapeles
