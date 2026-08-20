@@ -77,8 +77,15 @@ sudo sh /media/$USER/VBox_GAs_*/VBoxLinuxAdditions.run
 # Si el CD no se montó solo:
 #   sudo mount /dev/cdrom /mnt && sudo sh /mnt/VBoxLinuxAdditions.run
 
-sudo reboot
+# Apagar (no reiniciar): con la VM apagada se ajusta su configuración en VirtualBox
+sudo poweroff
 ```
+
+**7. Con la VM apagada**, en el **VirtualBox Manager** seleccionar la VM →
+**Configuración → Pantalla** (*Settings → Display*) y subir **Memoria de vídeo**
+(*Video Memory*) a **128 MB** (el valor por defecto puede quedarse corto para el
+escritorio). Verificar también en **Configuración → Red** que el Adaptador 2 esté
+en modo **Solo-anfitrión** (*Host-only*). Luego **encender la VM**.
 
 !!! warning "No usar los paquetes virtualbox-guest-* de APT"
     Los paquetes `virtualbox-guest-utils` / `virtualbox-guest-x11` de los
@@ -87,7 +94,7 @@ sudo reboot
     portapapeles compartido no funcionan. Si ya se instalaron, retirarlos antes
     de usar el CD: `sudo apt remove -y virtualbox-guest-utils virtualbox-guest-x11`.
 
-Tras el reinicio, en la **ventana de VirtualBox** de la VM:
+Ya con la VM encendida de nuevo, en la **ventana de VirtualBox** de la VM:
 
 - **Dispositivos → Portapapeles compartido → Bidireccional** (*Devices → Shared
   Clipboard → Bidirectional*) — copiar y pegar texto entre host y VM en ambos
