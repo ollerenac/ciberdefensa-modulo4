@@ -4,6 +4,7 @@ site/
 # GSD / Claude — artefactos de planificación privados
 .planning/
 .claude/
+.worktrees/
 *.claude*
 CLAUDE.md
 
