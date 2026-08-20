@@ -165,13 +165,16 @@ debe ser idéntico al del Paso 7 — incluidos los comentarios `/* */`, que viaj
 el archivo porque son parte de las reglas (`-m comment`). Ese es el argumento de
 venta del módulo: comentarios que sobreviven al ciclo save/restore.
 
-**Problemas comunes con la captura:** archivo **vacío** = ejecutó `iptables-save`
-sin `sudo` (sin root no lee las tablas, y la redirección crea el archivo igual).
-*Permission denied* al escribir = quedó un archivo previo propiedad de root (de un
-intento con `sudo tee`); se elimina con `sudo rm` y se recaptura. Por eso la
-lección usa `sudo iptables-save > archivo`: sudo para leer las tablas, redirección
-del shell del alumno para que el archivo quede a su nombre. El `cat` inmediato
-detecta la captura vacía en el acto.
+**Problemas comunes con la captura:** archivo **vacío** tiene dos causas y solo
+una es error. (1) Legítima: no hay tablas registradas en el kernel (VM recién
+arrancada sin firewall tocado) — `sudo nft list ruleset` sin salida lo confirma;
+en ese caso vacío = estado real. (2) Error: ejecutó `iptables-save` sin `sudo`
+(imprime *Permission denied* en pantalla y la redirección crea el archivo igual).
+*Permission denied* al **escribir** = quedó un archivo previo propiedad de root
+(de un intento con `sudo tee`); se elimina con `sudo rm` y se recaptura. Por eso
+la lección usa `sudo iptables-save > archivo`: sudo para leer las tablas,
+redirección del shell del alumno para que el archivo quede a su nombre. El `cat`
+inmediato revela la captura vacía en el acto para clasificarla.
 
 ### Paso 11 — Persistencia real
 

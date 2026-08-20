@@ -95,7 +95,7 @@ echo "Interfaz: $LAB_IF — IP: $LAB_IP — Subred del lab: $LAB_NET"
 ```bash
 # Capturar el estado actual antes de trabajar
 sudo iptables-save > ~/ruleset-inicial-p2.txt
-cat ~/ruleset-inicial-p2.txt    # verificar: nunca debe quedar vacío
+cat ~/ruleset-inicial-p2.txt    # vacío = la VM no tenía reglas cargadas (válido; ver nota en Parte 1)
 
 # Reset seguro: políticas ACCEPT PRIMERO, flush después
 sudo iptables -P INPUT ACCEPT
@@ -373,6 +373,8 @@ MASQUERADE en la tabla `nat`. Faltando cualquiera, no hay router.
 # Cerrar los servidores de Python (80 y 443) si siguen corriendo (Ctrl+C en sus terminales)
 
 # Restaurar el ruleset capturado al inicio de este lab
+# (si ~/ruleset-inicial-p2.txt quedó vacío, usar en su lugar el reset seguro
+#  del Paso 2: políticas ACCEPT primero, después -F -X -Z)
 sudo iptables-restore < ~/ruleset-inicial-p2.txt
 # Volver a persistir el estado LIMPIO, para que el lab no quede activo en el arranque
 sudo netfilter-persistent save

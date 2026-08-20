@@ -257,11 +257,19 @@ Antes de tocar cualquier regla, guardar el estado actual para restaurarlo al fin
 # Exportar el ruleset actual a un archivo
 # (sudo lee las tablas; la redirección > deja el archivo como propiedad del alumno)
 sudo iptables-save > ~/ruleset-inicial.txt
-# Verificar la captura: debe mostrar *filter ... COMMIT — NUNCA quedar vacío
+# Verificar la captura (puede quedar vacío — ver la nota siguiente)
 cat ~/ruleset-inicial.txt
 # Ver el estado actual con detalles
 sudo iptables -L -v -n
 ```
+
+!!! note "¿El archivo quedó vacío? Es normal en una VM recién arrancada"
+    `iptables-save` solo exporta las tablas que ya existen en el kernel. En una VM
+    donde nadie ha tocado el firewall todavía no existe ninguna, y la salida es
+    vacía — aunque `iptables -L` muestre las chains con política ACCEPT (esa vista
+    es el estado por defecto, no una tabla real). **Archivo vacío = no había
+    reglas**: el estado inicial es "sin reglas, todo permitido". Anotarlo en el
+    cuaderno — importa para el Paso 11.
 
 !!! note "Por qué capturar primero"
     Una máquina real no siempre arranca con el firewall vacío. Trabajar sin snapshot
@@ -599,6 +607,12 @@ sudo iptables-restore < ~/ruleset-inicial.txt
 sudo iptables -L -v -n
 ```
 
+!!! warning "¿El snapshot del Paso 2 quedó vacío?"
+    `iptables-restore` con un archivo vacío no aplica **nada** — dejaría las reglas
+    del laboratorio activas. Si el estado inicial era "sin reglas" (archivo vacío),
+    restaurar significa volver a ese estado con el reset seguro del Paso 3:
+    políticas ACCEPT primero, después `-F`, `-X` y `-Z`.
+
 !!! note "Ciclo completo"
     Capturar → trabajar → restaurar. Ningún laboratorio debe dejar el sistema en un
     estado distinto al que tenía al empezar. La Parte 2 repite este mismo patrón.
@@ -609,11 +623,13 @@ Al terminar todas las partes, verificar:
 
 - [ ] `iptables --version` muestra la versión instalada (v1.8.x, backend nf_tables)
 - [ ] Existe `~/ruleset-inicial.txt` con el estado previo al laboratorio
+      (vacío es válido si la VM no tenía reglas cargadas)
 - [ ] Con la política DROP activa: SSH (22) y HTTP (80) accesibles desde Windows,
       puerto 8080 (con servicio escuchando y sin regla) inaccesible
 - [ ] La regla DROP insertada con `-I INPUT 1` bloqueó el ping a 8.8.8.8 y su
       contador lo demuestra
-- [ ] El ruleset final (tras `iptables-restore`) coincide con el inicial
+- [ ] El ruleset final (tras `iptables-restore`, o el reset seguro si el snapshot
+      quedó vacío) coincide con el inicial
 
 ## Complemento OFFen
 
