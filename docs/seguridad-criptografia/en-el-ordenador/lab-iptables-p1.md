@@ -45,9 +45,9 @@ sudo cp /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.so
 sudo apt update && sudo apt full-upgrade -y
 
 # 3. Instalar los paquetes del laboratorio
-#    (python3 ya viene incluido en Ubuntu 24.04; curl se instala explícitamente
-#    por si la instalación fue mínima)
-sudo apt install -y openssh-server netfilter-persistent tcpdump curl
+#    (python3 ya viene incluido en Ubuntu 24.04; curl y bash-completion se
+#    instalan explícitamente por si la instalación fue mínima)
+sudo apt install -y openssh-server netfilter-persistent tcpdump curl bash-completion
 
 # 4. Verificaciones
 iptables --version          # se espera: iptables v1.8.x (nf_tables)
@@ -99,6 +99,14 @@ copiar y pegar texto entre el host Windows y la VM en ambos sentidos.
     Al verificar la versión aparecerá `(nf_tables)`: es el nombre del motor
     interno que iptables usa por debajo en Ubuntu 24.04. No afecta al laboratorio
     — aquí se usan únicamente comandos `iptables`.
+
+!!! tip "Autocompletado con Tab (bash-completion)"
+    Con `bash-completion` instalado, la tecla **Tab** completa comandos, rutas y
+    subcomandos: escribir `sudo netf` + Tab completa a `netfilter-persistent`;
+    `systemctl sta` + Tab ofrece `start`/`status`. **Doble Tab** lista todas las
+    opciones posibles. No requiere configuración: Ubuntu lo activa solo al abrir
+    una terminal nueva. Verificar con `type _init_completion` — debe responder
+    "es una función" (si no, cerrar y abrir la terminal).
 
 !!! warning "netfilter-persistent al instalar"
     Si el instalador pregunta si desea guardar las reglas actuales (IPv4/IPv6),
