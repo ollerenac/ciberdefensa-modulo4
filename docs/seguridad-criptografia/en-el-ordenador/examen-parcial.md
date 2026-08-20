@@ -113,7 +113,7 @@
 
 ---
 
-**P11.** ¿Por qué es importante controlar el tráfico **saliente** (outbound) en el cortafuegos, además del tráfico entrante?
+**P11.** ¿Por qué es importante controlar el tráfico **saliente** (outbound) en el firewall, además del tráfico entrante?
 
 - (A) Para mejorar la velocidad de descarga de actualizaciones de Windows
 - (B) Para impedir que malware instalado en el equipo se comunique con servidores de comando y control externos

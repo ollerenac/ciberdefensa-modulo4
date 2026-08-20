@@ -60,14 +60,14 @@ Start-Transcript -Path C:\Lab\Evidencias\01-reconocimiento.txt -Force
 
 ## Qué es un control de seguridad
 
-Un **control de seguridad** es cualquier medida —técnica, organizativa o física— que se implanta para reducir un riesgo. El cortafuegos es un control, pero también lo son la política de contraseñas, el registro de auditoría y la orden que prohíbe conectar memorias USB ajenas.
+Un **control de seguridad** es cualquier medida —técnica, organizativa o física— que se implanta para reducir un riesgo. El firewall es un control, pero también lo son la política de contraseñas, el registro de auditoría y la orden que prohíbe conectar memorias USB ajenas.
 
 Los controles se clasifican según **el momento en que actúan** respecto al incidente:
 
 | Tipo | Cuándo actúa | Qué hace | Ejemplo en la estación |
 |------|-------------|----------|------------------------|
 | **Preventivo** | Antes | Impide que el incidente llegue a ocurrir | Cuenta Invitado deshabilitada; SMBv1 retirado; contraseña de 14 caracteres |
-| **Detectivo** | Durante o después | No impide el hecho, pero deja constancia de que ocurrió | Auditoría de inicio de sesión; registro del cortafuegos; transcripción de PowerShell |
+| **Detectivo** | Durante o después | No impide el hecho, pero deja constancia de que ocurrió | Auditoría de inicio de sesión; registro del firewall; transcripción de PowerShell |
 | **Correctivo** | Después | Restablece el estado correcto una vez detectado el problema | Cuarentena del antivirus; restauración de un snapshot; retirada de privilegios de una cuenta |
 
 !!! note "Ninguno basta por sí solo"
@@ -498,7 +498,7 @@ El panel principal muestra seis áreas de protección, cada una representada por
 |-------|------------|-----------------|
 | **Virus & threat protection** | Antivirus (Microsoft Defender) y gestión de amenazas | Integridad (previene modificaciones maliciosas) |
 | **Account protection** | Contraseña, Windows Hello, opciones de inicio de sesión | Confidencialidad (controla quién accede) |
-| **Firewall & network protection** | Estado del cortafuegos para cada perfil de red | Disponibilidad (bloquea ataques de red) |
+| **Firewall & network protection** | Estado del firewall para cada perfil de red | Disponibilidad (bloquea ataques de red) |
 | **App & browser control** | SmartScreen, protección de reputación, exploit protection | Integridad (previene ejecución de código malicioso) |
 | **Device security** | TPM, Secure Boot, Core Isolation | Integridad (garantiza integridad del hardware y arranque) |
 | **Device performance & health** | Estado general del sistema, actualizaciones, almacenamiento | Disponibilidad (sistema funciona correctamente) |
@@ -533,7 +533,7 @@ Revisar el panel principal y guardar una captura con el nombre exacto `C:\Lab\Ev
 !!! warning "El paso 2 es el que se olvida"
     Sin hacer clic en el aviso, la captura se queda solo en el portapapeles y **no existe como archivo**. Comprobarlo con `Test-Path C:\Lab\Evidencias\01-seguridad-windows.png`, que debe devolver `True`.
 
-**Paso 2 — Contrastar el panel con el estado real de Defender y del cortafuegos**
+**Paso 2 — Contrastar el panel con el estado real de Defender y del firewall**
 
 ```powershell
 Get-MpComputerStatus |
@@ -546,7 +546,7 @@ Get-NetFirewallProfile |
     Format-Table Name, Enabled
 ```
 
-**Se espera ver:** `AntivirusEnabled` y `RealTimeProtectionEnabled` en `True`, `DefenderSignaturesOutOfDate` en `False`, y los tres perfiles del cortafuegos (Dominio, Privado, Público) en `True`. La fecha de firmas depende del día de la práctica.
+**Se espera ver:** `AntivirusEnabled` y `RealTimeProtectionEnabled` en `True`, `DefenderSignaturesOutOfDate` en `False`, y los tres perfiles del firewall (Dominio, Privado, Público) en `True`. La fecha de firmas depende del día de la práctica.
 
 **Si no aparece:** en esta Parte 1 **no se corrige nada**. Registrar el hallazgo, detenerse y avisar al instructor. La corrección corresponde a la Parte 2.
 

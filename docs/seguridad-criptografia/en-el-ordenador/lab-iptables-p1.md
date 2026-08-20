@@ -74,7 +74,7 @@ curl -4 -I http://example.com   # debe devolver una respuesta HTTP (exit code 0)
     Todos los paquetes de este lab provienen de `main`.
 
 !!! note "¿Qué es iptables?"
-    `iptables` es el cortafuegos de Linux: el programa con el que se decide qué
+    `iptables` es el firewall de Linux: el programa con el que se decide qué
     conexiones de red pueden entrar o salir de la máquina. Se le dan **reglas** —
     "lo que venga a este puerto, déjalo pasar; todo lo demás, descártalo" — y el
     sistema las revisa en orden con cada paquete que llega. Cumple el mismo papel
