@@ -56,12 +56,12 @@ All 4 phases shipped, code-reviewed, fixed, and verified. The MkDocs Material co
 
 ## Session Continuity
 
-Last session: 2026-08-20T11:27:10Z
-Stopped at: Pausa a mitad de la Tarea 6 (UAT en vivo). UAT de iptables P1 ejecutada en VM real con 10+ hallazgos corregidos y pusheados; P2 revisada (7d06771) pero su UAT en VM pendiente. Lab Squid migrado a la VM Ubuntu (160355b) y su UAT a mitad: 403 diagnosticado (config anexada al default), fix entregado, falta confirmar 200 OK. Fuga corregida: planes MoodleCloud retirados del sitio público (b0ed7d9, 404 verificado). OJO — dos workstreams en paralelo: la fase 2.1 se documenta en `.planning/phases/02.1-correccion-iptables/.continue-here.md` (autoritativo); `.planning/HANDOFF.json` y `.planning/.continue-here.md` pertenecen al workstream MoodleCloud (tarea 5/6, sesión paralela en `.worktrees/examen-moodlecloud`, rama feature/examen-moodlecloud) — no confundir. La versión de HANDOFF.json commiteada en `aca217f` (fase 2.1) fue sobrescrita en disco por la sesión MoodleCloud minutos después.
-Resume file: .planning/phases/02.1-correccion-iptables/.continue-here.md
+Last session: 2026-08-24T05:29:38-05:00
+Stopped at: Sección Snort/LAB-04 reescrita tras UAT real en VM-WIN. Configuración mínima, ICMP loopback y TCP/23 con `Test-NetConnection` validados; `mkdocs build --strict` verde. Faltan la UAT HTTP saliente sobre el adaptador NAT y la UAT de `threshold` antes de declarar el laboratorio completo. Los workstreams previos siguen pausados y separados: fase 2.1 en `.planning/phases/02.1-correccion-iptables/.continue-here.md`; MoodleCloud en `.planning/HANDOFF.json` y `.planning/.continue-here.md` dentro de su contexto correspondiente.
+Resume file: docs/seguridad-criptografia/en-la-red/ids-ips-p2.md
 Leak confirmed 2026-08-13: los 5 exámenes publican su clave de respuestas inline en bloques `!!! danger "Solo instructor"` (renderizan visibles), y docs/instructor/ publica 7 soluciones por URL directa pese a estar fuera del nav
-Carried concern: el disco del anfitrión se reportó al 98 % en la sesión anterior; `ova/VM-WIN-SI.ova` (32 GB) seguía pendiente de retiro. Revalidar espacio antes de trabajo intensivo con snapshots o exportaciones.
-Resume reconciliation: `main` está sincronizada con `origin/main` en `45761d7`. Los cambios de Defender y Windows Firewall ya fueron publicados; el trabajo pendiente se limita a planificar, corregir y validar iptables.
+Carried concern: el disco del anfitrión está al 94 % con 59 GB libres; evitar snapshots o exportaciones grandes hasta recuperar espacio.
+Resume reconciliation: la actualización Snort se preparó sobre `main` basada en `6000b1d`. No mezclar este trabajo con la rama MoodleCloud.
 
 ## Phase 01 — Site Foundation ✅
 

@@ -16,7 +16,7 @@
 - `lab-iptables-p1-solucion.md` — Solución completa: Lab Filtrado con Iptables (Parte 1)
 - `lab-iptables-p2-solucion.md` — Solución completa: Lab Filtrado con Iptables (Parte 2)
 - `lab-squid-solucion.md` — Solución completa: Lab Proxy Squid
-- `lab-suricata-solucion.md` — Solución completa: Lab IDS Suricata
+- `lab-suricata-solucion.md` — Solución completa: Lab IDS con Snort 2.9.20 (nombre histórico del archivo)
 - `lab-honeypot-solucion.md` — Solución completa: Lab Honeypot
 - `lab-auditoria-p1-solucion.md` — Solución completa: Lab Auditoría Interna (Parte 1)
 - `lab-auditoria-p2-solucion.md` — Solución completa: Lab Auditoría Interna (Parte 2)

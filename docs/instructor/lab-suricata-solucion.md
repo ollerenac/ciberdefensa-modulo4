@@ -5,213 +5,322 @@
 
 # SOLUCIÓN: Lab IDS con Snort en Windows (LAB-04)
 
-!!! info "Nota histórica sobre el nombre del archivo"
-    El nombre de este archivo es `lab-suricata-solucion.md` por razones históricas del esquema de nombres del programa original. El contenido corresponde al lab de **Snort 2.9.x en Windows 11**, que es la herramienta elegida en FEATURES.md por disponibilidad de instalador documentado para Windows.
+!!! info "Nota histórica sobre el nombre"
+    El archivo conserva el nombre `lab-suricata-solucion.md` por razones históricas. El laboratorio utiliza **Snort 2.9.20 x64**, no Suricata.
 
 !!! danger "Solo para instructores"
-    Este documento contiene las configuraciones esperadas, reglas completas, alertas de referencia y criterios de calificación. No mostrarlo en el proyector durante el lab.
+    Este documento contiene configuraciones, reglas completas, alertas esperadas, diagnóstico y rúbrica. No publicarlo ni proyectarlo durante el trabajo autónomo del alumno.
+
+!!! warning "Alcance tecnológico"
+    Snort 2 es una rama heredada. Cisco todavía publica 2.9.20, pero no certifica Windows 11 como plataforma verificada. La formulación correcta es: “laboratorio validado por el curso en una VM Windows 11 x64”. No presentarlo como arquitectura recomendada para un despliegue nuevo.
 
 ---
 
-## Prerrequisito de Instalación — Verificar ANTES del lab
+## Estado de validación en la VM de referencia
 
-**Orden de instalación obligatorio:** Npcap PRIMERO, Snort DESPUÉS.
+| Componente | Evidencia | Estado al 24-08-2026 |
+|------------|-----------|----------------------|
+| Snort | `snort.exe -V` muestra `2.9.20-WIN64` | Validado |
+| Npcap | `snort.exe -W` enumera Host-only, NAT y `NPF_Loopback` | Validado |
+| Configuración | `snort.exe -T -c ...snort-lab.conf` lee 3 reglas | Validado |
+| ICMP | Alerta SID `1000010` sobre `127.0.0.1` | UAT validada |
+| TCP/23 | Alerta SID `1000011` mediante `Test-NetConnection` | UAT validada |
+| HTTP saliente | SID `1000012` sobre adaptador NAT | Pendiente de UAT final |
+| `threshold` | Una alerta para diez Echo Request | Pendiente de UAT final |
 
-1. **Instalar Npcap** desde [npcap.com](https://npcap.com). La opción "WinPcap API-compatible Mode" **DEBE** estar marcada durante la instalación. Sin esta casilla marcada, Snort no detecta las interfaces de red y falla con error fatal al iniciar.
+No declarar el laboratorio completamente validado hasta cerrar las dos últimas filas en la VM.
 
-2. **Instalar Snort 2.9.x** desde [snort.org](https://www.snort.org). Verificar que la versión sea 2.9.x (no 3.x — la sintaxis de `snort.conf` cambió completamente entre versiones y los materiales del lab son incompatibles con Snort 3).
+---
 
-3. **Descargar Community Rules** desde snort.org/downloads (no requiere registro). Descomprimir el contenido en `C:\Snort\rules\`. Verificar que existe el archivo `C:\Snort\rules\community.rules`.
+## Prerrequisitos — Preparar antes de la clase
 
-4. **Tener los archivos MSI en USB** para distribución offline — la descarga puede tardar en aulas con red lenta.
+### 1. Resolver la licencia de Npcap
 
-5. **Verificar identificadores de interfaz antes del lab:**
-   ```cmd
-   C:\Snort\bin\snort.exe -W
-   ```
-   Este comando lista las interfaces disponibles con sus números. Anotar el número de la interfaz de loopback (generalmente se llama "Adapter for loopback traffic capture" o similar). Se usa con `-i <número>` al ejecutar Snort.
+Npcap Free permite normalmente hasta cinco instalaciones cuando se usa con Snort y no autoriza redistribuir libremente el instalador. Si el aula supera ese número, gestionar autorización o licencia institucional antes de clonar las VMs. No incorporar el instalador de Npcap a una ISO o USB de distribución sin revisar esos términos.
+
+### 2. Confirmar Windows x64 y privilegios
+
+```powershell
+Get-CimInstance Win32_OperatingSystem | Select-Object OSArchitecture
+```
+
+Usar una cuenta que pueda elevar mediante UAC. La salida debe indicar `64-bit`.
+
+### 3. Instalar Visual C++ Redistributable x64
+
+Descargar [`VC_redist.x64.exe`](https://aka.ms/vc14/vc_redist.x64.exe) directamente desde Microsoft e instalarlo antes de Snort. No usar solo la edición x86: `Snort_2_9_20_Installer.x64.exe` es un binario x64 e importa `VCRUNTIME140.dll`.
+
+Si `snort.exe -V` ya funciona, el runtime está satisfecho y no debe reinstalarse para resolver errores de reglas, interfaces o configuración.
+
+### 4. Instalar Npcap
+
+1. Descargar Npcap 1.88 —versión de la VM validada— desde [npcap.com](https://npcap.com/#download).
+2. Ejecutarlo como administrador.
+3. Confirmar **Install Npcap in WinPcap API-compatible Mode**.
+4. No instalar el WinPcap antiguo en paralelo.
+5. Mantener `NPF_Loopback`; reemplaza al antiguo adaptador de loopback.
+
+### 5. Instalar Snort 2.9.20 x64
+
+Descargar `Snort_2_9_20_Installer.x64.exe` desde la [página oficial](https://www.snort.org/downloads/) e instalar en `C:\Snort\`.
+
+Los instaladores de Snort y Npcap son ejecutables, no archivos MSI.
+
+### 6. Verificar por capas
+
+```powershell
+C:\Snort\bin\snort.exe -V
+C:\Snort\bin\snort.exe -W
+```
+
+No continuar hasta que:
+
+- `-V` muestre `Version 2.9.20-WIN64`.
+- `-W` enumere el adaptador NAT y `Adapter for loopback traffic capture`.
+
+En la VM de referencia:
+
+| Índice observado | IP | Uso |
+|------------------|----|-----|
+| 1 | `192.168.56.102` | Host-only |
+| 2 | `10.0.2.15` | NAT/HTTP saliente |
+| 3 | `127.0.0.1` mediante `NPF_Loopback` | ICMP y TCP locales |
+
+Los índices pueden cambiar después de modificar la VM. Redescubrirlos antes de cada clase.
 
 ---
 
 ## snort.conf Mínimo Funcional
 
-El `snort.conf` oficial incluido en el instalador tiene aproximadamente 500 líneas. Para el lab, usar esta versión mínima: copiar en un nuevo archivo `C:\Snort\etc\snort-lab.conf`.
+No utilizar el `C:\Snort\etc\snort.conf` completo para LAB-04. La copia incluida con el instalador puede conservar la directiva dinámica comentada con una ruta Unix:
 
 ```text
-# Ruta del directorio de reglas
+#dynamicpreprocessor directory /usr/local/lib/snort_dynamicpreprocessor/
+```
+
+Aunque `sf_ftptelnet.dll` exista en Windows, Snort no la carga y termina en `Unknown preprocessor: "ftp_telnet"`. No solucionar esto eliminando preprocesadores uno por uno: el laboratorio no necesita esa plantilla.
+
+Crear `C:\Snort\etc\snort-lab.conf`:
+
+```powershell
+@'
+# Configuración mínima para LAB-04
+
+ipvar HOME_NET [127.0.0.1/32,10.0.2.0/24,192.168.56.0/24]
+ipvar EXTERNAL_NET any
+
 var RULE_PATH C:\Snort\rules
 
-# Red a proteger (ajustar a la IP del aula)
-ipvar HOME_NET 192.168.1.0/24
-
-# Variables de puertos estándar (mínimo requerido por el parser de Snort)
-portvar HTTP_PORTS 80
-portvar SHELLCODE_PORTS !80
-
-# Incluir las reglas de la comunidad (opcional en el lab — puede comentarse para simplificar)
-include $RULE_PATH\community.rules
-
-# Incluir las reglas personalizadas del alumno
 include $RULE_PATH\mis-reglas.rules
+'@ | Set-Content -Path C:\Snort\etc\snort-lab.conf -Encoding ascii
 ```
 
-!!! note "Nota para el instructor"
-    Ejecutar siempre con el archivo minimizado: `snort.exe -c C:\Snort\etc\snort-lab.conf`. Si el alumno usa el `snort.conf` completo incluido en el instalador, puede tardar varios minutos en compilar las reglas y generar mensajes de advertencia confusos. El archivo mínimo es más rápido y produce salida más clara para aprender.
+Crear el archivo de reglas:
 
-**Crear el archivo de reglas del alumno** (vacío al inicio del lab):
-```cmd
-echo. > C:\Snort\rules\mis-reglas.rules
+```powershell
+if (-not (Test-Path C:\Snort\rules\mis-reglas.rules)) {
+    New-Item -Path C:\Snort\rules\mis-reglas.rules -ItemType File
+}
 ```
 
-**Probar la configuración en modo test (sin capturar tráfico):**
-```cmd
-C:\Snort\bin\snort.exe -T -c C:\Snort\etc\snort-lab.conf
-```
-Salida esperada de éxito: `Snort successfully validated the configuration!`
+No usar `New-Item -Force` sobre un archivo existente: podría destruir evidencia o reglas de una ejecución anterior.
+
+### Decisión sobre Community Rules
+
+No cargar `community.rules` durante el camino principal. Algunas reglas comunitarias requieren variables y preprocesadores ausentes en la configuración mínima; agregarlas impediría atribuir un error a una sola causa.
+
+Las reglas locales bastan para los objetivos y la rúbrica. El paquete comunitario puede utilizarse posteriormente en una demostración preparada, con versión congelada y configuración validada por el instructor.
 
 ---
 
 ## Reglas Snort Esperadas
 
-Las 3 reglas que el alumno debe escribir en `C:\Snort\rules\mis-reglas.rules`. Se incluyen notas sobre opciones que los alumnos suelen olvidar.
+Guardar cada regla en una sola línea dentro de `C:\Snort\rules\mis-reglas.rules`.
 
-**Regla 1 — ICMP ping (versión con threshold para evitar alert storm):**
-```text
-alert icmp any any -> $HOME_NET any (msg:"Ping ICMP detectado"; itype:8; threshold: type limit, track by_src, count 1, seconds 60; sid:1000010; rev:1;)
-```
+### Regla 1 — ICMP inicial
 
-Versión sin threshold (el alumno puede empezar así y agregar el threshold como mejora):
-```text
+```snort
 alert icmp any any -> $HOME_NET any (msg:"Ping ICMP detectado"; itype:8; sid:1000010; rev:1;)
 ```
 
-!!! note "Sobre la opción itype:8"
-    `itype:8` limita la alerta a paquetes ICMP de tipo 8 (Echo Request, es decir el "ping" propiamente). Sin esta opción, la regla genera alertas también para las respuestas ICMP tipo 0 (Echo Reply) — duplicando las alertas.
+### Regla 2 — Intento TCP hacia Telnet
 
-**Regla 2 — Telnet:**
-```text
+```snort
 alert tcp any any -> $HOME_NET 23 (msg:"Intento de conexion Telnet inseguro"; sid:1000011; rev:1;)
 ```
 
-**Regla 3 — HTTP con cadena sospechosa:**
-```text
-alert tcp any any -> $HOME_NET 80 (msg:"HTTP con cadena sospechosa - cmd.exe"; content:"cmd.exe"; nocase; http_uri; sid:1000012; rev:1;)
+### Regla 3 — Contenido HTTP saliente
+
+```snort
+alert tcp $HOME_NET any -> $EXTERNAL_NET 80 (msg:"HTTP saliente con cadena sospechosa cmd.exe"; content:"cmd.exe"; nocase; sid:1000012; rev:1;)
 ```
 
-!!! note "Sobre la opción http_uri"
-    La opción `http_uri` mejora la detección al limitar la búsqueda de la cadena al URI de la petición HTTP. Sin ella, Snort busca "cmd.exe" en todo el payload del paquete TCP — puede funcionar pero genera más falsos positivos (por ejemplo, en respuestas de páginas que mencionan "cmd.exe" en su contenido HTML).
+La regla HTTP original estaba invertida: `any -> $HOME_NET:80` describe tráfico entrante, mientras que `curl.exe` genera una petición saliente desde la VM. No añadir `http_uri` a esta configuración mínima; esa opción presupone el preprocesamiento HTTP que deliberadamente no estamos cargando.
+
+### Regla 1 final con control de volumen
+
+```snort
+alert icmp any any -> $HOME_NET any (msg:"Ping ICMP detectado"; itype:8; threshold: type limit, track by_src, count 1, seconds 60; sid:1000010; rev:2;)
+```
+
+Mostrarla en una sola línea. Un bloque multilínea sin continuaciones no es una regla lista para copiar a Snort.
 
 ---
 
-## Alertas Esperadas en la Consola
-
-Formato exacto de cada alerta cuando Snort corre en modo consola (`-A console`). El instructor puede mostrar esto como referencia antes de que el alumno genere el tráfico.
-
-**Ejecutar Snort en modo IDS sobre la interfaz loopback (usar el número correcto de la interfaz):**
-```cmd
-C:\Snort\bin\snort.exe -i 1 -A console -c C:\Snort\etc\snort-lab.conf
-```
-
-**Alerta de ping (Regla 1):**
-```text
-05/15-14:30:00.123456  [**] [1:1000010:1] "Ping ICMP detectado" [**] [Classification: (null)] [Priority: 0] {ICMP} 127.0.0.1 -> 127.0.0.1
-```
-
-**Alerta de Telnet (Regla 2):**
-```text
-05/15-14:31:00.456789  [**] [1:1000011:1] "Intento de conexion Telnet inseguro" [**] [Classification: (null)] [Priority: 0] {TCP} 127.0.0.1:54321 -> 127.0.0.1:23
-```
-
-**Alerta de HTTP con cmd.exe (Regla 3):**
-```text
-05/15-14:32:00.789012  [**] [1:1000012:1] "HTTP con cadena sospechosa - cmd.exe" [**] [Classification: (null)] [Priority: 0] {TCP} 127.0.0.1:54322 -> 93.184.216.34:80
-```
-
-**Explicación de cada campo (mostrar en proyector al revisar la primera alerta):**
-
-| Campo | Ejemplo | Significado |
-|-------|---------|-------------|
-| Timestamp | `05/15-14:30:00.123456` | Fecha/hora del paquete (mes/día-hora:min:seg.microseg) |
-| Separador | `[**]` | Marca de inicio/fin de alerta en Snort |
-| ID de regla | `[1:1000010:1]` | `[generator_id:sig_id:revision]` |
-| Mensaje | `"Ping ICMP detectado"` | Campo `msg` de la regla |
-| Clasificación | `[Classification: (null)]` | Clasificación de la regla (null si no se especificó) |
-| Prioridad | `[Priority: 0]` | Prioridad de la regla (0 por defecto si no se especificó) |
-| Protocolo | `{ICMP}` | Protocolo del paquete que disparó la alerta |
-| IP origen | `127.0.0.1` | IP de quien envió el paquete |
-| IP destino | `127.0.0.1:23` | IP y puerto del destino |
-
----
-
-## Comandos de Prueba para Generar Tráfico
-
-Los comandos exactos para que el alumno genere las alertas de cada regla.
-
-```cmd
-:: Para Regla 1 — desde CMD en Windows (loopback)
-ping 127.0.0.1
-
-:: Para Regla 2 — intento de Telnet
-:: El servicio Telnet no está corriendo, pero el paquete SYN genera la alerta en Snort
-telnet localhost 23
-:: Si Telnet Client no está instalado en Windows 11:
-:: Panel de control -> Programas -> Activar características de Windows -> Telnet Client -> OK
-```
+## Validación de configuración
 
 ```powershell
-# Para Regla 3 — curl con cmd.exe en la URL
-curl http://example.com/cmd.exe
-# Alternativa sin curl (abrir en el navegador con proxy desactivado):
-# http://example.com/cmd.exe
+C:\Snort\bin\snort.exe -T -c C:\Snort\etc\snort-lab.conf
 ```
 
-!!! tip "Organización pedagógica sugerida"
-    Organizar en parejas: un alumno ejecuta Snort en modo consola, el otro genera el tráfico desde otra ventana CMD. Cuando la alerta aparece, rotar roles. La visualización en tiempo real es el momento de mayor impacto del lab.
+Criterios:
+
+```text
+3 Snort rules read
+3 detection rules
+Snort successfully validated the configuration!
+```
+
+Si el error menciona un SID, revisar `mis-reglas.rules`. Si menciona `ftp_telnet`, el alumno ejecutó el archivo equivocado.
 
 ---
 
-## Errores Comunes y Cómo Manejarlos
+## UAT 1 — ICMP sobre loopback
 
-| Error | Causa probable | Solución |
-|-------|---------------|----------|
-| `ERROR: Cannot open the network interface. Please select an interface number.` | No se especificó la interfaz con `-i` | Ejecutar primero `snort.exe -W` para listar interfaces y usar el número correcto en `-i <número>` |
-| `FATAL ERROR: [Snort] => Can't find a usable network interface` | Npcap no instalado o instalado sin "WinPcap API-compatible Mode" | Desinstalar Npcap, reinstalar marcando la casilla "WinPcap API-compatible Mode" |
-| `snort -T` pasa pero en modo IDS no aparecen alertas | El archivo `mis-reglas.rules` no se está incluyendo en `snort-lab.conf` | Verificar que la línea `include $RULE_PATH\mis-reglas.rules` está en el archivo y que la ruta `RULE_PATH` es correcta |
-| Error de sintaxis en `snort -T` con mensaje sobre `sid` | SID duplicado — dos reglas con el mismo `sid:1000010` | Verificar que cada regla tiene un `sid` único: 1000010, 1000011, 1000012 respectivamente |
-| Alerta de ping aparece cientos o miles de veces | La regla ICMP no tiene la opción `threshold` | Agregar `threshold: type limit, track by_src, count 1, seconds 60;` a la regla ICMP antes del `sid` |
-| No aparece alerta de Telnet aunque el comando se ejecutó | Snort está capturando en la interfaz de red principal, pero `telnet localhost 23` va por la interfaz loopback | Verificar con `snort.exe -W` el número de la interfaz loopback y reiniciar Snort con `-i <número_loopback>` |
+Usar el índice real de `NPF_Loopback`:
 
----
+```powershell
+C:\Snort\bin\snort.exe -i <LOOPBACK> -A console -N -c C:\Snort\etc\snort-lab.conf
+```
 
-## Notas de Dictado
+`-N` desactiva el almacenamiento de paquetes y mantiene las alertas. Sin esta opción, el comando anterior del curso intentaba crear `log/snort.log...` en una ruta relativa y podía terminar con error fatal.
 
-### Timing sugerido (total: ~90 minutos de lab)
+Desde otra PowerShell:
 
-**Instalación Npcap + Snort (20 min):** Hacer que todos instalen en paralelo. Verificar con `snort --version` antes de avanzar. La señal de éxito: el comando muestra `Version 2.9.x.x (Build XXX)` sin errores.
+```powershell
+ping 127.0.0.1
+```
 
-**`snort-lab.conf` mínimo y `snort -T` (15 min):** El modo test es importante — confirma que la sintaxis de la configuración es válida antes de capturar tráfico real. "Si `snort -T` no pasa, no avanzar — debuggear con el alumno en ese momento." Los errores de `snort -T` suelen ser: ruta de reglas incorrecta, directiva mal escrita, o variable `HOME_NET` con formato incorrecto.
+Salida validada:
 
-**Escribir las 3 reglas en `mis-reglas.rules` (20 min):** Los alumnos escriben manualmente (no copiar-pegar a ciegas) para entender la sintaxis. El instructor circula verificando: que los SIDs son únicos, que cada regla termina con punto y coma, que las opciones están dentro de los paréntesis.
+```text
+[1:1000010:1] Ping ICMP detectado ... {ICMP} 127.0.0.1 -> 127.0.0.1
+```
 
-**Ejecutar en modo IDS y generar alertas (30 min):** El momento de mayor impacto — ver la alerta aparecer en tiempo real mientras otro alumno genera el tráfico. Organizar en parejas: uno en Snort, otro generando tráfico con `ping` y `telnet`.
-
-**Threshold (15 min):** Demostrar primero el alert storm: `ping -n 100 127.0.0.1` sin threshold genera 100 alertas. Luego agregar el threshold y repetir — ahora solo 1 alerta por minuto. Este contraste es pedagógicamente poderoso para explicar por qué el tuning de reglas es esencial en producción.
+El aviso `No preprocessors configured for policy 0` es esperado en esta configuración mínima y no invalida las reglas simples a nivel de paquete.
 
 ---
 
-## Rúbrica de Calificación
+## UAT 2 — TCP/23 sin instalar Telnet Client
+
+Con Snort todavía en loopback:
+
+```powershell
+Test-NetConnection -ComputerName 127.0.0.1 -Port 23
+```
+
+Salida validada en Snort:
+
+```text
+[1:1000011:1] Intento de conexion Telnet inseguro ... 127.0.0.1:puerto -> 127.0.0.1:23
+```
+
+Un `TcpTestSucceeded: False` es aceptable. Las alertas repetidas con el mismo puerto de origen son retransmisiones TCP. La herramienta puede efectuar además una comprobación ICMP y activar la Regla 1.
+
+Esta prueba reemplaza al cliente Telnet opcional de Windows.
+
+---
+
+## UAT 3 — HTTP saliente sobre NAT
+
+Detener Snort con `Ctrl+C` y reiniciarlo sobre el índice NAT:
+
+```powershell
+C:\Snort\bin\snort.exe -i <NAT> -A console -N -c C:\Snort\etc\snort-lab.conf
+```
+
+En otra PowerShell:
+
+```powershell
+curl.exe --noproxy "*" --http1.1 --max-time 10 http://example.com/cmd.exe
+```
+
+Alerta esperada:
+
+```text
+[1:1000012:1] HTTP saliente con cadena sospechosa cmd.exe ... 10.0.2.15:puerto -> IP_EXTERNA:80
+```
+
+El código HTTP puede ser 404. El criterio es que la petición sin cifrar contenga `/cmd.exe` y la alerta aparezca sobre el adaptador de salida.
+
+---
+
+## UAT 4 — Threshold
+
+Sustituir la Regla 1 por la revisión 2, validar nuevamente con `-T`, iniciar sobre loopback y ejecutar:
+
+```powershell
+ping -n 10 127.0.0.1
+```
+
+Esperado: diez Echo Request procesados y como máximo una alerta SID `1000010` para `127.0.0.1` durante 60 segundos.
+
+---
+
+## Diagnóstico de errores observados
+
+| Error o síntoma | Causa comprobada o probable | Acción correcta |
+|-----------------|-----------------------------|-----------------|
+| `snort.exe -V` no inicia y menciona `VCRUNTIME140.dll` | Falta runtime x64 | Instalar `VC_redist.x64.exe` desde Microsoft |
+| `snort.exe -W` no enumera adaptadores | Npcap ausente o sin compatibilidad WinPcap | Revisar instalación de Npcap, no las reglas |
+| `Unknown preprocessor: "ftp_telnet"` | Se usó el `snort.conf` completo sin cargar DLL dinámicas | Usar `snort-lab.conf`; no borrar preprocesadores uno por uno |
+| `Failed to open log file "log/snort.log..."` | El comando no usó `-N` ni una ruta absoluta de log | Añadir `-N` para alertas solo en consola |
+| `snort -T` lee cero reglas | Falta el `include` o se editó otro archivo | Verificar ruta y `mis-reglas.rules` |
+| ICMP/TCP no alerta | Snort captura Ethernet/NAT, pero la prueba circula por loopback | Seleccionar el índice `NPF_Loopback` |
+| HTTP no alerta | Interfaz incorrecta, regla invertida, proxy o HTTPS | Usar NAT, regla saliente y HTTP directo |
+| Muchas alertas TCP/23 | Retransmisiones del mismo SYN | Explicarlo; no confundir con ejecuciones independientes |
+
+---
+
+## Notas de dictado
+
+| Bloque | Tiempo | Evidencia para avanzar |
+|--------|--------|------------------------|
+| Prerrequisitos y `-V` | 20 min | Versión 2.9.20-WIN64 |
+| Npcap e interfaces | 10 min | NAT y `NPF_Loopback` enumerados |
+| Configuración mínima y `-T` | 15 min | Tres reglas validadas |
+| Escritura y anatomía de reglas | 25 min | SIDs únicos y direcciones justificadas |
+| ICMP y TCP loopback | 20 min | Alertas 1000010 y 1000011 |
+| HTTP sobre NAT | 15 min | Alerta 1000012 |
+| `threshold` y análisis | 15 min | Una alerta para diez pings |
+
+La instalación se realiza en paralelo, pero ningún alumno avanza de `-V` a `-W`, ni de `-W` a `-T`, sin mostrar el checkpoint anterior.
+
+---
+
+## Rúbrica de calificación
 
 | Criterio | Puntos | Cómo verificar |
 |----------|--------|----------------|
-| `snort -T -c snort-lab.conf` pasa sin errores | 2 | El alumno muestra la salida `Snort successfully validated the configuration!` |
-| Regla 1 (ICMP) correctamente escrita y genera alerta | 2 | Código de la regla en el archivo + captura de pantalla de la alerta en consola |
-| Regla 2 (Telnet) correctamente escrita y genera alerta | 2 | Código de la regla en el archivo + captura de pantalla de la alerta en consola |
-| Regla 3 (HTTP content) correctamente escrita y genera alerta | 2 | Código de la regla en el archivo + captura de pantalla de la alerta en consola |
-| Regla 1 con threshold agregado (sin alert storm) | 1 | Versión final del archivo `mis-reglas.rules` entregado con el `threshold` visible |
-| Análisis escrito de una alerta (todos los campos explicados) | 1 | Párrafo de análisis en la entrega identificando timestamp, ID de regla, protocolo, IPs |
+| `snort-lab.conf` valida tres reglas | 2 | Salida `Snort successfully validated the configuration!` |
+| Regla ICMP funciona sobre loopback | 2 | Regla y alerta SID 1000010 |
+| Regla TCP funciona sin Telnet Client | 2 | Regla y alerta SID 1000011 |
+| Regla HTTP saliente funciona sobre NAT | 2 | Regla y alerta SID 1000012 |
+| `threshold` limita el volumen | 1 | Revisión 2 y resultado de diez pings |
+| El alumno interpreta una alerta | 1 | Explica timestamp, SID, protocolo, origen y destino |
 
 **Total: 10 puntos**
 
 ---
+
+## Checklist previo al dictado
+
+- [ ] Licencia o autorización de Npcap resuelta para el número de VMs
+- [ ] `VC_redist.x64.exe`, Npcap y Snort obtenidos desde fuentes oficiales
+- [ ] Snapshot de VM tomado después de instalar el driver con la VM apagada
+- [ ] Índices NAT y loopback redescubiertos
+- [ ] `snort-lab.conf` y tres reglas validados
+- [ ] UAT ICMP, TCP, HTTP y `threshold` ejecutada de principio a fin
+- [ ] Ningún Community Ruleset forma parte del camino crítico
 
 <!-- Solución instructor para: docs/seguridad-criptografia/en-la-red/ids-ips-p2.md -->
