@@ -15,7 +15,7 @@
 
 ## Decisión técnica del laboratorio
 
-El procedimiento canónico despliega un honeypot didáctico de baja interacción mediante `honeypot-simple.py`. El script usa la biblioteca estándar de Python 3, registra conexiones TCP y permite analizar correctamente el origen, el destino y la marca de tiempo de cada evento.
+El procedimiento canónico despliega un honeypot didáctico de baja interacción mediante `honeypot-simple.py`. El script usa la biblioteca estándar de Python 3, registra conexiones TCP y permite analizar correctamente el origen, el destino y la marca de tiempo de cada evento. La guía incluye además `honeypot-multiservicio.py` como ampliación opcional fuera de la ruta evaluada de tres horas.
 
 ---
 
@@ -170,6 +170,214 @@ Repetir la conexión tres veces. Deben aparecer tres eventos adicionales en cons
 
 ---
 
+## UAT de la ampliación multservicio
+
+Esta ampliación requiere 45–60 minutos adicionales y no modifica la rúbrica de diez puntos. Debe ejecutarse únicamente si el grupo terminó el laboratorio principal y el instructor ya verificó que los puertos `8022`, `8080` y `2121` están libres.
+
+### Script multservicio canónico
+
+El bloque siguiente debe ser idéntico al publicado en la guía del alumno. Guardarlo como `C:\HoneypotLab\honeypot-multiservicio.py`:
+
+```python
+# Honeypot multservicio de baja interaccion para uso exclusivo en localhost.
+import datetime
+from pathlib import Path
+import socket
+import threading
+
+HOST = "127.0.0.1"
+SERVICES = (("SSH", 8022), ("HTTP", 8080), ("FTP", 2121))
+LOG_PATH = Path(__file__).with_name("honeypot-multiservicio.log")
+MAX_INPUT = 1024
+LOG_LOCK = threading.Lock()
+STOP_EVENT = threading.Event()
+
+
+def register_event(service, source, destination, event_type, detail=None):
+    timestamp = datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+    event = (
+        f"[{timestamp}] servicio={service} "
+        f"origen={source[0]}:{source[1]} "
+        f"destino={destination[0]}:{destination[1]} "
+        f"evento={event_type}"
+    )
+    if detail:
+        event += f' detalle="{detail}"'
+
+    with LOG_LOCK:
+        print(event)
+        with LOG_PATH.open("a", encoding="utf-8") as log_file:
+            log_file.write(event + "\n")
+
+
+def receive_line(connection):
+    data = bytearray()
+    while len(data) < MAX_INPUT:
+        chunk = connection.recv(min(256, MAX_INPUT - len(data)))
+        if not chunk:
+            break
+        data.extend(chunk)
+        if b"\n" in data:
+            break
+
+    text = data.decode("utf-8", errors="replace").splitlines()
+    first_line = text[0] if text else ""
+    safe_line = "".join(char if char.isprintable() else "?" for char in first_line)
+    return safe_line.replace('"', "'")[:120]
+
+
+def handle_client(connection, source, service):
+    with connection:
+        destination = connection.getsockname()
+        connection.settimeout(2)
+        register_event(service, source, destination, "CONEXION")
+
+        try:
+            if service == "SSH":
+                connection.sendall(b"SSH-2.0-OpenSSH_8.9p1 LabHoneypot\r\n")
+
+            elif service == "HTTP":
+                request_line = receive_line(connection)
+                parts = request_line.split()
+                method = parts[0] if parts else "INVALIDA"
+                path = parts[1].split("?", 1)[0] if len(parts) > 1 else "/"
+                register_event(service, source, destination, "PETICION", f"{method} {path}")
+
+                body = b"<h1>Portal de administracion</h1><p>Servicio de laboratorio.</p>"
+                response = (
+                    b"HTTP/1.1 200 OK\r\n"
+                    b"Content-Type: text/html; charset=utf-8\r\n"
+                    + f"Content-Length: {len(body)}\r\n".encode("ascii")
+                    + b"Connection: close\r\n\r\n"
+                    + body
+                )
+                connection.sendall(response)
+
+            elif service == "FTP":
+                connection.sendall(b"220 FTP de laboratorio listo\r\n")
+                command_line = receive_line(connection)
+                command = command_line.split(maxsplit=1)[0].upper() if command_line else "VACIO"
+                register_event(service, source, destination, "COMANDO", command)
+                connection.sendall(b"530 Autenticacion no disponible\r\n")
+
+        except (ConnectionError, socket.timeout):
+            return
+
+
+def serve(service, listener):
+    while not STOP_EVENT.is_set():
+        try:
+            connection, source = listener.accept()
+        except OSError:
+            break
+        threading.Thread(
+            target=handle_client,
+            args=(connection, source, service),
+            daemon=True,
+        ).start()
+
+
+def create_listeners():
+    listeners = []
+    try:
+        for service, port in SERVICES:
+            listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            try:
+                listener.bind((HOST, port))
+                listener.listen(5)
+            except OSError:
+                listener.close()
+                raise
+            listeners.append((service, port, listener))
+    except OSError:
+        for _, _, listener in listeners:
+            listener.close()
+        raise
+    return listeners
+
+
+def main():
+    try:
+        listeners = create_listeners()
+    except OSError as error:
+        raise SystemExit(f"No se pudieron abrir todos los puertos: {error}") from error
+
+    print("Honeypot multservicio iniciado:")
+    for service, port, _ in listeners:
+        print(f"- {service} simulado en {HOST}:{port}")
+    print(f"Log: {LOG_PATH}")
+    print("Esperando conexiones... (Ctrl+C para detener)")
+
+    threads = []
+    for service, _, listener in listeners:
+        thread = threading.Thread(target=serve, args=(service, listener), daemon=True)
+        thread.start()
+        threads.append(thread)
+
+    try:
+        while all(thread.is_alive() for thread in threads):
+            STOP_EVENT.wait(0.5)
+    except KeyboardInterrupt:
+        print("\nHoneypot multservicio detenido.")
+    finally:
+        STOP_EVENT.set()
+        for _, _, listener in listeners:
+            listener.close()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+### Secuencia UAT y criterios de éxito
+
+1. Comprobar los puertos antes de iniciar:
+
+   ```powershell
+   8022, 8080, 2121 | ForEach-Object {
+       Get-NetTCPConnection -LocalPort $_ -State Listen -ErrorAction SilentlyContinue
+   }
+   ```
+
+   No debe aparecer ninguna fila.
+
+2. Iniciar el emulador:
+
+   ```powershell
+   py -3 C:\HoneypotLab\honeypot-multiservicio.py
+   ```
+
+3. En otra consola, verificar las tres escuchas:
+
+   ```powershell
+   Get-NetTCPConnection -LocalPort 8022,8080,2121 -State Listen |
+       Select-Object LocalAddress, LocalPort, State
+   ```
+
+   Deben aparecer `8022`, `8080` y `2121` asociados a `127.0.0.1`.
+
+4. Ejecutar sin modificaciones los clientes SSH, HTTP y FTP publicados en los pasos D, E y F de la guía del alumno. Los resultados esperados son:
+
+   | Prueba | Respuesta | Eventos mínimos |
+   |---|---|---|
+   | SSH simulado | `SSH-2.0-OpenSSH_8.9p1 LabHoneypot` | `servicio=SSH`, destino `8022`, `evento=CONEXION` |
+   | HTTP simulado | Estado `200` y texto `Portal de administracion` | `servicio=HTTP`, destino `8080`, `evento=CONEXION` y `detalle="GET /admin"` |
+   | FTP simulado | Saludo `220` y rechazo `530` | `servicio=FTP`, destino `2121`, `evento=CONEXION` y `detalle="USER"` |
+
+5. Confirmar que `honeypot-multiservicio.log` no contiene `alumno`, encabezados HTTP, parámetros de consulta ni contraseñas. Después detener con `Ctrl+C` y comprobar que desaparecen las tres escuchas.
+
+### Respuestas modelo de la ampliación
+
+1. SSH corresponde al puerto destino `8022`, HTTP a `8080` y FTP a `2121`.
+2. Un banner es texto controlado por quien opera el servicio. Puede imitar otro producto o versión; es una pista para la identificación, no una prueba concluyente del software real.
+3. HTTP conserva solo método y ruta sin la consulta; FTP conserva únicamente el verbo. Se omiten argumentos, encabezados, cuerpos y contraseñas para minimizar la recopilación de datos y evitar guardar secretos.
+4. Tres puertos **destino** distintos muestran que el cliente contactó varias superficies simuladas del mismo host. Esto es compatible con reconocimiento multservicio en un escenario real, pero en el laboratorio sigue siendo tráfico autorizado y no demuestra intención maliciosa. Los puertos de origen cambiantes, por sí solos, solo reflejan asignaciones efímeras del cliente.
+
+!!! warning "Controles que no deben relajarse"
+    El script debe conservar `HOST = "127.0.0.1"`, las lecturas acotadas, el tiempo de espera y la exclusión de credenciales. No crear reglas de firewall ni reemplazar los puertos altos por `22`, `80` o `21` durante la clase.
+
+---
+
 ## Extracto de log para el ejercicio
 
 Este bloque debe coincidir exactamente con el de la guía del alumno:
@@ -224,6 +432,8 @@ Confirmar primero el activo y su responsable en el inventario, el calendario de 
 | `WinError 10048` o `Address already in use` | Otro proceso ya escucha en ese puerto | Consultar `Get-NetTCPConnection -LocalPort 9999 -State Listen`; usar otro puerto alto en ambos comandos |
 | `WinError 10013` | Puerto excluido o reservado, política de seguridad o protección del endpoint | No asumir que se debe al número del puerto; probar otro puerto alto y escalar al administrador si persiste |
 | `TcpTestSucceeded : False` | El sensor no está ejecutándose, se usó otro puerto o terminó con error | Volver a la primera consola, confirmar el puerto mostrado y repetir con el mismo valor |
+| El multservicio muestra que no pudo abrir todos los puertos | Al menos uno de `8022`, `8080` o `2121` ya está ocupado | Consultar cada puerto antes de iniciar; detener el proceso de práctica anterior o editar un puerto alto en el script y en todas sus pruebas |
+| Una prueba de banner queda esperando | El emulador no inició, se consultó otro puerto o la respuesta no llegó antes del límite | Confirmar las tres escuchas y conservar `ReceiveTimeout = 3000` en los clientes PowerShell |
 | El evento aparece en consola pero no se encuentra el archivo | Se buscó el log en el directorio actual | Consultar `C:\HoneypotLab\honeypot.log`; el script siempre escribe junto a su propio archivo |
 | Otra computadora no puede conectarse | Comportamiento esperado: el sensor escucha en loopback | Mantener localhost; no abrir el sensor a la red como solución improvisada |
 | `localhost` resuelve a `::1` y la prueba falla | El script usa IPv4 (`AF_INET`) | Usar explícitamente `127.0.0.1` como indica la guía |
@@ -284,7 +494,7 @@ Consultar siempre la [guía oficial de instalación de Cowrie](https://github.co
 | 160–175 | Validación individual y rúbrica |
 | 175–180 | Cierre: el honeypot inicia la investigación, no la concluye |
 
-Cowrie es una ampliación fuera de esta distribución o un reemplazo para un bloque avanzado previamente planificado; no añadirlo improvisadamente a los 180 minutos.
+El ejercicio multservicio y Cowrie son ampliaciones fuera de esta distribución o reemplazos para un bloque avanzado previamente planificado; no añadirlos improvisadamente a los 180 minutos.
 
 ---
 

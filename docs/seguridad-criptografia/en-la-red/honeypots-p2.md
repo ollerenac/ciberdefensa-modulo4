@@ -24,6 +24,7 @@ Al finalizar esta clase, el alumno será capaz de:
 - Diferenciar el puerto de origen del cliente del puerto destino del sensor
 - Analizar un log sin convertir una observación aislada en una atribución definitiva
 - Proponer acciones de verificación, correlación y contención basadas en evidencia
+- Reconocer, en la ampliación opcional, cómo distintos banners y puertos representan servicios simulados
 
 ---
 
@@ -38,7 +39,7 @@ Usaremos un honeypot didáctico construido con el módulo `socket` de Python. El
 - utiliza la biblioteca estándar de Python 3.
 
 !!! info "Alcance del sensor"
-    Esta práctica se concentra en **detección y registro de conexiones TCP**. La emulación de servicios como SSH o HTTP corresponde a una práctica avanzada.
+    La práctica principal se concentra en **detección y registro de conexiones TCP**. Al terminarla se propone una ampliación opcional que emula de forma limitada SSH, HTTP y FTP, siempre en localhost.
 
 ---
 
@@ -215,6 +216,287 @@ Repetir `Test-NetConnection` tres veces y comprobar que aparecen tres eventos nu
 
 ---
 
+## Ejercicio 2 — Honeypot multservicio (ampliación opcional)
+
+> **Duración adicional:** 45–60 minutos | **Requisito:** haber completado y detenido `honeypot-simple.py` | **Evaluación:** no requerida para el examen
+
+En este ejercicio un solo programa simula tres servicios de baja interacción:
+
+| Servicio simulado | Puerto local | Comportamiento |
+|---|---:|---|
+| SSH | `8022` | Envía un banner SSH ficticio y cierra la conexión |
+| HTTP | `8080` | Registra el método y la ruta, y devuelve una página estática |
+| FTP | `2121` | Envía un saludo, registra solo el nombre del comando y rechaza la autenticación |
+
+Los puertos son deliberadamente altos para evitar permisos administrativos y conflictos con servicios reales. Los banners solo **representan** servicios: el programa no implementa servidores SSH, web o FTP completos.
+
+### Paso A — Comprobar los tres puertos
+
+En PowerShell:
+
+```powershell
+8022, 8080, 2121 | ForEach-Object {
+    Get-NetTCPConnection -LocalPort $_ -State Listen -ErrorAction SilentlyContinue
+}
+```
+
+El resultado esperado es que no aparezca ninguna fila. Si aparece un proceso en cualquiera de los puertos, no continuar hasta consultarlo con el instructor.
+
+### Paso B — Crear el emulador
+
+Guardar el siguiente contenido como `C:\HoneypotLab\honeypot-multiservicio.py`:
+
+```python
+# Honeypot multservicio de baja interaccion para uso exclusivo en localhost.
+import datetime
+from pathlib import Path
+import socket
+import threading
+
+HOST = "127.0.0.1"
+SERVICES = (("SSH", 8022), ("HTTP", 8080), ("FTP", 2121))
+LOG_PATH = Path(__file__).with_name("honeypot-multiservicio.log")
+MAX_INPUT = 1024
+LOG_LOCK = threading.Lock()
+STOP_EVENT = threading.Event()
+
+
+def register_event(service, source, destination, event_type, detail=None):
+    timestamp = datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+    event = (
+        f"[{timestamp}] servicio={service} "
+        f"origen={source[0]}:{source[1]} "
+        f"destino={destination[0]}:{destination[1]} "
+        f"evento={event_type}"
+    )
+    if detail:
+        event += f' detalle="{detail}"'
+
+    with LOG_LOCK:
+        print(event)
+        with LOG_PATH.open("a", encoding="utf-8") as log_file:
+            log_file.write(event + "\n")
+
+
+def receive_line(connection):
+    data = bytearray()
+    while len(data) < MAX_INPUT:
+        chunk = connection.recv(min(256, MAX_INPUT - len(data)))
+        if not chunk:
+            break
+        data.extend(chunk)
+        if b"\n" in data:
+            break
+
+    text = data.decode("utf-8", errors="replace").splitlines()
+    first_line = text[0] if text else ""
+    safe_line = "".join(char if char.isprintable() else "?" for char in first_line)
+    return safe_line.replace('"', "'")[:120]
+
+
+def handle_client(connection, source, service):
+    with connection:
+        destination = connection.getsockname()
+        connection.settimeout(2)
+        register_event(service, source, destination, "CONEXION")
+
+        try:
+            if service == "SSH":
+                connection.sendall(b"SSH-2.0-OpenSSH_8.9p1 LabHoneypot\r\n")
+
+            elif service == "HTTP":
+                request_line = receive_line(connection)
+                parts = request_line.split()
+                method = parts[0] if parts else "INVALIDA"
+                path = parts[1].split("?", 1)[0] if len(parts) > 1 else "/"
+                register_event(service, source, destination, "PETICION", f"{method} {path}")
+
+                body = b"<h1>Portal de administracion</h1><p>Servicio de laboratorio.</p>"
+                response = (
+                    b"HTTP/1.1 200 OK\r\n"
+                    b"Content-Type: text/html; charset=utf-8\r\n"
+                    + f"Content-Length: {len(body)}\r\n".encode("ascii")
+                    + b"Connection: close\r\n\r\n"
+                    + body
+                )
+                connection.sendall(response)
+
+            elif service == "FTP":
+                connection.sendall(b"220 FTP de laboratorio listo\r\n")
+                command_line = receive_line(connection)
+                command = command_line.split(maxsplit=1)[0].upper() if command_line else "VACIO"
+                register_event(service, source, destination, "COMANDO", command)
+                connection.sendall(b"530 Autenticacion no disponible\r\n")
+
+        except (ConnectionError, socket.timeout):
+            return
+
+
+def serve(service, listener):
+    while not STOP_EVENT.is_set():
+        try:
+            connection, source = listener.accept()
+        except OSError:
+            break
+        threading.Thread(
+            target=handle_client,
+            args=(connection, source, service),
+            daemon=True,
+        ).start()
+
+
+def create_listeners():
+    listeners = []
+    try:
+        for service, port in SERVICES:
+            listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            try:
+                listener.bind((HOST, port))
+                listener.listen(5)
+            except OSError:
+                listener.close()
+                raise
+            listeners.append((service, port, listener))
+    except OSError:
+        for _, _, listener in listeners:
+            listener.close()
+        raise
+    return listeners
+
+
+def main():
+    try:
+        listeners = create_listeners()
+    except OSError as error:
+        raise SystemExit(f"No se pudieron abrir todos los puertos: {error}") from error
+
+    print("Honeypot multservicio iniciado:")
+    for service, port, _ in listeners:
+        print(f"- {service} simulado en {HOST}:{port}")
+    print(f"Log: {LOG_PATH}")
+    print("Esperando conexiones... (Ctrl+C para detener)")
+
+    threads = []
+    for service, _, listener in listeners:
+        thread = threading.Thread(target=serve, args=(service, listener), daemon=True)
+        thread.start()
+        threads.append(thread)
+
+    try:
+        while all(thread.is_alive() for thread in threads):
+            STOP_EVENT.wait(0.5)
+    except KeyboardInterrupt:
+        print("\nHoneypot multservicio detenido.")
+    finally:
+        STOP_EVENT.set()
+        for _, _, listener in listeners:
+            listener.close()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+El programa limita cada lectura a `1024` bytes y a dos segundos. Para reducir la recopilación de datos, HTTP descarta la consulta situada después de `?`, FTP registra únicamente el nombre del comando y SSH no almacena contenido enviado por el cliente.
+
+### Paso C — Iniciar y confirmar las escuchas
+
+En la primera ventana de PowerShell:
+
+```powershell
+py -3 C:\HoneypotLab\honeypot-multiservicio.py
+```
+
+La salida debe listar los tres servicios y terminar con `Esperando conexiones...`. Sin cerrar esa ventana, confirmar en una segunda consola:
+
+```powershell
+Get-NetTCPConnection -LocalPort 8022,8080,2121 -State Listen |
+    Select-Object LocalAddress, LocalPort, State
+```
+
+Deben aparecer exactamente tres escuchas en `127.0.0.1`, una por cada puerto.
+
+### Paso D — Consultar el banner SSH simulado
+
+En la segunda consola:
+
+```powershell
+$cliente = [System.Net.Sockets.TcpClient]::new("127.0.0.1", 8022)
+$cliente.ReceiveTimeout = 3000
+$lector = [System.IO.StreamReader]::new($cliente.GetStream())
+$lector.ReadLine()
+$lector.Dispose()
+$cliente.Dispose()
+```
+
+Resultado esperado:
+
+```text
+SSH-2.0-OpenSSH_8.9p1 LabHoneypot
+```
+
+El texto es un **banner ficticio**. Verlo no demuestra que exista un servidor OpenSSH real detrás del puerto.
+
+### Paso E — Solicitar la página HTTP simulada
+
+```powershell
+$respuesta = Invoke-WebRequest -Uri http://127.0.0.1:8080/admin -UseBasicParsing
+$respuesta.StatusCode
+$respuesta.Content
+```
+
+El código debe ser `200` y el contenido debe incluir `Portal de administracion`. `-UseBasicParsing` evita el análisis de contenido mediante el motor heredado del navegador.
+
+### Paso F — Interactuar con el FTP simulado
+
+```powershell
+$cliente = [System.Net.Sockets.TcpClient]::new("127.0.0.1", 2121)
+$cliente.ReceiveTimeout = 3000
+$flujo = $cliente.GetStream()
+$lector = [System.IO.StreamReader]::new($flujo)
+$escritor = [System.IO.StreamWriter]::new($flujo)
+$escritor.NewLine = "`r`n"
+$escritor.AutoFlush = $true
+$lector.ReadLine()
+$escritor.WriteLine("USER alumno")
+$lector.ReadLine()
+$escritor.Dispose()
+$lector.Dispose()
+$cliente.Dispose()
+```
+
+La consola debe mostrar primero `220 FTP de laboratorio listo` y después `530 Autenticacion no disponible`. No introducir una contraseña real: el emulador no la necesita ni debe recopilarla.
+
+### Paso G — Comparar los eventos
+
+```powershell
+Get-Content C:\HoneypotLab\honeypot-multiservicio.log
+```
+
+El archivo debe contener conexiones a los tres puertos, una petición `GET /admin` y un comando `USER`. Los puertos de origen variarán:
+
+```text
+[2026-08-25T10:20:01-05:00] servicio=SSH origen=127.0.0.1:54001 destino=127.0.0.1:8022 evento=CONEXION
+[2026-08-25T10:20:20-05:00] servicio=HTTP origen=127.0.0.1:54002 destino=127.0.0.1:8080 evento=CONEXION
+[2026-08-25T10:20:20-05:00] servicio=HTTP origen=127.0.0.1:54002 destino=127.0.0.1:8080 evento=PETICION detalle="GET /admin"
+[2026-08-25T10:20:40-05:00] servicio=FTP origen=127.0.0.1:54003 destino=127.0.0.1:2121 evento=CONEXION
+[2026-08-25T10:20:40-05:00] servicio=FTP origen=127.0.0.1:54003 destino=127.0.0.1:2121 evento=COMANDO detalle="USER"
+```
+
+Responder:
+
+1. ¿Qué puerto destino corresponde a cada servicio simulado?
+2. ¿Por qué un banner no demuestra por sí solo qué software existe detrás del puerto?
+3. ¿Qué datos omite deliberadamente el emulador HTTP y FTP, y por qué?
+4. ¿Qué evidencia adicional aporta observar tres **puertos destino** frente a observar solamente cambios en los puertos de origen?
+
+Finalmente, presionar `Ctrl+C` en la primera consola. Los tres puertos deben dejar de aparecer en `Get-NetTCPConnection`.
+
+!!! warning "Límites de la emulación"
+    No cambiar `HOST`, no abrir reglas de Windows Firewall y no usar estos banners para suplantar servicios en una red real. El ejercicio no autentica usuarios, no ejecuta comandos y no entrega archivos.
+
+---
+
 ## Análisis de logs
 
 El honeypot es un sensor, no un protector. Un evento indica que alguien o algo alcanzó el recurso; el analista debe determinar el contexto antes de atribuir intención.
@@ -284,6 +566,13 @@ Una IP interna no prueba por sí sola movimiento lateral ni insider threat. Es u
 - [ ] El alumno diferencia puerto de origen y puerto destino
 - [ ] El alumno responde el ejercicio sin afirmar más de lo que demuestra la evidencia
 
+Si se realiza la ampliación opcional:
+
+- [ ] Los tres servicios escuchan únicamente en `127.0.0.1`
+- [ ] Los banners y la página simulada coinciden con los resultados esperados
+- [ ] `honeypot-multiservicio.log` diferencia servicio, conexión, petición y comando
+- [ ] El alumno explica por qué un banner es una pista y no una identificación definitiva
+
 ---
 
 ## Contexto militar
@@ -300,6 +589,7 @@ Una IP interna no prueba por sí sola movimiento lateral ni insider threat. Es u
 - El log diferencia explícitamente el origen del destino
 - Un evento del honeypot es una alerta de alta confianza, no una atribución automática
 - La frecuencia y los puertos de origen no bastan para demostrar un escaneo
+- La ampliación multservicio permite comparar banners y actividad dirigida a varios puertos destino
 - La respuesta correcta combina inventario, autorización y correlación con otros controles
 
 ## Para profundizar
