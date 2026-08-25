@@ -54,30 +54,38 @@ py -3 --version
 
 Si aparece `Python 3.x.x`, Python está listo y se puede continuar con el Paso 2. Si el comando falla, usar esta ruta principal en PowerShell:
 
-1. Comprobar que WinGet está disponible:
+1. Instalar el **Python Install Manager** desde el servidor oficial de Python:
 
    ```powershell
-   winget --version
+   Add-AppxPackage -AppInstallerFile https://www.python.org/ftp/python/pymanager/pymanager.appinstaller
    ```
 
-2. Instalar el **Python Install Manager** oficial:
+   El comando puede terminar sin mostrar un mensaje. Si no aparece texto rojo ni una excepción, continuar. Esta ruta evita depender de una sesión válida de Microsoft Store y está publicada en la [documentación oficial de Python para Windows](https://docs.python.org/3/using/windows.html#advanced-installation).
+
+2. Instalar explícitamente el runtime estable predeterminado:
 
    ```powershell
-   winget install 9NQ7512CXL7T -e --accept-package-agreements --disable-interactivity
+   py install default
    ```
 
-   Este comando instala el administrador de Python; todavía falta instalar Python propiamente dicho. El identificador usado está publicado en la [documentación oficial de Python para Windows](https://docs.python.org/3/using/windows.html#advanced-installation).
+   El administrador comprobará su propia versión, verificará la firma del índice oficial y descargará Python. Los números de versión mostrados pueden cambiar.
 
-3. Si el siguiente comando aún no se reconoce, cerrar PowerShell y abrir una ventana nueva. Después, instalar explícitamente el runtime estable predeterminado:
+3. Comprobar el resultado:
 
    ```powershell
-   pymanager install default
+   py -3 --version
    ```
 
-4. Repetir la comprobación del inicio. El criterio de éxito es que la consola muestre `Python 3.x.x`.
+   El criterio de éxito es que la consola muestre `Python 3.x.x`. Si `py` todavía no se reconoce después del primer comando, cerrar PowerShell, abrir una ventana nueva y repetir los pasos 2 y 3.
 
-!!! note "Contingencia si WinGet no está disponible"
-    Si `winget --version` falla o una política institucional bloquea WinGet, descargar el **Python Install Manager** únicamente desde [python.org](https://www.python.org/downloads/windows/). Instalarlo, abrir una PowerShell nueva si fuera necesario y continuar con la instalación del runtime y la comprobación indicadas arriba. Esta es una contingencia; la ruta principal del laboratorio es WinGet.
+!!! note "Alternativa mediante WinGet"
+    Si Microsoft Store funciona en la sesión interactiva del alumno, también se puede instalar el administrador con:
+
+    ```powershell
+    winget install --id 9NQ7512CXL7T --exact --source msstore --accept-source-agreements --accept-package-agreements --authentication-mode interactive
+    ```
+
+    Si WinGet devuelve `0x8a15000f` o `0x80070520`, no reiniciar fuentes ni insistir durante la clase: volver a la ruta principal con `Add-AppxPackage`.
 
 ### Paso 2 — Crear el directorio del laboratorio
 
