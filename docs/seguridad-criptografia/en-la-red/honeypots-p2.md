@@ -218,7 +218,10 @@ Repetir `Test-NetConnection` tres veces y comprobar que aparecen tres eventos nu
 
 ## Ejercicio 2 — Honeypot multservicio (ampliación opcional)
 
-> **Duración adicional:** 45–60 minutos | **Requisito:** haber completado y detenido `honeypot-simple.py` | **Evaluación:** no requerida para el examen
+> **Duración adicional:** 45–60 minutos | **Requisito:** haber completado toda la práctica principal | **Evaluación:** no requerida para el examen
+
+!!! important "Realizar después de la práctica principal"
+    Al llegar por primera vez a esta sección, continuar directamente con **Análisis de logs**. Volver a esta ampliación únicamente después de terminar el análisis, la validación y el resumen de la práctica principal, o cuando lo indique el instructor.
 
 En este ejercicio un solo programa simula tres servicios de baja interacción:
 
@@ -338,11 +341,7 @@ def serve(service, listener):
             connection, source = listener.accept()
         except OSError:
             break
-        threading.Thread(
-            target=handle_client,
-            args=(connection, source, service),
-            daemon=True,
-        ).start()
+        handle_client(connection, source, service)
 
 
 def create_listeners():

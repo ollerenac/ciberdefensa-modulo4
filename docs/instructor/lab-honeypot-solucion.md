@@ -270,11 +270,7 @@ def serve(service, listener):
             connection, source = listener.accept()
         except OSError:
             break
-        threading.Thread(
-            target=handle_client,
-            args=(connection, source, service),
-            daemon=True,
-        ).start()
+        handle_client(connection, source, service)
 
 
 def create_listeners():
