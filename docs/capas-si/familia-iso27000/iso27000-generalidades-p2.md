@@ -93,8 +93,8 @@ Esta distinción es una de las más importantes del curso, y una de las más fre
 
 **Security posture** (postura de seguridad) significa qué tan bien protegida está realmente la organización frente a amenazas actuales. Es el estado real de seguridad, no el estado documentado.
 
-!!! warning "El peligro del compliance sin postura"
-    Una organización puede estar en compliance total con ISO 27001 y tener una postura de seguridad débil. Esto ocurre cuando la documentación existe pero los controles no funcionan en la práctica: la política de contraseñas existe pero nadie la cumple, el plan de respuesta a incidentes está redactado pero nadie lo conoce, las auditorías internas se realizan pero no se corrigen las no-conformidades encontradas. El compliance es condición necesaria pero no suficiente para una buena postura de seguridad.
+!!! warning "El peligro del cumplimiento aparente"
+    Una organización puede exhibir una certificación vigente o abundante evidencia documental y tener una postura de seguridad débil. Si la política de contraseñas existe pero nadie la cumple, el plan de respuesta está redactado pero nadie lo conoce o las no conformidades no se corrigen, no existe “compliance total”: existe una brecha entre la conformidad declarada y la eficacia real. Demostrar conformidad ayuda, pero no basta por sí solo para sostener una buena postura de seguridad.
 
 La relación correcta entre los dos conceptos es: el SGSI es el mecanismo que, cuando funciona bien, hace que el compliance y la postura de seguridad converjan. Un SGSI que solo genera papeles sin mejorar controles reales es burocracia, no seguridad.
 

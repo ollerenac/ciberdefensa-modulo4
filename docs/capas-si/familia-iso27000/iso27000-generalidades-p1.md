@@ -21,7 +21,7 @@ Al finalizar esta clase, el alumno será capaz de:
 
 ## Actividad de apertura — Del incidente al control
 
-> **Duración sugerida:** 30 minutos | **Modalidad:** equipos de 2–4 alumnos | **Conocimientos previos:** no requeridos
+> **Duración sugerida:** 30 minutos | **Modalidad:** equipos de 2–4 alumnos | **Conocimientos previos:** tríada CID; no se requiere conocer ISO
 
 La pregunta no es “¿qué norma violó la empresa?”, sino una más útil para gestionar riesgo:
 
@@ -61,18 +61,27 @@ Durante el retiro de centros de datos y otros equipos, la organización no evalu
 
 ### Trabajo por equipos
 
-Cada equipo recibe uno de los seis casos y prepara una exposición de dos minutos:
+Cada equipo recibe uno de los seis casos y prepara una exposición de dos minutos. La actividad se desarrolla en dos rondas para no exigir que el alumno conozca todavía el catálogo ISO.
 
 Si hay menos de seis equipos o el tiempo es limitado, priorizar **Equifax, Capital One, Marriott y Morgan Stanley**; usar Target y Maersk como casos de ampliación.
 
+**Ronda 1 — Analizar la evidencia**
+
 1. Identificar el activo y el efecto principal sobre confidencialidad, integridad o disponibilidad.
 2. Separar la **debilidad documentada** de cualquier inferencia del equipo.
+
+**Ronda 2 — Consultar el banco y argumentar**
+
+El docente entrega este banco sin indicar qué referencia corresponde a cada caso: **§ 6.1.2** evaluación de riesgos; **§ 9.1** seguimiento y medición; **A.5.9** inventario; **A.5.19–A.5.23** proveedores, cadena de suministro y nube; **A.5.25** evaluación de eventos; **A.5.29–A.5.30** continuidad; **A.7.14** reutilización de equipos; **A.8.2** privilegios; **A.8.8–A.8.10** vulnerabilidades, configuración y eliminación; **A.8.15–A.8.16** registros y monitoreo; **A.8.22** segregación de redes.
+
 3. Elegir un requisito o control principal y hasta dos controles complementarios.
 4. Clasificar cada medida como preventiva, detectiva o de recuperación.
 5. Indicar qué evidencia pediría un auditor para comprobar que el control funciona en la práctica.
 6. Completar esta frase: “La evidencia se relaciona con ___; su aplicación eficaz habría podido ___, pero no demuestra ___”.
 
 ??? success "Mapa orientativo — abrir después de la discusión"
+
+    El mapa reúne alternativas posibles; cada equipo debe defender solamente un control principal y hasta dos complementarios.
 
     | Caso | Mapeo analítico ISO/IEC 27001:2022 | Qué habría que verificar |
     |---|---|---|
@@ -108,8 +117,8 @@ La transición de BS 7799 a la familia ISO 27000 ocurrió en etapas:
 | 1998 | BS 7799 Parte 2 — Especificación del SGSI (primeros requisitos auditables) |
 | 2000 | ISO/IEC 17799 — BS 7799 Parte 1 adopta el número ISO |
 | 2005 | ISO/IEC 27001:2005 — Primera versión del estándar de gestión con ese número |
-| 2013 | ISO/IEC 27001:2013 — Revisión mayor, Annex A con 114 controles en 14 dominios |
-| 2022 | ISO/IEC 27001:2022 — Versión vigente, Annex A con 93 controles en 4 temas |
+| 2013 | ISO/IEC 27001:2013 — Revisión mayor, Anexo A con 114 controles en 14 dominios |
+| 2022 | ISO/IEC 27001:2022 — Versión vigente, Anexo A con 93 controles en 4 temas |
 | 2026 | ISO/IEC 27000:2026 — Panorama, conceptos, principios y relaciones de la familia actualizados |
 
 Conviene distinguir dos normas vigentes: **ISO/IEC 27000:2026** ofrece la introducción conceptual a la familia, mientras **ISO/IEC 27001:2022** contiene los requisitos certificables del SGSI. Los números de cláusulas y controles usados en este curso corresponden a ISO/IEC 27001:2022.
@@ -137,7 +146,7 @@ La "familia ISO 27000" no es una norma única — es un conjunto de estándares 
 La forma más sencilla de entender la relación es esta:
 
 - **ISO 27001** es el jefe: dice **qué** debe existir en una organización que gestiona la seguridad de su información.
-- **ISO 27002** es el técnico: dice **cómo** implementar cada control que ISO 27001 requiere.
+- **ISO 27002** es el técnico: orienta **cómo** implementar los controles que la organización selecciona según sus riesgos.
 - **ISO 27005** es el analista de riesgo: dice **cómo** identificar y tratar los riesgos que ISO 27001 pide gestionar.
 - **ISO 27000** es el mapa: explica los **conceptos, principios y relaciones** que permiten navegar la familia.
 
@@ -201,7 +210,7 @@ Las razones más comunes son:
 El SGSI y los estándares ISO 27000 no son exclusivos del mundo corporativo. Las fuerzas armadas de múltiples países — incluyendo miembros de la OTAN — han adoptado marcos basados en ISO 27001 para gestionar la seguridad de sus sistemas de comunicaciones e información.
 
 **Ejemplo 1 — SCIF y clasificación de información:**
-Un SCIF (Sensitive Compartmented Information Facility) es una instalación diseñada para procesar información clasificada. Los controles de seguridad que se aplican en un SCIF — acceso físico controlado, equipos sin conectividad inalámbrica, procedimientos de barrido de dispositivos de almacenamiento — son la implementación práctica de conceptos que ISO 27001 formaliza: contexto organizacional (qué información se maneja), controles de acceso físico (cláusula 7 del Annex A de ISO 27002:2022), y gestión de activos de información. Un Técnico que entiende el marco ISO puede reconocer por qué cada procedimiento del SCIF existe, no solo seguirlo mecánicamente.
+Un SCIF (Sensitive Compartmented Information Facility) es una instalación diseñada para procesar información clasificada. Los controles de seguridad que se aplican en un SCIF — acceso físico controlado, equipos sin conectividad inalámbrica, procedimientos de barrido de dispositivos de almacenamiento — son la implementación práctica de conceptos que ISO 27001 formaliza: contexto organizacional (qué información se maneja), controles físicos A.7.* del Anexo A de ISO/IEC 27001:2022, desarrollados en el tema 7 de ISO/IEC 27002:2022, y gestión de activos de información. Un Técnico que entiende el marco ISO puede reconocer por qué cada procedimiento del SCIF existe, no solo seguirlo mecánicamente.
 
 **Ejemplo 2 — Radios tácticas y sistemas C2:**
 Una unidad de comunicaciones que opera radios tácticas y sistemas de mando y control (C2) tiene activos de información críticos: las frecuencias de operación, los planes de comunicaciones, los algoritmos de cifrado cargados en los equipos. Un SGSI para esa unidad define qué activos existen, quién puede acceder a ellos, bajo qué condiciones se renueva el material criptográfico, y qué se hace si un equipo es capturado o comprometido. Estos son los cuatro componentes del SGSI aplicados al contexto operativo del Técnico.
@@ -223,7 +232,7 @@ Una unidad de comunicaciones que opera radios tácticas y sistemas de mando y co
 
 - **ISO/IEC 27000:2026 (overview):** https://www.iso.org/standard/27000 — Panorama vigente de conceptos, principios y relaciones de la familia.
 - **Historia de ISO 27001 (IT Governance UK):** https://www.itgovernance.co.uk/iso27001 — Resumen accesible de la evolución del estándar.
-- **ISO 27001:2022 vs 2013 — Qué cambió:** https://www.iso27001security.com/html/27001.html — Comparación de versiones con foco en los cambios del Annex A.
+- **ISO 27001:2022 vs 2013 — Qué cambió:** https://www.iso27001security.com/html/27001.html — Comparación de versiones con foco en los cambios del Anexo A.
 
 ---
 
