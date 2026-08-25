@@ -17,7 +17,7 @@ Al finalizar esta clase, el alumno será capaz de:
 
 ---
 
-> **Recapitulación:** En la clase anterior (Parte 1) cubrimos el origen de los estándares ISO 27000, la estructura de la familia (27000 vocabulario, 27001 requisitos, 27002 controles, 27005 riesgo), y los cuatro componentes fundamentales de un SGSI. Esta clase continúa con el motor que hace funcionar el SGSI: el ciclo PDCA y los beneficios reales que aporta.
+> **Recapitulación:** En la clase anterior (Parte 1) cubrimos el origen de los estándares, la estructura de la familia (27000:2026 panorama y conceptos, 27001:2022 requisitos, 27002:2022 controles, 27005:2022 riesgo), los cuatro componentes fundamentales de un SGSI y el mapeo prudente de incidentes reales. Esta clase continúa con el motor que hace funcionar el SGSI: el ciclo PDCA y los beneficios reales que aporta.
 
 ---
 

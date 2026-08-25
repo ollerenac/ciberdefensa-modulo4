@@ -15,6 +15,75 @@ Al finalizar esta clase, el alumno será capaz de:
 - Identificar las principales normas de la familia ISO/IEC 27000 y describir el rol de cada una.
 - Definir qué es un Sistema de Gestión de la Seguridad de la Información (SGSI) y explicar su estructura conceptual.
 - Reconocer por qué las organizaciones adoptan un SGSI como marco de referencia, sin confundirlo con el proceso de certificación.
+- Relacionar debilidades documentadas de incidentes reales con requisitos y controles ISO, sin presentar el mapeo como una conclusión oficial de incumplimiento.
+
+---
+
+## Actividad de apertura — Del incidente al control
+
+> **Duración sugerida:** 30 minutos | **Modalidad:** equipos de 2–4 alumnos | **Conocimientos previos:** no requeridos
+
+La pregunta no es “¿qué norma violó la empresa?”, sino una más útil para gestionar riesgo:
+
+> **¿Qué práctica de un SGSI habría podido prevenir el incidente, detectarlo antes o reducir su impacto?**
+
+!!! warning "Regla de interpretación"
+    Ninguna de las fuentes citadas sanciona a estas organizaciones por “incumplir ISO/IEC 27001”. Además, los incidentes ocurrieron entre 2013 y 2019 y el catálogo usado para analizarlos es de 2022. El mapeo es **retrospectivo y analítico**: relaciona una debilidad documentada con requisitos o controles que podrían tratarla. No prueba ausencia de SGSI, no convierte todos los controles en obligatorios y no garantiza que una certificación hubiera evitado el incidente.
+
+!!! info "Precisión terminológica"
+    No se implementa un “control de ISO 27000”. [**ISO/IEC 27000:2026**](https://www.iso.org/standard/27000) explica el panorama, los conceptos y las relaciones de la familia; [**ISO/IEC 27001:2022**](https://www.iso.org/standard/27001) contiene los requisitos del SGSI y su Anexo A sirve como catálogo de referencia; [**ISO/IEC 27002:2022**](https://www.iso.org/standard/75652.html) proporciona orientación para implementar esos controles.
+
+### Seis expedientes reales
+
+**1. Equifax (2017)**
+
+Atacantes explotaron una vulnerabilidad de Apache Struts que no fue identificada correctamente en el portal afectado. La lista de distribución del aviso de parcheo estaba desactualizada, el escaneo posterior no encontró el sistema vulnerable, un certificado vencido impidió inspeccionar tráfico cifrado y las bases de datos no estaban suficientemente segmentadas. Se accedió a información personal de al menos 145,5 millones de personas. Fuente: [informe GAO-18-559](https://www.gao.gov/products/gao-18-559).
+
+**2. Target (2013)**
+
+El informe del Senado reconstruyó un acceso inicial con credenciales robadas a un proveedor, desplazamiento desde áreas menos sensibles hacia sistemas de punto de venta y falta de respuesta ante varias alertas del software de detección. Se expusieron aproximadamente 40 millones de cuentas de tarjetas y datos personales de hasta 70 millones de clientes. Fuente: [informe del Comité de Comercio del Senado de EE. UU.](https://www.commerce.senate.gov/public/_cache/files/24d3c229-4f2f-405d-b8db-a3a67f183883/23E30AA955B5C00FE57CFD709621592C.2014-0325-target-kill-chain-analysis.pdf).
+
+**3. Maersk / NotPetya (2017)**
+
+La acusación del Departamento de Justicia describe la distribución de NotPetya mediante el mecanismo de actualización del software contable ucraniano M.E.Doc; el ataque provocó una interrupción global. Maersk estimó pérdidas de entre USD 250 y 300 millones por pérdida de ingresos, restauración de TI y costos operacionales extraordinarios. Fuentes: [acusación del Departamento de Justicia de EE. UU.](https://www.justice.gov/d9/press-releases/attachments/2020/10/19/2020_10_19_unsealed_indictment_0.pdf) e [Informe Anual 2017 de Maersk](https://investor.maersk.com/system/files-encrypted/nasdaq_kms/assets/2018/04/25/13-00-21/A.P._Moller_-_Maersk_Annual_Report_2017.pdf).
+
+**4. Capital One (2019)**
+
+Una configuración incorrecta del firewall de aplicación web permitió ejecutar solicitudes que obtuvieron credenciales de roles y acceder, dentro de los permisos disponibles, a datos almacenados en la nube. La actividad de marzo fue comunicada a Capital One por una persona externa en julio. El incidente afectó aproximadamente a 100 millones de personas en EE. UU. y 6 millones en Canadá; la OCC impuso una penalidad de USD 80 millones por deficiencias de evaluación de riesgo y controles en la nube. Fuentes: [Departamento de Justicia de EE. UU.](https://www.justice.gov/usao-wdwa/pr/seattle-tech-worker-arrested-data-theft-involving-large-financial-services-company), [comunicado de Capital One](https://www.capitalone.com/about/newsroom/capital-one-announces-data-security-incident/) y [resolución de la OCC](https://www.occ.gov/news-issuances/news-releases/2020/nr-occ-2020-101.html).
+
+**5. Marriott / Starwood (2014–2018)**
+
+El atacante entró al entorno de Starwood en 2014; Marriott adquirió la empresa en 2016 y detectó la actividad en 2018. El ICO documentó, entre otras deficiencias, monitoreo insuficiente de cuentas privilegiadas y bases de datos. Se vieron afectados alrededor de 339 millones de registros de huéspedes y la sanción fue de GBP 18,4 millones. El ICO no atribuyó la sanción a una infracción durante la adquisición anterior al GDPR. Fuente: [resolución sancionadora del ICO](https://ico.org.uk/media2/migrated/2618524/marriott-international-inc-mpn-20201030.pdf).
+
+**6. Morgan Stanley (2016–2019)**
+
+Durante el retiro de centros de datos y otros equipos, la organización no evaluó adecuadamente el riesgo, seleccionó y supervisó deficientemente a proveedores, y no mantuvo un inventario apropiado de los datos en los dispositivos. Parte del hardware fue revendida sin eliminar toda la información. La OCC impuso USD 60 millones y la SEC USD 35 millones; esta última acción abarcó información de aproximadamente 15 millones de clientes. Fuentes: [resolución de la OCC](https://www.occ.gov/news-issuances/news-releases/2020/nr-occ-2020-134.html) y [resolución de la SEC](https://www.sec.gov/newsroom/press-releases/2022-168).
+
+### Trabajo por equipos
+
+Cada equipo recibe uno de los seis casos y prepara una exposición de dos minutos:
+
+Si hay menos de seis equipos o el tiempo es limitado, priorizar **Equifax, Capital One, Marriott y Morgan Stanley**; usar Target y Maersk como casos de ampliación.
+
+1. Identificar el activo y el efecto principal sobre confidencialidad, integridad o disponibilidad.
+2. Separar la **debilidad documentada** de cualquier inferencia del equipo.
+3. Elegir un requisito o control principal y hasta dos controles complementarios.
+4. Clasificar cada medida como preventiva, detectiva o de recuperación.
+5. Indicar qué evidencia pediría un auditor para comprobar que el control funciona en la práctica.
+6. Completar esta frase: “La evidencia se relaciona con ___; su aplicación eficaz habría podido ___, pero no demuestra ___”.
+
+??? success "Mapa orientativo — abrir después de la discusión"
+
+    | Caso | Mapeo analítico ISO/IEC 27001:2022 | Qué habría que verificar |
+    |---|---|---|
+    | Equifax | **A.8.8** Gestión de vulnerabilidades técnicas; complementarios **A.5.9** inventario, **A.8.16** monitoreo, **A.8.22** segregación y **§ 9.1** medición de eficacia | Inventario de sistemas con Struts, SLA de parcheo, escaneo que confirme el cierre, vigencia de certificados y alertas probadas |
+    | Target | **A.5.19–A.5.22** seguridad de proveedores; complementarios **A.8.22** segregación y **A.5.25** evaluación de eventos | Alcance real de accesos de terceros, separación del entorno POS, responsables y tiempos de respuesta a alertas |
+    | Maersk | **A.5.21** cadena de suministro TIC; complementarios **A.5.29** seguridad durante interrupciones y **A.5.30** preparación TIC para continuidad | Validación de actualizaciones, ejercicios de pérdida masiva de sistemas y objetivos de recuperación |
+    | Capital One | **§ 6.1.2** evaluación de riesgos y **A.5.23** uso seguro de nube; complementarios **A.8.9** configuración, **A.8.16** monitoreo y revisión de **A.8.2** privilegios | Revisión de configuración, alcance mínimo de permisos, detección de consultas y exfiltración anómalas, y reevaluación del riesgo cloud |
+    | Marriott | **A.8.16** monitoreo y **A.8.15** registro; complementarios **A.8.2** acceso privilegiado y **§ 6.1.2** evaluación continua del riesgo | Cobertura de logs de cuentas privilegiadas y bases de datos, reglas de alerta, revisión de sistemas adquiridos y pruebas de eficacia |
+    | Morgan Stanley | **A.7.14** eliminación o reutilización segura y **A.8.10** eliminación de información; complementarios **A.5.9** inventario y **A.5.19/A.5.20/A.5.22** gestión de proveedores | Cadena de custodia, inventario conciliado, evidencia de borrado o destrucción, competencia del proveedor y supervisión del contrato |
+
+El patrón común no es “faltó una herramienta”. Aparecen decisiones de riesgo, responsabilidades, proveedores, inventario, monitoreo, continuidad y verificación de eficacia: precisamente los elementos que convierten controles aislados en un sistema de gestión.
 
 ---
 
@@ -29,7 +98,7 @@ El primer intento serio de crear un lenguaje común fue el estándar británico 
 !!! note "Definición"
     Un **estándar internacional** es un documento técnico consensuado por expertos de múltiples países, que establece requisitos, guías o características para un producto, proceso o servicio. Los estándares ISO son voluntarios — ninguna ley obliga a cumplirlos — pero se convierten en requisitos de facto cuando clientes, socios o reguladores los exigen.
 
-### La Evolución hacia ISO 27001
+### La evolución hacia la familia ISO/IEC 27000
 
 La transición de BS 7799 a la familia ISO 27000 ocurrió en etapas:
 
@@ -41,8 +110,9 @@ La transición de BS 7799 a la familia ISO 27000 ocurrió en etapas:
 | 2005 | ISO/IEC 27001:2005 — Primera versión del estándar de gestión con ese número |
 | 2013 | ISO/IEC 27001:2013 — Revisión mayor, Annex A con 114 controles en 14 dominios |
 | 2022 | ISO/IEC 27001:2022 — Versión vigente, Annex A con 93 controles en 4 temas |
+| 2026 | ISO/IEC 27000:2026 — Panorama, conceptos, principios y relaciones de la familia actualizados |
 
-La versión vigente es **ISO/IEC 27001:2022**. Cualquier referencia en este curso usa la numeración de 2022.
+Conviene distinguir dos normas vigentes: **ISO/IEC 27000:2026** ofrece la introducción conceptual a la familia, mientras **ISO/IEC 27001:2022** contiene los requisitos certificables del SGSI. Los números de cláusulas y controles usados en este curso corresponden a ISO/IEC 27001:2022.
 
 ---
 
@@ -55,7 +125,7 @@ La "familia ISO 27000" no es una norma única — es un conjunto de estándares 
 
 | Norma | Propósito | Qué entrega |
 |-------|-----------|-------------|
-| **ISO/IEC 27000** | Vocabulario y conceptos generales | Definiciones comunes para toda la familia — el glosario oficial |
+| **ISO/IEC 27000:2026** | Panorama, conceptos y principios generales | Mapa para comprender la familia y la relación entre sus normas |
 | **ISO/IEC 27001:2022** | Requisitos para un SGSI (auditable) | La lista de "qué debe hacer" — base para la certificación si se desea |
 | **ISO/IEC 27002:2022** | Guía de implementación de controles | El "cómo hacerlo" — 93 controles con orientación práctica |
 | **ISO/IEC 27005:2022** | Gestión del riesgo de seguridad de la información | El proceso completo para identificar, analizar y tratar riesgos |
@@ -69,7 +139,7 @@ La forma más sencilla de entender la relación es esta:
 - **ISO 27001** es el jefe: dice **qué** debe existir en una organización que gestiona la seguridad de su información.
 - **ISO 27002** es el técnico: dice **cómo** implementar cada control que ISO 27001 requiere.
 - **ISO 27005** es el analista de riesgo: dice **cómo** identificar y tratar los riesgos que ISO 27001 pide gestionar.
-- **ISO 27000** es el intérprete: dice **qué significan** los términos que las otras normas usan.
+- **ISO 27000** es el mapa: explica los **conceptos, principios y relaciones** que permiten navegar la familia.
 
 Una organización que quiere implementar un SGSI completo lee ISO 27001 para saber qué debe hacer, consulta ISO 27002 para saber cómo hacerlo, y usa ISO 27005 para gestionar los riesgos que su SGSI debe controlar.
 
@@ -141,16 +211,17 @@ Una unidad de comunicaciones que opera radios tácticas y sistemas de mando y co
 ## Resumen
 
 1. Los estándares ISO 27000 nacieron de la necesidad de un lenguaje común para gestionar la seguridad de la información — comenzando con BS 7799 (1995) y evolucionando hasta ISO/IEC 27001:2022.
-2. La familia ISO/IEC 27000 es un conjunto de normas complementarias: **27000** (vocabulario), **27001** (requisitos auditables), **27002** (guía de controles), **27005** (gestión de riesgo), entre otras.
+2. La familia ISO/IEC 27000 es un conjunto de normas complementarias: **27000:2026** (panorama y conceptos), **27001:2022** (requisitos auditables), **27002:2022** (guía de controles), **27005:2022** (gestión de riesgo), entre otras.
 3. Un **SGSI** es el sistema documentado de políticas, controles y procesos que gestiona la seguridad de la información de forma sistemática — no es una herramienta tecnológica, es un sistema de gestión.
 4. Los cuatro componentes de un SGSI son: alcance y contexto, evaluación de riesgos, controles de seguridad, y ciclo de mejora continua.
 5. En este curso el SGSI se estudia como **marco de referencia conceptual** — para entender su propósito y estructura, no para certificar una organización.
+6. Los incidentes reales pueden mapearse a controles para aprender, pero ese análisis retrospectivo no demuestra incumplimiento de ISO ni garantiza que la certificación hubiera evitado el incidente.
 
 ## Para profundizar
 
 > Recursos opcionales — no requeridos para el examen.
 
-- **ISO/IEC 27000:2018 (overview):** https://www.iso.org/standard/73906.html — Disponible en versión gratuita en el sitio de ISO. Define todos los términos de la familia.
+- **ISO/IEC 27000:2026 (overview):** https://www.iso.org/standard/27000 — Panorama vigente de conceptos, principios y relaciones de la familia.
 - **Historia de ISO 27001 (IT Governance UK):** https://www.itgovernance.co.uk/iso27001 — Resumen accesible de la evolución del estándar.
 - **ISO 27001:2022 vs 2013 — Qué cambió:** https://www.iso27001security.com/html/27001.html — Comparación de versiones con foco en los cambios del Annex A.
 

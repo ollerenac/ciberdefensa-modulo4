@@ -143,7 +143,7 @@ La **Sección de Comunicaciones del Regimiento de Infantería N°8** (SC-RI8) es
 
 **Opciones:**
 - A) Establece los requisitos auditables para un SGSI
-- B) Proporciona vocabulario y definiciones de la familia de normas
+- B) Presenta el panorama, los conceptos, los principios y las relaciones de la familia de normas
 - C) Define el proceso de gestión de riesgos de seguridad de la información
 
 ---
@@ -238,7 +238,7 @@ ________________________________________________________________
     **P9 — Opción de tratamiento:** **C** (Aceptar / Retain). El Comandante documenta y acepta el riesgo dentro de su apetito. No es Mitigar (no implementa control), no es Transferir (no hay tercero), no es Evitar (no elimina la actividad).
 
     **P10 — Asociación norma-propósito:**
-    - ISO/IEC 27000 → **B** (vocabulario y definiciones)
+    - ISO/IEC 27000 → **B** (panorama, conceptos, principios y relaciones de la familia)
     - ISO/IEC 27001 → **A** (requisitos auditables del SGSI)
     - ISO/IEC 27005 → **C** (gestión de riesgos)
 
