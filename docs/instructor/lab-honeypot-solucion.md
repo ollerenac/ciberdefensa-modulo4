@@ -6,267 +6,304 @@
 # SOLUCIÓN: Lab Despliegue y Análisis de Honeypot (LAB-05)
 
 !!! danger "Solo para instructores"
-    Este documento contiene la configuración esperada, el script de contingencia Python completo, el extracto de log con respuestas modelo y los criterios de calificación. No mostrarlo en el proyector durante el lab.
+    Este documento contiene el procedimiento esperado, las respuestas modelo y la rúbrica. Durante el ejercicio, proyectar únicamente la guía del alumno y el extracto de log sin respuestas.
 
-!!! warning "Contingencia"
-    Este lab tiene mayor probabilidad de fallo de instalación que los otros labs de la unidad. Leer la sección **"## Plan B: Si HoneyPy No Instala"** antes del lab. Tener el script Python listo en USB para distribución antes de entrar al aula.
-
----
-
-## Prerrequisito de Instalación — Verificar ANTES del lab
-
-1. **Verificar que Python 3 está instalado** en los equipos del aula:
-   ```cmd
-   python --version
-   ```
-   o en algunos sistemas:
-   ```cmd
-   python3 --version
-   ```
-   Debe mostrar `Python 3.x.x`. Si no está instalado, descargar el instalador desde [python.org](https://python.org) (Windows installer 64-bit, versión estable más reciente).
-
-2. **Intentar instalar HoneyPy en el equipo del instructor ANTES del lab:**
-   ```cmd
-   pip install honeypy
-   ```
-   Si falla (error de conexión, red corporativa que bloquea PyPI, o proxy que interfiere con pip), cambiar directamente al Plan B — script Python en USB. No perder tiempo de clase en resolver problemas de pip.
-
-3. **Preparar el script `honeypot-simple.py`** en USB para distribución (el código está en la sección Plan B de este documento). Tenerlo listo aunque HoneyPy funcione — es el fallback garantizado.
-
-4. **Verificar que los puertos 22 y 80 no están en uso** en los equipos del aula:
-   ```cmd
-   netstat -an | findstr ":22 "
-   netstat -an | findstr ":80 "
-   ```
-   Si alguno está ocupado, el Plan A (HoneyPy en esos puertos) no funcionará. Ajustar la configuración de HoneyPy a puertos alternativos (2222 y 8080), o usar directamente el script Python con puerto 9999.
+!!! warning "Alcance obligatorio"
+    La práctica principal escucha exclusivamente en `127.0.0.1`. No cambiar a `0.0.0.0`, no crear reglas de entrada y no conectar equipos entre sí. Una práctica en red necesitaría autorización, segmentación y un plan de contención distintos.
 
 ---
 
-## Plan A: HoneyPy Funciona
+## Decisión técnica del laboratorio
 
-Si `pip install honeypy` tuvo éxito, usar este flujo.
-
-**Archivo de configuración `honeypy.cfg` esperado:**
-
-```ini
-[honeypy]
-logdir = C:\HoneyPy\logs
-
-[services]
-ssh = true
-ssh_port = 22
-http = true
-http_port = 80
-```
-
-Si los puertos 22 y 80 están en uso, cambiar a:
-```ini
-ssh_port = 2222
-http_port = 8080
-```
-
-**Salida esperada de consola al iniciar HoneyPy:**
-```text
-HoneyPy starting...
-Listening on port 22 (SSH emulation)
-Listening on port 80 (HTTP emulation)
-```
-
-**Comandos de prueba para generar conexiones:**
-```cmd
-:: Probar SSH (con Telnet Client instalado)
-telnet localhost 22
-
-:: Probar HTTP
-curl http://localhost
-```
-
-**Log esperado después de las conexiones de prueba** (ubicado en `C:\HoneyPy\logs\`):
-```text
-2026-06-16T14:30:00.123 | 127.0.0.1 | 54321 | ssh | connection
-2026-06-16T14:30:05.456 | 127.0.0.1 | 54322 | http | connection
-```
+El procedimiento canónico despliega un honeypot didáctico de baja interacción mediante `honeypot-simple.py`. El script usa la biblioteca estándar de Python 3, registra conexiones TCP y permite analizar correctamente el origen, el destino y la marca de tiempo de cada evento.
 
 ---
 
-## Plan B: Si HoneyPy No Instala
+## Preparación del instructor
 
-Esta sección es la guía de contingencia si `pip install honeypy` falla o HoneyPy no inicia correctamente.
+Antes de la clase:
 
-### Opción B1 — Script Python básico (distribuir en USB)
+1. Verificar Python 3 en la VM o equipo Windows 11:
 
-Guardar el siguiente script como `C:\honeypot-simple.py` en los equipos de los alumnos. Distribuir desde USB.
+   ```powershell
+   py -3 --version
+   ```
+
+   Si aparece `Python 3.x.x`, Python está listo. Si el comando falla, comprobar que WinGet está disponible:
+
+   ```powershell
+   winget --version
+   ```
+
+   Instalar el **Python Install Manager** oficial:
+
+   ```powershell
+   winget install 9NQ7512CXL7T -e --accept-package-agreements --disable-interactivity
+   ```
+
+   Este comando instala el administrador, no el runtime de Python. El identificador está publicado en la [documentación oficial de Python para Windows](https://docs.python.org/3/using/windows.html#advanced-installation).
+
+   Si el siguiente comando aún no se reconoce, cerrar PowerShell y abrir una ventana nueva. Después instalar explícitamente el runtime estable predeterminado:
+
+   ```powershell
+   pymanager install default
+   ```
+
+   Repetir la comprobación inicial. El criterio de éxito es `Python 3.x.x`.
+
+   !!! note "Contingencia si WinGet no está disponible"
+       Si `winget --version` falla o una política institucional bloquea WinGet, descargar el **Python Install Manager** únicamente desde [python.org](https://www.python.org/downloads/windows/). Instalarlo, abrir una PowerShell nueva si fuera necesario y continuar con la instalación del runtime y la comprobación indicadas arriba. Esta es una contingencia; la ruta principal es WinGet.
+
+2. Crear el directorio de práctica:
+
+   ```powershell
+   New-Item -ItemType Directory -Force C:\HoneypotLab
+   ```
+
+3. Confirmar que el puerto está libre:
+
+   ```powershell
+   Get-NetTCPConnection -LocalPort 9999 -State Listen -ErrorAction SilentlyContinue
+   ```
+
+4. Guardar una copia de `honeypot-simple.py` en USB o en el medio institucional autorizado. No depender de internet durante la sesión.
+
+5. Ejecutar una UAT completa: inicio, `Test-NetConnection`, aparición del evento, escritura de `honeypot.log` y cierre con `Ctrl+C`.
+
+---
+
+## Script canónico
+
+El bloque siguiente debe ser idéntico al publicado en la guía del alumno. Guardarlo como `C:\HoneypotLab\honeypot-simple.py`:
 
 ```python
-# Honeypot minimo de demostracion - detecta y registra conexiones TCP
-import socket
+# Honeypot minimo de demostracion: detecta y registra conexiones TCP.
 import datetime
+from pathlib import Path
+import socket
 import sys
 
-HOST = '127.0.0.1'
+HOST = "127.0.0.1"
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 9999
+LOG_PATH = Path(__file__).with_name("honeypot.log")
 
 print(f"Honeypot iniciado en {HOST}:{PORT}")
+print(f"Log: {LOG_PATH}")
 print("Esperando conexiones... (Ctrl+C para detener)")
-print("-" * 50)
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    s.bind((HOST, PORT))
-    s.listen(5)
-    while True:
-        try:
-            conn, addr = s.accept()
-            timestamp = datetime.datetime.now().isoformat()
-            log_entry = f"[{timestamp}] CONEXION desde {addr[0]}:{addr[1]}"
-            print(log_entry)
-            # Guardar en archivo de log
-            with open("honeypot.log", "a") as f:
-                f.write(log_entry + "\n")
-            conn.close()
-        except KeyboardInterrupt:
-            print("\nHoneypot detenido.")
-            break
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
+    server.bind((HOST, PORT))
+    server.listen(5)
+
+    try:
+        while True:
+            connection, source = server.accept()
+            with connection:
+                destination = connection.getsockname()
+                timestamp = datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+                event = (
+                    f"[{timestamp}] EVENTO_TCP "
+                    f"origen={source[0]}:{source[1]} "
+                    f"destino={destination[0]}:{destination[1]}"
+                )
+                print(event)
+                with LOG_PATH.open("a", encoding="utf-8") as log_file:
+                    log_file.write(event + "\n")
+    except KeyboardInterrupt:
+        print("\nHoneypot detenido.")
 ```
 
-**Ejecutar el honeypot:**
-```cmd
-python C:\honeypot-simple.py 9999
+### Propiedades que deben preservarse
+
+- `127.0.0.1` limita la escucha al mismo equipo.
+- El puerto por defecto es `9999`, pero puede pasarse otro puerto alto como argumento.
+- `Path(__file__)` coloca el log junto al script, independientemente del directorio desde el que se invoque.
+- `getsockname()` registra el destino real y evita confundirlo con el puerto efímero del cliente.
+- `socket`, `datetime`, `pathlib` y `sys` pertenecen a la biblioteca estándar.
+
+---
+
+## UAT esperada en Windows 11
+
+### 1. Iniciar el sensor
+
+```powershell
+py -3 C:\HoneypotLab\honeypot-simple.py 9999
 ```
 
-**Probar la conexión** (desde otra ventana CMD):
-```cmd
-telnet 127.0.0.1 9999
-```
+Salida inicial:
 
-**Salida esperada en la consola del honeypot:**
 ```text
 Honeypot iniciado en 127.0.0.1:9999
+Log: C:\HoneypotLab\honeypot.log
 Esperando conexiones... (Ctrl+C para detener)
---------------------------------------------------
-[2026-06-16T14:30:00.123456] CONEXION desde 127.0.0.1:54321
-[2026-06-16T14:30:15.789012] CONEXION desde 127.0.0.1:54325
 ```
 
-!!! note "Nota de seguridad T-04-02"
-    El script usa `HOST = '127.0.0.1'` (solo loopback) para evitar requerir permisos de administrador (puertos < 1024 en Windows requieren elevación). Si un alumno cambia `HOST` a `'0.0.0.0'`, el honeypot aceptará conexiones de toda la red del aula — alertar sobre esto como lección de seguridad: un honeypot expuesto en red real requiere autorización explícita.
+### 2. Generar tráfico desde otra consola
 
-### Opción B2 — Cowrie en WSL2 (solo si el aula tiene WSL2 con Ubuntu disponible)
-
-Cowrie es un honeypot SSH de alta interacción que registra todos los comandos que el "atacante" escribe. Es la opción más impactante pedagógicamente, pero requiere WSL2 y aproximadamente 20 minutos de instalación.
-
-```bash
-# En Ubuntu WSL2 (abrir desde el menu Inicio: Ubuntu)
-sudo apt-get install -y git python3-venv
-
-git clone https://github.com/cowrie/cowrie.git
-cd cowrie
-
-python3 -m venv cowrie-env
-source cowrie-env/bin/activate
-pip install -r requirements/requirements.txt
-
-cp etc/cowrie.cfg.dist etc/cowrie.cfg
-# Editar cowrie.cfg: cambiar listen_port a 2222 (no requiere permisos de root)
-# Linea a modificar: listen_port = 2222
-
-bin/cowrie start
+```powershell
+Test-NetConnection 127.0.0.1 -Port 9999
 ```
 
-**Probar desde otra terminal WSL2:**
-```bash
-ssh -p 2222 root@localhost
-# Cowrie simula un shell. Escribir: ls, cat /etc/passwd, whoami
-# Todos los comandos quedan registrados en cowrie/var/log/cowrie/cowrie.log
-```
-
-**Tiempo de instalación:** 15-20 minutos. Solo viable si el grupo va adelantado y WSL2 ya está disponible en los equipos del aula.
-
----
-
-## Extracto de Log para el Ejercicio de Análisis
-
-El instructor distribuye este extracto impreso o lo proyecta para el ejercicio de análisis en clase. No depende de que el honeypot funcione — el análisis puede hacerse con este extracto independientemente.
+Criterio de éxito:
 
 ```text
-[2026-06-16T10:15:01] CONEXION desde 192.168.1.100:1024
-[2026-06-16T10:15:45] CONEXION desde 192.168.1.100:1025
-[2026-06-16T10:16:02] CONEXION desde 192.168.1.100:1026
-[2026-06-16T10:16:03] CONEXION desde 192.168.1.100:1027
-[2026-06-16T10:16:04] CONEXION desde 192.168.1.100:1028
-[2026-06-16T10:45:22] CONEXION desde 10.0.0.5:2048
-[2026-06-16T10:45:23] CONEXION desde 10.0.0.5:2049
-[2026-06-16T11:02:15] CONEXION desde 192.168.1.77:3000
-[2026-06-16T11:02:18] CONEXION desde 192.168.1.77:3001
-[2026-06-16T11:02:20] CONEXION desde 192.168.1.77:3002
+TcpTestSucceeded : True
 ```
 
-### Respuestas Modelo del Ejercicio de Análisis
+### 3. Verificar consola y archivo
 
-**Pregunta 1 — ¿Cuántas conexiones únicas aparecen en el log? ¿Cuántas IPs distintas?**
+El puerto de origen variará en cada equipo:
 
-Respuesta correcta: 10 conexiones totales. 3 IPs distintas: `192.168.1.100`, `10.0.0.5`, `192.168.1.77`.
+```text
+[2026-08-24T10:15:01-05:00] EVENTO_TCP origen=127.0.0.1:54321 destino=127.0.0.1:9999
+```
 
-**Pregunta 2 — ¿Qué IP es la más activa? ¿Qué patrón de comportamiento sugiere?**
+```powershell
+Get-Content C:\HoneypotLab\honeypot.log
+```
 
-Respuesta correcta: `192.168.1.100` con 5 conexiones en menos de 1 minuto (desde las 10:15:01 hasta las 10:16:04). El patrón de puertos incrementales (1024, 1025, 1026...) sugiere un **escaneo de puertos automatizado** — una herramienta que intenta conectar a puertos secuencialmente.
+Repetir la conexión tres veces. Deben aparecer tres eventos adicionales en consola y archivo. Después detener con `Ctrl+C`.
 
-**Pregunta 3 — ¿Hay patrones en los momentos de tiempo? ¿Qué sugieren?**
-
-Respuesta correcta: Hay dos ráfagas de actividad separadas por un gap de casi 45 minutos (10:15-10:16 y luego 11:02). El gap puede indicar un atacante que pausó la actividad (para evitar detección, o porque estaba ocupado en otra tarea). La tercera IP (`10.0.0.5`) aparece brevemente en el medio — puede ser un actor diferente o el mismo atacante usando otra máquina.
-
-**Pregunta 4 — Una de las IPs pertenece al rango interno de la red (192.168.1.x). ¿Qué implica esto?**
-
-Respuesta correcta: La presencia de `192.168.1.77` (dirección de red interna) en el log del honeypot es un **indicador de movimiento lateral** — un equipo de la misma red está explorando recursos internos. Esto puede indicar: (a) un equipo comprometido que ejecuta código malicioso, (b) un insider threat (alguien con acceso legítimo realizando reconocimiento no autorizado). Acción recomendada: aislar `192.168.1.77` de la red y analizar sus procesos activos.
-
----
-
-## Errores Comunes y Cómo Manejarlos
-
-| Error | Causa probable | Solución |
-|-------|---------------|----------|
-| `pip install honeypy` falla con "connection error" o "timeout" | Red corporativa bloquea PyPI o hay proxy que interfiere con pip | Pasar directamente al Plan B — distribuir el script `honeypot-simple.py` desde USB |
-| HoneyPy no inicia: `Address already in use` | Puerto 22 o 80 ya está ocupado (IIS, servidor SSH, u otro servicio) | `netstat -an \| findstr ":22 "` para identificar el conflicto, o cambiar `ssh_port = 2222` y `http_port = 8080` en `honeypy.cfg` |
-| Script Python falla: `[WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions` | Binding en puerto < 1024 requiere permisos de administrador en Windows | Ejecutar CMD como Administrador, o cambiar el puerto a 9999 (el script usa 9999 por defecto) |
-| `telnet localhost 9999` falla: `'telnet' is not recognized as an internal or external command` | Telnet Client no está instalado en Windows 11 (viene desactivado por defecto) | Panel de control → Programas → Activar características de Windows → Telnet Client → OK |
-| El log `honeypot.log` está vacío después de conectar | La conexión fue a `127.0.0.1` y el script tiene `HOST = '0.0.0.0'`, o viceversa — verificar que coincidan | Verificar el `HOST` en el script. Si el script dice `'127.0.0.1'`, conectar con `telnet 127.0.0.1 9999` (no `localhost` si resolución DNS difiere) |
+!!! note "Interpretación correcta"
+    `54321` representa el puerto de origen elegido para el cliente; `9999` es el puerto destino del sensor. Una sucesión de puertos de origen no demuestra que se hayan probado varios destinos.
 
 ---
 
-## Notas de Dictado
+## Extracto de log para el ejercicio
 
-### Timing sugerido (total: ~90 minutos de lab)
+Este bloque debe coincidir exactamente con el de la guía del alumno:
 
-**Instalación / fallback (15 min):** Intentar `pip install honeypy` en los primeros equipos. Si hay 2 o más fallos en el grupo, cambiar al script Python inmediatamente para no perder tiempo de clase en debugging de pip. El script Python produce el mismo aprendizaje con menos fricción.
+```text
+[2026-08-24T10:15:01-05:00] EVENTO_TCP origen=192.168.1.100:51024 destino=192.168.1.10:9999
+[2026-08-24T10:15:45-05:00] EVENTO_TCP origen=192.168.1.100:51025 destino=192.168.1.10:9999
+[2026-08-24T10:16:02-05:00] EVENTO_TCP origen=192.168.1.100:51026 destino=192.168.1.10:9999
+[2026-08-24T10:16:03-05:00] EVENTO_TCP origen=192.168.1.100:51027 destino=192.168.1.10:9999
+[2026-08-24T10:16:04-05:00] EVENTO_TCP origen=192.168.1.100:51028 destino=192.168.1.10:9999
+[2026-08-24T10:45:22-05:00] EVENTO_TCP origen=10.0.0.5:52048 destino=192.168.1.10:9999
+[2026-08-24T10:45:23-05:00] EVENTO_TCP origen=10.0.0.5:52049 destino=192.168.1.10:9999
+[2026-08-24T11:02:15-05:00] EVENTO_TCP origen=192.168.1.77:53000 destino=192.168.1.10:9999
+[2026-08-24T11:02:18-05:00] EVENTO_TCP origen=192.168.1.77:53001 destino=192.168.1.10:9999
+[2026-08-24T11:02:20-05:00] EVENTO_TCP origen=192.168.1.77:53002 destino=192.168.1.10:9999
+```
 
-**Configuración y primer inicio (10 min):** Verificar que todos tienen el honeypot corriendo antes de continuar. La señal de éxito: el honeypot imprime el mensaje de "Esperando conexiones..." sin error. Hacer que todos abran una segunda ventana CMD para generar el tráfico de prueba.
+### Respuestas modelo
 
-**Generación de tráfico de prueba (15 min):** El momento más visual del lab — ver las entradas aparecer en tiempo real en la consola del honeypot mientras otro alumno se "conecta". Organizar si hay red local entre equipos: el instructor conecta desde el proyector al honeypot de un alumno para simular un "atacante externo" (esto es pedagógicamente más impactante que conectarse desde localhost).
+**1. ¿Cuántos eventos y cuántas IP de origen distintas aparecen?**
 
-**Ejercicio de análisis del log (25 min):** Distribuir el extracto de log impreso (o proyectar). Dar 10 minutos para análisis individual escribiendo las respuestas. Luego 15 minutos de discusión en grupo. Esta es la sección más rica pedagógicamente del lab. Enfatizar la Pregunta 4 (IP interna) — el concepto de movimiento lateral es clave en ciberdefensa.
+Diez eventos y tres IP de origen: `192.168.1.100`, `10.0.0.5` y `192.168.1.77`.
 
-**Cowrie opcional (15 min):** Solo para grupos avanzados o si terminaron antes. Cowrie registra los comandos que el "atacante" escribe en el shell simulado — el impacto de ver cómo registra `ls`, `cat /etc/passwd`, `whoami` es memorable y demuestra la diferencia entre un honeypot de baja interacción (solo detecta conexiones) y uno de alta interacción (registra comportamiento).
+**2. ¿Cuál es la IP más activa? ¿Qué puede observarse sin atribuir una causa?**
 
-### Mensaje de cierre del lab
+`192.168.1.100`, con cinco eventos entre las 10:15:01 y las 10:16:04. Es una concentración breve que podría corresponder a automatización, reintentos, monitoreo o reconocimiento. El log aislado no permite escoger una de esas causas.
 
-Recordar que el honeypot es un **detector, no un protector**. Cuando registra una conexión, el trabajo del analista comienza — no termina. Conectar con la Pregunta 4 del ejercicio: una IP interna en el log del honeypot no es el final de la investigación, es el punto de partida.
+**3. ¿En qué ventanas se concentra la actividad?**
+
+Hay tres ventanas:
+
+- 10:15:01–10:16:04: cinco eventos de `192.168.1.100`;
+- 10:45:22–10:45:23: dos eventos de `10.0.0.5`;
+- 11:02:15–11:02:20: tres eventos de `192.168.1.77`.
+
+Los intervalos permiten buscar eventos relacionados en otros sistemas, pero no prueban que las tres fuentes pertenezcan al mismo actor.
+
+**4. ¿Qué debe comprobarse para `192.168.1.77`?**
+
+Confirmar primero el activo y su responsable en el inventario, el calendario de escaneos autorizados, tareas de monitoreo y cambios recientes. Después correlacionar con Snort, firewall, proxy y autenticación. Si el conjunto de evidencia indica compromiso, aplicar el procedimiento institucional de aislamiento y preservación de evidencia; la IP interna por sí sola no basta.
 
 ---
 
-## Rúbrica de Calificación
+## Errores comunes y diagnóstico
 
-| Criterio | Puntos | Cómo verificar |
-|----------|--------|----------------|
-| Honeypot inicia sin error (HoneyPy o script Python) | 2 | El alumno muestra la consola del honeypot corriendo con el mensaje de inicio |
-| Al conectar con telnet o curl, aparece entrada en el log | 2 | Captura de pantalla de la consola con al menos 1 entrada de conexión |
-| Log muestra timestamp, IP de origen y puerto | 1 | Revisión de la consola o del archivo `honeypot.log` |
-| Ejercicio de análisis Q1: conteo de conexiones e IPs | 1 | Respuesta correcta: 10 conexiones, 3 IPs distintas |
-| Ejercicio de análisis Q2: IP más activa con justificación | 1 | `192.168.1.100` con explicación del patrón de puertos incrementales |
-| Ejercicio de análisis Q3: patrones de tiempo | 1 | Identificación de 2 ráfagas y el gap de aproximadamente 45 minutos entre ellas |
-| Ejercicio de análisis Q4: IP interna sospechosa y acción recomendada | 2 | Identificación de movimiento lateral + recomendación de acción concreta (aislar equipo, analizar procesos) |
+| Síntoma | Causa probable | Acción |
+|---|---|---|
+| Ni `py` ni `pymanager` se reconocen | El Python Install Manager está ausente o la terminal aún no reconoce sus comandos | Cerrar y abrir PowerShell; si persiste, seguir primero la ruta WinGet de Preparación y usar la descarga manual solo como contingencia |
+| `pymanager` funciona, pero la comprobación de Python 3 falla | El administrador está instalado, pero falta el runtime | Ejecutar la instalación explícita del runtime indicada en Preparación y repetir la comprobación inicial hasta obtener `Python 3.x.x` |
+| `WinError 10048` o `Address already in use` | Otro proceso ya escucha en ese puerto | Consultar `Get-NetTCPConnection -LocalPort 9999 -State Listen`; usar otro puerto alto en ambos comandos |
+| `WinError 10013` | Puerto excluido o reservado, política de seguridad o protección del endpoint | No asumir que se debe al número del puerto; probar otro puerto alto y escalar al administrador si persiste |
+| `TcpTestSucceeded : False` | El sensor no está ejecutándose, se usó otro puerto o terminó con error | Volver a la primera consola, confirmar el puerto mostrado y repetir con el mismo valor |
+| El evento aparece en consola pero no se encuentra el archivo | Se buscó el log en el directorio actual | Consultar `C:\HoneypotLab\honeypot.log`; el script siempre escribe junto a su propio archivo |
+| Otra computadora no puede conectarse | Comportamiento esperado: el sensor escucha en loopback | Mantener localhost; no abrir el sensor a la red como solución improvisada |
+| `localhost` resuelve a `::1` y la prueba falla | El script usa IPv4 (`AF_INET`) | Usar explícitamente `127.0.0.1` como indica la guía |
+
+---
+
+## Cowrie en WSL2 — ampliación opcional
+
+Cowrie no forma parte de la ruta crítica. Su modo shell simula un sistema y se clasifica como **interacción media**; el modo proxy hacia un backend separado puede ofrecer alta interacción.
+
+Solo realizar esta ampliación si WSL2 con Ubuntu ya está instalado y el grupo terminó la práctica principal. El flujo vigente para operadores es:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y python3-pip python3-venv libssl-dev libffi-dev \
+  build-essential libpython3-dev python3-minimal authbind
+
+mkdir -p ~/my-honeypot
+cd ~/my-honeypot
+python3 -m venv cowrie-env
+source cowrie-env/bin/activate
+python -m pip install --upgrade pip
+python -m pip install cowrie
+cowrie init
+cowrie start
+```
+
+Probar en otra terminal WSL2:
+
+```bash
+cd ~/my-honeypot
+source cowrie-env/bin/activate
+ssh -p 2222 root@localhost
+```
+
+Detener desde el directorio inicializado:
+
+```bash
+cd ~/my-honeypot
+source cowrie-env/bin/activate
+cowrie stop
+```
+
+Consultar siempre la [guía oficial de instalación de Cowrie](https://github.com/cowrie/cowrie/blob/main/INSTALL.rst) antes de usar esta ampliación, porque sus requisitos pueden cambiar.
+
+---
+
+## Secuencia sugerida para las 3 horas
+
+| Minutos | Actividad |
+|---:|---|
+| 0–20 | Recap, objetivo y diferencia entre alerta y atribución |
+| 20–45 | Arquitectura del sensor, alcance localhost y campos TCP |
+| 45–70 | Preparación, creación del script e inicio |
+| 70–95 | Conexiones controladas y lectura de `honeypot.log` |
+| 95–130 | Ejercicio individual y discusión de respuestas |
+| 130–160 | Correlación con inventario, Snort, proxy y firewall |
+| 160–175 | Validación individual y rúbrica |
+| 175–180 | Cierre: el honeypot inicia la investigación, no la concluye |
+
+Cowrie es una ampliación fuera de esta distribución o un reemplazo para un bloque avanzado previamente planificado; no añadirlo improvisadamente a los 180 minutos.
+
+---
+
+## Rúbrica de calificación
+
+| Criterio | Puntos | Evidencia |
+|---|---:|---|
+| El sensor inicia en `127.0.0.1` y un puerto alto | 2 | Consola con dirección, puerto y ruta del log |
+| `Test-NetConnection` produce un evento | 2 | `TcpTestSucceeded : True` y evento correspondiente |
+| El archivo conserva origen y destino | 1 | `Get-Content C:\HoneypotLab\honeypot.log` |
+| Q1: conteo de eventos y fuentes | 1 | 10 eventos, 3 IP de origen |
+| Q2: fuente más activa e inferencia prudente | 1 | `192.168.1.100`, cinco eventos, sin atribución definitiva |
+| Q3: ventanas temporales | 1 | Identifica correctamente las tres ventanas |
+| Q4: hipótesis, correlación y decisión | 2 | Verifica autorización e inventario antes de contener |
 
 **Total: 10 puntos**
 
 ---
+
+## Mensaje de cierre
+
+Un honeypot genera una señal deliberadamente fácil de investigar. Su utilidad desaparece si el analista confunde una conexión con una atribución, o un puerto de origen con el servicio atacado. El aprendizaje central es conservar el evento, interpretar sus campos y decidir mediante correlación.
 
 <!-- Solución instructor para: docs/seguridad-criptografia/en-la-red/honeypots-p2.md -->

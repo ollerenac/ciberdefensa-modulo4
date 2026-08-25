@@ -9,7 +9,9 @@
 
 ## Recap de la Parte 1
 
-En la Parte 1 definimos el honeypot como un recurso sin uso legítimo, donde cualquier conexión es sospechosa por definición y no existen falsos positivos. Distinguimos los honeypots de baja interacción (emulan servicios, más seguros) de los de alta interacción (ejecutan servicios reales, más datos pero mayor riesgo). Vimos también su valor en la detección de insider threats y los honeytokens como variante simple. En esta sesión desplegamos un honeypot de baja interacción en Windows 11, generamos tráfico de prueba y analizamos los logs para extraer inteligencia.
+En la Parte 1 definimos el honeypot como un recurso sin uso operacional. Una conexión produce una alerta de alta confianza, pero el analista todavía debe descartar actividades autorizadas y errores de configuración. También distinguimos los honeypots de baja interacción de los de alta interacción, revisamos los honeytokens y estudiamos su utilidad para detectar reconocimiento interno.
+
+En esta sesión desplegaremos un **honeypot didáctico de baja interacción** en Windows 11, generaremos tráfico controlado y analizaremos los eventos registrados.
 
 ---
 
@@ -17,257 +19,287 @@ En la Parte 1 definimos el honeypot como un recurso sin uso legítimo, donde cua
 
 Al finalizar esta clase, el alumno será capaz de:
 
-- Instalar HoneyPy en Windows 11 o usar el script Python de fallback como honeypot básico
-- Configurar la emulación de servicios SSH y HTTP en puertos locales
-- Generar conexiones de prueba al honeypot y observar el registro en tiempo real
-- Leer y analizar las entradas del log del honeypot identificando todos los campos relevantes
+- Desplegar un sensor TCP local usando Python 3 y únicamente su biblioteca estándar
+- Generar una conexión de prueba sin instalar Telnet ni herramientas externas
+- Diferenciar el puerto de origen del cliente del puerto destino del sensor
+- Analizar un log sin convertir una observación aislada en una atribución definitiva
+- Proponer acciones de verificación, correlación y contención basadas en evidencia
 
 ---
 
-## Herramienta: HoneyPy
+## Herramienta del laboratorio
 
-HoneyPy es un honeypot de baja interacción escrito en Python. Emula servicios en puertos específicos y registra toda conexión entrante sin ejecutar un sistema real. Al ser Python, funciona en Windows de forma nativa sin necesidad de virtualización.
+Usaremos un honeypot didáctico construido con el módulo `socket` de Python. El script:
 
-**Características relevantes para el lab:**
-- Emula servicios TCP en puertos configurables (SSH en 22, HTTP en 80, etc.)
-- Registra: timestamp, IP de origen, puerto de origen, servicio emulado
-- Configuración mediante archivo `.cfg` simple
-- Alternativa: si HoneyPy no instala correctamente, el lab continúa con un script Python básico incluido en esta página
+- escucha conexiones TCP en `127.0.0.1:9999`;
+- registra fecha y hora, IP y puerto de origen, e IP y puerto destino;
+- guarda los eventos en `C:\HoneypotLab\honeypot.log`;
+- acepta y cierra cada conexión después de registrar sus extremos;
+- utiliza la biblioteca estándar de Python 3.
 
----
-
-## Instalación de HoneyPy en Windows 11
-
-### Prerrequisito: Python 3
-
-Verificar que Python 3 está instalado:
-
-```
-python --version
-```
-
-Si no está instalado, descargar desde `https://python.org/downloads/`. Durante la instalación, marcar "Add Python to PATH".
-
-### Instalar HoneyPy
-
-```
-pip install honeypy
-```
-
-Verificar la instalación:
-
-```
-honeypy --version
-```
-
-!!! tip "Si pip install honeypy falla"
-    En redes con restricciones (proxies corporativos, redes sin acceso PyPI), intentar la instalación directa desde el repositorio de código fuente:
-    ```
-    pip install git+https://github.com/foospidy/HoneyPy.git
-    ```
-    Si tampoco funciona, usar el **Script Python Básico** de la sección siguiente — proporciona las mismas capacidades de detección para este laboratorio sin dependencias externas.
+!!! info "Alcance del sensor"
+    Esta práctica se concentra en **detección y registro de conexiones TCP**. La emulación de servicios como SSH o HTTP corresponde a una práctica avanzada.
 
 ---
 
-## Configuración del Honeypot
+## Preparación
 
-HoneyPy usa un archivo de configuración `honeypy.cfg`. Crear el archivo en `C:\HoneyPy\honeypy.cfg` con el siguiente contenido:
+### Paso 1 — Verificar o instalar Python 3
 
-```ini
-[honeypy]
-# Directorio donde se guardan los logs del honeypot
-logdir = C:\HoneyPy\logs
+Abrir PowerShell y ejecutar:
 
-[services]
-# Emular servicio SSH en puerto 22
-ssh = true
-ssh_port = 22
-
-# Emular servicio HTTP en puerto 80
-http = true
-http_port = 80
+```powershell
+py -3 --version
 ```
 
-Crear la carpeta de logs:
+Si aparece `Python 3.x.x`, Python está listo y se puede continuar con el Paso 2. Si el comando falla, usar esta ruta principal en PowerShell:
 
-```
-mkdir C:\HoneyPy\logs
+1. Comprobar que WinGet está disponible:
+
+   ```powershell
+   winget --version
+   ```
+
+2. Instalar el **Python Install Manager** oficial:
+
+   ```powershell
+   winget install 9NQ7512CXL7T -e --accept-package-agreements --disable-interactivity
+   ```
+
+   Este comando instala el administrador de Python; todavía falta instalar Python propiamente dicho. El identificador usado está publicado en la [documentación oficial de Python para Windows](https://docs.python.org/3/using/windows.html#advanced-installation).
+
+3. Si el siguiente comando aún no se reconoce, cerrar PowerShell y abrir una ventana nueva. Después, instalar explícitamente el runtime estable predeterminado:
+
+   ```powershell
+   pymanager install default
+   ```
+
+4. Repetir la comprobación del inicio. El criterio de éxito es que la consola muestre `Python 3.x.x`.
+
+!!! note "Contingencia si WinGet no está disponible"
+    Si `winget --version` falla o una política institucional bloquea WinGet, descargar el **Python Install Manager** únicamente desde [python.org](https://www.python.org/downloads/windows/). Instalarlo, abrir una PowerShell nueva si fuera necesario y continuar con la instalación del runtime y la comprobación indicadas arriba. Esta es una contingencia; la ruta principal del laboratorio es WinGet.
+
+### Paso 2 — Crear el directorio del laboratorio
+
+```powershell
+New-Item -ItemType Directory -Force C:\HoneypotLab
 ```
 
-Iniciar el honeypot:
+### Paso 3 — Comprobar que el puerto 9999 está libre
 
-```
-honeypy -c C:\HoneyPy\honeypy.cfg
+```powershell
+Get-NetTCPConnection -LocalPort 9999 -State Listen -ErrorAction SilentlyContinue
 ```
 
-!!! warning "Conflictos de puertos antes de iniciar"
-    El honeypot intentará escuchar en los puertos 22 y 80. Si algún servicio legítimo ya usa esos puertos, el honeypot no podrá iniciarse. Verificar antes de iniciar:
-    ```
-    netstat -an | findstr ":22 "
-    netstat -an | findstr ":80 "
-    ```
-    Si algún puerto está en uso, cambiar el puerto del honeypot en `honeypy.cfg` a uno no utilizado (por ejemplo, `ssh_port = 2222` o `http_port = 8080`).
+Si no aparece ninguna fila, no existe un proceso escuchando en ese puerto. Si aparece un proceso, usar otro puerto alto —por ejemplo `10000`— tanto al iniciar el script como al probar la conexión.
 
 ---
 
-## Alternativa con Socket Python Básico
+## Desplegar el honeypot
 
-Si HoneyPy no instala correctamente, este script Python implementa un honeypot mínimo funcional. No requiere dependencias externas — solo Python 3 estándar:
+Guardar el siguiente contenido como `C:\HoneypotLab\honeypot-simple.py`:
 
 ```python
-# honeypot-simple.py
-# Honeypot minimo: escucha en un puerto TCP y registra cada conexion
-import socket
+# Honeypot minimo de demostracion: detecta y registra conexiones TCP.
 import datetime
+from pathlib import Path
+import socket
+import sys
 
-HOST = '127.0.0.1'   # Solo escuchar en localhost (no exponer a la red)
-PORT = 9999           # Puerto del honeypot (elegir uno no usado)
+HOST = "127.0.0.1"
+PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 9999
+LOG_PATH = Path(__file__).with_name("honeypot.log")
 
-print(f"[*] Honeypot iniciando en {HOST}:{PORT}")
-print("[*] Presionar Ctrl+C para detener")
-print("[*] Esperando conexiones...")
+print(f"Honeypot iniciado en {HOST}:{PORT}")
+print(f"Log: {LOG_PATH}")
+print("Esperando conexiones... (Ctrl+C para detener)")
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    s.bind((HOST, PORT))
-    s.listen()
-    while True:
-        conn, addr = s.accept()
-        timestamp = datetime.datetime.now().isoformat()
-        print(f"[{timestamp}] CONEXION desde {addr[0]}:{addr[1]}")
-        conn.close()
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
+    server.bind((HOST, PORT))
+    server.listen(5)
+
+    try:
+        while True:
+            connection, source = server.accept()
+            with connection:
+                destination = connection.getsockname()
+                timestamp = datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+                event = (
+                    f"[{timestamp}] EVENTO_TCP "
+                    f"origen={source[0]}:{source[1]} "
+                    f"destino={destination[0]}:{destination[1]}"
+                )
+                print(event)
+                with LOG_PATH.open("a", encoding="utf-8") as log_file:
+                    log_file.write(event + "\n")
+    except KeyboardInterrupt:
+        print("\nHoneypot detenido.")
 ```
 
-Guardar como `C:\HoneyPy\honeypot-simple.py` e iniciar:
+### ¿Qué hace cada componente?
 
-```
-python C:\HoneyPy\honeypot-simple.py
-```
+| Componente | Función |
+|---|---|
+| `HOST = "127.0.0.1"` | Acepta conexiones únicamente desde el mismo equipo |
+| `PORT = 9999` | Usa un puerto alto para evitar conflictos con servicios conocidos |
+| `server.accept()` | Espera una conexión TCP y devuelve la dirección del cliente |
+| `connection.getsockname()` | Obtiene la IP y el puerto destino que recibió la conexión |
+| `honeypot.log` | Conserva evidencia aunque se cierre la consola |
 
-El script registra cada conexión en la consola con timestamp e IP de origen. Para este laboratorio, la funcionalidad es equivalente a HoneyPy.
+!!! warning "No cambiar el alcance durante la práctica"
+    No sustituir `127.0.0.1` por `0.0.0.0`. Ese cambio expondría el sensor a otras interfaces y requeriría autorización, una regla de Windows Firewall y un diseño de contención. La práctica principal ocurre exclusivamente en localhost.
 
 ---
 
-## Generando Tráfico de Prueba
+## Ejecutar y probar
 
-Con el honeypot corriendo, abrir una segunda ventana de CMD para generar conexiones de prueba:
+### Paso 4 — Iniciar el honeypot
 
-**Si usando HoneyPy con puertos 22 y 80:**
-```
-# Conectar al puerto SSH emulado
-telnet localhost 22
+En una ventana de PowerShell:
 
-# Conectar al puerto HTTP emulado
-curl http://localhost:80
+```powershell
+py -3 C:\HoneypotLab\honeypot-simple.py 9999
 ```
 
-**Si usando el script básico en puerto 9999:**
-```
-# Conectar al honeypot básico
-telnet localhost 9999
+Si se usa `python` en lugar del lanzador `py`:
+
+```powershell
+python C:\HoneypotLab\honeypot-simple.py 9999
 ```
 
-**Opcional avanzado — si se tiene WSL2 con Cowrie instalado:**
+La consola debe quedar mostrando:
+
+```text
+Honeypot iniciado en 127.0.0.1:9999
+Log: C:\HoneypotLab\honeypot.log
+Esperando conexiones... (Ctrl+C para detener)
 ```
-# Cowrie emula un servidor SSH interactivo completo
-ssh root@localhost -p 2222
+
+### Paso 5 — Generar una conexión controlada
+
+Sin cerrar el honeypot, abrir una **segunda** ventana de PowerShell y ejecutar:
+
+```powershell
+Test-NetConnection 127.0.0.1 -Port 9999
 ```
-Con Cowrie, se puede escribir comandos como si fuera un servidor Linux real: Cowrie los registra todos aunque no ejecute nada. Esto permite experimentar con técnicas de post-explotación de forma segura.
+
+La salida debe contener:
+
+```text
+TcpTestSucceeded : True
+```
+
+Al mismo tiempo, la primera ventana mostrará un evento similar a:
+
+```text
+[2026-08-24T10:15:01-05:00] EVENTO_TCP origen=127.0.0.1:54321 destino=127.0.0.1:9999
+```
+
+El número `54321` es un ejemplo de **puerto de origen efímero**, elegido por Windows para esa conexión. El puerto `9999` es el **puerto destino** donde escucha el honeypot. Que los puertos de origen cambien entre conexiones no demuestra por sí solo un escaneo.
+
+### Paso 6 — Consultar el archivo de log
+
+```powershell
+Get-Content C:\HoneypotLab\honeypot.log
+```
+
+Repetir `Test-NetConnection` tres veces y comprobar que aparecen tres eventos nuevos. Después, volver a la primera ventana y presionar `Ctrl+C` para detener el sensor.
 
 ---
 
-## Análisis de Logs del Honeypot
+## Análisis de logs
 
-Esta es la sección pedagógica central del laboratorio. El análisis de logs es la habilidad que convierte el honeypot de una "trampa" en una fuente de inteligencia accionable.
+El honeypot es un sensor, no un protector. Un evento indica que alguien o algo alcanzó el recurso; el analista debe determinar el contexto antes de atribuir intención.
 
-**Formato de log de HoneyPy** (archivo en `C:\HoneyPy\logs\`):
+### Campos del evento
 
-```
-2026-06-16T14:30:00.123 | 127.0.0.1 | 54321 | ssh | conexion entrante
-2026-06-16T14:30:01.456 | 127.0.0.1 | 54321 | ssh | desconexion
-2026-06-16T14:31:05.789 | 127.0.0.1 | 54899 | http | conexion entrante
+```text
+[fecha-hora-zona] EVENTO_TCP origen=IP:puerto_origen destino=IP:puerto_destino
 ```
 
-**Formato de log del script básico** (en consola):
+| Campo | Pregunta que responde |
+|---|---|
+| Fecha, hora y zona | ¿Cuándo ocurrió? ¿Puede correlacionarse con otros sistemas? |
+| IP de origen | ¿Qué equipo inició la conexión? |
+| Puerto de origen | ¿Qué puerto efímero utilizó el cliente? |
+| IP y puerto destino | ¿Qué sensor o servicio fue contactado? |
 
+### Ejercicio de análisis
+
+El siguiente extracto representa un sensor autorizado dentro de una red de práctica. El inventario indica que `192.168.1.77` pertenece a una estación interna. Analizar los diez eventos:
+
+```text
+[2026-08-24T10:15:01-05:00] EVENTO_TCP origen=192.168.1.100:51024 destino=192.168.1.10:9999
+[2026-08-24T10:15:45-05:00] EVENTO_TCP origen=192.168.1.100:51025 destino=192.168.1.10:9999
+[2026-08-24T10:16:02-05:00] EVENTO_TCP origen=192.168.1.100:51026 destino=192.168.1.10:9999
+[2026-08-24T10:16:03-05:00] EVENTO_TCP origen=192.168.1.100:51027 destino=192.168.1.10:9999
+[2026-08-24T10:16:04-05:00] EVENTO_TCP origen=192.168.1.100:51028 destino=192.168.1.10:9999
+[2026-08-24T10:45:22-05:00] EVENTO_TCP origen=10.0.0.5:52048 destino=192.168.1.10:9999
+[2026-08-24T10:45:23-05:00] EVENTO_TCP origen=10.0.0.5:52049 destino=192.168.1.10:9999
+[2026-08-24T11:02:15-05:00] EVENTO_TCP origen=192.168.1.77:53000 destino=192.168.1.10:9999
+[2026-08-24T11:02:18-05:00] EVENTO_TCP origen=192.168.1.77:53001 destino=192.168.1.10:9999
+[2026-08-24T11:02:20-05:00] EVENTO_TCP origen=192.168.1.77:53002 destino=192.168.1.10:9999
 ```
-[2026-06-16T14:30:00.123456] CONEXION desde 127.0.0.1:54321
-[2026-06-16T14:31:05.789012] CONEXION desde 127.0.0.1:54899
-```
 
-**Ejercicio de análisis:** El instructor proyecta el siguiente extracto de log de ejemplo con 10 entradas. El alumno debe responder las 4 preguntas:
+Responder:
 
-```
-[2026-06-16T09:14:00] CONEXION desde 192.168.1.22:1024
-[2026-06-16T09:14:01] CONEXION desde 192.168.1.22:1025
-[2026-06-16T09:14:01] CONEXION desde 192.168.1.22:1026
-[2026-06-16T09:14:02] CONEXION desde 192.168.1.55:4455
-[2026-06-16T09:14:03] CONEXION desde 192.168.1.22:1027
-[2026-06-16T09:14:03] CONEXION desde 192.168.1.22:1028
-[2026-06-16T09:22:17] CONEXION desde 192.168.1.55:6699
-[2026-06-16T09:22:19] CONEXION desde 192.168.1.55:6700
-[2026-06-16T09:22:20] CONEXION desde 192.168.1.55:6701
-[2026-06-16T09:22:21] CONEXION desde 192.168.1.55:6702
-```
+1. ¿Cuántos eventos y cuántas IP de origen distintas aparecen?
+2. ¿Cuál es la IP más activa? ¿Qué observación temporal puede hacerse sin atribuir todavía una causa?
+3. ¿En qué tres ventanas de tiempo se concentra la actividad?
+4. ¿Qué hipótesis deben comprobarse para `192.168.1.77` antes de decidir una contención?
 
-**Preguntas:**
-
-1. ¿Cuántas conexiones únicas se registraron en total?
-2. ¿Cuál es la IP más activa y qué patrón muestra su comportamiento?
-3. ¿A qué horas se concentraron las conexiones? ¿Hay diferencia de contexto entre los dos grupos?
-4. Una conexión viene desde la IP 192.168.1.55, que pertenece a la red interna de la unidad. ¿Qué sugiere esto sobre el posible origen del ataque?
+!!! note "Límite de la evidencia"
+    Las conexiones repetidas pueden indicar automatización, reintentos de una aplicación, monitoreo autorizado o reconocimiento. Como todos los eventos llegan al mismo puerto destino, este extracto **no demuestra un escaneo de puertos**.
 
 ---
 
-## Valor Operacional del Análisis
+## Del evento a la respuesta
 
-El honeypot es un detector, no un protector. Registra eventos — el valor está en la respuesta que los datos permiten. Cuando el log registra una conexión, el analista debe ejecutar este proceso:
+Cuando el honeypot registra una conexión:
 
-1. **Identificar la fuente:** ¿La IP es interna o externa? Si es interna, ¿a qué equipo corresponde según el DHCP o el inventario de red?
+1. **Validar el sensor:** confirmar que el evento no fue generado por la prueba del instructor ni por monitoreo autorizado.
+2. **Resolver la fuente:** consultar DHCP, inventario y asignación de direcciones para identificar el equipo.
+3. **Evaluar frecuencia y horario:** distinguir una conexión aislada de una ráfaga o recurrencia.
+4. **Correlacionar:** revisar alertas de Snort, logs de firewall, proxy y autenticación en el mismo intervalo.
+5. **Decidir:** escalar, observar o aislar el equipo según el conjunto de evidencias y el procedimiento institucional.
 
-2. **Evaluar el patrón:** ¿Es una conexión aislada o un patrón repetido? ¿Las conexiones múltiples son a puertos secuenciales (port scan)?
-
-3. **Clasificar el origen probable:**
-   - IP interna con patrón de escaneo → equipo comprometido realizando reconocimiento lateral, o insider threat
-   - IP externa (si el honeypot tiene IP pública) → reconocimiento automatizado de internet o ataque dirigido
-
-4. **Correlacionar con otros logs:** Contrastar con el `access.log` de Squid (¿ese equipo hizo descargas inusuales?), con las alertas de Snort (¿hay tráfico sospechoso adicional desde esa IP?), con los logs del firewall.
-
-5. **Escalar o contener:** Si la evidencia apunta a compromiso, aislar el equipo de la red antes de investigar para detener la propagación.
+Una IP interna no prueba por sí sola movimiento lateral ni insider threat. Es una pista que adquiere significado cuando se combina con identidad del activo, autorización y otros logs.
 
 ---
 
 ## Validación del laboratorio
 
-- [ ] El honeypot (HoneyPy o script básico) inicia sin errores y muestra mensaje de escucha en el puerto configurado
-- [ ] Al conectar desde `telnet localhost <puerto>` al honeypot, aparece una entrada en el log (consola o archivo)
-- [ ] El log muestra: timestamp, IP de origen, puerto de origen
-- [ ] El alumno puede responder correctamente las 4 preguntas del ejercicio de análisis del log de ejemplo
+- [ ] Python 3 está disponible y el script canónico está guardado
+- [ ] El sensor escucha únicamente en `127.0.0.1` y en un puerto alto
+- [ ] `Test-NetConnection` devuelve `TcpTestSucceeded : True`
+- [ ] La consola y `honeypot.log` registran origen y destino
+- [ ] El alumno diferencia puerto de origen y puerto destino
+- [ ] El alumno responde el ejercicio sin afirmar más de lo que demuestra la evidencia
 
 ---
 
 ## Contexto militar
 
 !!! example "Aplicación en entorno castrense"
-    El oficial de seguridad de una base despliega un honeypot en la red interna con el nombre de recurso "FS-RESERVADO-ALPHA". A las 02:34, el honeypot registra 6 conexiones en 2 segundos desde la IP interna 192.168.10.55, correspondiente al equipo de un cabo de guardia. El patrón (múltiples puertos en segundos) indica una herramienta automatizada de escaneo, no acceso manual. El oficial activa el protocolo de respuesta a incidentes: aísla el equipo 192.168.10.55, analiza su memoria y disco, y descubre un troyano de reconocimiento instalado 3 horas antes mediante un correo de phishing. Sin el honeypot, el ataque hubiera continuado en silencio — el IDS perimetral no habría detectado el movimiento lateral en la red interna.
+    Un sensor de engaño autorizado registra varias conexiones desde una estación interna fuera del horario previsto. El analista no declara inmediatamente que existe un troyano: primero descarta un escaneo de vulnerabilidades programado, identifica el equipo en el inventario y correlaciona el intervalo con Snort, firewall y autenticación. Solo si el conjunto de evidencias indica compromiso aplica el procedimiento de aislamiento. El valor del honeypot es producir una señal temprana y concreta para iniciar esa investigación.
 
 ---
 
 ## Resumen
 
-- HoneyPy es un honeypot de baja interacción en Python que emula servicios y registra conexiones sin ejecutar un sistema real; si falla la instalación, el script Python básico provee la misma funcionalidad de detección
-- El honeypot solo detecta — no bloquea ni protege. Su valor está en la calidad del análisis posterior al log
-- Todo acceso al honeypot debe tratarse como un incidente hasta demostrar lo contrario: incluso conexiones desde IPs internas conocidas son sospechosas
-- La correlación del log del honeypot con logs de Squid, Snort y firewall proporciona contexto completo para una respuesta a incidentes efectiva
-- En entornos militares, el honeypot es especialmente valioso para detectar movimiento lateral y reconocimiento interno, que los sistemas perimetrales no pueden ver
+- El alumno despliega un honeypot didáctico con la biblioteca estándar de Python 3
+- `Test-NetConnection` genera el tráfico TCP de prueba
+- El log diferencia explícitamente el origen del destino
+- Un evento del honeypot es una alerta de alta confianza, no una atribución automática
+- La frecuencia y los puertos de origen no bastan para demostrar un escaneo
+- La respuesta correcta combina inventario, autorización y correlación con otros controles
 
 ## Para profundizar
 
 > Recursos opcionales — no requeridos para el examen.
 
-- Repositorio HoneyPy en GitHub: `https://github.com/foospidy/HoneyPy` — documentación completa y plugins adicionales
-- Cowrie SSH Honeypot: `https://github.com/cowrie/cowrie` — honeypot SSH interactivo con registro de sesión completa (requiere Linux o WSL2)
-- T-Pot: plataforma de múltiples honeypots con dashboards Kibana (para referencia de arquitecturas avanzadas, no para este lab)
+- [Cowrie](https://github.com/cowrie/cowrie) — honeypot SSH/Telnet de interacción media en su modo shell; requiere Linux o WSL2
+- [T-Pot](https://github.com/telekom-security/tpotce) — plataforma avanzada de múltiples honeypots; fuera del alcance de esta práctica
 
 <!-- Solución disponible para el instructor en: docs/instructor/lab-honeypot-solucion.md -->
 

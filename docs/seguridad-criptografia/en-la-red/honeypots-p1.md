@@ -11,7 +11,7 @@
 
 Al finalizar esta clase, el alumno será capaz de:
 
-- Definir qué es un honeypot y explicar su valor como herramienta de detección sin falsos positivos
+- Definir qué es un honeypot y explicar por qué genera alertas de alta confianza
 - Distinguir honeypots de baja interacción de honeypots de alta interacción en términos de seguridad y datos recopilados
 - Explicar las consideraciones legales y éticas que rigen el despliegue de honeypots
 - Identificar casos de uso concretos en entornos militares, incluyendo la detección de insider threats
@@ -25,7 +25,7 @@ Un honeypot es un recurso de red o sistema diseñado deliberadamente para ser en
 !!! note "Definición"
     Un **honeypot** es un sistema o recurso de red falso, desplegado intencionalmente para atraer a atacantes, con el objetivo de detectar su presencia, estudiar sus técnicas y recopilar inteligencia de amenazas. No tiene valor productivo: su único valor es como trampa y sensor de detección.
 
-**Analogía:** Es como una trampa para ratones colocada en un almacén militar: no tiene valor para nadie excepto para quien no debería estar allí. Si la trampa se activa, es señal inequívoca de actividad no autorizada. No hay "activación accidental legítima" posible.
+**Analogía:** Es como una trampa para ratones colocada en un almacén militar: no tiene valor operacional, por lo que su activación merece atención inmediata. Sin embargo, antes de atribuirla a un atacante se debe descartar un escaneo autorizado, una herramienta de monitoreo o una configuración equivocada.
 
 **Honeynet:** Una red compuesta por múltiples honeypots que simulan una infraestructura completa (servidor web, servidor de archivos, servidor de base de datos, estaciones de trabajo). Concepto más avanzado — en esta clase trabajamos con un honeypot individual.
 
@@ -35,10 +35,10 @@ Un honeypot es un recurso de red o sistema diseñado deliberadamente para ser en
 
 | Tipo | Seguridad | Datos recopilados | Ejemplo de herramienta |
 |------|-----------|-------------------|----------------------|
-| **Baja interacción** | Alta — el atacante no interactúa con un sistema real | Conexiones, IPs, puertos intentados, timing | HoneyPy, Cowrie (parcialmente) |
+| **Baja interacción** | Mayor — el atacante interactúa con una emulación limitada | Conexiones, IPs, puertos intentados, timing | Sensor TCP simple, emulador de banners |
 | **Alta interacción** | Menor — el atacante interactúa con un sistema real | Todo lo anterior + comandos ejecutados, técnicas usadas, herramientas descargadas | Sistema Linux real con servicios deliberadamente vulnerables |
 
-**Baja interacción:** El honeypot emula la apariencia de un servicio (responde a conexiones TCP, simula el banner de SSH o HTTP) pero no ejecuta un sistema operativo real. El atacante cree que encontró un servicio real pero en realidad está hablando con un proceso de emulación. Es más seguro porque el atacante no puede comprometer el sistema real del honeypot ni usarlo como plataforma para atacar otros sistemas.
+**Baja interacción:** El honeypot emula la apariencia de un servicio (responde a conexiones TCP, simula el banner de SSH o HTTP) pero no entrega un sistema operativo completo. El atacante habla con un proceso de emulación. Esto reduce el riesgo, pero no lo elimina: el software del honeypot también debe mantenerse contenido y actualizado.
 
 **Alta interacción:** El honeypot ejecuta servicios reales en un sistema completo. El atacante puede comprometer el sistema "de verdad", ejecutar comandos, instalar herramientas. Esto permite recopilar inteligencia mucho más rica sobre las técnicas del atacante, pero introduce el riesgo de que el atacante escape del honeypot y comprometa otros sistemas de la red.
 
@@ -49,9 +49,9 @@ Un honeypot es un recurso de red o sistema diseñado deliberadamente para ser en
 
 ## Valor Defensivo
 
-Los honeypots aportan cuatro ventajas operacionales que ninguna otra herramienta defensiva ofrece:
+Los honeypots aportan cuatro ventajas operacionales como complemento de otras herramientas defensivas:
 
-1. **Detección temprana sin falsos positivos:** Cualquier conexión al honeypot es una alerta real. No hay tráfico legítimo que deba llegar al honeypot, por lo que no existe el problema del falso positivo que afecta a IDS y firewalls. Una sola conexión ya justifica una investigación.
+1. **Detección temprana de alta confianza:** Un honeypot bien inventariado no recibe tráfico operacional normal. Por eso, una conexión justifica una investigación, aunque todavía se debe verificar si provino de una actividad autorizada o de un error de configuración.
 
 2. **Inteligencia de amenazas:** ¿Qué técnicas usa el atacante? ¿Qué servicios busca? ¿Qué herramientas intenta usar? Los honeypots responden estas preguntas con datos reales capturados del atacante real, no de simulaciones.
 
@@ -60,7 +60,7 @@ Los honeypots aportan cuatro ventajas operacionales que ninguna otra herramienta
 4. **Deception (engaño activo):** El atacante invierte tiempo y esfuerzo en interactuar con recursos que no tienen valor real, mientras el equipo de seguridad tiene tiempo para detectar el ataque y preparar la respuesta. El tiempo que el atacante pierde en el honeypot es tiempo que el defensor gana.
 
 !!! example "Aplicación en entorno castrense"
-    Un honeypot configurado para parecer un servidor de archivos con el nombre `SERVIDOR-OPERACIONES-ALFA` y con recursos compartidos visibles en la red de la unidad. Ningún usuario legítimo tiene motivos para intentar conectarse — es un nombre que atrae curiosidad pero no corresponde a ningún servicio autorizado. Si alguien intenta conectarse, es garantía de actividad sospechosa: puede ser un atacante externo que comprometió un equipo, un script de ransomware buscando recursos para cifrar, o personal interno realizando reconocimiento no autorizado.
+    Un honeypot configurado para parecer un servidor de archivos con el nombre `SERVIDOR-OPERACIONES-ALFA` y con recursos compartidos visibles en la red de la unidad. Ningún proceso operacional debería conectarse. Un intento genera una alerta de alta confianza: puede ser un atacante externo que comprometió un equipo, un script de ransomware, personal interno realizando reconocimiento no autorizado o un escaneo administrativo que no fue coordinado.
 
 ---
 
@@ -100,7 +100,7 @@ Los honeytokens son más simples de desplegar que un honeypot completo y pueden 
 
 ## Resumen
 
-- Un honeypot es un recurso sin uso legítimo: cualquier conexión a él es sospechosa por definición, lo que elimina el problema del falso positivo que afecta a IDS y firewalls
+- Un honeypot es un recurso sin uso operacional: cualquier conexión es sospechosa y produce una alerta de alta confianza que debe verificarse
 - Los honeypots de baja interacción emulan servicios (más seguros, menos datos); los de alta interacción ejecutan servicios reales (más datos, mayor riesgo de escape del atacante)
 - Los honeypots detectan insider threats de forma especialmente efectiva: los atacantes internos que escanean la red contactarán el honeypot igual que los externos
 - El despliegue de honeypots requiere autorización explícita y correcta contención de red — un honeypot mal aislado puede convertirse en plataforma de ataques a terceros
