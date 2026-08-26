@@ -14,10 +14,11 @@ Al finalizar esta clase, el alumno será capaz de:
 - Describir el ciclo PDCA y explicar cómo se aplica al Sistema de Gestión de la Seguridad de la Información.
 - Distinguir entre postura de seguridad real y cumplimiento normativo (compliance vs. security posture).
 - Identificar los beneficios concretos que aporta un SGSI a una organización o unidad militar.
+- Seleccionar, entre controles previamente relacionados con un incidente, el control principal y proponer una implementación concreta y verificable.
 
 ---
 
-> **Recapitulación:** En la clase anterior (Parte 1) cubrimos el origen de los estándares, la estructura de la familia (27000:2026 panorama y conceptos, 27001:2022 requisitos, 27002:2022 controles, 27005:2022 riesgo), los cuatro componentes fundamentales de un SGSI y el mapeo prudente de incidentes reales. Esta clase continúa con el motor que hace funcionar el SGSI: el ciclo PDCA y los beneficios reales que aporta.
+> **Recapitulación:** En la clase anterior (Parte 1) cubrimos el origen de los estándares, la estructura de la familia (27000:2026 panorama y conceptos, 27001:2022 requisitos, 27002:2022 controles, 27005:2022 riesgo) y los cuatro componentes fundamentales de un SGSI mediante el ejemplo de la SC-RI8. Esta clase continúa con el motor que hace funcionar el SGSI: el ciclo PDCA y los beneficios reales que aporta.
 
 ---
 
@@ -102,6 +103,246 @@ Para los Técnicos: su trabajo diario — configurar equipos correctamente, actu
 
 ---
 
+## Trabajo por Equipos — Del Incidente a un Control Verificable
+
+> **Duración sugerida:** 50 minutos | **Modalidad:** equipos de 2–4 alumnos | **Producto:** exposición de 2 minutos y ficha de trabajo
+
+### Propósito de la actividad
+
+El alumno todavía no conoce los 93 controles de ISO/IEC 27002:2022. Por eso, **no debe investigar todo el catálogo ni adivinar el control correcto**. Cada expediente ya contiene un conjunto reducido de controles razonablemente relacionados con las debilidades documentadas.
+
+La tarea del equipo consiste en tomar una decisión profesional:
+
+> **¿Cuál de los controles entregados debe ser el principal, cómo se implementaría y qué evidencia demostraría que funciona?**
+
+!!! info "Precisión terminológica"
+    Los códigos **A.5.*, A.7.* y A.8.*** identifican controles del Anexo A de [ISO/IEC 27001:2022](https://www.iso.org/standard/27001). [ISO/IEC 27002:2022](https://www.iso.org/standard/75652.html) conserva esos identificadores y proporciona orientación para implementarlos. ISO/IEC 27000 no es un catálogo de controles.
+
+!!! warning "Regla de interpretación"
+    El ejercicio es un mapeo retrospectivo con fines didácticos. Relacionar una debilidad con un control no demuestra que la organización careciera de SGSI, que incumpliera ISO/IEC 27001 o que una certificación hubiera evitado el incidente. Un control puede no haber existido, haber tenido un alcance insuficiente, estar mal implementado o no haber funcionado eficazmente; las fuentes disponibles no siempre permiten distinguirlo.
+
+### Organización del tiempo
+
+- **5 minutos:** el docente explica la consigna, la regla de interpretación y asigna un expediente.
+- **8 minutos:** el equipo identifica activo, efecto sobre la tríada CID y debilidad prioritaria.
+- **15 minutos:** el equipo selecciona controles y diseña una implementación verificable.
+- **12 minutos:** seis exposiciones de dos minutos; si hay menos equipos, cada equipo puede analizar una segunda alternativa.
+- **10 minutos:** comparación de decisiones y retroalimentación del docente.
+
+No se requiere investigar en Internet durante la clase: los hechos y las fuentes institucionales necesarias están incluidos en cada expediente.
+
+### Consigna para todos los equipos
+
+1. Identificar el **activo o proceso afectado** y el efecto principal sobre confidencialidad, integridad o disponibilidad.
+2. Elegir una **debilidad documentada prioritaria**. No agregar causas que no aparezcan en el expediente.
+3. Seleccionar **un control principal** de la lista entregada y justificar por qué trata más directamente la debilidad prioritaria.
+4. Seleccionar hasta **dos controles complementarios** que ayuden a prevenir, detectar o reducir el impacto.
+5. Diseñar la implementación utilizando esta fórmula:
+
+    > **Responsable + acción + alcance + frecuencia o evento disparador + evidencia producida.**
+
+6. Indicar cómo se comprobaría la **eficacia** del control. Tener un procedimiento o una herramienta no basta: debe probarse que produce el resultado esperado.
+7. Completar la conclusión prudente:
+
+    > “La debilidad documentada se relaciona principalmente con ___; una aplicación eficaz habría podido ___, pero la evidencia disponible no demuestra ___”.
+
+!!! tip "Cómo reconocer el control principal"
+    El control principal trata de forma más directa la debilidad que el equipo decidió priorizar. Los controles complementarios actúan sobre causas secundarias, mejoran la detección o limitan el impacto. Como varios expedientes contienen más de una debilidad, pueden existir elecciones diferentes siempre que estén sustentadas en los hechos.
+
+### Ficha de respuesta
+
+| Elemento | Respuesta del equipo |
+|---|---|
+| Expediente asignado | |
+| Activo o proceso afectado | |
+| Efecto principal sobre CID | |
+| Debilidad documentada prioritaria | |
+| Control principal y justificación | |
+| Hasta dos controles complementarios | |
+| Implementación: responsable, acción, alcance y frecuencia | |
+| Evidencia producida | |
+| Prueba o indicador de eficacia | |
+| Conclusión prudente | |
+
+### Expediente 1 — Equifax (2017)
+
+**Hechos documentados:** atacantes explotaron una vulnerabilidad de Apache Struts que no fue identificada correctamente en el portal afectado. La lista de distribución del aviso de parcheo estaba desactualizada, el escaneo posterior no encontró el sistema vulnerable, un certificado vencido impidió inspeccionar tráfico cifrado y las bases de datos no estaban suficientemente segmentadas. Se accedió a información personal de al menos 145,5 millones de personas. Fuente: [informe GAO-18-559](https://www.gao.gov/products/gao-18-559).
+
+**Controles relacionados entregados al equipo:**
+
+| Control | Descripción simplificada |
+|---|---|
+| **A.8.8 — Gestión de vulnerabilidades técnicas** | Identificar, evaluar, corregir y verificar vulnerabilidades dentro de plazos definidos. |
+| **A.5.9 — Inventario de información y otros activos asociados** | Conocer los activos, software, versiones, ubicación y responsables. |
+| **A.8.16 — Actividades de monitoreo** | Observar sistemas y redes para detectar actividad anómala. |
+| **A.8.22 — Segregación de redes** | Separar redes y sistemas para limitar accesos y movimiento entre zonas. |
+
+### Expediente 2 — Target (2013)
+
+**Hechos documentados:** el informe del Senado reconstruyó un acceso inicial con credenciales robadas a un proveedor, desplazamiento desde áreas menos sensibles hacia sistemas de punto de venta y falta de respuesta ante varias alertas del software de detección. Se expusieron aproximadamente 40 millones de cuentas de tarjetas y datos personales de hasta 70 millones de clientes. Fuente: [informe del Comité de Comercio del Senado de EE. UU.](https://www.commerce.senate.gov/public/_cache/files/24d3c229-4f2f-405d-b8db-a3a67f183883/23E30AA955B5C00FE57CFD709621592C.2014-0325-target-kill-chain-analysis.pdf).
+
+**Controles relacionados entregados al equipo:**
+
+| Control | Descripción simplificada |
+|---|---|
+| **A.5.19 — Seguridad en las relaciones con proveedores** | Identificar y gestionar riesgos derivados del acceso o servicio de terceros. |
+| **A.5.20 — Seguridad en acuerdos con proveedores** | Establecer requisitos y responsabilidades de seguridad en los acuerdos. |
+| **A.5.22 — Monitoreo y cambios de servicios de proveedores** | Supervisar periódicamente el servicio, los accesos y los cambios del proveedor. |
+| **A.8.22 — Segregación de redes** | Impedir que un acceso de menor confianza alcance directamente sistemas críticos. |
+| **A.5.25 — Evaluación de eventos de seguridad** | Analizar alertas y decidir oportunamente si deben tratarse como incidentes. |
+
+### Expediente 3 — Maersk / NotPetya (2017)
+
+**Hechos documentados:** la acusación del Departamento de Justicia describe la distribución de NotPetya mediante el mecanismo de actualización del software contable ucraniano M.E.Doc; el ataque provocó una interrupción global. Maersk estimó pérdidas de entre USD 250 y 300 millones por pérdida de ingresos, restauración de TI y costos operacionales extraordinarios. Fuentes: [acusación del Departamento de Justicia de EE. UU.](https://www.justice.gov/d9/press-releases/attachments/2020/10/19/2020_10_19_unsealed_indictment_0.pdf) e [Informe Anual 2017 de Maersk](https://investor.maersk.com/system/files-encrypted/nasdaq_kms/assets/2018/04/25/13-00-21/A.P._Moller_-_Maersk_Annual_Report_2017.pdf).
+
+**Controles relacionados entregados al equipo:**
+
+| Control | Descripción simplificada |
+|---|---|
+| **A.5.21 — Seguridad en la cadena de suministro TIC** | Gestionar riesgos introducidos por productos, componentes y actualizaciones de terceros. |
+| **A.5.29 — Seguridad durante una interrupción** | Mantener un nivel apropiado de protección mientras la organización opera bajo disrupción. |
+| **A.5.30 — Preparación de las TIC para la continuidad** | Preparar, probar y mantener capacidades tecnológicas de recuperación. |
+| **A.8.13 — Respaldo de información** | Mantener copias protegidas y comprobar que pueden restaurarse. |
+
+### Expediente 4 — Capital One (2019)
+
+**Hechos documentados:** una configuración incorrecta del firewall de aplicación web permitió ejecutar solicitudes que obtuvieron credenciales de roles y acceder, dentro de los permisos disponibles, a datos almacenados en la nube. La actividad de marzo fue comunicada a Capital One por una persona externa en julio. El incidente afectó aproximadamente a 100 millones de personas en EE. UU. y 6 millones en Canadá; la OCC impuso una penalidad de USD 80 millones por deficiencias de evaluación de riesgo y controles en la nube. Fuentes: [Departamento de Justicia de EE. UU.](https://www.justice.gov/usao-wdwa/pr/seattle-tech-worker-arrested-data-theft-involving-large-financial-services-company), [comunicado de Capital One](https://www.capitalone.com/about/newsroom/capital-one-announces-data-security-incident/) y [resolución de la OCC](https://www.occ.gov/news-issuances/news-releases/2020/nr-occ-2020-101.html).
+
+**Controles relacionados entregados al equipo:**
+
+| Control | Descripción simplificada |
+|---|---|
+| **A.5.23 — Seguridad para el uso de servicios en la nube** | Definir procesos para adquirir, usar, administrar y finalizar servicios cloud de forma segura. |
+| **A.8.9 — Gestión de la configuración** | Definir configuraciones seguras, aplicarlas y detectar desviaciones. |
+| **A.8.2 — Derechos de acceso privilegiado** | Restringir y revisar los privilegios de cuentas y roles con capacidades elevadas. |
+| **A.8.16 — Actividades de monitoreo** | Detectar consultas, accesos o transferencias anómalas. |
+
+### Expediente 5 — Marriott / Starwood (2014–2018)
+
+**Hechos documentados:** el atacante entró al entorno de Starwood en 2014; Marriott adquirió la empresa en 2016 y detectó la actividad en 2018. El ICO documentó, entre otras deficiencias, monitoreo insuficiente de cuentas privilegiadas y bases de datos. Se vieron afectados alrededor de 339 millones de registros de huéspedes y la sanción fue de GBP 18,4 millones. El ICO no atribuyó la sanción a una infracción durante la adquisición anterior al GDPR. Fuente: [resolución sancionadora del ICO](https://ico.org.uk/media2/migrated/2618524/marriott-international-inc-mpn-20201030.pdf).
+
+**Controles relacionados entregados al equipo:**
+
+| Control | Descripción simplificada |
+|---|---|
+| **A.8.15 — Registro de eventos** | Generar, proteger y analizar registros útiles de sistemas, aplicaciones y accesos. |
+| **A.8.16 — Actividades de monitoreo** | Observar los sistemas para detectar comportamientos anómalos y actuar ante ellos. |
+| **A.8.2 — Derechos de acceso privilegiado** | Limitar, autorizar y revisar accesos con privilegios elevados. |
+| **A.5.9 — Inventario de información y otros activos asociados** | Conocer los sistemas, bases de datos, información y responsables incluidos en el entorno. |
+
+### Expediente 6 — Morgan Stanley (2016–2019)
+
+**Hechos documentados:** durante el retiro de centros de datos y otros equipos, la organización no evaluó adecuadamente el riesgo, seleccionó y supervisó deficientemente a proveedores, y no mantuvo un inventario apropiado de los datos en los dispositivos. Parte del hardware fue revendida sin eliminar toda la información. La OCC impuso USD 60 millones y la SEC USD 35 millones; esta última acción abarcó información de aproximadamente 15 millones de clientes. Fuentes: [resolución de la OCC](https://www.occ.gov/news-issuances/news-releases/2020/nr-occ-2020-134.html) y [resolución de la SEC](https://www.sec.gov/newsroom/press-releases/2022-168).
+
+**Controles relacionados entregados al equipo:**
+
+| Control | Descripción simplificada |
+|---|---|
+| **A.7.14 — Eliminación o reutilización segura de equipos** | Comprobar que equipos y soportes no conservan información antes de desecharlos o reutilizarlos. |
+| **A.8.10 — Eliminación de información** | Eliminar información cuando ya no se requiere, usando métodos apropiados y verificables. |
+| **A.5.9 — Inventario de información y otros activos asociados** | Mantener trazabilidad sobre dispositivos, información, custodios y estado. |
+| **A.5.19 — Seguridad en las relaciones con proveedores** | Evaluar y gestionar los riesgos del tercero que manipula los equipos. |
+| **A.5.22 — Monitoreo y cambios de servicios de proveedores** | Supervisar el desempeño, cumplimiento y cambios del servicio contratado. |
+
+### Criterios de evaluación — 10 puntos
+
+| Criterio | Puntaje |
+|---|---:|
+| Identifica correctamente activo, efecto CID y debilidad documentada | 2 |
+| Justifica por qué el control elegido es principal | 2 |
+| Propone una implementación específica, viable y con responsable | 3 |
+| Define evidencia y una prueba o indicador de eficacia | 2 |
+| Formula una conclusión prudente sin afirmar incumplimiento no demostrado | 1 |
+
+### Entrega de las diapositivas
+
+Cada equipo entregará **un solo archivo de PowerPoint (`.pptx`)** con su análisis. El instructor indicará cuándo está habilitado el servidor de recepción y comunicará verbalmente la contraseña temporal.
+
+#### 1. Guardar el archivo con el nombre obligatorio
+
+Guarden y cierren la presentación en la carpeta **Documentos** del usuario conectado en Windows. Usen este formato:
+
+```text
+G##-ATAQUE.pptx
+```
+
+- Reemplacen `##` por el número del grupo con dos dígitos.
+- Usen uno de estos nombres de ataque: `EQUIFAX`, `TARGET`, `MAERSK`, `CAPITAL-ONE`, `MARRIOTT` o `MORGAN-STANLEY`.
+- No agreguen espacios, tildes ni nombres de integrantes al nombre del archivo.
+
+Ejemplos válidos:
+
+```text
+G01-EQUIFAX.pptx
+G04-CAPITAL-ONE.pptx
+G06-MORGAN-STANLEY.pptx
+```
+
+#### 2. Verificar la conexión y el comando SCP
+
+Abrir **PowerShell** y ejecutar:
+
+```powershell
+Test-NetConnection 192.168.22.250 -Port 22
+Get-Command scp -ErrorAction SilentlyContinue
+```
+
+Continuar solamente si `TcpTestSucceeded` muestra `True` y el segundo comando muestra la ubicación de `scp.exe`. Si alguna comprobación falla, avisar al instructor.
+
+#### 3. Enviar la presentación
+
+Copiar y pegar en PowerShell el siguiente bloque completo:
+
+```powershell
+$nombre = (Read-Host "Nombre exacto del archivo, incluido .pptx").Trim()
+
+if ($nombre -notmatch '(?i)^G\d{2}-(EQUIFAX|TARGET|MAERSK|CAPITAL-ONE|MARRIOTT|MORGAN-STANLEY)\.pptx$') {
+    throw "Nombre incorrecto. Ejemplo válido: G01-EQUIFAX.pptx"
+}
+
+$documentos = [Environment]::GetFolderPath('MyDocuments')
+$archivo = Join-Path $documentos $nombre
+
+if (-not (Test-Path -LiteralPath $archivo -PathType Leaf)) {
+    throw "No se encontró el archivo en Documentos: $archivo"
+}
+
+scp $archivo "entregas@192.168.22.250:$nombre"
+```
+
+Cuando el bloque lo solicite, escribir el nombre exacto del archivo. En la primera conexión puede aparecer una pregunta sobre la autenticidad del servidor: responder `yes` **solo después de que el instructor confirme la huella mostrada**. Luego ingresar la contraseña temporal; PowerShell no muestra caracteres mientras se escribe.
+
+#### 4. Confirmar la entrega
+
+La transferencia terminó correctamente cuando `scp` muestra el nombre del archivo, una barra de progreso y `100%`. No cerrar PowerShell antes de ver esa confirmación.
+
+!!! warning "Antes de retirarse"
+    Cada grupo debe comprobar que entregó el archivo correcto. Si necesita reemplazar una entrega, debe comunicarlo al instructor antes de volver a ejecutar el envío.
+
+??? success "Guía para el instructor — abrir después de las exposiciones"
+
+    No existe necesariamente una sola respuesta correcta: el control principal depende de la debilidad que el equipo haya priorizado. Las siguientes son rutas sólidas para orientar la retroalimentación.
+
+    | Caso | Elección principal defendible | Ejemplo de implementación verificable |
+    |---|---|---|
+    | Equifax | **A.8.8** si se prioriza la vulnerabilidad; **A.5.9** si se prioriza la falta de visibilidad del sistema | Inventario de software y responsables, recepción de avisos, plazo para vulnerabilidades críticas, ticket de corrección y escaneo autenticado que confirme el cierre. |
+    | Target | **A.5.19/A.5.20** si se prioriza el acceso del proveedor; **A.8.22** si se prioriza el desplazamiento; **A.5.25** si se priorizan las alertas desatendidas | Cuenta individual para cada tercero, privilegio y horario mínimos, segmento aislado, revisión trimestral y alerta con responsable y plazo de escalamiento probado. |
+    | Maersk | **A.5.21** si se prioriza la actualización comprometida; **A.5.30** si se prioriza la continuidad | Validar origen e integridad de actualizaciones, probarlas en un entorno aislado, mantener respaldos desconectados y ejecutar ejercicios contra objetivos de recuperación. |
+    | Capital One | **A.8.9** o **A.5.23** si se prioriza la configuración cloud; **A.8.16** si se prioriza la detección tardía | Configuración base versionada, revisión automática antes del despliegue, roles de mínimo privilegio, registro centralizado y alerta de consultas o transferencias anómalas. |
+    | Marriott | **A.8.16** si se prioriza el monitoreo; **A.8.15** si se prioriza la falta de registros útiles; **A.8.2** si se priorizan los privilegios | Registrar actividad administrativa y de base de datos, centralizarla, alertar por patrones definidos, asignar responsable de respuesta y probar periódicamente la detección. |
+    | Morgan Stanley | **A.7.14/A.8.10** si se prioriza la información residual; **A.5.19/A.5.22** si se prioriza al proveedor | Conciliar inventario y cadena de custodia, usar borrado verificable o destrucción, conservar certificado, muestrear equipos y auditar al proveedor contra requisitos contractuales. |
+
+    **Diferencia que debe aparecer en una buena respuesta:**
+
+    - **Evidencia de ejecución:** existe un ticket que afirma que se instaló el parche.
+    - **Evidencia de eficacia:** un escaneo posterior confirma que la vulnerabilidad ya no está presente.
+
+    **Ejemplos de respuestas insuficientes:** “poner un firewall”, “capacitar al personal”, “hacer respaldos” o “monitorear la red”. Les falta responsable, alcance, frecuencia, evidencia o criterio de éxito.
+
+El patrón común de los seis expedientes no es solamente “faltó una herramienta”. Aparecen inventario, decisiones de riesgo, responsabilidades, proveedores, monitoreo, continuidad y verificación de eficacia: los elementos que convierten controles aislados en un sistema de gestión.
+
+---
+
 ## Aplicación en Contexto Castrense
 
 **Ejemplo 1 — PDCA y el puesto de mando avanzado:**
@@ -118,6 +359,7 @@ Una unidad puede tener documentado en su SOP (Standard Operating Procedure) que 
 2. Cada fase del PDCA corresponde a cláusulas de ISO 27001: PLAN (cláusulas 4-7), DO (8), CHECK (9), ACT (10).
 3. Los beneficios del SGSI incluyen visibilidad para el mando, responsabilidades claras para el personal técnico, continuidad de misión, y respuesta a incidentes más efectiva.
 4. **Compliance** es cumplir con los requisitos documentados; **security posture** es el nivel de protección real. El SGSI que funciona bien hace que ambos converjan.
+5. Ante un incidente, el análisis correcto parte de hechos documentados, prioriza una debilidad, selecciona controles relacionados y exige evidencia de ejecución y de eficacia; no convierte el mapeo en una acusación de incumplimiento.
 
 ## Para profundizar
 
