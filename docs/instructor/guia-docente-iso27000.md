@@ -55,6 +55,127 @@ Use siempre una pregunta de transferencia, no una pregunta de memoria:
 
 Una respuesta sólida debe mencionar una situación concreta, un responsable, una acción y una evidencia. Si el alumno solo menciona una herramienta o repite una definición, todavía no ha transferido el concepto.
 
+## Ejemplo resuelto para modelar las exposiciones — Colonial Pipeline (2021)
+
+Utilice este caso para mostrar el nivel de precisión esperado en el trabajo **Ataques → controles de seguridad**. Preséntelo después de explicar la consigna o al terminar las exposiciones, para evitar que los grupos simplemente copien la estructura.
+
+!!! warning "Límite de la conclusión"
+
+    Este es un análisis docente basado en información pública, no una auditoría de Colonial Pipeline. No diga que la empresa “incumplía ISO” ni que carecía de todos los controles. La formulación rigurosa es: **una VPN heredada continuaba utilizable y no exigía MFA; los controles seleccionados habrían añadido resistencia directa frente a ese vector de acceso**.
+
+### 1. Detalles del ataque
+
+| Campo | Ejemplo de respuesta esperada |
+|---|---|
+| **Víctima** | Colonial Pipeline Company, operador estadounidense de infraestructura energética. |
+| **Atacante** | Un afiliado que utilizó el ransomware como servicio **DarkSide**. El FBI atribuyó el compromiso a DarkSide, pero no identificó públicamente al operador humano concreto. |
+| **Acceso inicial** | La evidencia forense más temprana, del **29 de abril de 2021**, muestra un inicio de sesión en un dispositivo VPN con el usuario y la contraseña de un empleado. Se utilizó un perfil de VPN heredado que la empresa creía inactivo, pero que todavía funcionaba. |
+| **Debilidad explotada** | El perfil VPN aceptaba solamente usuario y contraseña: **no exigía autenticación multifactor (MFA)**. La contraseña era compleja, pero también había sido utilizada en otro sitio posteriormente comprometido. La investigación no pudo determinar de manera concluyente cómo obtuvo el atacante las credenciales. |
+| **Vulnerabilidad CVE** | **No se identificó una CVE para el acceso inicial.** El atacante abusó de credenciales válidas y de una configuración de acceso remoto débil; no explotó un defecto de software publicado. |
+| **Acción del atacante** | Una vez dentro de la red de TI, desplegó DarkSide, cifró sistemas y presentó una exigencia de rescate. Las fuentes oficiales no publicaron una reconstrucción completa del movimiento lateral. |
+| **Impacto** | El ransomware afectó sistemas de TI. Colonial detuvo preventivamente aproximadamente **5.500 millas de tubería** mientras contenía y evaluaba el incidente. CISA y el FBI no reportaron afectación directa de la red operacional —OT—. |
+
+#### Cadena técnica que debe explicar el alumno
+
+> **Credenciales comprometidas** → **VPN heredada todavía activa** → **contraseña como único factor** → **acceso no autorizado a TI** → **ransomware y cifrado** → **apagado preventivo para contener el riesgo hacia OT**.
+
+Insista en dos precisiones:
+
+- La reutilización de la contraseña está documentada, pero no se confirmó que esa fuera exactamente la vía por la que el atacante la consiguió.
+- La interrupción operacional no significa que el atacante controlara válvulas o sistemas industriales; el cierre fue una decisión preventiva de la empresa.
+
+### 2. Controles de ISO/IEC 27002:2022 que habrían añadido resistencia
+
+| Control | Condición observada | Resistencia que debía aportar |
+|---|---|---|
+| **8.5 — Autenticación segura** | La ruta VPN utilizada no exigía MFA. | Aunque el atacante conociera la contraseña, no habría podido ingresar sin el segundo factor. Es la relación más directa y mejor documentada. |
+| **5.17 — Información de autenticación** | La contraseña corporativa también se utilizaba en otro sitio comprometido. | Contraseñas únicas, un gestor institucional y la detección de credenciales expuestas reducen el riesgo de reutilización y abuso. |
+| **5.18 — Derechos de acceso** | Un perfil VPN que se creía fuera de uso todavía permitía autenticarse. | La revisión periódica y la revocación verificable eliminan accesos que ya no tienen una necesidad operacional. |
+| **8.9 — Gestión de la configuración** | Persistía una ruta heredada con autenticación de un solo factor, distinta del mecanismo normal con token. | Una línea base aprobada y la verificación del retiro completo impiden que sobrevivan configuraciones antiguas expuestas. |
+| **5.16 — Gestión de identidades** | Existían credenciales válidas capaces de autenticarse mediante una ruta que no debía utilizarse. | Cada identidad y cuenta remota debe tener propietario, propósito, vigencia y un ciclo formal de alta, revisión y baja. Este vínculo es complementario porque no se publicó el expediente interno de la cuenta. |
+
+!!! note "Cómo evaluar una selección diferente"
+
+    Acepte otro control si el alumno identifica primero una debilidad concreta, explica cómo el control la previene, detecta o limita y no presenta una inferencia como hecho. No acepte una lista extensa de controles sin relación causal.
+
+No presente como ausentes los controles de respuesta a incidentes, segmentación, copias de seguridad o continuidad. La evidencia pública no permite esa conclusión y, de hecho, Colonial activó su respuesta, notificó a las autoridades, aisló sistemas y operó parcialmente con procedimientos manuales.
+
+### 3. Procedimientos específicos para implementar los controles
+
+Los procedimientos siguientes muestran el nivel de detalle esperado: indican **qué se hace, quién lo hace y qué evidencia permite comprobarlo**.
+
+#### Procedimiento A — Exigir MFA y contraseñas únicas en todo acceso remoto
+
+**Implementa principalmente:** 8.5 y 5.17.
+
+1. El responsable de seguridad obtiene de los firewalls, concentradores VPN, servicios en la nube y directorios una lista única de todos los accesos remotos.
+2. Para cada acceso registra el sistema, dirección expuesta, propietario, usuarios autorizados, método de autenticación y fecha prevista de retiro.
+3. La organización prohíbe utilizar la contraseña corporativa en servicios personales y entrega un gestor de contraseñas para generar una clave distinta por cuenta.
+4. El administrador bloquea contraseñas conocidas como expuestas y ordena su cambio inmediato cuando existe una alerta confiable de compromiso.
+5. Se configura MFA para todas las conexiones remotas. Para administradores y sistemas críticos se priorizan llaves FIDO2/WebAuthn o tokens resistentes al *phishing*.
+6. Una VPN que no admite MFA se retira o se coloca detrás de un servicio moderno que sí lo exija. No se mantiene abierta como excepción permanente.
+7. Un técnico de pruebas intenta ingresar con una contraseña válida, pero sin el segundo factor. El resultado esperado es **acceso rechazado**.
+8. Mensualmente se informa el porcentaje de accesos remotos cubiertos por MFA. La meta es 100 %; cada excepción debe tener responsable, tratamiento compensatorio y fecha de vencimiento.
+
+**Evidencia:** inventario de accesos, política de contraseñas, exportación de la configuración MFA, reporte de usuarios inscritos, resultado de la prueba negativa y registro de excepciones.
+
+#### Procedimiento B — Dar de baja accesos que ya no son necesarios
+
+**Implementa principalmente:** 5.16 y 5.18.
+
+1. Todo acceso VPN se crea mediante una solicitud aprobada que identifica a la persona, función, responsable, recursos permitidos y fecha de expiración.
+2. No se crean cuentas compartidas. Cada acceso debe poder atribuirse a una persona o a un servicio técnico con propietario identificado.
+3. Recursos Humanos o el responsable de contratistas comunica inmediatamente las bajas y cambios de función. El administrador desactiva ese mismo día los accesos que dejan de corresponder.
+4. El sistema suspende las cuentas VPN que superen el periodo de inactividad definido. Su reactivación requiere una nueva aprobación registrada.
+5. Cada trimestre, el dueño del sistema revisa la lista de usuarios y confirma uno por uno quién mantiene una necesidad operacional. Los accesos no confirmados se suspenden.
+6. El administrador compara personal vigente, identidades del directorio y usuarios configurados en la VPN. Investiga y corrige cada diferencia.
+7. Después de la baja, otro técnico intenta autenticar la cuenta y adjunta al ticket el rechazo obtenido. Cambiar un estado en una hoja de cálculo no demuestra que el acceso dejó de funcionar.
+
+**Evidencia:** solicitudes y aprobaciones, reporte de inactividad, revisión trimestral firmada, conciliación de identidades, ticket de baja y prueba posterior de bloqueo.
+
+#### Procedimiento C — Retirar completamente una VPN o configuración heredada
+
+**Implementa principalmente:** 8.9.
+
+1. La organización aprueba una línea base de acceso remoto: tecnologías y versiones permitidas, MFA obligatorio, cifrado, registros y redes alcanzables.
+2. El responsable compara todos los concentradores, perfiles y reglas de acceso con la línea base. Marca cualquier componente antiguo, no documentado, sin propietario o sin MFA.
+3. Para retirar un servicio abre un cambio formal y elimina todos sus componentes: perfil VPN, cuentas locales, certificados, reglas de firewall, publicación DNS y rutas asociadas.
+4. Desde una red externa de prueba intenta conectarse al servicio retirado. El resultado esperado es que no responda o rechace el acceso; se conserva la captura de la prueba.
+5. Periódicamente se descubren los servicios expuestos a Internet y se comparan con el inventario aprobado. Toda VPN o puerto no reconocido genera una alerta y un ticket.
+6. Las configuraciones se exportan a un repositorio controlado y se revisan para detectar autenticación de un solo factor, cuentas locales no autorizadas y otras desviaciones.
+7. Toda excepción requiere aprobación del responsable del riesgo, medidas compensatorias y fecha de vencimiento. Al vencer, se cierra automáticamente o se renueva formalmente.
+
+**Evidencia:** línea base, inventario, ticket de cambio, configuración anterior y posterior, prueba externa de cierre, resultados del descubrimiento y registro de excepciones.
+
+#### Procedimiento D — Comprobar que los controles funcionan juntos
+
+**Implementa y verifica:** 5.16, 5.18, 8.5 y 8.9.
+
+1. Trimestralmente, un revisor que no administre la VPN selecciona una muestra de usuarios activos, usuarios dados de baja y servicios retirados.
+2. Para cada usuario activo comprueba aprobación vigente, MFA inscrito, permisos mínimos y fecha de revisión.
+3. Para cada usuario dado de baja comprueba que no puede autenticarse ni conserva certificados, tokens o grupos con acceso indirecto.
+4. Para cada servicio retirado comprueba desde el exterior que no responde y revisa que no queden reglas, DNS, cuentas o perfiles asociados.
+5. Cada diferencia recibe responsable y fecha de corrección. Después se repite la prueba: cerrar el ticket sin volver a probar no demuestra eficacia.
+6. El mando recibe cuatro indicadores: cobertura MFA, cuentas sin propietario, accesos vencidos todavía activos y tiempo promedio de revocación.
+
+**Evidencia:** plan de muestreo, lista de comprobación, resultados, tickets de corrección, revalidación e informe de indicadores.
+
+### Cómo comunicar el ejemplo en el aula
+
+1. Proyecte primero solamente los detalles del ataque y pregunte: “¿En qué punto de la cadena habría sido más barato detenerlo?”.
+2. Revele después los controles. Por cada uno, obligue a completar la frase: “Este control habría añadido resistencia porque…”.
+3. Muestre los procedimientos al final y contraste **actividad** con **eficacia**: configurar MFA es una actividad; comprobar que la contraseña sola ya no permite entrar es evidencia de eficacia.
+4. Cierre preguntando: “¿Qué afirmaciones de este ejemplo son hechos documentados y cuáles son inferencias profesionales?”.
+
+??? info "Fuentes oficiales del caso"
+
+    - [Audiencia de la Cámara: testimonios de Colonial Pipeline y Mandiant, 9 de junio de 2021](https://www.congress.gov/117/chrg/CHRG-117hhrg45085/CHRG-117hhrg45085.pdf).
+    - [Testimonio de Joseph Blount ante el Senado, 8 de junio de 2021](https://www.hsgac.senate.gov/wp-content/uploads/imo/media/doc/Testimony-Blount-2021-06-08.pdf).
+    - [Interrogatorio oficial del Senado sobre la VPN y MFA](https://www.hsgac.senate.gov/media/reps/portman-presses-president-and-ceo-of-colonial-pipeline-on-gaps-in-cybersecurity-practices/).
+    - [Aviso conjunto CISA–FBI AA21-131A sobre DarkSide](https://www.cisa.gov/sites/default/files/publications/AA21-131A_Darkside_Ransomware.pdf).
+    - [Cronología del Departamento de Energía](https://www.energy.gov/ceser/colonial-pipeline-cyber-incident).
+    - [Comunicado del Departamento de Justicia sobre la recuperación parcial del rescate](https://www.justice.gov/archives/opa/pr/department-justice-seizes-23-million-cryptocurrency-paid-ransomware-extortionists-darkside).
+
 ---
 
 ## 1. Generalidades — Parte 1
