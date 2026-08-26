@@ -15,84 +15,6 @@ Al finalizar esta clase, el alumno será capaz de:
 - Identificar las principales normas de la familia ISO/IEC 27000 y describir el rol de cada una.
 - Definir qué es un Sistema de Gestión de la Seguridad de la Información (SGSI) y explicar su estructura conceptual.
 - Reconocer por qué las organizaciones adoptan un SGSI como marco de referencia, sin confundirlo con el proceso de certificación.
-- Relacionar debilidades documentadas de incidentes reales con requisitos y controles ISO, sin presentar el mapeo como una conclusión oficial de incumplimiento.
-
----
-
-## Actividad de apertura — Del incidente al control
-
-> **Duración sugerida:** 30 minutos | **Modalidad:** equipos de 2–4 alumnos | **Conocimientos previos:** tríada CID; no se requiere conocer ISO
-
-La pregunta no es “¿qué norma violó la empresa?”, sino una más útil para gestionar riesgo:
-
-> **¿Qué práctica de un SGSI habría podido prevenir el incidente, detectarlo antes o reducir su impacto?**
-
-!!! warning "Regla de interpretación"
-    Ninguna de las fuentes citadas sanciona a estas organizaciones por “incumplir ISO/IEC 27001”. Además, los incidentes ocurrieron entre 2013 y 2019 y el catálogo usado para analizarlos es de 2022. El mapeo es **retrospectivo y analítico**: relaciona una debilidad documentada con requisitos o controles que podrían tratarla. No prueba ausencia de SGSI, no convierte todos los controles en obligatorios y no garantiza que una certificación hubiera evitado el incidente.
-
-!!! info "Precisión terminológica"
-    No se implementa un “control de ISO 27000”. [**ISO/IEC 27000:2026**](https://www.iso.org/standard/27000) explica el panorama, los conceptos y las relaciones de la familia; [**ISO/IEC 27001:2022**](https://www.iso.org/standard/27001) contiene los requisitos del SGSI y su Anexo A sirve como catálogo de referencia; [**ISO/IEC 27002:2022**](https://www.iso.org/standard/75652.html) proporciona orientación para implementar esos controles.
-
-### Seis expedientes reales
-
-**1. Equifax (2017)**
-
-Atacantes explotaron una vulnerabilidad de Apache Struts que no fue identificada correctamente en el portal afectado. La lista de distribución del aviso de parcheo estaba desactualizada, el escaneo posterior no encontró el sistema vulnerable, un certificado vencido impidió inspeccionar tráfico cifrado y las bases de datos no estaban suficientemente segmentadas. Se accedió a información personal de al menos 145,5 millones de personas. Fuente: [informe GAO-18-559](https://www.gao.gov/products/gao-18-559).
-
-**2. Target (2013)**
-
-El informe del Senado reconstruyó un acceso inicial con credenciales robadas a un proveedor, desplazamiento desde áreas menos sensibles hacia sistemas de punto de venta y falta de respuesta ante varias alertas del software de detección. Se expusieron aproximadamente 40 millones de cuentas de tarjetas y datos personales de hasta 70 millones de clientes. Fuente: [informe del Comité de Comercio del Senado de EE. UU.](https://www.commerce.senate.gov/public/_cache/files/24d3c229-4f2f-405d-b8db-a3a67f183883/23E30AA955B5C00FE57CFD709621592C.2014-0325-target-kill-chain-analysis.pdf).
-
-**3. Maersk / NotPetya (2017)**
-
-La acusación del Departamento de Justicia describe la distribución de NotPetya mediante el mecanismo de actualización del software contable ucraniano M.E.Doc; el ataque provocó una interrupción global. Maersk estimó pérdidas de entre USD 250 y 300 millones por pérdida de ingresos, restauración de TI y costos operacionales extraordinarios. Fuentes: [acusación del Departamento de Justicia de EE. UU.](https://www.justice.gov/d9/press-releases/attachments/2020/10/19/2020_10_19_unsealed_indictment_0.pdf) e [Informe Anual 2017 de Maersk](https://investor.maersk.com/system/files-encrypted/nasdaq_kms/assets/2018/04/25/13-00-21/A.P._Moller_-_Maersk_Annual_Report_2017.pdf).
-
-**4. Capital One (2019)**
-
-Una configuración incorrecta del firewall de aplicación web permitió ejecutar solicitudes que obtuvieron credenciales de roles y acceder, dentro de los permisos disponibles, a datos almacenados en la nube. La actividad de marzo fue comunicada a Capital One por una persona externa en julio. El incidente afectó aproximadamente a 100 millones de personas en EE. UU. y 6 millones en Canadá; la OCC impuso una penalidad de USD 80 millones por deficiencias de evaluación de riesgo y controles en la nube. Fuentes: [Departamento de Justicia de EE. UU.](https://www.justice.gov/usao-wdwa/pr/seattle-tech-worker-arrested-data-theft-involving-large-financial-services-company), [comunicado de Capital One](https://www.capitalone.com/about/newsroom/capital-one-announces-data-security-incident/) y [resolución de la OCC](https://www.occ.gov/news-issuances/news-releases/2020/nr-occ-2020-101.html).
-
-**5. Marriott / Starwood (2014–2018)**
-
-El atacante entró al entorno de Starwood en 2014; Marriott adquirió la empresa en 2016 y detectó la actividad en 2018. El ICO documentó, entre otras deficiencias, monitoreo insuficiente de cuentas privilegiadas y bases de datos. Se vieron afectados alrededor de 339 millones de registros de huéspedes y la sanción fue de GBP 18,4 millones. El ICO no atribuyó la sanción a una infracción durante la adquisición anterior al GDPR. Fuente: [resolución sancionadora del ICO](https://ico.org.uk/media2/migrated/2618524/marriott-international-inc-mpn-20201030.pdf).
-
-**6. Morgan Stanley (2016–2019)**
-
-Durante el retiro de centros de datos y otros equipos, la organización no evaluó adecuadamente el riesgo, seleccionó y supervisó deficientemente a proveedores, y no mantuvo un inventario apropiado de los datos en los dispositivos. Parte del hardware fue revendida sin eliminar toda la información. La OCC impuso USD 60 millones y la SEC USD 35 millones; esta última acción abarcó información de aproximadamente 15 millones de clientes. Fuentes: [resolución de la OCC](https://www.occ.gov/news-issuances/news-releases/2020/nr-occ-2020-134.html) y [resolución de la SEC](https://www.sec.gov/newsroom/press-releases/2022-168).
-
-### Trabajo por equipos
-
-Cada equipo recibe uno de los seis casos y prepara una exposición de dos minutos. La actividad se desarrolla en dos rondas para no exigir que el alumno conozca todavía el catálogo ISO.
-
-Si hay menos de seis equipos o el tiempo es limitado, priorizar **Equifax, Capital One, Marriott y Morgan Stanley**; usar Target y Maersk como casos de ampliación.
-
-**Ronda 1 — Analizar la evidencia**
-
-1. Identificar el activo y el efecto principal sobre confidencialidad, integridad o disponibilidad.
-2. Separar la **debilidad documentada** de cualquier inferencia del equipo.
-
-**Ronda 2 — Consultar el banco y argumentar**
-
-El docente entrega este banco sin indicar qué referencia corresponde a cada caso: **§ 6.1.2** evaluación de riesgos; **§ 9.1** seguimiento y medición; **A.5.9** inventario; **A.5.19–A.5.23** proveedores, cadena de suministro y nube; **A.5.25** evaluación de eventos; **A.5.29–A.5.30** continuidad; **A.7.14** reutilización de equipos; **A.8.2** privilegios; **A.8.8–A.8.10** vulnerabilidades, configuración y eliminación; **A.8.15–A.8.16** registros y monitoreo; **A.8.22** segregación de redes.
-
-3. Elegir un requisito o control principal y hasta dos controles complementarios.
-4. Clasificar cada medida como preventiva, detectiva o de recuperación.
-5. Indicar qué evidencia pediría un auditor para comprobar que el control funciona en la práctica.
-6. Completar esta frase: “La evidencia se relaciona con ___; su aplicación eficaz habría podido ___, pero no demuestra ___”.
-
-??? success "Mapa orientativo — abrir después de la discusión"
-
-    El mapa reúne alternativas posibles; cada equipo debe defender solamente un control principal y hasta dos complementarios.
-
-    | Caso | Mapeo analítico ISO/IEC 27001:2022 | Qué habría que verificar |
-    |---|---|---|
-    | Equifax | **A.8.8** Gestión de vulnerabilidades técnicas; complementarios **A.5.9** inventario, **A.8.16** monitoreo, **A.8.22** segregación y **§ 9.1** medición de eficacia | Inventario de sistemas con Struts, SLA de parcheo, escaneo que confirme el cierre, vigencia de certificados y alertas probadas |
-    | Target | **A.5.19–A.5.22** seguridad de proveedores; complementarios **A.8.22** segregación y **A.5.25** evaluación de eventos | Alcance real de accesos de terceros, separación del entorno POS, responsables y tiempos de respuesta a alertas |
-    | Maersk | **A.5.21** cadena de suministro TIC; complementarios **A.5.29** seguridad durante interrupciones y **A.5.30** preparación TIC para continuidad | Validación de actualizaciones, ejercicios de pérdida masiva de sistemas y objetivos de recuperación |
-    | Capital One | **§ 6.1.2** evaluación de riesgos y **A.5.23** uso seguro de nube; complementarios **A.8.9** configuración, **A.8.16** monitoreo y revisión de **A.8.2** privilegios | Revisión de configuración, alcance mínimo de permisos, detección de consultas y exfiltración anómalas, y reevaluación del riesgo cloud |
-    | Marriott | **A.8.16** monitoreo y **A.8.15** registro; complementarios **A.8.2** acceso privilegiado y **§ 6.1.2** evaluación continua del riesgo | Cobertura de logs de cuentas privilegiadas y bases de datos, reglas de alerta, revisión de sistemas adquiridos y pruebas de eficacia |
-    | Morgan Stanley | **A.7.14** eliminación o reutilización segura y **A.8.10** eliminación de información; complementarios **A.5.9** inventario y **A.5.19/A.5.20/A.5.22** gestión de proveedores | Cadena de custodia, inventario conciliado, evidencia de borrado o destrucción, competencia del proveedor y supervisión del contrato |
-
-El patrón común no es “faltó una herramienta”. Aparecen decisiones de riesgo, responsabilidades, proveedores, inventario, monitoreo, continuidad y verificación de eficacia: precisamente los elementos que convierten controles aislados en un sistema de gestión.
 
 ---
 
@@ -185,6 +107,200 @@ Un SGSI bien construido tiene cuatro componentes fundamentales:
 
 ---
 
+## Ejemplo Integrador — SGSI de una Sección de Comunicaciones
+
+> **Duración sugerida:** 60 minutos | **Propósito:** recorrer un SGSI completo sin entrar todavía en el detalle de las cláusulas de ISO/IEC 27001
+
+La **Sección de Comunicaciones del Regimiento de Infantería N.° 8 (SC-RI8)** tiene 15 integrantes. Opera 24 radios tácticas, seis terminales de mando y control (C2), un servidor de archivos, una sala de comunicaciones y documentación impresa con planes de frecuencias. La rotación de personal es frecuente y parte del equipamiento se despliega fuera de la base.
+
+El Comandante no necesita solamente saber qué herramientas están instaladas. Necesita saber **qué información sostiene la misión, qué puede afectarla, quién responde por ella y si las medidas de seguridad funcionan**. Para responder esas preguntas, la SC-RI8 establece el siguiente SGSI.
+
+### Componente 1 — Alcance y contexto
+
+**Qué pregunta responde:** ¿qué protegerá el SGSI, para qué misión y dentro de qué límites?
+
+- **Misión que se debe sostener:**
+    - Mantener comunicaciones confiables entre el puesto de mando y las unidades subordinadas.
+    - Evitar que personal no autorizado conozca órdenes, ubicaciones, frecuencias o capacidades operativas.
+    - Poder continuar operando, aunque un equipo falle, se pierda o sea comprometido.
+- **Alcance propuesto:**
+    - Incluye al personal de la SC-RI8, la sala de comunicaciones, los radios tácticos, las terminales C2, el servidor de archivos y los soportes físicos o digitales que contienen planes de comunicaciones.
+    - Incluye los procesos de asignación de equipos, administración de cuentas, respaldo, mantenimiento, despliegue, devolución y reporte de incidentes.
+    - Incluye a proveedores o talleres externos mientras tengan acceso a equipos o información de la sección.
+    - Excluye los sistemas administrativos del Regimiento que son gestionados por otra dependencia; la exclusión se documenta y se identifica quién es responsable de ellos.
+- **Partes interesadas y necesidades:**
+    - El **Comandante** necesita disponibilidad, información para decidir y riesgos expresados en términos de impacto sobre la misión.
+    - Los **operadores** necesitan procedimientos breves que puedan ejecutar bajo presión.
+    - El **personal técnico** necesita configuraciones autorizadas, inventarios correctos y responsables definidos.
+    - Las **unidades apoyadas** necesitan canales disponibles y mecanismos alternativos de comunicación.
+    - Los **proveedores** necesitan reglas contractuales sobre acceso, custodia, mantenimiento y eliminación de información.
+- **Responsabilidades mínimas:**
+    - El Comandante aprueba el alcance, la política y los riesgos que se decida aceptar.
+    - El Jefe de Comunicaciones administra el SGSI y reporta sus resultados.
+    - Cada custodio responde por los equipos que recibe.
+    - El administrador de sistemas gestiona cuentas, configuraciones, registros y respaldos.
+    - Todo integrante debe reportar pérdidas, accesos sospechosos y fallas de seguridad.
+- **Evidencias que produce este componente:**
+    - Documento de alcance aprobado.
+    - Organigrama o matriz de responsabilidades.
+    - Lista de procesos, ubicaciones, terceros y activos incluidos.
+    - Registro y justificación de exclusiones.
+- **Alternativas de implementación:**
+    - **Alcance reducido:** comenzar solo con el servidor, las terminales C2 y la sala de comunicaciones. Es más rápido y manejable, pero puede dejar fuera riesgos de los radios desplegados.
+    - **Alcance completo:** incluir desde el inicio todos los equipos, personas, procesos y despliegues. Ofrece mayor cobertura, pero requiere más recursos y coordinación.
+    - **Implementación progresiva:** comenzar con los activos más críticos y ampliar el alcance por etapas con fechas y responsables definidos. Es la alternativa más realista si la unidad tiene recursos limitados.
+
+!!! tip "Idea para explicar"
+    El alcance es como el perímetro de responsabilidad asignado a una unidad: debe indicar qué se defiende, quién lo defiende y dónde termina la responsabilidad. Lo que queda fuera no desaparece; debe tener otro responsable conocido.
+
+### Componente 2 — Evaluación de riesgos
+
+**Qué pregunta responde:** ¿qué puede impedir la misión, por qué podría ocurrir y qué riesgo merece atención primero?
+
+- **Activos que la SC-RI8 identifica:**
+    - Planes de frecuencias, órdenes y archivos operativos.
+    - Radios, terminales C2, servidor, dispositivos de respaldo y material criptográfico.
+    - Servicios de red y energía.
+    - Conocimiento y experiencia del personal.
+    - Confianza de las unidades que reciben el servicio de comunicaciones.
+- **Escenarios de riesgo iniciales:**
+    - Las cuentas genéricas del servidor permiten modificar o extraer archivos sin identificar al responsable.
+    - Un radio se pierde durante el despliegue y contiene parámetros de comunicación todavía válidos.
+    - Una falla eléctrica daña el servidor y no existe un respaldo recuperable.
+    - Un proveedor recibe un equipo para mantenimiento sin que se elimine la información sensible.
+    - Un operador nuevo configura incorrectamente una terminal porque no recibió instrucción ni una configuración de referencia.
+- **Método sencillo de valoración:**
+    - La probabilidad se califica como 1 baja, 2 media o 3 alta.
+    - El impacto sobre la misión se califica como 1 bajo, 2 medio o 3 alto.
+    - El nivel se obtiene multiplicando probabilidad por impacto; la unidad atiende primero los riesgos altos.
+    - Los criterios se acuerdan antes de calificar para que “alto” signifique lo mismo para todos.
+- **Ejemplo de registro de riesgo:**
+    - **Activo:** servidor de archivos operativos.
+    - **Amenaza:** acceso no autorizado.
+    - **Vulnerabilidad:** cuentas genéricas y contraseñas compartidas.
+    - **Consecuencia:** pérdida de confidencialidad y modificación de órdenes sin trazabilidad.
+    - **Probabilidad:** 3, porque muchas personas conocen la contraseña y no se puede revocar individualmente.
+    - **Impacto:** 3, porque archivos alterados o divulgados pueden afectar una operación.
+    - **Nivel:** 9, riesgo alto.
+    - **Propietario del riesgo:** Jefe de Comunicaciones, porque tiene autoridad para decidir y asignar recursos sobre el proceso afectado.
+- **Alternativas de tratamiento del ejemplo:**
+    - **Modificar:** crear cuentas individuales, limitar privilegios y revisar los registros de acceso.
+    - **Evitar:** dejar de almacenar información operativa sensible en ese servidor hasta que sea protegido.
+    - **Compartir:** contratar un servicio administrado puede distribuir responsabilidades, pero no elimina la responsabilidad de la unidad sobre su información.
+    - **Retener:** aceptar temporalmente el riesgo requiere justificación, autoridad competente, fecha de revisión y medidas provisionales; no equivale a ignorarlo.
+- **Evidencias que produce este componente:**
+    - Inventario de activos y propietarios.
+    - Criterios de probabilidad, impacto y aceptación.
+    - Registro de riesgos con responsables y fechas de revisión.
+    - Decisiones de tratamiento o aceptación aprobadas.
+- **Alternativas metodológicas:**
+    - Una matriz cualitativa de 3 × 3 es rápida y adecuada para comenzar.
+    - Una matriz de 5 × 5 ofrece mayor diferenciación, pero puede crear una precisión aparente si no existen buenos datos.
+    - Un análisis cuantitativo estima pérdidas monetarias o tiempos de interrupción; es útil para decisiones de inversión, pero exige datos confiables y mayor madurez.
+
+!!! tip "Idea para explicar"
+    El riesgo no es solamente una vulnerabilidad. Es un escenario que conecta un activo valioso, una amenaza, una debilidad y una consecuencia para la misión.
+
+### Componente 3 — Controles de seguridad
+
+**Qué pregunta responde:** ¿qué medidas concretas reducirán los riesgos seleccionados?
+
+- **Controles organizacionales:**
+    - Aprobar una política de uso de los sistemas y un procedimiento de altas, cambios y bajas de usuarios.
+    - Mantener un inventario con número de serie, custodio, ubicación, configuración y estado de cada equipo.
+    - Establecer reglas de seguridad para proveedores y una cadena de custodia durante el mantenimiento.
+    - **Alternativa simple:** formularios en papel numerados y revisados semanalmente.
+    - **Alternativa de mayor capacidad:** sistema electrónico de inventario y flujo de aprobaciones con alertas por vencimiento.
+- **Controles sobre las personas:**
+    - Dar una inducción antes de conceder acceso y realizar ejercicios periódicos de reporte de incidentes.
+    - Separar funciones críticas: quien solicita una cuenta no debe aprobarla y crearla sin una segunda revisión.
+    - Retirar accesos y recuperar equipos inmediatamente cuando una persona cambia de función o deja la unidad.
+    - **Alternativa de bajo costo:** charla de ingreso, tarjeta de bolsillo y comprobación oral del procedimiento.
+    - **Alternativa más robusta:** capacitación por funciones, simulaciones, evaluación práctica y registro de competencia.
+- **Controles físicos:**
+    - Restringir la sala de comunicaciones, registrar ingresos y acompañar a visitantes.
+    - Guardar respaldos y material sensible en un lugar distinto del equipo principal.
+    - Verificar la devolución y el estado de radios al finalizar cada operación.
+    - **Alternativa manual:** cerradura, lista autorizada y libro de ingresos revisado por el responsable.
+    - **Alternativa automatizada:** credencial individual, registro electrónico, alarma y revisión periódica de accesos.
+- **Controles tecnológicos para las cuentas compartidas:**
+    - Crear una cuenta nominativa por usuario y asignar solamente los privilegios necesarios.
+    - Exigir un segundo factor para administradores cuando la plataforma lo permita.
+    - Registrar accesos y alertar por intentos repetidos, horarios inusuales o descarga masiva de archivos.
+    - **Si el sistema antiguo no admite cuentas individuales:** usar cuentas nominativas en un equipo intermediario, custodiar las credenciales privilegiadas, registrar cada autorización y planificar el reemplazo del sistema.
+- **Controles tecnológicos para la disponibilidad:**
+    - Realizar respaldos según la criticidad de la información y probar restauraciones, no solo comprobar que el archivo de respaldo existe.
+    - Mantener configuraciones de referencia y repuestos para los equipos esenciales.
+    - **Alternativa básica:** respaldo cifrado desconectado y restauración de prueba mensual.
+    - **Alternativa de recuperación rápida:** réplica en un segundo servidor y conmutación ensayada; cuesta más y también debe protegerse.
+- **Controles para la pérdida de un radio:**
+    - Registrar qué persona recibe cada equipo y qué parámetros contiene.
+    - Exigir reporte inmediato y ejecutar el cambio de claves o frecuencias definido para el incidente.
+    - **Si el equipo permite borrado remoto:** activarlo y probarlo bajo condiciones controladas.
+    - **Si no lo permite:** reducir el periodo de validez del material, disponer de claves de contingencia y entrenar el procedimiento de cambio.
+- **Cómo se decide entre alternativas:**
+    - El control elegido debe reducir el riesgo hasta un nivel aceptable sin impedir la misión.
+    - Deben considerarse costo, tiempo, personal disponible, facilidad de operación, dependencia de conectividad y capacidad de trabajar en modo degradado.
+    - Una medida temporal debe tener responsable y fecha de sustitución; de lo contrario, tiende a convertirse en una debilidad permanente.
+- **Evidencias que produce este componente:**
+    - Políticas y procedimientos aprobados.
+    - Inventarios, autorizaciones, registros de acceso y listas de capacitación.
+    - Configuraciones técnicas, alertas, reportes de respaldo y resultados de restauración.
+    - Contratos, actas de entrega, cadenas de custodia y reportes de incidentes.
+
+!!! tip "Idea para explicar"
+    Un control no es únicamente una herramienta. “Proteger las cuentas” exige una regla, un responsable, una configuración, evidencia de ejecución y una forma de comprobar que la medida funciona.
+
+### Componente 4 — Ciclo de mejora continua
+
+**Qué pregunta responde:** ¿cómo sabe el mando si el SGSI funciona y cómo se corrige cuando cambia la realidad?
+
+- **Planear:**
+    - La SC-RI8 decide eliminar las cuentas compartidas en 30 días y establece como objetivo que el 100 % de los accesos normales sean nominativos.
+    - Define responsables, recursos, excepciones permitidas y la evidencia que se conservará.
+- **Ejecutar:**
+    - Se crean las cuentas, se asignan privilegios, se capacita a los usuarios y se deshabilita la cuenta genérica.
+    - Los casos técnicamente incompatibles quedan registrados con medidas compensatorias.
+- **Verificar:**
+    - Cada mes se compara la lista de personal con las cuentas activas.
+    - Se muestrean registros para confirmar que las acciones pueden atribuirse a una persona.
+    - Se prueba la restauración de un respaldo y se mide el tiempo real de recuperación.
+    - Se revisan incidentes, incumplimientos y observaciones del personal.
+- **Actuar:**
+    - Si todavía existen cuentas de personal trasladado, se corrige la baja y se modifica el procedimiento que permitió la demora.
+    - Si la restauración tarda seis horas cuando la misión tolera solamente dos, se mejora la solución de respaldo o se redefine la capacidad de continuidad.
+    - Si una medida dificulta la operación, se busca un control alternativo que reduzca el mismo riesgo sin incentivar que el personal evada el procedimiento.
+- **Indicadores útiles para el mando:**
+    - Porcentaje de activos con custodio y configuración registrados.
+    - Porcentaje de cuentas revisadas y número de cuentas sin responsable.
+    - Vulnerabilidades críticas fuera del plazo establecido.
+    - Porcentaje de restauraciones exitosas y tiempo real de recuperación.
+    - Tiempo desde la detección de un incidente hasta su reporte y contención.
+    - Porcentaje de acciones correctivas cerradas dentro del plazo.
+- **Alternativas para verificar:**
+    - **Revisión manual:** listas de comprobación y muestreo; requiere poco equipamiento, pero consume tiempo y puede omitir eventos.
+    - **Supervisión automatizada:** paneles y alertas; aumenta la cobertura, pero exige configuración, mantenimiento y personal capaz de responder.
+    - **Ejercicio de mesa:** los participantes explican cómo actuarían ante un incidente; es económico y descubre vacíos de decisión.
+    - **Simulación técnica:** se ejecuta una pérdida, caída o restauración controlada; ofrece mayor evidencia, pero debe planificarse para no afectar la misión.
+- **Evidencias que produce este componente:**
+    - Indicadores y reportes periódicos al mando.
+    - Resultados de auditorías, ejercicios y pruebas técnicas.
+    - Registro de no conformidades, causas y acciones correctivas.
+    - Decisiones de revisión del SGSI y cambios aprobados.
+
+### Recorrido completo del ejemplo
+
+- La **misión** exige que los archivos operativos estén disponibles y no sean divulgados ni alterados.
+- El **alcance** incluye al servidor, sus usuarios, los respaldos, la sala y los procedimientos asociados.
+- La **evaluación** identifica como riesgo alto el acceso mediante credenciales compartidas.
+- Los **controles** combinan cuentas individuales, privilegio mínimo, capacitación, registros y revisión de accesos.
+- La **verificación** descubre cuentas de personal trasladado y una recuperación más lenta de lo requerido.
+- La **mejora** corrige las bajas, ajusta el procedimiento y mejora la capacidad de recuperación.
+
+> El SGSI no es cada medida por separado. Es el sistema que conecta la misión, los riesgos, las decisiones, los responsables, la evidencia y la mejora.
+
+---
+
 ## El SGSI como Marco de Referencia Conceptual
 
 En este curso no se cubre el proceso de certificación ISO 27001 (auditoría externa, registro en un organismo de acreditación, mantenimiento de la certificación). Ese proceso es relevante para organizaciones que necesitan demostrar su conformidad ante clientes o reguladores, pero no es el objetivo de este módulo.
@@ -224,7 +340,6 @@ Una unidad de comunicaciones que opera radios tácticas y sistemas de mando y co
 3. Un **SGSI** es el sistema documentado de políticas, controles y procesos que gestiona la seguridad de la información de forma sistemática — no es una herramienta tecnológica, es un sistema de gestión.
 4. Los cuatro componentes de un SGSI son: alcance y contexto, evaluación de riesgos, controles de seguridad, y ciclo de mejora continua.
 5. En este curso el SGSI se estudia como **marco de referencia conceptual** — para entender su propósito y estructura, no para certificar una organización.
-6. Los incidentes reales pueden mapearse a controles para aprender, pero ese análisis retrospectivo no demuestra incumplimiento de ISO ni garantiza que la certificación hubiera evitado el incidente.
 
 ## Para profundizar
 
