@@ -1,75 +1,92 @@
 {
   "version": "1.0",
-  "timestamp": "2026-08-26T10:52:52.578Z",
+  "timestamp": "2026-08-26T19:21:03.154Z",
   "phase": "03",
   "phase_name": "asignatura-2-capas-si",
   "phase_dir": ".planning/phases/03-asignatura-2-capas-si",
   "plan": 1,
-  "task": 3,
-  "total_tasks": 3,
+  "task": 2,
+  "total_tasks": 5,
   "status": "paused",
   "completed_tasks": [
     {
       "id": 1,
-      "name": "Reestructurar Generalidades Parte 1 y añadir un ejemplo detallado de SGSI",
+      "name": "Seleccionar ocho incidentes para una segunda dinámica por grupos",
       "status": "done",
       "commit": null
     },
     {
       "id": 2,
-      "name": "Mover y rediseñar el ejercicio de incidentes en Generalidades Parte 2",
-      "status": "done",
-      "commit": null
-    },
-    {
-      "id": 3,
-      "name": "Verificar, revisar y cerrar la revisión pedagógica",
+      "name": "Definir la modalidad del ejercicio de implementación de controles de red",
       "status": "in_progress",
-      "progress": "MkDocs strict, git diff --check y comprobaciones estructurales pasaron; falta revisión humana y commit final del contenido"
+      "progress": "Se presentó un diseño seguro y publicable; el usuario pausó antes de aprobarlo explícitamente"
     }
   ],
   "remaining_tasks": [
     {
-      "id": 3,
-      "name": "Revisar el diff pedagógico y crear el commit final de las dos lecciones",
+      "id": 2,
+      "name": "Obtener aprobación explícita de la modalidad propuesta o ajustar si se requieren comandos ejecutados en una VM",
       "status": "in_progress"
+    },
+    {
+      "id": 3,
+      "name": "Investigar los ocho incidentes con fuentes primarias y mapear controles ISO/IEC 27002:2022",
+      "status": "not_started"
+    },
+    {
+      "id": 4,
+      "name": "Publicar el ejercicio para alumnos y la orientación separada para el instructor",
+      "status": "not_started"
+    },
+    {
+      "id": 5,
+      "name": "Verificar MkDocs, revisar, hacer commit, push y confirmar GitHub Pages",
+      "status": "not_started"
     }
   ],
-  "blockers": [],
+  "blockers": [
+    {
+      "description": "Falta aprobación explícita del diseño del nuevo ejercicio; el usuario invocó la pausa en lugar de responder",
+      "type": "human_action",
+      "workaround": "Al reanudar, mostrar el resumen del diseño y solicitar un sí o los cambios concretos antes de investigar o editar"
+    },
+    {
+      "description": "GitHub reportó una interrupción parcial importante; el último workflow automático falló y el build manual de Pages seguía en building",
+      "type": "external",
+      "workaround": "El contenido y las ramas ya fueron enviados; verificar el estado actual antes de cualquier nuevo despliegue y no asumir que push equivale a publicación visible"
+    }
+  ],
   "async_jobs": [],
   "human_actions_pending": [
     {
-      "action": "Revisar las dos lecciones modificadas y confirmar si requieren ajustes antes del commit final",
-      "context": "La implementación y las verificaciones técnicas terminaron, pero el contenido pedagógico permanece sin commit",
-      "blocking": false
+      "action": "Aprobar la modalidad de diseño técnico implementable sobre una red ficticia, sin modificar la red real del aula",
+      "context": "La alternativa propuesta publica un ejercicio visible para alumnos en ISO 27002 Parte 2 y una solución separada para el instructor; si se desea ejecución real, primero deben definirse VM, privilegios y topología",
+      "blocking": true
     }
   ],
   "decisions": [
     {
-      "decision": "Retirar por completo el ejercicio de incidentes de Generalidades Parte 1",
-      "rationale": "La Parte 1 debe concentrarse en construir el modelo mental del SGSI antes de pedir análisis de controles",
+      "decision": "Usar ocho casos distintos de los seis originales y de Colonial Pipeline",
+      "rationale": "Permite repetir la dinámica sin reutilizar respuestas y cubrir dominios de control más variados",
       "phase": "03"
     },
     {
-      "decision": "Explicar el SGSI con un único caso integrador de la SC-RI8 organizado en cuatro componentes",
-      "rationale": "Un caso recurrente y descrito por viñetas facilita la exposición oral y conecta alcance, riesgos, controles, evidencia y mejora",
+      "decision": "Casos seleccionados: SolarWinds, British Airways, SingHealth, Bangladesh Bank/SWIFT, Viasat KA-SAT, Uber, MOVEit/Cl0p y Health Service Executive de Irlanda",
+      "rationale": "La selección cubre cadena de suministro, aplicaciones, movimiento lateral, fraude, infraestructura crítica, identidad, día cero y ransomware/continuidad, con fuentes institucionales disponibles",
       "phase": "03"
     },
     {
-      "decision": "Entregar a cada equipo un conjunto reducido de controles relacionados con su incidente",
-      "rationale": "Los alumnos aún no dominan los 93 controles; la dificultad debe estar en priorizar, implementar y verificar, no en adivinar códigos",
+      "decision": "Proponer una práctica de diseño técnico verificable, no cambios sobre la red física del aula",
+      "rationale": "No existe una topología de laboratorio común definida para esta clase; un escenario ficticio permite evaluar reglas, pruebas, reversión y evidencia sin interrumpir la red",
       "phase": "03"
     },
     {
-      "decision": "Exigir evidencia de ejecución y prueba de eficacia, además de una conclusión prudente",
-      "rationale": "Evita confundir documentación con seguridad real y evita afirmar incumplimientos que las fuentes no demuestran",
+      "decision": "Exigir diagrama antes/después, matriz de flujos, controles 8.20/8.21/8.22, ACL, procedimiento, reversión, pruebas y evidencia",
+      "rationale": "Convierte la selección de controles en una implementación defendible y permite distinguir actividad de eficacia",
       "phase": "03"
     }
   ],
-  "uncommitted_files": [
-    "docs/capas-si/familia-iso27000/iso27000-generalidades-p1.md",
-    "docs/capas-si/familia-iso27000/iso27000-generalidades-p2.md"
-  ],
-  "next_action": "Leer el handoff y revisar el diff de las dos lecciones; si el contenido se acepta, volver a ejecutar MkDocs strict y git diff --check, y crear el commit final de documentación",
-  "context_notes": "Revisión pedagógica posmilestone sobre main en f756838. Parte 1 contiene ahora un ejemplo detallado de SGSI de la SC-RI8; Parte 2 contiene el ejercicio guiado de seis incidentes. No hay servidores, agentes ni trabajos asíncronos activos. Las pausas anteriores siguen separadas: MoodleCloud en .planning/.continue-here.md y corrección iptables en .planning/phases/02.1-correccion-iptables/.continue-here.md. No mezclar esos workstreams. La detección literal de phases/*/PLAN.md apunta erróneamente a la fase 01 porque los planes posteriores usan nombres XX-YY-PLAN.md. El runtime /home/researcher/.agents/gsd-core/bin/gsd-tools.cjs falla por package.json ausente; usar /home/researcher/.codex/gsd-core/bin/gsd-tools.cjs."
+  "uncommitted_files": [],
+  "next_action": "Leer el handoff, confirmar el estado de GitHub Pages y preguntar al usuario si aprueba la modalidad propuesta; sólo después lanzar la investigación primaria de los ocho casos",
+  "context_notes": "Trabajo posmilestone sobre main. Los seis casos originales están en iso27000-generalidades-p2.md. La guía docente no indexada contiene el ejemplo resuelto de Colonial Pipeline. El nuevo ejercicio se propuso para iso27002-controles-p2.md, visible a alumnos, con orientación separada en docs/instructor/. No se investigaron todavía los ocho casos ni se modificaron archivos para el nuevo ejercicio. Main está limpio en 692da15. La rama gh-pages fue actualizada manualmente a 9a5e6d9 porque Actions sufrió una interrupción. La detección literal de phases/*/PLAN.md apunta erróneamente a fase 01; el contexto correcto es fase 03. Usar /home/researcher/.codex/gsd-core/bin/gsd-tools.cjs, no el runtime roto de .agents."
 }
