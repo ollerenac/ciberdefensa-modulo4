@@ -453,7 +453,7 @@ Si necesitan asumir algo que no aparece en el escenario, indíquenlo claramente.
 
 3. **¿Qué riesgo tratarían y qué resultado esperan obtener?**
 
-    Completen: “Si ___ aprovecha ___, podría afectar ___ y provocar ___”.
+    Completen: “Si [actor] aprovecha [debilidad], podría afectar [activo] y provocar [consecuencia]”.
 
     Después definan reglas para cuatro casos: equipo institucional, visitante común, visitante con permiso especial y equipo desconocido. Cierren con un objetivo medible y un plazo.
 
@@ -533,13 +533,13 @@ Dibujen primero cómo relacionarían la visita, el equipo, la conexión y el cie
 
 Después redacten una explicación de **200 a 300 palabras**, organizada en cuatro párrafos:
 
-> **PLAN:** “Examinamos ___, identificamos el riesgo de ___ y establecimos el objetivo de ___.”
+> **PLAN:** “Examinamos [fuentes], identificamos el riesgo de [riesgo] y establecimos el objetivo de [objetivo].”
 >
-> **DO:** “Implementamos ___, bajo responsabilidad de ___, y produjimos como evidencia ___.”
+> **DO:** “Implementamos [medidas], bajo responsabilidad de [responsable], y produjimos como evidencia [evidencia].”
 >
-> **CHECK:** “Probamos ___ y los resultados demostraron ___; sin embargo, encontramos ___.”
+> **CHECK:** “Probamos [controles] y los resultados demostraron [resultado]; sin embargo, encontramos [hallazgo].”
 >
-> **ACT:** “Corregiremos ___, mejoraremos ___ y en el siguiente PLAN revisaremos ___.”
+> **ACT:** “Corregiremos [problema], mejoraremos [proceso] y en el siguiente PLAN revisaremos [aspecto].”
 
 La explicación debe mantener esta relación:
 
