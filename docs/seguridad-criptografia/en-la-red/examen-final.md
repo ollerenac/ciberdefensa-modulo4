@@ -3,313 +3,263 @@
 # Tipo: Examen
 ---
 
-# Examen Final — Unidad: En la Red
+# Examen Final — Redes Defensivas
 
-> **Duración:** 1 hora | **Asignatura:** Seguridad de la Información y Criptografía | **Unidad:** En la Red
+> **Duración:** 60 minutos | **Preguntas:** 20 | **Valor:** 20 puntos (1 punto por pregunta)
 
 !!! warning "Instrucciones"
-    - Este examen cubre los temas de la Unidad "En la Red": Proxy Squid (Partes 1 y 2), IDS e IPS con Snort (Partes 1 y 2), y Honeypots (Partes 1 y 2).
-    - Responder individualmente y sin consultar apuntes salvo que el instructor lo indique.
-    - Duración total: 60 minutos.
-    - Sección A vale 12 puntos (1 punto por pregunta). Sección B vale 4 puntos (1 punto por pregunta). Sección C vale 4 puntos (1 punto por pregunta). Total: 20 puntos.
+    - Responder de forma individual y sin consultar apuntes, salvo indicación del instructor.
+    - Marcar **una sola respuesta** por pregunta.
+    - Cada pregunta presenta cuatro alternativas: A, B, C y D.
+    - Si se marcan dos o más alternativas en una pregunta, la respuesta se considera incorrecta.
+    - Escribir nombre completo y número de identificación antes de comenzar.
+
+El examen evalúa conceptos y decisiones básicas de **iptables**, **proxy Squid**, **IDS/IPS** y **honeypots**.
 
 ---
 
-## Sección A: Opción Múltiple (Preguntas 1-12)
+## Iptables — Preguntas 1 a 5
 
-*Seleccionar la única respuesta correcta para cada pregunta.*
+**P1. Pregunta:** ¿Qué tráfico examina principalmente la cadena `INPUT` de iptables?
 
----
+A) El tráfico generado por el propio equipo y enviado a Internet
 
-**P1.** ¿Cuál es la diferencia funcional principal entre un proxy forward y un firewall?
+B) El tráfico que llega al propio equipo desde la red
 
-A) El proxy analiza el contenido de las peticiones HTTP; el firewall analiza solo puertos e IPs
+C) El tráfico que atraviesa el equipo cuando funciona como router
 
-B) El firewall bloquea puertos; el proxy redirige todo el tráfico a una IP diferente
-
-C) El proxy funciona en capa 7 (aplicación) controlando URLs y contenido; el firewall funciona en capa 3/4 controlando IPs y puertos
-
-D) No hay diferencia práctica — ambos controlan el mismo tráfico de la misma manera
+D) Únicamente el tráfico destinado al puerto 22
 
 ---
 
-**P2.** ¿Qué columna del `access.log` de Squid indica si el proxy entregó el contenido desde su caché local o lo descargó del servidor destino?
+**P2. Pregunta:** Una cadena `INPUT` tiene política predeterminada `DROP`. ¿Qué ocurre con un paquete entrante que no coincide con ninguna regla anterior?
 
-A) La columna de bytes transferidos
+A) Se acepta y se registra automáticamente
 
-B) El código Squid (TCP_HIT para contenido de caché, TCP_MISS para descarga directa del servidor)
+B) Se reenvía a la cadena `OUTPUT`
 
-C) El método HTTP (GET vs POST)
+C) Se descarta
 
-D) La URL completa de la petición
-
----
-
-**P3.** Un alumno configura Squid para bloquear `facebook.com` con una ACL correcta, pero puede seguir accediendo a ese dominio cuando desactiva el proxy en su navegador. ¿Por qué?
-
-A) El `squid.conf` tiene un error de sintaxis que hace inefectiva la ACL
-
-B) El navegador tiene caché de DNS y resuelve la IP directamente sin consultar el proxy
-
-C) Squid solo controla el tráfico que pasa a través de él — sin una regla de firewall que fuerce el uso del proxy, el navegador puede conectarse directamente a internet
-
-D) `facebook.com` usa HTTPS y Squid no puede bloquear tráfico HTTPS sin SSL Bump
+D) Se guarda para que el administrador decida después
 
 ---
 
-**P4.** ¿Cuál es la diferencia entre un IDS y un IPS en términos de impacto operacional?
+**P3. Pregunta:** ¿Cuál es el propósito de una regla que permite todo el tráfico por la interfaz `lo`?
 
-A) El IDS es más caro y complejo de configurar que el IPS
+A) Permitir la comunicación local entre procesos del mismo equipo
 
-B) El IPS puede interrumpir tráfico legítimo si genera falsos positivos; el IDS solo alerta sin afectar el flujo de tráfico
+B) Permitir conexiones desde cualquier equipo de Internet
 
-C) El IDS solo funciona en redes WiFi; el IPS funciona en redes cableadas
+C) Traducir direcciones privadas mediante NAT
 
-D) El IPS requiere una licencia de pago; el IDS siempre es gratuito y de código abierto
-
----
-
-**P5.** ¿Qué significa un "falso positivo" en el contexto de un IDS?
-
-A) Una alerta que no se generó cuando debería haberse generado ante tráfico malicioso real
-
-B) Una alerta generada por tráfico malicioso real que el IDS detectó correctamente
-
-C) Una alerta generada por tráfico legítimo que coincidió erróneamente con una firma de ataque conocida
-
-D) Un error en el archivo de configuración del IDS que produce comportamiento inesperado
+D) Registrar todo el tráfico que será bloqueado
 
 ---
 
-**P6.** Analice la siguiente regla Snort:
+**P4. Pregunta:** ¿Por qué importa el orden de las reglas en una cadena de iptables?
 
-```
-alert tcp any any -> $HOME_NET 23 (msg:"Telnet"; sid:1000001; rev:1;)
-```
+A) Porque las reglas se ejecutan siempre desde la última hacia la primera
 
-¿Qué tráfico detecta esta regla?
+B) Porque las reglas de permiso deben escribirse obligatoriamente en orden alfabético
 
-A) Todo el tráfico TCP que sale de la red interna hacia cualquier destino externo en el puerto 23
+C) Porque iptables solo puede mantener una regla por puerto
 
-B) Todo el tráfico TCP desde cualquier origen hacia cualquier equipo de la red interna ($HOME_NET) en el puerto 23 (destino Telnet)
-
-C) Solo el tráfico TCP desde IPs externas hacia el servidor de seguridad de la red en el puerto 23
-
-D) El tráfico UDP en el puerto 23 que intenta establecer una sesión Telnet cifrada
+D) Porque normalmente se aplica la primera regla que coincide con el paquete
 
 ---
 
-**P7.** ¿Por qué se recomienda usar la opción `threshold` en reglas Snort para eventos frecuentes como pings?
+**P5. Pregunta:** ¿Para qué se utiliza `iptables-save` durante un laboratorio?
 
-A) Porque el `threshold` mejora la velocidad de detección al reducir el procesamiento por paquete
+A) Para instalar automáticamente el servicio de persistencia
 
-B) Para evitar el "alert storm": un solo evento de ping repetido puede generar cientos de alertas idénticas en segundos, saturando la consola e impidiendo ver otros eventos más graves
+B) Para obtener una representación del ruleset actual que puede guardarse como respaldo
 
-C) Porque sin `threshold`, Snort no puede detectar paquetes ICMP en la interfaz de red
+C) Para eliminar todas las reglas sin cambiar las políticas
 
-D) Para reducir el uso de CPU del servidor donde corre Snort en entornos de producción
-
----
-
-**P8.** ¿Por qué cualquier conexión a un honeypot es inherentemente sospechosa?
-
-A) Porque los honeypots usan protocolos obsoletos que los usuarios normales no utilizan en la red
-
-B) Porque el honeypot bloquea automáticamente las IPs conocidas como seguras antes de registrar
-
-C) Porque un honeypot no tiene ningún uso legítimo — ningún usuario normal debería conectarse a él en circunstancias normales
-
-D) Porque los honeypots están configurados para rechazar todo el tráfico excepto el que proviene de IPs de atacantes conocidas
+D) Para comprobar qué proceso escucha en cada puerto
 
 ---
 
-**P9.** ¿Cuál es la diferencia entre un honeypot de baja interacción y uno de alta interacción?
+## Proxy Squid — Preguntas 6 a 10
 
-A) El de alta interacción solo funciona en redes WiFi; el de baja interacción funciona en cualquier tipo de red
+**P6. Pregunta:** ¿Cuál es la función principal de un proxy forward como Squid?
 
-B) El de baja interacción emula servicios sin ejecutar un sistema real (más seguro, menos datos recopilados); el de alta interacción ejecuta servicios reales y recopila más inteligencia pero presenta mayor riesgo si el atacante escapa
+A) Intermediar las solicitudes de los clientes hacia servicios de Internet
 
-C) El de baja interacción solo puede detectar conexiones TCP; el de alta interacción también detecta conexiones UDP y ICMP
+B) Reemplazar el antivirus instalado en cada equipo
 
-D) No hay diferencia técnica entre ambos — la distinción es únicamente en el precio del software utilizado
+C) Asignar direcciones IP mediante DHCP
 
----
-
-**P10.** Un honeypot en una red militar interna registra una conexión desde la IP 192.168.10.23, que pertenece al ordenador asignado a un oficial. ¿Cuál es la interpretación más adecuada?
-
-A) Es una conexión de mantenimiento normal del equipo de administración de TI
-
-B) El oficial probablemente hizo clic accidentalmente en un enlace que redirigió al honeypot
-
-C) Puede indicar que el equipo del oficial está comprometido y realizando reconocimiento lateral, o que el oficial está explorando recursos de red no autorizados — ambos requieren investigación
-
-D) El firewall perimetral está mal configurado y está redirigiendo tráfico normal al honeypot sin motivo
+D) Detectar físicamente equipos conectados a un switch
 
 ---
 
-**P11.** ¿Qué ventaja tiene el control de navegación por proxy sobre el control por firewall de capa 3/4 para detectar posible exfiltración de datos?
+**P7. Pregunta:** ¿Cuál es el puerto predeterminado más habitual de Squid?
 
-A) El proxy puede bloquear HTTPS y el firewall de capa 3/4 no puede bloquear ese protocolo
+A) 22
 
-B) El proxy registra las URLs completas (incluyendo paths y parámetros) y el tipo de contenido, lo que permite identificar qué datos se enviaron hacia qué destino específico, con una granularidad imposible para un firewall de capa 3/4
+B) 80
 
-C) El firewall de capa 3/4 no puede bloquear el tráfico HTTP, pero el proxy sí puede hacerlo
+C) 3128
 
-D) El proxy es más rápido que el firewall porque trabaja directamente en capa 3 con direcciones IP
-
----
-
-**P12.** En una regla Snort, ¿qué significa la opción `content:"cmd.exe"; nocase;`?
-
-A) Ejecuta el archivo `cmd.exe` en el servidor Snort cuando se detecta la amenaza para analizar el malware
-
-B) Busca la cadena literal `cmd.exe` en el payload del paquete, sin distinción entre mayúsculas y minúsculas (detecta `CMD.EXE`, `Cmd.Exe`, etc.)
-
-C) Bloquea cualquier proceso del sistema operativo que tenga `cmd.exe` en su nombre de ejecutable
-
-D) Es el identificador único numérico de la firma en la base de datos oficial de reglas de Snort
+D) 3389
 
 ---
 
-## Sección B: Identificación y Análisis (Preguntas 13-16)
+**P8. Pregunta:** En `squid.conf`, ¿por qué una regla `http_access deny` específica debe colocarse antes de una regla general `http_access allow`?
 
-*Analizar el escenario o dato presentado y responder con precisión. 1 punto por pregunta.*
+A) Porque Squid procesa primero las líneas más largas
 
----
+B) Porque Squid utiliza la primera regla de acceso que coincide
 
-**P13.** Se muestra el siguiente extracto del `access.log` de Squid:
+C) Porque las reglas `allow` solo funcionan al final del archivo
 
-```
-1718500200.123  850  192.168.1.55  TCP_MISS/200  128450  POST  http://upload.transferservice.net/data  -  DIRECT/203.0.113.10  application/octet-stream
-```
-
-¿Qué información revela esta línea y qué aspectos son potencialmente preocupantes desde el punto de vista de la seguridad?
+D) Porque una regla `deny` cambia automáticamente el puerto del proxy
 
 ---
 
-**P14.** Se muestra la siguiente alerta generada por Snort:
+**P9. Pregunta:** ¿Qué indica normalmente el resultado `TCP_DENIED/403` en `access.log`?
 
-```
-[**] [1:1000012:1] HTTP con cadena sospechosa cmd.exe [**]
-[Priority: 0]
-06/16-02:17:43.112233 192.168.1.100:54321 -> 93.184.216.34:80
-TCP TTL:128 TOS:0x0 ID:4321 IpLen:20 DgmLen:500
-```
+A) El contenido se entregó desde la caché
 
-¿Qué indica esta alerta y cuál es el siguiente paso recomendado para el analista de seguridad?
+B) El servidor remoto no tenía conexión a Internet
 
----
+C) El cliente descargó el archivo correctamente
 
-**P15.** Se muestra el log de un honeypot con las siguientes entradas registradas en un período de 5 minutos:
-
-```
-[14:20:01] CONEXION desde 192.168.1.77:1024 - puerto honeypot 22 (SSH)
-[14:20:01] CONEXION desde 192.168.1.77:1025 - puerto honeypot 23 (Telnet)
-[14:20:02] CONEXION desde 192.168.1.77:1026 - puerto honeypot 80 (HTTP)
-[14:20:02] CONEXION desde 192.168.1.77:1027 - puerto honeypot 443 (HTTPS)
-[14:20:03] CONEXION desde 192.168.1.77:1028 - puerto honeypot 3389 (RDP)
-```
-
-¿Qué comportamiento se observa en este log y qué implicaciones tiene para la seguridad de la red?
+D) Squid rechazó la solicitud según su política de acceso
 
 ---
 
-**P16.** ¿En qué situación el proxy Squid **no puede** controlar el tráfico aunque el usuario lo tenga configurado correctamente como proxy en su navegador? Dar un ejemplo concreto.
+**P10. Pregunta:** Squid bloquea correctamente un dominio, pero el usuario puede visitarlo al desactivar el proxy del navegador. ¿Cuál es la causa más probable?
+
+A) La red permite una conexión directa a Internet que evita el proxy
+
+B) Squid convierte automáticamente las solicitudes bloqueadas en HTTPS
+
+C) El archivo `access.log` está lleno
+
+D) El dominio utiliza una dirección IPv4 privada
 
 ---
 
-## Sección C: Respuesta Corta (Preguntas 17-20)
+## IDS e IPS — Preguntas 11 a 15
 
-*Responder en 3-5 oraciones concisas. 1 punto por pregunta.*
+**P11. Pregunta:** ¿Cuál es la diferencia principal entre un IDS y un IPS?
 
----
+A) El IDS trabaja solo con Windows y el IPS solo con Linux
 
-**P17.** Un técnico debe elegir entre desplegar primero un IDS o un IPS en la red de la unidad. El oficial de seguridad tiene poca experiencia con las firmas de detección y el tráfico normal de la red. ¿Cuál recomienda el técnico y por qué?
+B) El IDS detecta y alerta; el IPS también puede bloquear tráfico automáticamente
 
----
+C) El IDS analiza puertos y el IPS analiza únicamente archivos
 
-**P18.** Explique por qué un honeypot que registra exactamente 0 conexiones durante semanas no significa que "no funcionó" ni que fue una pérdida de tiempo. ¿Qué información útil proporciona esa situación al equipo de seguridad?
-
----
-
-**P19.** ¿Cuál es la diferencia entre `acl badsite dstdomain .facebook.com` y `acl badsite dstdomain facebook.com` (sin el punto inicial) en `squid.conf`? ¿Qué implicación práctica tiene esta diferencia?
+D) El IDS siempre está fuera de la red y el IPS siempre está en un endpoint
 
 ---
 
-**P20.** Un NIDS genera 5.000 alertas en una sola noche. El analista no puede revisar manualmente todas. Describir tres estrategias concretas para priorizar cuáles alertas revisar primero.
+**P12. Pregunta:** ¿Qué es un falso positivo en un IDS?
+
+A) Un ataque real que el sistema no detectó
+
+B) Una regla que fue eliminada correctamente
+
+C) Una alerta generada por actividad legítima que fue interpretada como sospechosa
+
+D) Una conexión maliciosa bloqueada por un IPS
 
 ---
 
+**P13. Pregunta:** ¿Qué diferencia existe entre un NIDS y un HIDS?
+
+A) El NIDS observa tráfico de red; el HIDS supervisa eventos de un equipo específico
+
+B) El NIDS bloquea todo el tráfico; el HIDS solo permite tráfico web
+
+C) El NIDS funciona sin reglas; el HIDS requiere siempre firmas
+
+D) El NIDS protege únicamente redes inalámbricas; el HIDS protege redes cableadas
+
 ---
 
-!!! danger "Solo instructor — Clave de Respuestas"
+**P14. Pregunta:** ¿Qué diferencia hay entre detección por firma y detección por anomalía?
 
-    ## Clave de Respuestas
+A) La firma analiza usuarios y la anomalía analiza únicamente puertos
 
-    ### Sección A — Respuestas correctas
+B) La firma siempre bloquea; la anomalía solo registra
 
-    | Pregunta | Respuesta | Concepto evaluado |
-    |----------|-----------|-------------------|
-    | P1 | **C** | Proxy capa 7 vs firewall capa 3/4 |
-    | P2 | **B** | Lectura de access.log: TCP_HIT vs TCP_MISS |
-    | P3 | **C** | Bypass de proxy sin regla de firewall complementaria |
-    | P4 | **B** | IDS pasivo (no afecta tráfico) vs IPS activo (puede interrumpir) |
-    | P5 | **C** | Definición de falso positivo en detección |
-    | P6 | **B** | Lectura de regla Snort: dirección `->` y `$HOME_NET` como destino |
-    | P7 | **B** | Alert storm y la función del threshold |
-    | P8 | **C** | Definición de honeypot: ningún uso legítimo = toda conexión es sospechosa |
-    | P9 | **B** | Baja vs alta interacción: seguridad vs riqueza de datos |
-    | P10 | **C** | Conexión interna a honeypot: equipo comprometido o insider threat |
-    | P11 | **B** | Visibilidad URL completa del proxy vs visibilidad IP/puerto del firewall |
-    | P12 | **B** | Opción `content` con `nocase` en regla Snort |
+C) La firma se usa en un HIDS y la anomalía únicamente en un NIDS
 
-    ---
+D) La firma busca patrones conocidos; la anomalía busca desviaciones del comportamiento normal
 
-    ### Sección B — Respuestas modelo
+---
 
-    **P13 — Respuesta esperada:**
-    La línea del access.log revela que el equipo con IP 192.168.1.55 realizó una petición HTTP `POST` (subida de datos) de 128.450 bytes (aproximadamente 125 KB) hacia el dominio `upload.transferservice.net`, que es un servicio de transferencia de archivos externo desconocido. El método `POST` combinado con el path `/data`, el tamaño considerable de la transferencia, el tipo de contenido `application/octet-stream` (datos binarios sin tipo específico) y el dominio desconocido que contiene "upload" son señales de posible exfiltración de datos. El analista debe: (1) identificar el equipo con IP 192.168.1.55 en el inventario, (2) investigar qué proceso realizó la petición, (3) bloquear `transferservice.net` en Squid de forma preventiva, (4) correlacionar con alertas de Snort desde esa IP.
+**P15. Pregunta:** ¿Para qué se utiliza `threshold` en una regla de Snort que podría generar muchas alertas repetidas?
 
-    **P14 — Respuesta esperada:**
-    La alerta indica que la regla Snort con sid 1000012 detectó la cadena `cmd.exe` en tráfico HTTP TCP desde la IP interna 192.168.1.100, puerto 54321, hacia la IP externa 93.184.216.34 (example.com) en el puerto 80. Encontrar `cmd.exe` en una petición HTTP saliente es un indicador de que el equipo 192.168.1.100 puede estar comunicándose con un servidor de comando y control (C2) de malware, enviando resultados de ejecución de comandos del sistema en el cuerpo de la petición HTTP. Esto es una técnica común de tunneling de C2 sobre HTTP para evadir firewalls. Siguiente paso: (1) aislar inmediatamente el equipo 192.168.1.100 de la red, (2) analizar procesos en ejecución y conexiones de red activas, (3) correlacionar con el access.log de Squid para ver el historial completo de peticiones, (4) escalar al oficial de seguridad como posible compromiso activo.
+A) Para convertir automáticamente el IDS en IPS
 
-    **P15 — Respuesta esperada:**
-    El log muestra un escaneo de puertos sistemático (port scan) ejecutado por la IP interna 192.168.1.77. En menos de 2 segundos, esa IP intentó conectarse a 5 puertos distintos del honeypot (22, 23, 80, 443, 3389) de forma secuencial — comportamiento característico de una herramienta automatizada de reconocimiento de red, imposible en acceso manual legítimo. Que la IP sea interna es especialmente relevante: indica que el equipo 192.168.1.77 puede estar comprometido y realizando reconocimiento lateral (búsqueda de servicios explotables en otros equipos de la misma red), o que es un insider realizando exploración no autorizada. Acción: aislar el equipo 192.168.1.77, analizar su memoria y conexiones activas, investigar qué herramienta realizó el scan.
+B) Para limitar la frecuencia de alertas y evitar una tormenta de eventos
 
-    **P16 — Respuesta esperada:**
-    El proxy Squid no puede controlar el tráfico de aplicaciones que no respetan la configuración de proxy del sistema operativo o del navegador. Ejemplo concreto: una aplicación de comunicaciones (cliente VoIP, aplicación de mensajería corporativa, agente de actualización de software) que establece conexiones TCP directas a internet sin consultar la configuración de proxy del sistema — no pasa por Squid aunque el navegador esté correctamente configurado. También: si el usuario usa una VPN que tunnela todo el tráfico fuera del proxy, o si una aplicación abre conexiones en puertos no estándar que el proxy no intercepta.
+C) Para cifrar los registros producidos por Snort
 
-    ---
+D) Para permitir todo el tráfico ICMP
 
-    ### Sección C — Criterios de evaluación
+---
 
-    **P17 — Mínimo que debe mencionar:**
-    Recomendar comenzar con **IDS** (no IPS). Razón principal: sin experiencia previa con el tráfico normal de la red, configurar un IPS puede generar falsos positivos que bloqueen tráfico legítimo. El IDS permite observar el tráfico durante un período (semanas o meses), identificar qué alertas son reales y cuáles son ruido, y afinar las reglas sin riesgo de interrumpir operaciones. Solo cuando las reglas están validadas y la tasa de falsos positivos es baja, se pasa a modo IPS. Mencionar el concepto de "período de tune-up" es valioso.
+## Honeypots — Preguntas 16 a 20
 
-    **P18 — Mínimo que debe mencionar:**
-    El honeypot con 0 conexiones durante semanas indica que **ningún atacante intentó moverse lateralmente ni explorar la red**. Esta información es valiosa: confirma que en ese período no hubo reconocimiento interno, no hay herramientas de escaneo activas en la red, y no hay insider threats activos. El honeypot funciona como "centinela silencioso" — el hecho de que no registre nada es la evidencia de ausencia de actividad maliciosa, que es exactamente lo que queremos confirmar periódicamente. Además, si en el futuro aparece una alerta después de semanas de silencio, el contraste hace la anomalía más evidente.
+**P16. Pregunta:** ¿Por qué una conexión a un honeypot suele considerarse sospechosa?
 
-    **P19 — Mínimo que debe mencionar:**
-    Con **punto inicial** (`.facebook.com`): la ACL coincide con todos los subdominios de facebook.com — `www.facebook.com`, `m.facebook.com`, `static.facebook.com`, `api.facebook.com`. Esta es la forma correcta para bloquear un dominio completo.
-    Sin **punto inicial** (`facebook.com`): la ACL solo coincide con el dominio exacto `facebook.com`. No bloquea `www.facebook.com` ni ningún subdominio — en la práctica, el navegador accede a través de `www.facebook.com`, por lo que la regla sin el punto no bloquea el acceso real.
-    En resumen: siempre usar el punto inicial para bloquear dominios completos en Squid.
+A) Porque el honeypot bloquea todo el tráfico legítimo de Internet
 
-    **P20 — Tres estrategias válidas (cualquier combinación de las siguientes):**
-    (1) **Priorizar por severidad/prioridad de la firma**: las reglas Snort tienen campo `priority`; revisar primero las alertas de prioridad 1 (alta) antes que las de prioridad 3 (baja).
-    (2) **Agrupar alertas por IP de origen**: si 4.000 de las 5.000 alertas provienen de la misma IP, son un único evento repetido — tratarlo como un caso y revisarlo una vez.
-    (3) **Filtrar por tipo de alert storm conocido**: si se sabe que la regla X genera ruido (ping de monitorización legítima), suprimir esas alertas del análisis del turno.
-    (4) **Correlacionar con otras fuentes**: alertas que también aparecen en el log del proxy o del firewall tienen mayor probabilidad de ser reales — priorizar esas.
-    (5) **Buscar primero alertas de IPs internas con comportamiento anómalo**: una alerta desde una IP interna es más grave que una desde internet — los ataques internos tienen más acceso a sistemas críticos.
+B) Porque el honeypot reemplaza al servidor principal durante el mantenimiento
 
-    ---
+C) Porque es un recurso señuelo que no debería recibir uso legítimo normal
 
-    ## Notas de aplicación para el instructor
+D) Porque solamente acepta conexiones de atacantes previamente identificados
 
-    **Timing sugerido:** 60 minutos totales. Los alumnos habitualmente necesitan 30-35 min para la Sección A, 15 min para la B y 15 min para la C. Si el tiempo escasea, la Sección C puede reducirse a 2 preguntas (P17 y P19 tienen mayor discriminación).
+---
 
-    **Cómo presentar los logs de P13, P14 y P15:** Proyectar cada extracto de log en la pantalla y dar 3 minutos antes de la siguiente pregunta para que los alumnos copien la información relevante en su hoja de respuestas. No es necesario que memoricen el log — sí que lo analicen.
+**P17. Pregunta:** ¿Cuál es una diferencia correcta entre un honeypot de baja interacción y uno de alta interacción?
 
-    **Preguntas que suelen generar más discusión:**
-    - **P3** (bypass del proxy): muchos alumnos responden D (HTTPS). Aprovechar para reforzar que Squid sí puede bloquear conexiones HTTPS por dominio (aunque no vea el contenido) — el problema de bypass es diferente.
-    - **P19** (punto en squid.conf): habitualmente la respuesta más recordada del examen. Explicar en pizarra con un ejemplo: escribir `.facebook.com` y `www.facebook.com` y mostrar cuál ACL coincide con cuál. Esta distinción es la más práctica de toda la unidad.
-    - **P8** (honeypot inherentemente sospechoso): algunos alumnos eligen A o D. Repasar la definición: "ningún uso legítimo" es la clave conceptual — no es sobre el protocolo ni sobre el filtrado de IPs.
+A) El de baja interacción emula servicios y reduce el riesgo; el de alta interacción ofrece un entorno más real y recopila más información, pero implica mayor riesgo
+
+B) El de baja interacción funciona solo con UDP y el de alta interacción solo con TCP
+
+C) El de baja interacción siempre bloquea al atacante y el de alta interacción nunca registra eventos
+
+D) El de baja interacción necesita un sistema operativo completo y el de alta interacción no necesita software
+
+---
+
+**P18. Pregunta:** ¿Dónde debería ubicarse un honeypot para reducir el riesgo de que un atacante lo use contra otros sistemas?
+
+A) En el mismo segmento y con los mismos permisos que los servidores críticos
+
+B) En el equipo personal del administrador, sin monitoreo
+
+C) Directamente dentro de la red de mando, con acceso sin restricciones
+
+D) En un segmento aislado y monitoreado, con conexiones salientes limitadas
+
+---
+
+**P19. Pregunta:** ¿Qué información básica resulta útil en el registro de un honeypot?
+
+A) Únicamente el nombre comercial del antivirus del atacante
+
+B) Dirección IP de origen, fecha y hora, puerto de destino y patrón de intentos
+
+C) Solo el nombre completo de la persona que realizó la conexión
+
+D) La contraseña del administrador del honeypot
+
+---
+
+**P20. Pregunta:** Un honeypot interno registra que una misma IP intentó conectarse rápidamente a los puertos 22, 23, 80 y 3389. ¿Cuál es la interpretación más adecuada?
+
+A) Es una actualización normal del sistema operativo
+
+B) Demuestra que todos esos servicios están vulnerados
+
+C) Puede ser reconocimiento o escaneo de puertos y debe investigarse
+
+D) Significa que el honeypot dejó de funcionar
