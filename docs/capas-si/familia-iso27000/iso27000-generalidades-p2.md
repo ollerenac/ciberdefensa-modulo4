@@ -371,4 +371,125 @@ Una unidad puede tener documentado en su SOP (Standard Operating Procedure) que 
 
 ---
 
+## Ejercicio Integrador — Admisión y Trazabilidad de Equipos Mediante PDCA
+
+> **Duración sugerida:** 40 minutos | **Modalidad:** equipos de 3–4 alumnos | **Producto:** ficha de 12 respuestas, cadena de trazabilidad y narrativa PDCA
+
+!!! info "Uso dentro de la sesión"
+    Para mantener la duración total de dos horas, esta actividad puede utilizarse como refuerzo posterior o sustituir el trabajo por incidentes cuando la prioridad sea practicar PDCA de manera integral.
+
+### Propósito
+
+Diseñar, mediante el ciclo PDCA, una capacidad del SGSI que permita mantener una garantía razonable de que todo equipo admitido a la red:
+
+- está relacionado con una visita o un responsable conocido;
+- recibe solamente el acceso autorizado y durante el tiempo necesario;
+- deja evidencia suficiente para reconstruir su sesión; y
+- es bloqueado o aislado cuando no cumple las condiciones de admisión.
+
+No se busca prometer “control total” ni producir comandos de configuración. La tarea consiste en integrar personas, procedimientos, tecnología, evidencia y mejora continua.
+
+### Escenario
+
+La unidad recibirá la próxima semana a un consultor externo. El Oficial de Operaciones patrocina la visita y confirma que el consultor llevará una laptop para mostrar una presentación almacenada en Internet. En principio, solamente necesita navegación web; cualquier acceso adicional deberá solicitarse y aprobarse antes de la visita.
+
+Actualmente:
+
+- recepción registra al visitante y al oficial que lo recibe, pero no relaciona la visita con el equipo que ingresa;
+- la red de invitados utiliza una contraseña compartida, conocida por varias personas y sin vencimiento individual;
+- el controlador inalámbrico registra hora, dirección MAC y punto de acceso; DHCP registra la dirección IP y el firewall registra conexiones, pero esos datos no están vinculados con el registro de la visita;
+- los equipos institucionales se administran mediante el dominio, pero no existe una regla uniforme para admitir laptops externas;
+- algunas salas tienen Wi-Fi y puertos de red cableados habilitados; y
+- al terminar una visita no existe una comprobación formal de que las credenciales y excepciones hayan sido revocadas.
+
+El mando dispone que se diseñe e implemente una capacidad permanente del SGSI para conocer, autorizar y supervisar los equipos que se conectan por Wi-Fi o cable, sin impedir las actividades legítimas.
+
+### Forma de trabajo
+
+Respondan las tres preguntas de una fase antes de continuar con la siguiente. Cada respuesta debe indicar una decisión, su justificación, el responsable y la evidencia que produciría. Si necesitan asumir algo que no aparece en el escenario, declárenlo expresamente.
+
+---
+
+### PLAN — Comprender el riesgo y diseñar la capacidad
+
+1. **¿Qué examinarían antes de seleccionar una solución?** Indiquen al menos cinco fuentes concretas —por ejemplo, registros de ingreso, inventarios, diagrama de red, configuración inalámbrica, concesiones DHCP, reglas de firewall o registros de autenticación— y expliquen qué pregunta responderían con cada fuente.
+
+2. **¿Cómo relacionarían persona, equipo y sesión sin recopilar información innecesaria?** Definan los datos mínimos que registrarían al ingreso, cuáles serían declarados por el visitante, cuáles serían observados técnicamente y cómo los vincularían con el oficial patrocinador, la credencial y la duración de la visita.
+
+3. **¿Qué riesgo priorizarían y qué política de admisión propondrían para tratarlo?** Formulen el riesgo completando: “Si ___ aprovecha ___, podría afectar ___ y provocar ___”. Luego distingan al menos entre equipo institucional administrado, visitante registrado, visitante con necesidad excepcional y equipo desconocido. Para cada categoría indiquen cómo se autenticaría, qué acceso recibiría, por cuánto tiempo y qué debería ocurrir si no cumple las condiciones. Cierren con un objetivo medible y un plazo.
+
+---
+
+### DO — Implementar lo planificado
+
+1. **¿Cómo funcionaría el procedimiento de principio a fin?** Describan en orden qué sucede desde la solicitud o llegada del visitante hasta la expiración del acceso. Asignen responsables para patrocinar, registrar, autorizar, configurar, supervisar y cerrar la visita, e indiquen qué evidencia genera cada paso.
+
+2. **¿Qué mecanismos de autenticación utilizarían para cada categoría?** Comparen la contraseña compartida, un voucher individual, una clave individual por visitante o dispositivo y la autenticación mediante credenciales o certificados. Elijan una alternativa para equipos institucionales y otra para visitantes, y expliquen cómo limitarían la reutilización de la credencial en otro dispositivo.
+
+3. **¿Dónde aplicarían el mínimo privilegio y cómo producirían trazabilidad?** Indiquen cómo separarían equipos por nivel de confianza, cómo utilizarían el AP o el puerto de red como dato aproximado de ubicación, qué sistemas aplicarían las reglas de acceso y qué registros deberían correlacionarse. Incluyan el tratamiento de una solicitud excepcional de RDP, SSH u otro servicio.
+
+---
+
+### CHECK — Demostrar que la capacidad funciona
+
+1. **¿Cómo probarían la admisión de dispositivos?** Diseñen pruebas para un equipo no registrado, para el intento de usar la credencial del consultor en un teléfono y para una reconexión en la que la laptop presente una dirección MAC privada diferente. Definan el resultado esperado en cada caso.
+
+2. **¿Cómo probarían el mínimo privilegio sin interrumpir la misión?** Comprueben que el visitante conserva el acceso legítimo a Internet, que no alcanza recursos internos no autorizados y que una excepción aprobada permite únicamente el destino, protocolo, puerto y horario establecidos.
+
+3. **¿Cómo demostrarían la trazabilidad y el cierre?** Partiendo únicamente del identificador de la visita, indiquen cómo reconstruirían quién se conectó, con qué equipo y credencial, cuándo, desde qué AP o puerto, con qué IP y qué política recibió. Definan además cómo comprobarían la expiración de la credencial y de toda excepción, y establezcan al menos tres indicadores con sus umbrales de aprobación vinculados al objetivo de PLAN.
+
+### Resultado del primer piloto
+
+Una vez diseñadas las pruebas de CHECK, analicen estos resultados del primer piloto de la organización:
+
+- la laptop registrada tuvo acceso a Internet y no pudo alcanzar los servidores internos;
+- la misma credencial temporal pudo utilizarse simultáneamente desde un teléfono;
+- después de una reconexión, la laptop utilizó otra dirección MAC privada y apareció como un segundo equipo en la consola;
+- los relojes del controlador inalámbrico y del servidor DHCP tenían siete minutos de diferencia, por lo que reconstruir la sesión tomó 40 minutos; y
+- la credencial expiró correctamente, pero una excepción temporal del firewall continuó activa al día siguiente.
+
+Si su diseño ya habría evitado alguno de estos resultados, expliquen qué decisión lo impediría y qué evidencia lo demostraría.
+
+---
+
+### ACT — Corregir, aprender y comenzar un nuevo ciclo
+
+1. **¿Qué corregirían inmediatamente?** Prioricen los hallazgos del piloto, asignen un responsable y un plazo, e indiquen qué exposición reduce cada corrección.
+
+2. **¿Qué causas tratarían para que el problema no se repita?** Diferencien la corrección puntual de la acción correctiva sistémica. Consideren la reutilización de credenciales, el cambio de MAC, la diferencia horaria entre registros y la excepción que no venció.
+
+3. **¿Qué cambiarían en el siguiente PLAN?** Indiquen qué política, procedimiento, configuración, dato o indicador actualizarían; qué riesgo residual quedaría; y qué prueba repetirían para demostrar que la mejora fue eficaz.
+
+---
+
+### Producto final — Narrativa PDCA integrada
+
+Primero dibujen la cadena de trazabilidad que propone su equipo, desde el ingreso del visitante hasta la revocación del acceso. Luego redacten una narrativa de **250 a 350 palabras**, organizada en cuatro párrafos:
+
+> **PLAN:** “Examinamos ___, identificamos el riesgo de ___ y establecimos el objetivo de ___.”
+>
+> **DO:** “Implementamos ___, bajo responsabilidad de ___, y produjimos como evidencia ___.”
+>
+> **CHECK:** “Probamos ___ y los resultados demostraron ___; sin embargo, encontramos ___.”
+>
+> **ACT:** “Corregiremos ___, mejoraremos ___ y en el siguiente PLAN revisaremos ___.”
+
+La narrativa debe conservar esta trazabilidad:
+
+| Riesgo identificado | Objetivo | Medida implementada | Evidencia de ejecución | Prueba de eficacia | Resultado | Mejora |
+|---|---|---|---|---|---|---|
+| PLAN | PLAN | DO | DO | CHECK | CHECK | ACT |
+
+### Criterios de evaluación — 10 puntos
+
+| Criterio | Puntaje |
+|---|---:|
+| PLAN identifica fuentes, riesgos, categorías y un objetivo verificable | 2 |
+| DO integra procedimiento, responsables, autenticación, mínimo privilegio y evidencia | 2 |
+| CHECK define pruebas reproducibles, resultados esperados e indicadores | 2 |
+| ACT corrige hallazgos, trata causas y alimenta el siguiente ciclo | 2 |
+| La narrativa mantiene coherencia y trazabilidad entre las cuatro fases | 2 |
+
+---
+
 *Siguiente: [ISO 27001 — Requisitos (Parte 1)](iso27001-requisitos-p1.md)*
