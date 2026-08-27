@@ -6,12 +6,12 @@ meta:
     content: noindex, nofollow
 ---
 
-# Guía del Instructor — PDCA para la Admisión y Trazabilidad de Equipos
+# Guía del Instructor — PDCA para el Control de Equipos Conectados
 
 !!! danger "Solo para instructores"
     Este documento contiene las decisiones técnicas esperadas, rutas de respuesta aceptables y criterios de retroalimentación del ejercicio integrador de Generalidades — Parte 2. No mostrar durante el trabajo de los alumnos.
 
-[Abrir el material de clase](../capas-si/familia-iso27000/iso27000-generalidades-p2.md#ejercicio-integrador-admision-y-trazabilidad-de-equipos-mediante-pdca)
+[Abrir el material de clase](../capas-si/familia-iso27000/iso27000-generalidades-p2.md#ejercicio-integrador-mejorar-el-control-de-equipos-conectados-a-la-red)
 
 ## Resultado esperado
 
@@ -23,6 +23,12 @@ El alumno no necesita diseñar una red lista para producción ni utilizar una ma
 4. controles administrativos, físicos y técnicos;
 5. evidencia de ejecución y pruebas de eficacia; y
 6. acciones correctivas que alimentan un nuevo ciclo PLAN.
+
+### Enfoque didáctico
+
+El ejercicio parte de un SGSI existente. La revisión de sus registros —CHECK del ciclo anterior— descubre una debilidad. El hallazgo se registra y se utiliza como entrada para un nuevo ciclo de mejora.
+
+No se evalúa el diseño de todo el SGSI. Se evalúa cómo una mejora concreta se integra al sistema mediante responsables, reglas, evidencia, pruebas y revisión.
 
 La expresión **“control total”** no debe aceptarse como garantía absoluta. Una formulación profesional sería:
 

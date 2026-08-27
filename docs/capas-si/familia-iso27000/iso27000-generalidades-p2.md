@@ -371,100 +371,167 @@ Una unidad puede tener documentado en su SOP (Standard Operating Procedure) que 
 
 ---
 
-## Ejercicio Integrador — Admisión y Trazabilidad de Equipos Mediante PDCA
+## Ejercicio integrador — Mejorar el control de equipos conectados a la red
 
-> **Duración sugerida:** 40 minutos | **Modalidad:** equipos de 3–4 alumnos | **Producto:** ficha de 12 respuestas, cadena de trazabilidad y narrativa PDCA
+> **Duración sugerida:** 50 minutos | **Modalidad:** equipos de 3–4 alumnos | **Producto:** 12 respuestas, un diagrama y una explicación final
 
 !!! info "Uso dentro de la sesión"
-    Para mantener la duración total de dos horas, esta actividad puede utilizarse como refuerzo posterior o sustituir el trabajo por incidentes cuando la prioridad sea practicar PDCA de manera integral.
+    La unidad ya cuenta con un SGSI. El ejercicio no pide diseñarlo desde cero, sino mejorar una parte que presenta una debilidad.
+
+    Para mantener las dos horas de clase, esta actividad puede reemplazar el trabajo por incidentes cuando se quiera reforzar el ciclo PDCA.
 
 ### Propósito
 
-Diseñar, mediante el ciclo PDCA, una capacidad del SGSI que permita mantener una garantía razonable de que todo equipo admitido a la red:
+Aplicar PDCA para mejorar la forma en que la unidad registra, autoriza y supervisa los equipos que se conectan a su red.
 
-- está relacionado con una visita o un responsable conocido;
-- recibe solamente el acceso autorizado y durante el tiempo necesario;
-- deja evidencia suficiente para reconstruir su sesión; y
-- es bloqueado o aislado cuando no cumple las condiciones de admisión.
+Al finalizar, la unidad debería poder responder:
 
-No se busca prometer “control total” ni producir comandos de configuración. La tarea consiste en integrar personas, procedimientos, tecnología, evidencia y mejora continua.
+- ¿Quién autorizó la conexión?
+- ¿Qué persona y qué equipo la utilizaron?
+- ¿Cuándo y desde dónde se conectaron?
+- ¿Qué acceso recibieron?
+- ¿Cuándo terminó la autorización?
+
+Poder responder estas preguntas se denomina **trazabilidad**. No significa vigilar todo el contenido del equipo, sino conservar evidencia suficiente sobre su acceso a la red.
 
 ### Escenario
 
-La unidad recibirá la próxima semana a un consultor externo. El Oficial de Operaciones patrocina la visita y confirma que el consultor llevará una laptop para mostrar una presentación almacenada en Internet. En principio, solamente necesita navegación web; cualquier acceso adicional deberá solicitarse y aprobarse antes de la visita.
+La unidad ya opera un SGSI. Entre otras medidas, registra visitantes, administra sus equipos institucionales, mantiene una red de invitados y conserva registros de red.
 
-Actualmente:
+Durante una revisión periódica —CHECK del ciclo anterior— se encontró una conexión que no pudo relacionarse con una visita, una persona ni un equipo registrado.
 
-- recepción registra al visitante y al oficial que lo recibe, pero no relaciona la visita con el equipo que ingresa;
-- la red de invitados utiliza una contraseña compartida, conocida por varias personas y sin vencimiento individual;
-- el controlador inalámbrico registra hora, dirección MAC y punto de acceso; DHCP registra la dirección IP y el firewall registra conexiones, pero esos datos no están vinculados con el registro de la visita;
-- los equipos institucionales se administran mediante el dominio, pero no existe una regla uniforme para admitir laptops externas;
-- algunas salas tienen Wi-Fi y puertos de red cableados habilitados; y
-- al terminar una visita no existe una comprobación formal de que las credenciales y excepciones hayan sido revocadas.
+Los registros mostraban una dirección IP y una dirección MAC, pero todos los visitantes utilizaban la misma contraseña Wi-Fi. Tampoco existía un registro común que relacionara la visita con la conexión.
 
-El mando dispone que se diseñe e implemente una capacidad permanente del SGSI para conocer, autorizar y supervisar los equipos que se conectan por Wi-Fi o cable, sin impedir las actividades legítimas.
+La próxima semana llegará un consultor externo. El Oficial de Operaciones será responsable de la visita. El consultor llevará una laptop para mostrar una presentación almacenada en Internet.
+
+En principio solo necesita navegar por la web. Si requiere otro servicio, deberá solicitarlo y obtener autorización antes de la visita.
+
+La situación actual es la siguiente:
+
+- recepción registra al visitante y al oficial responsable, pero no registra el equipo;
+- la contraseña de invitados es compartida y no vence al terminar cada visita;
+- el punto de acceso registra hora y MAC;
+- DHCP registra qué dirección IP entregó;
+- el firewall registra las conexiones, pero esos datos no están unidos al registro de la visita;
+- algunas salas tienen Wi-Fi y puertos de red cableados; y
+- nadie comprueba formalmente que las credenciales y permisos temporales hayan sido retirados.
+
+El hallazgo se convierte en una oportunidad de mejora. El mando solicita actualizar el SGSI para reducir las conexiones no registradas sin impedir el trabajo legítimo.
 
 ### Forma de trabajo
 
-Respondan las tres preguntas de una fase antes de continuar con la siguiente. Cada respuesta debe indicar una decisión, su justificación, el responsable y la evidencia que produciría. Si necesitan asumir algo que no aparece en el escenario, declárenlo expresamente.
+Respondan las tres preguntas de cada fase antes de continuar. Cada respuesta debe indicar:
+
+- qué decisión tomaron;
+- por qué la tomaron;
+- quién sería responsable; y
+- qué evidencia quedaría.
+
+Si necesitan asumir algo que no aparece en el escenario, indíquenlo claramente.
+
+### Organización del tiempo
+
+- **10 minutos:** PLAN.
+- **10 minutos:** DO.
+- **8 minutos:** CHECK.
+- **10 minutos:** analizar el piloto y responder ACT.
+- **12 minutos:** preparar la explicación final.
 
 ---
 
-### PLAN — Comprender el riesgo y diseñar la capacidad
+### PLAN — Comprender el problema y decidir qué se necesita
 
-1. **¿Qué examinarían antes de seleccionar una solución?** Indiquen al menos cinco fuentes concretas —por ejemplo, registros de ingreso, inventarios, diagrama de red, configuración inalámbrica, concesiones DHCP, reglas de firewall o registros de autenticación— y expliquen qué pregunta responderían con cada fuente.
+1. **¿Qué revisarían para entender la debilidad actual?**
 
-2. **¿Cómo relacionarían persona, equipo y sesión sin recopilar información innecesaria?** Definan los datos mínimos que registrarían al ingreso, cuáles serían declarados por el visitante, cuáles serían observados técnicamente y cómo los vincularían con el oficial patrocinador, la credencial y la duración de la visita.
+    Elijan al menos cuatro fuentes: registro de visitas, inventario, diagrama de red, configuración Wi-Fi, DHCP, firewall o autenticación.
 
-3. **¿Qué riesgo priorizarían y qué política de admisión propondrían para tratarlo?** Formulen el riesgo completando: “Si ___ aprovecha ___, podría afectar ___ y provocar ___”. Luego distingan al menos entre equipo institucional administrado, visitante registrado, visitante con necesidad excepcional y equipo desconocido. Para cada categoría indiquen cómo se autenticaría, qué acceso recibiría, por cuánto tiempo y qué debería ocurrir si no cumple las condiciones. Cierren con un objetivo medible y un plazo.
+    Para cada fuente, indiquen qué información buscarían y qué duda les permitiría resolver.
+
+2. **¿Qué datos mínimos permitirían relacionar la visita, el equipo y la conexión?**
+
+    Distingan entre datos declarados por el visitante y datos observados por la red. Indiquen quién autoriza la visita, cuánto dura y cuándo deben eliminarse sus datos.
+
+3. **¿Qué riesgo tratarían y qué resultado esperan obtener?**
+
+    Completen: “Si ___ aprovecha ___, podría afectar ___ y provocar ___”.
+
+    Después definan reglas para cuatro casos: equipo institucional, visitante común, visitante con permiso especial y equipo desconocido. Cierren con un objetivo medible y un plazo.
 
 ---
 
-### DO — Implementar lo planificado
+### DO — Poner en funcionamiento lo planificado
 
-1. **¿Cómo funcionaría el procedimiento de principio a fin?** Describan en orden qué sucede desde la solicitud o llegada del visitante hasta la expiración del acceso. Asignen responsables para patrocinar, registrar, autorizar, configurar, supervisar y cerrar la visita, e indiquen qué evidencia genera cada paso.
+1. **¿Cómo funcionaría el procedimiento de principio a fin?**
 
-2. **¿Qué mecanismos de autenticación utilizarían para cada categoría?** Comparen la contraseña compartida, un voucher individual, una clave individual por visitante o dispositivo y la autenticación mediante credenciales o certificados. Elijan una alternativa para equipos institucionales y otra para visitantes, y expliquen cómo limitarían la reutilización de la credencial en otro dispositivo.
+    Describan qué ocurre desde la solicitud de la visita hasta el retiro del acceso. Asignen responsables y señalen qué registro o evidencia deja cada paso.
 
-3. **¿Dónde aplicarían el mínimo privilegio y cómo producirían trazabilidad?** Indiquen cómo separarían equipos por nivel de confianza, cómo utilizarían el AP o el puerto de red como dato aproximado de ubicación, qué sistemas aplicarían las reglas de acceso y qué registros deberían correlacionarse. Incluyan el tratamiento de una solicitud excepcional de RDP, SSH u otro servicio.
+2. **¿Cómo identificarían a los equipos cuando intentan conectarse?**
+
+    Comparen estas opciones: contraseña compartida, código temporal individual, clave individual por equipo y certificado digital.
+
+    Elijan una opción para equipos institucionales y otra para visitantes. Expliquen cómo evitarían que la misma credencial se use también en un teléfono.
+
+3. **¿Qué acceso recibiría cada equipo y qué registros deberían unirse?**
+
+    Apliquen **mínimo privilegio**: cada equipo recibe solo el acceso que necesita.
+
+    Indiquen cómo separarían los equipos, cómo registrarían el punto de acceso (AP) o puerto utilizado y cómo relacionarían visita, autenticación, IP y firewall.
+
+    Si el consultor solicita RDP, SSH u otro servicio, expliquen cómo autorizarían ese acceso sin abrirlo para todos.
 
 ---
 
-### CHECK — Demostrar que la capacidad funciona
+### CHECK — Comprobar que la mejora funciona
 
-1. **¿Cómo probarían la admisión de dispositivos?** Diseñen pruebas para un equipo no registrado, para el intento de usar la credencial del consultor en un teléfono y para una reconexión en la que la laptop presente una dirección MAC privada diferente. Definan el resultado esperado en cada caso.
+1. **¿Cómo probarían el registro y autorización de los equipos?**
 
-2. **¿Cómo probarían el mínimo privilegio sin interrumpir la misión?** Comprueben que el visitante conserva el acceso legítimo a Internet, que no alcanza recursos internos no autorizados y que una excepción aprobada permite únicamente el destino, protocolo, puerto y horario establecidos.
+    Prueben un equipo desconocido, el uso de la credencial en un teléfono y una reconexión con una MAC privada diferente. Indiquen qué debería ocurrir en cada caso.
 
-3. **¿Cómo demostrarían la trazabilidad y el cierre?** Partiendo únicamente del identificador de la visita, indiquen cómo reconstruirían quién se conectó, con qué equipo y credencial, cuándo, desde qué AP o puerto, con qué IP y qué política recibió. Definan además cómo comprobarían la expiración de la credencial y de toda excepción, y establezcan al menos tres indicadores con sus umbrales de aprobación vinculados al objetivo de PLAN.
+2. **¿Cómo comprobarían que cada equipo recibe solamente el acceso necesario?**
+
+    Verifiquen que el consultor puede usar Internet, que no llega a recursos internos sin permiso y que un permiso especial funciona solo para el destino, servicio y horario aprobados.
+
+3. **¿Cómo comprobarían la trazabilidad y el cierre?**
+
+    Partan del identificador de la visita y reconstruyan quién se conectó, cuándo, desde qué AP o puerto, con qué IP y qué acceso recibió.
+
+    Definan al menos tres medidas y el valor que indicaría “cumple” o “no cumple”. Incluyan la expiración de la credencial y de todo permiso temporal.
 
 ### Resultado del primer piloto
 
-Una vez diseñadas las pruebas de CHECK, analicen estos resultados del primer piloto de la organización:
+Después de diseñar las pruebas de CHECK, analicen estos resultados del primer piloto:
 
 - la laptop registrada tuvo acceso a Internet y no pudo alcanzar los servidores internos;
 - la misma credencial temporal pudo utilizarse simultáneamente desde un teléfono;
-- después de una reconexión, la laptop utilizó otra dirección MAC privada y apareció como un segundo equipo en la consola;
-- los relojes del controlador inalámbrico y del servidor DHCP tenían siete minutos de diferencia, por lo que reconstruir la sesión tomó 40 minutos; y
-- la credencial expiró correctamente, pero una excepción temporal del firewall continuó activa al día siguiente.
+- después de reconectarse, la laptop utilizó otra MAC privada y apareció como un segundo equipo;
+- el controlador Wi-Fi y DHCP tenían siete minutos de diferencia, por lo que reconstruir la conexión tomó 40 minutos; y
+- la credencial venció correctamente, pero un permiso temporal del firewall continuó activo al día siguiente.
 
 Si su diseño ya habría evitado alguno de estos resultados, expliquen qué decisión lo impediría y qué evidencia lo demostraría.
 
 ---
 
-### ACT — Corregir, aprender y comenzar un nuevo ciclo
+### ACT — Corregir y comenzar un nuevo ciclo
 
-1. **¿Qué corregirían inmediatamente?** Prioricen los hallazgos del piloto, asignen un responsable y un plazo, e indiquen qué exposición reduce cada corrección.
+1. **¿Qué corregirían de inmediato?**
 
-2. **¿Qué causas tratarían para que el problema no se repita?** Diferencien la corrección puntual de la acción correctiva sistémica. Consideren la reutilización de credenciales, el cambio de MAC, la diferencia horaria entre registros y la excepción que no venció.
+    Ordenen los hallazgos por prioridad. Para cada corrección indiquen qué riesgo reduce, quién la realizará y cuándo debe terminarla.
 
-3. **¿Qué cambiarían en el siguiente PLAN?** Indiquen qué política, procedimiento, configuración, dato o indicador actualizarían; qué riesgo residual quedaría; y qué prueba repetirían para demostrar que la mejora fue eficaz.
+2. **¿Qué cambiarían para que el problema no se repita?**
+
+    No se limiten a reparar el caso. Propongan cambios al procedimiento o al sistema para evitar la reutilización de credenciales, registros con horas distintas y permisos que no vencen.
+
+3. **¿Qué llevarían al siguiente PLAN?**
+
+    Indiquen qué regla, procedimiento, configuración o medida actualizarían. Señalen qué riesgo todavía quedaría y qué prueba repetirían para confirmar la mejora.
 
 ---
 
-### Producto final — Narrativa PDCA integrada
+### Producto final — Explicación completa del ciclo PDCA
 
-Primero dibujen la cadena de trazabilidad que propone su equipo, desde el ingreso del visitante hasta la revocación del acceso. Luego redacten una narrativa de **250 a 350 palabras**, organizada en cuatro párrafos:
+Dibujen primero cómo relacionarían la visita, el equipo, la conexión y el cierre del acceso.
+
+Después redacten una explicación de **200 a 300 palabras**, organizada en cuatro párrafos:
 
 > **PLAN:** “Examinamos ___, identificamos el riesgo de ___ y establecimos el objetivo de ___.”
 >
@@ -474,7 +541,7 @@ Primero dibujen la cadena de trazabilidad que propone su equipo, desde el ingres
 >
 > **ACT:** “Corregiremos ___, mejoraremos ___ y en el siguiente PLAN revisaremos ___.”
 
-La narrativa debe conservar esta trazabilidad:
+La explicación debe mantener esta relación:
 
 | Riesgo identificado | Objetivo | Medida implementada | Evidencia de ejecución | Prueba de eficacia | Resultado | Mejora |
 |---|---|---|---|---|---|---|
@@ -488,7 +555,7 @@ La narrativa debe conservar esta trazabilidad:
 | DO integra procedimiento, responsables, autenticación, mínimo privilegio y evidencia | 2 |
 | CHECK define pruebas reproducibles, resultados esperados e indicadores | 2 |
 | ACT corrige hallazgos, trata causas y alimenta el siguiente ciclo | 2 |
-| La narrativa mantiene coherencia y trazabilidad entre las cuatro fases | 2 |
+| La explicación conecta claramente las cuatro fases | 2 |
 
 ---
 
