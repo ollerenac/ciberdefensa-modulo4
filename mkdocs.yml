@@ -64,8 +64,9 @@ nav:
       - "IDS e IPS (Parte 2)": seguridad-criptografia/en-la-red/ids-ips-p2.md
       - "Honey Pots (Parte 1)": seguridad-criptografia/en-la-red/honeypots-p1.md
       - "Honey Pots (Parte 2)": seguridad-criptografia/en-la-red/honeypots-p2.md
-      - "Ejercicio extra — Preparación de Metasploit": seguridad-criptografia/en-la-red/ejercicios-extra-metasploit.md
       - "Examen Final": seguridad-criptografia/en-la-red/examen-final.md
+
+  - "Ejercicio extra — Preparación de Metasploit": seguridad-criptografia/en-la-red/ejercicios-extra-metasploit.md
 
   - Capas SI:
     - capas-si/index.md
