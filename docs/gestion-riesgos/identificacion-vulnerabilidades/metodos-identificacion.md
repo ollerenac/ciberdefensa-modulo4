@@ -11,10 +11,10 @@
 
 Al finalizar esta clase, el alumno será capaz de:
 
-- Buscar una entrada CVE en nvd.nist.gov dado su identificador.
-- Extraer la severidad CVSS v3.1 (Critical/High/Medium/Low) y los sistemas afectados de una ficha CVE.
-- Priorizar la remediación de tres vulnerabilidades usando la regla de severidad → plazo.
-- Identificar dos métodos de detección de vulnerabilidades sin herramientas especializadas.
+- Localizar el registro oficial de un CVE y su enriquecimiento técnico a partir del identificador.
+- Extraer la severidad CVSS, su versión, fuente y vector, además de los sistemas afectados.
+- Diseñar controles compensatorios para una vulnerabilidad sin parche disponible.
+- Aplicar PDCA para convertir una alerta de vulnerabilidad en una mejora permanente del SGSI.
 
 ---
 
@@ -23,15 +23,19 @@ Al finalizar esta clase, el alumno será capaz de:
 Cuando un investigador descubre una falla en Windows, en el firmware de una radio, o en el software de gestión de una red, esa falla necesita un nombre estándar para que todos hablen del mismo problema. Ese nombre es un **CVE**.
 
 !!! note "Definición"
-    **CVE (Common Vulnerabilities and Exposures)** es una lista pública de identificadores estandarizados para vulnerabilidades de seguridad conocidas. Cada entrada tiene un ID único con el formato **CVE-AÑO-NÚMERO** (ejemplo: CVE-2024-1234). La lista es mantenida por **MITRE Corporation** y publicada en la **National Vulnerability Database (NVD)** del NIST en: [https://nvd.nist.gov](https://nvd.nist.gov)
+    **CVE (Common Vulnerabilities and Exposures)** es el catálogo público de identificadores estandarizados para vulnerabilidades conocidas. Cada registro tiene un ID único con el formato **CVE-AÑO-NÚMERO** (ejemplo: CVE-2024-1234). Una autoridad CNA publica el registro oficial en el [Programa CVE](https://www.cve.org/); después, la [National Vulnerability Database (NVD)](https://nvd.nist.gov) lo consume y agrega análisis como CVSS, CWE y aplicabilidad CPE.
 
-**Por qué importa para el Técnico:** Cuando Microsoft publica un parche de seguridad en su boletín mensual, lo referencia con un CVE-ID. El Técnico puede buscar ese ID en nvd.nist.gov y entender exactamente qué falla corrige el parche, qué sistemas están afectados, y qué tan urgente es aplicarlo. Sin el CVE, el Técnico solo sabe que "hay un parche" — con el CVE, sabe si ese parche resuelve un riesgo Crítico o uno de severidad Baja.
+**Por qué importa para el Técnico:** Cuando un proveedor publica una alerta de seguridad, la referencia con un CVE-ID. El Técnico puede usar ese identificador para consultar el registro oficial, contrastarlo con NVD y revisar el aviso del proveedor. Así determina qué falla existe, qué sistemas están afectados y qué tan urgente es actuar.
 
 ---
 
 ## Cómo Leer una Entrada CVE
 
-El objetivo no es escribir CVEs — es leer los que ya existen y tomar decisiones con ellos. Cada entrada en nvd.nist.gov tiene siempre los mismos campos. Aprender a leer esos campos es la habilidad central de esta clase.
+El objetivo no es escribir CVE — es leer los registros existentes y tomar decisiones con ellos. Para una investigación completa se consultan tres capas:
+
+1. **CVE.org:** identidad, CNA, descripción y referencias del registro oficial.
+2. **NVD:** análisis enriquecido, como CVSS, CWE y configuraciones CPE.
+3. **Aviso del proveedor:** productos afectados, contexto técnico y acciones dirigidas a sus clientes.
 
 ### Ejemplo: Leer una entrada CVE
 
@@ -44,6 +48,9 @@ El objetivo no es escribir CVEs — es leer los que ya existen y tomar decisione
 | **Vector de ataque** | Red — accesible desde la red sin requerir interacción del usuario |
 | **Puntuación CVSS** | 8.8 — **High (Alta)** → requiere acción en 7 días o menos |
 | **Solución disponible** | Sí — parche de seguridad MS24-XXX (Windows Update) |
+
+!!! warning "El número solo no basta"
+    La forma correcta de registrar una evaluación es **CVSS 3.1: 8.8 — fuente NVD — vector `CVSS:3.1/...`**. Un mismo CVE puede mostrar evaluaciones de fuentes diferentes o generaciones distintas de CVSS. No se promedian: se conserva la procedencia de cada una.
 
 **¿Qué hace el Técnico con este CVE?**
 
@@ -134,36 +141,113 @@ El score CVSS da la severidad técnica de una vulnerabilidad. Pero en el entorno
 
 ## Aplicación en Contexto Castrense
 
-### Ejercicio guiado: Priorizar tres CVEs para la JC-BC3
+### Ejercicio por grupos: Alerta Zero-Day — del CVE al SGSI
 
-El Técnico de guardia de la Jefatura de Comunicaciones del Batallón de Comunicaciones N°3 recibe la siguiente lista de vulnerabilidades detectadas en la revisión semanal:
+> **Duración:** 60 minutos | **Modalidad:** 8 grupos | **Producto:** ficha de una página y exposición de 90 segundos
 
-| CVE | Score | Producto afectado | Activos de la JC-BC3 afectados |
-|-----|-------|-------------------|---------------------------------|
-| CVE-2024-A001 | **9.8 (Critical)** | Windows Server 2016 — servicio RDP | Servidor de archivos de la JC-BC3 (Windows Server 2016) |
-| CVE-2024-A002 | **7.5 (High)** | Adobe Acrobat Reader 2020 | 4 terminales C2 con Adobe Acrobat instalado |
-| CVE-2024-A003 | **4.3 (Medium)** | Mozilla Firefox versiones anteriores a 120 | 6 laptops de campo (Firefox 118) |
+#### Situación
 
-**Pasos de priorización:**
+Son las 08:00. La **Jefatura de Comunicaciones del Batallón de Comunicaciones N.° 3 (JC-BC3)** recibe una alerta sobre una vulnerabilidad explotada activamente. La organización confirma que utiliza al menos un sistema afectado, pero todavía no existe parche ni solución oficial disponible.
 
-1. **CVE-2024-A001 (Score 9.8, activo servidor de archivos):** Critical en activo compartido que almacena documentos de planificación. Prioridad máxima. Acción: escalar inmediatamente al Jefe de sección, desactivar RDP si no es necesario para la operación, planificar parche de emergencia en 24 horas.
+Cada grupo recibe solamente un CVE. Debe investigar la vulnerabilidad, identificar qué activo de la JC-BC3 podría estar afectado y preparar una respuesta defensiva para el mando.
 
-2. **CVE-2024-A002 (Score 7.5, activos terminales C2):** High en activos de misión crítica → elevar a tratamiento Critical. Los terminales C2 no pueden quedar con esta vulnerabilidad durante 7 días — acción en 24 horas. Actualizar Adobe Acrobat en los 4 terminales.
+!!! warning "Reglas del escenario"
+    - Aunque estos CVE son históricos, deben tratarlos como si acabaran de publicarse.
+    - Ignoren los campos **Solutions**, parches, actualizaciones y mitigaciones históricas del proveedor.
+    - No busquen ni ejecuten exploits, PoC, payloads o comandos ofensivos.
+    - No realicen cambios en equipos ni en la red real del aula.
+    - Los controles propuestos deben ser defensivos, reversibles y verificables.
 
-3. **CVE-2024-A003 (Score 4.3, laptops de campo):** Medium en activos administrativos. No es emergencia. Incluir en el plan de mantenimiento del ciclo actual — actualizar Firefox en las 6 laptops dentro de los próximos 30 días.
+#### Asignación
 
-!!! tip "Respuesta correcta"
-    Orden de prioridad: CVE-2024-A001 (Critical, servidor) = CVE-2024-A002 (High elevado a Critical por activo C2) > CVE-2024-A003 (Medium estándar en laptops). Los dos primeros se tratan en paralelo dentro de las 24 horas; el tercero entra al plan mensual.
+| Grupo | CVE asignado |
+|-------|--------------|
+| 1 | `CVE-2017-0144` |
+| 2 | `CVE-2020-1472` |
+| 3 | `CVE-2021-44228` |
+| 4 | `CVE-2017-5638` |
+| 5 | `CVE-2014-6271` |
+| 6 | `CVE-2018-13379` |
+| 7 | `CVE-2019-19781` |
+| 8 | `CVE-2023-34362` |
+
+#### Fuentes permitidas
+
+- [CVE.org](https://www.cve.org/) — registro oficial y CNA.
+- [NVD](https://nvd.nist.gov/) — CVSS, CWE y aplicabilidad.
+- [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) — evidencia de explotación conocida.
+- Aviso oficial del proveedor del producto afectado.
+
+#### Parte 1 — Conciencia de la vulnerabilidad
+
+Completen los siguientes campos con sus propias palabras:
+
+| Campo | Respuesta del grupo |
+|-------|---------------------|
+| ¿De qué trata la vulnerabilidad? | |
+| Producto, componente y versiones afectadas | |
+| Consecuencia sobre confidencialidad, integridad y disponibilidad | |
+| Puntaje y severidad CVSS | |
+| Versión, fuente y vector CVSS | |
+| Activo de la JC-BC3 que podría estar afectado | |
+| Prioridad organizacional y justificación | |
+
+#### Parte 2 — Respuesta mediante PDCA
+
+En el ciclo formal, la cuarta fase es **Actuar**. En este escenario incluye reaccionar ante los resultados, corregir la respuesta y mejorar el SGSI.
+
+| Fase | Preguntas que deben responder |
+|------|-------------------------------|
+| **Planear** | ¿Qué activo y misión están expuestos? ¿Qué resultado defensivo se busca? ¿Quién autoriza, quién ejecuta y qué riesgo operativo puede causar la contención? |
+| **Hacer** | ¿Qué tres o cuatro acciones temporales aplicarían y en qué orden? Incluyan contención, reducción de superficie, detección y continuidad de la operación. |
+| **Verificar** | ¿Qué evidencia mostraría que la exposición disminuyó? ¿Qué prueba positiva y negativa realizarían? ¿Qué logs, alertas o indicadores revisarían para detectar un compromiso previo? |
+| **Actuar** | ¿Qué mantendrían, corregirían o revertirían después de verificar? ¿Qué riesgo residual escalarían? ¿Qué cambio permanente incorporarían al SGSI? |
+
+No basta con escribir “instalar firewall”, “activar antivirus” o “usar MFA”. Cada control debe indicar **qué parte del vector reduce, quién lo aplica, qué evidencia produce y qué limitación conserva**.
+
+#### Parte 3 — Capacidad permanente para el SGSI
+
+La respuesta no termina cuando se contiene el zero-day. Propongan un proceso permanente de vigilancia y hardening que incluya:
+
+- fuentes de alertas que se revisarán;
+- responsable y frecuencia de revisión;
+- inventario de productos, versiones y dependencias;
+- regla de priorización y plazo de respuesta;
+- evidencia que se conservará;
+- un indicador para informar al mando.
+
+Ejemplo de indicador: **porcentaje de vulnerabilidades Critical evaluadas dentro de las primeras 24 horas**.
+
+#### Organización de los 60 minutos
+
+| Tiempo | Actividad |
+|--------|-----------|
+| 0–5 min | Explicación del escenario, reglas y asignación |
+| 5–20 min | Investigación en fuentes oficiales |
+| 20–40 min | Elaboración de la ficha y respuesta PDCA |
+| 40–52 min | Ocho exposiciones de 90 segundos |
+| 52–60 min | Comparación de respuestas y cierre del instructor |
+
+#### Evaluación — 20 puntos
+
+| Criterio | Puntos |
+|----------|--------|
+| Investigación correcta de la vulnerabilidad y sistemas afectados | 5 |
+| CVSS con puntaje, severidad, versión, fuente y vector | 3 |
+| Acciones PDCA concretas y relacionadas con el vector | 6 |
+| Verificación mediante pruebas y evidencias | 3 |
+| Mejora permanente incorporada al SGSI | 3 |
+| **Total** | **20** |
 
 ---
 
 ## Resumen
 
-- **CVE** es el identificador estándar de vulnerabilidades. El formato es CVE-AÑO-NÚMERO. La base de datos oficial es [nvd.nist.gov](https://nvd.nist.gov).
-- El **score CVSS v3.1** tiene cuatro bandas: Critical (9–10), High (7–8.9), Medium (4–6.9), Low (0.1–3.9). La banda determina el plazo de acción — no el número exacto.
+- **CVE** es el identificador estándar de vulnerabilidades. CVE.org publica el registro oficial y NVD lo enriquece con análisis técnico.
+- El **score CVSS** debe registrarse con versión, fuente y vector. Tiene cuatro bandas: Critical (9–10), High (7–8.9), Medium (4–6.9) y Low (0.1–3.9).
 - Los **tres métodos sin herramientas especializadas**: Windows Update para parches pendientes, búsqueda en NVD por producto/versión, y boletines Microsoft Patch Tuesday.
 - La **criticidad del activo** puede elevar la prioridad de acción: una vulnerabilidad High en un sistema C2 se trata como Critical.
-- El Técnico **no calcula** el score CVSS — lo lee de la ficha y actúa según la banda.
+- El Técnico combina severidad, exposición y criticidad del activo; después aplica controles, conserva evidencia y mejora el SGSI mediante PDCA.
 
 ## Para profundizar
 
