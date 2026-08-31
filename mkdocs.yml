@@ -102,6 +102,7 @@ nav:
     - Identificación y Evaluación de Vulnerabilidades:
       - gestion-riesgos/identificacion-vulnerabilidades/index.md
       - "Métodos de Identificación y Priorización": gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion.md
+      - "Ficha: Alerta Zero-Day y PDCA": gestion-riesgos/identificacion-vulnerabilidades/ficha-zero-day-pdca.md
     - Mitigación y Control de Riesgos:
       - gestion-riesgos/mitigacion-controles/index.md
       - "Controles y Buenas Prácticas": gestion-riesgos/mitigacion-controles/controles-buenas-practicas.md

@@ -23,7 +23,7 @@ Al finalizar esta clase, el alumno será capaz de:
 Cuando un investigador descubre una falla en Windows, en el firmware de una radio, o en el software de gestión de una red, esa falla necesita un nombre estándar para que todos hablen del mismo problema. Ese nombre es un **CVE**.
 
 !!! note "Definición"
-    **CVE (Common Vulnerabilities and Exposures)** es el catálogo público de identificadores estandarizados para vulnerabilidades conocidas. Cada registro tiene un ID único con el formato **CVE-AÑO-NÚMERO** (ejemplo: CVE-2024-1234). Una autoridad CNA publica el registro oficial en el [Programa CVE](https://www.cve.org/); después, la [National Vulnerability Database (NVD)](https://nvd.nist.gov) lo consume y agrega análisis como CVSS, CWE y aplicabilidad CPE.
+    **CVE (Common Vulnerabilities and Exposures)** es el catálogo público de identificadores estandarizados para vulnerabilidades conocidas. Cada registro tiene un ID único con el formato **CVE-AÑO-NÚMERO** (ejemplo: CVE-2024-1234). Una organización autorizada publica el registro oficial en el [Programa CVE](https://www.cve.org/); después, la [National Vulnerability Database (NVD)](https://nvd.nist.gov) agrega datos de severidad y de los sistemas afectados.
 
 **Por qué importa para el Técnico:** Cuando un proveedor publica una alerta de seguridad, la referencia con un CVE-ID. El Técnico puede usar ese identificador para consultar el registro oficial, contrastarlo con NVD y revisar el aviso del proveedor. Así determina qué falla existe, qué sistemas están afectados y qué tan urgente es actuar.
 
@@ -33,8 +33,8 @@ Cuando un investigador descubre una falla en Windows, en el firmware de una radi
 
 El objetivo no es escribir CVE — es leer los registros existentes y tomar decisiones con ellos. Para una investigación completa se consultan tres capas:
 
-1. **CVE.org:** identidad, CNA, descripción y referencias del registro oficial.
-2. **NVD:** análisis enriquecido, como CVSS, CWE y configuraciones CPE.
+1. **CVE.org:** identificador, descripción y referencias del registro oficial.
+2. **NVD:** datos complementarios, como la severidad CVSS y las configuraciones afectadas.
 3. **Aviso del proveedor:** productos afectados, contexto técnico y acciones dirigidas a sus clientes.
 
 ### Ejemplo: Leer una entrada CVE
@@ -154,7 +154,7 @@ Cada grupo recibe solamente un CVE. Debe investigar la vulnerabilidad, identific
 !!! warning "Reglas del escenario"
     - Aunque estos CVE son históricos, deben tratarlos como si acabaran de publicarse.
     - Ignoren los campos **Solutions**, parches, actualizaciones y mitigaciones históricas del proveedor.
-    - No busquen ni ejecuten exploits, PoC, payloads o comandos ofensivos.
+    - No busquen instrucciones ni herramientas para atacar sistemas.
     - No realicen cambios en equipos ni en la red real del aula.
     - Los controles propuestos deben ser defensivos, reversibles y verificables.
 
@@ -173,24 +173,24 @@ Cada grupo recibe solamente un CVE. Debe investigar la vulnerabilidad, identific
 
 #### Fuentes permitidas
 
-- [CVE.org](https://www.cve.org/) — registro oficial y CNA.
-- [NVD](https://nvd.nist.gov/) — CVSS, CWE y aplicabilidad.
-- [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) — evidencia de explotación conocida.
+- [CVE.org](https://www.cve.org/) — registro oficial de la vulnerabilidad.
+- [NVD](https://nvd.nist.gov/) — severidad CVSS y sistemas afectados.
 - Aviso oficial del proveedor del producto afectado.
+
+Usen la **[ficha imprimible del ejercicio](ficha-zero-day-pdca.md)** para organizar el trabajo y entregar una sola página por grupo. La ficha incluye un glosario breve de los términos necesarios.
 
 #### Parte 1 — Conciencia de la vulnerabilidad
 
-Completen los siguientes campos con sus propias palabras:
+Completen cuatro hallazgos con sus propias palabras:
 
 | Campo | Respuesta del grupo |
 |-------|---------------------|
 | ¿De qué trata la vulnerabilidad? | |
 | Producto, componente y versiones afectadas | |
-| Consecuencia sobre confidencialidad, integridad y disponibilidad | |
-| Puntaje y severidad CVSS | |
-| Versión, fuente y vector CVSS | |
-| Activo de la JC-BC3 que podría estar afectado | |
-| Prioridad organizacional y justificación | |
+| CVSS: puntaje, severidad, versión, fuente y vector | |
+| Consecuencia, activo plausible de la JC-BC3 y prioridad | |
+
+El **vector CVSS** es la cadena que comienza con `CVSS:` y resume los factores usados en la calificación. Solo deben copiarla de la fuente y citar su procedencia; no tienen que calcularla.
 
 #### Parte 2 — Respuesta mediante PDCA
 
@@ -198,25 +198,25 @@ En el ciclo formal, la cuarta fase es **Actuar**. En este escenario incluye reac
 
 | Fase | Preguntas que deben responder |
 |------|-------------------------------|
-| **Planear** | ¿Qué activo y misión están expuestos? ¿Qué resultado defensivo se busca? ¿Quién autoriza, quién ejecuta y qué riesgo operativo puede causar la contención? |
-| **Hacer** | ¿Qué tres o cuatro acciones temporales aplicarían y en qué orden? Incluyan contención, reducción de superficie, detección y continuidad de la operación. |
-| **Verificar** | ¿Qué evidencia mostraría que la exposición disminuyó? ¿Qué prueba positiva y negativa realizarían? ¿Qué logs, alertas o indicadores revisarían para detectar un compromiso previo? |
-| **Actuar** | ¿Qué mantendrían, corregirían o revertirían después de verificar? ¿Qué riesgo residual escalarían? ¿Qué cambio permanente incorporarían al SGSI? |
+| **Planear** | Identifiquen el activo y la misión expuestos. Definan un objetivo defensivo y un responsable. |
+| **Hacer** | Propongan dos acciones temporales: una para reducir la exposición y otra para mantener la continuidad de la operación. |
+| **Verificar** | Indiquen una comprobación que demuestre que el uso autorizado continúa y que la vía no autorizada quedó restringida. Señalen además un registro o alerta que revisarían. |
+| **Actuar** | Decidan qué control mantendrían o ajustarían, qué riesgo aún permanece y qué mejora incorporarían al SGSI. |
 
-No basta con escribir “instalar firewall”, “activar antivirus” o “usar MFA”. Cada control debe indicar **qué parte del vector reduce, quién lo aplica, qué evidencia produce y qué limitación conserva**.
+No basta con escribir “instalar firewall”, “activar antivirus” o “usar MFA”. Expliquen brevemente **cómo reduce la exposición y cómo comprobarían que funcionó**.
 
 #### Parte 3 — Capacidad permanente para el SGSI
 
-La respuesta no termina cuando se contiene el zero-day. Propongan un proceso permanente de vigilancia y hardening que incluya:
+La respuesta no termina cuando se contiene el zero-day. Propongan una capacidad permanente que incluya:
 
-- fuentes de alertas que se revisarán;
-- responsable y frecuencia de revisión;
+- fuente de alertas, responsable y frecuencia de revisión;
 - inventario de productos, versiones y dependencias;
-- regla de priorización y plazo de respuesta;
-- evidencia que se conservará;
-- un indicador para informar al mando.
+- configuración segura de referencia, revisión de cambios y tratamiento de excepciones;
+- evidencia o indicador que se informará al mando.
 
 Ejemplo de indicador: **porcentaje de vulnerabilidades Critical evaluadas dentro de las primeras 24 horas**.
+
+La **configuración segura** o *hardening* reduce funciones y accesos innecesarios. Una excepción es un sistema que no puede cumplirla por una necesidad operativa; debe quedar aprobada, protegida con otro control y revisada periódicamente.
 
 #### Organización de los 60 minutos
 
@@ -234,7 +234,7 @@ Ejemplo de indicador: **porcentaje de vulnerabilidades Critical evaluadas dentro
 |----------|--------|
 | Investigación correcta de la vulnerabilidad y sistemas afectados | 5 |
 | CVSS con puntaje, severidad, versión, fuente y vector | 3 |
-| Acciones PDCA concretas y relacionadas con el vector | 6 |
+| Acciones PDCA concretas y aplicables al escenario | 6 |
 | Verificación mediante pruebas y evidencias | 3 |
 | Mejora permanente incorporada al SGSI | 3 |
 | **Total** | **20** |
