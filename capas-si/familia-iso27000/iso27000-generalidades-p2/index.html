@@ -1,0 +1,2916 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/capas-si/familia-iso27000/iso27000-generalidades-p2/">
+      
+      
+        <link rel="prev" href="../iso27000-generalidades-p1/">
+      
+      
+        <link rel="next" href="../iso27001-requisitos-p1/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>ISO 27000 — Generalidades (Parte 2) - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#horas-asignadas-2-hrs" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ISO 27000 — Generalidades (Parte 2)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/laboratorio-vm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🖥 Laboratorio virtual — accesos y credenciales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/lab-iptables-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-el-ordenador/lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/repaso-redes-defensivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precalentamiento y Repaso — Redes Defensivas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../seguridad-criptografia/en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27001-requisitos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/identificacion-vulnerabilidades/ficha-zero-day-pdca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ficha: Alerta Zero-Day y PDCA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/ejercicios-extra-metasploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ejercicio extra — Preparación de Metasploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<h1 id="horas-asignadas-2-hrs">Horas asignadas: 2 hrs<a class="headerlink" href="#horas-asignadas-2-hrs" title="Permanent link">&para;</a></h1>
+<h1 id="tipo-teoria">Tipo: Teoría<a class="headerlink" href="#tipo-teoria" title="Permanent link">&para;</a></h1>
+<hr />
+<h1 id="iso-27000-generalidades-parte-2">ISO 27000 — Generalidades (Parte 2)<a class="headerlink" href="#iso-27000-generalidades-parte-2" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Duración:</strong> 2 horas | <strong>Asignatura:</strong> Capas SI | <strong>Unidad:</strong> La Familia ISO 27000</p>
+</blockquote>
+<h2 id="objetivo-de-la-clase">Objetivo de la clase<a class="headerlink" href="#objetivo-de-la-clase" title="Permanent link">&para;</a></h2>
+<p>Al finalizar esta clase, el alumno será capaz de:</p>
+<ul>
+<li>Describir el ciclo PDCA y explicar cómo se aplica al Sistema de Gestión de la Seguridad de la Información.</li>
+<li>Distinguir entre postura de seguridad real y cumplimiento normativo (compliance vs. security posture).</li>
+<li>Identificar los beneficios concretos que aporta un SGSI a una organización o unidad militar.</li>
+<li>Seleccionar, entre controles previamente relacionados con un incidente, el control principal y proponer una implementación concreta y verificable.</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>Recapitulación:</strong> En la clase anterior (Parte 1) cubrimos el origen de los estándares, la estructura de la familia (27000:2026 panorama y conceptos, 27001:2022 requisitos, 27002:2022 controles, 27005:2022 riesgo) y los cuatro componentes fundamentales de un SGSI mediante el ejemplo de la SC-RI8. Esta clase continúa con el motor que hace funcionar el SGSI: el ciclo PDCA y los beneficios reales que aporta.</p>
+</blockquote>
+<hr />
+<h2 id="el-ciclo-pdca-aplicado-al-sgsi">El Ciclo PDCA Aplicado al SGSI<a class="headerlink" href="#el-ciclo-pdca-aplicado-al-sgsi" title="Permanent link">&para;</a></h2>
+<p>Un SGSI no es un proyecto con fecha de inicio y fecha de fin. Es un ciclo permanente de mejora. La herramienta conceptual que describe ese ciclo es el modelo <strong>PDCA</strong> (Plan-Do-Check-Act), también llamado ciclo de Deming por el estadístico W. Edwards Deming, quien lo popularizó en la gestión de calidad en la década de 1950.</p>
+<p>ISO 27001 adoptó el ciclo PDCA como el principio organizativo del SGSI porque captura una verdad fundamental: la seguridad de la información en el mundo real nunca está "completa". Las amenazas evolucionan, los sistemas cambian, el personal rota, surgen nuevas vulnerabilidades. Un sistema de gestión que no se revisa y mejora continuamente se vuelve obsoleto.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>     ┌──────────────────────────────────────────────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>     │                 CICLO PDCA                       │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>     │                                                  │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>     │   ┌──────────┐          ┌──────────┐             │
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>     │   │  PLAN    │ ──────▶  │   DO     │             │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>     │   │ Planear  │          │ Ejecutar │             │
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     │   └──────────┘          └──────────┘             │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>     │        ▲                      │                  │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>     │        │                      ▼                  │
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>     │   ┌──────────┐          ┌──────────┐             │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>     │   │   ACT    │ ◀──────  │  CHECK   │             │
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>     │   │  Actuar  │          │ Verificar│             │
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>     │   └──────────┘          └──────────┘             │
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>     └──────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="las-cuatro-fases-aplicadas-a-la-seguridad-de-la-informacion">Las cuatro fases aplicadas a la seguridad de la información<a class="headerlink" href="#las-cuatro-fases-aplicadas-a-la-seguridad-de-la-informacion" title="Permanent link">&para;</a></h3>
+<p><strong>PLAN — Planear (Cláusulas 4-7 de ISO 27001):</strong>
+En esta fase la organización define el alcance del SGSI, identifica sus activos de información, evalúa los riesgos, selecciona los controles que va a implementar y establece los objetivos de seguridad. Es la fase donde se toman las decisiones: ¿qué queremos proteger? ¿de qué amenazas? ¿qué controles son adecuados para nuestro contexto?</p>
+<p><strong>DO — Ejecutar (Cláusula 8 de ISO 27001):</strong>
+En esta fase se implementan los controles planificados. Se instalan las herramientas técnicas, se redactan y distribuyen las políticas, se capacita al personal, se configuran los sistemas según los requisitos de seguridad decididos en la fase anterior. Es la fase de acción.</p>
+<p><strong>CHECK — Verificar (Cláusula 9 de ISO 27001):</strong>
+En esta fase se mide si los controles funcionan como se esperaba. Incluye auditorías internas (¿se cumplen las políticas?), revisión de métricas de seguridad (¿cuántos incidentes hubo este mes?), y revisión por la dirección (¿el SGSI sigue siendo adecuado para el contexto actual?). Sin verificación, no hay forma de saber si la seguridad real mejoró o solo la documentación.</p>
+<p><strong>ACT — Actuar (Cláusula 10 de ISO 27001):</strong>
+En esta fase se corrigen las no-conformidades encontradas en la fase CHECK, se implementan mejoras, y se actualiza el SGSI para reflejar los cambios en el contexto o en los riesgos. Al final de la fase ACT, el ciclo vuelve a comenzar — con un SGSI mejorado que inicia un nuevo ciclo PLAN.</p>
+<div class="admonition example">
+<p class="admonition-title">Aplicación en entorno castrense</p>
+<p>La Jefatura de Comunicaciones del Batallón aplica PDCA a la gestión de su material criptográfico:
+<strong>PLAN:</strong> Define qué equipos usan cifrado, qué algoritmos se cargan, con qué frecuencia se renueva el material criptográfico, y qué procedimiento sigue si un equipo se pierde.
+<strong>DO:</strong> Carga el material criptográfico en los radios tácticos según el plan, documenta los equipos que lo recibieron, y capacita al personal en el procedimiento de pérdida de equipo.
+<strong>CHECK:</strong> Realiza una auditoría mensual para verificar que todos los equipos tienen el material correcto y que los registros están al día. Revisa si hubo incidentes de seguridad relacionados con comunicaciones.
+<strong>ACT:</strong> Si la auditoría detecta que un equipo tiene material criptográfico vencido, se corrige inmediatamente y se actualiza el procedimiento para evitar que vuelva a ocurrir.</p>
+</div>
+<hr />
+<h2 id="beneficios-del-sgsi">Beneficios del SGSI<a class="headerlink" href="#beneficios-del-sgsi" title="Permanent link">&para;</a></h2>
+<p>Implementar un SGSI tiene beneficios concretos — no solo para la organización en abstracto, sino para las personas que trabajan en ella.</p>
+<p><strong>Para la dirección / el mando:</strong>
+El SGSI proporciona visibilidad del estado real de la seguridad. Sin él, el Comandante no sabe qué activos existen, qué tan vulnerables son, ni si los controles que se dicen implementados realmente funcionan. Con un SGSI, esa información está documentada, medida y reportada.</p>
+<p><strong>Para el personal técnico:</strong>
+El SGSI define responsabilidades claras. Los Técnicos saben qué sistemas son de su responsabilidad, qué controles deben mantener, y qué procedimiento seguir cuando algo falla. No hay ambigüedad sobre quién hace qué en un incidente.</p>
+<p><strong>Para la continuidad de la misión:</strong>
+Un SGSI incluye planes de continuidad para los activos más críticos. Si un sistema falla durante una operación, el plan de continuidad define cómo se mantiene la misión con recursos alternativos o en modo degradado. La improvisación bajo presión genera errores; el plan documentado reduce esa improvisación.</p>
+<p><strong>Para la respuesta a incidentes:</strong>
+Cuando ocurre un incidente de seguridad, la organización tiene un inventario de activos (sabe qué fue afectado), un registro de controles implementados (sabe qué protecciones existían), y un proceso de gestión de incidentes (sabe cómo responder). Sin SGSI, el primer paso de cualquier respuesta es tratar de entender qué hay en el entorno — lo que consume tiempo crítico.</p>
+<hr />
+<h2 id="compliance-vs-security-posture">Compliance vs. Security Posture<a class="headerlink" href="#compliance-vs-security-posture" title="Permanent link">&para;</a></h2>
+<p>Esta distinción es una de las más importantes del curso, y una de las más frecuentemente mal entendidas.</p>
+<p><strong>Compliance</strong> (cumplimiento normativo) significa que la organización puede demostrar que cumple con los requisitos de un estándar o regulación. Es un estado documentado y verificable: "tenemos política de contraseñas documentada y aprobada" o "nuestros servidores tienen los parches al día". El compliance se demuestra ante auditores, clientes o reguladores.</p>
+<p><strong>Security posture</strong> (postura de seguridad) significa qué tan bien protegida está realmente la organización frente a amenazas actuales. Es el estado real de seguridad, no el estado documentado.</p>
+<div class="admonition warning">
+<p class="admonition-title">El peligro del cumplimiento aparente</p>
+<p>Una organización puede exhibir una certificación vigente o abundante evidencia documental y tener una postura de seguridad débil. Si la política de contraseñas existe pero nadie la cumple, el plan de respuesta está redactado pero nadie lo conoce o las no conformidades no se corrigen, no existe “compliance total”: existe una brecha entre la conformidad declarada y la eficacia real. Demostrar conformidad ayuda, pero no basta por sí solo para sostener una buena postura de seguridad.</p>
+</div>
+<p>La relación correcta entre los dos conceptos es: el SGSI es el mecanismo que, cuando funciona bien, hace que el compliance y la postura de seguridad converjan. Un SGSI que solo genera papeles sin mejorar controles reales es burocracia, no seguridad.</p>
+<p>Para los Técnicos: su trabajo diario — configurar equipos correctamente, actualizar parches, verificar que los controles funcionan — es lo que crea postura de seguridad real. La documentación del SGSI registra y formaliza ese trabajo, pero no lo sustituye.</p>
+<hr />
+<h2 id="trabajo-por-equipos-del-incidente-a-un-control-verificable">Trabajo por Equipos — Del Incidente a un Control Verificable<a class="headerlink" href="#trabajo-por-equipos-del-incidente-a-un-control-verificable" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Duración sugerida:</strong> 50 minutos | <strong>Modalidad:</strong> equipos de 2–4 alumnos | <strong>Producto:</strong> exposición de 2 minutos y ficha de trabajo</p>
+</blockquote>
+<h3 id="proposito-de-la-actividad">Propósito de la actividad<a class="headerlink" href="#proposito-de-la-actividad" title="Permanent link">&para;</a></h3>
+<p>El alumno todavía no conoce los 93 controles de ISO/IEC 27002:2022. Por eso, <strong>no debe investigar todo el catálogo ni adivinar el control correcto</strong>. Cada expediente ya contiene un conjunto reducido de controles razonablemente relacionados con las debilidades documentadas.</p>
+<p>La tarea del equipo consiste en tomar una decisión profesional:</p>
+<blockquote>
+<p><strong>¿Cuál de los controles entregados debe ser el principal, cómo se implementaría y qué evidencia demostraría que funciona?</strong></p>
+</blockquote>
+<div class="admonition info">
+<p class="admonition-title">Precisión terminológica</p>
+<p>Los códigos <strong>A.5.<em>, A.7.* y A.8.</em></strong> identifican controles del Anexo A de <a href="https://www.iso.org/standard/27001">ISO/IEC 27001:2022</a>. <a href="https://www.iso.org/standard/75652.html">ISO/IEC 27002:2022</a> conserva esos identificadores y proporciona orientación para implementarlos. ISO/IEC 27000 no es un catálogo de controles.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Regla de interpretación</p>
+<p>El ejercicio es un mapeo retrospectivo con fines didácticos. Relacionar una debilidad con un control no demuestra que la organización careciera de SGSI, que incumpliera ISO/IEC 27001 o que una certificación hubiera evitado el incidente. Un control puede no haber existido, haber tenido un alcance insuficiente, estar mal implementado o no haber funcionado eficazmente; las fuentes disponibles no siempre permiten distinguirlo.</p>
+</div>
+<h3 id="organizacion-del-tiempo">Organización del tiempo<a class="headerlink" href="#organizacion-del-tiempo" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>5 minutos:</strong> el docente explica la consigna, la regla de interpretación y asigna un expediente.</li>
+<li><strong>8 minutos:</strong> el equipo identifica activo, efecto sobre la tríada CID y debilidad prioritaria.</li>
+<li><strong>15 minutos:</strong> el equipo selecciona controles y diseña una implementación verificable.</li>
+<li><strong>12 minutos:</strong> seis exposiciones de dos minutos; si hay menos equipos, cada equipo puede analizar una segunda alternativa.</li>
+<li><strong>10 minutos:</strong> comparación de decisiones y retroalimentación del docente.</li>
+</ul>
+<p>No se requiere investigar en Internet durante la clase: los hechos y las fuentes institucionales necesarias están incluidos en cada expediente.</p>
+<h3 id="consigna-para-todos-los-equipos">Consigna para todos los equipos<a class="headerlink" href="#consigna-para-todos-los-equipos" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Identificar el <strong>activo o proceso afectado</strong> y el efecto principal sobre confidencialidad, integridad o disponibilidad.</li>
+<li>Elegir una <strong>debilidad documentada prioritaria</strong>. No agregar causas que no aparezcan en el expediente.</li>
+<li>Seleccionar <strong>un control principal</strong> de la lista entregada y justificar por qué trata más directamente la debilidad prioritaria.</li>
+<li>Seleccionar hasta <strong>dos controles complementarios</strong> que ayuden a prevenir, detectar o reducir el impacto.</li>
+<li>
+<p>Diseñar la implementación utilizando esta fórmula:</p>
+<blockquote>
+<p><strong>Responsable + acción + alcance + frecuencia o evento disparador + evidencia producida.</strong></p>
+</blockquote>
+</li>
+<li>
+<p>Indicar cómo se comprobaría la <strong>eficacia</strong> del control. Tener un procedimiento o una herramienta no basta: debe probarse que produce el resultado esperado.</p>
+</li>
+<li>
+<p>Completar la conclusión prudente:</p>
+<blockquote>
+<p>“La debilidad documentada se relaciona principalmente con <strong><em>; una aplicación eficaz habría podido </em></strong>, pero la evidencia disponible no demuestra ___”.</p>
+</blockquote>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Cómo reconocer el control principal</p>
+<p>El control principal trata de forma más directa la debilidad que el equipo decidió priorizar. Los controles complementarios actúan sobre causas secundarias, mejoran la detección o limitan el impacto. Como varios expedientes contienen más de una debilidad, pueden existir elecciones diferentes siempre que estén sustentadas en los hechos.</p>
+</div>
+<h3 id="ficha-de-respuesta">Ficha de respuesta<a class="headerlink" href="#ficha-de-respuesta" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Respuesta del equipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Expediente asignado</td>
+<td></td>
+</tr>
+<tr>
+<td>Activo o proceso afectado</td>
+<td></td>
+</tr>
+<tr>
+<td>Efecto principal sobre CID</td>
+<td></td>
+</tr>
+<tr>
+<td>Debilidad documentada prioritaria</td>
+<td></td>
+</tr>
+<tr>
+<td>Control principal y justificación</td>
+<td></td>
+</tr>
+<tr>
+<td>Hasta dos controles complementarios</td>
+<td></td>
+</tr>
+<tr>
+<td>Implementación: responsable, acción, alcance y frecuencia</td>
+<td></td>
+</tr>
+<tr>
+<td>Evidencia producida</td>
+<td></td>
+</tr>
+<tr>
+<td>Prueba o indicador de eficacia</td>
+<td></td>
+</tr>
+<tr>
+<td>Conclusión prudente</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="expediente-1-equifax-2017">Expediente 1 — Equifax (2017)<a class="headerlink" href="#expediente-1-equifax-2017" title="Permanent link">&para;</a></h3>
+<p><strong>Hechos documentados:</strong> atacantes explotaron una vulnerabilidad de Apache Struts que no fue identificada correctamente en el portal afectado. La lista de distribución del aviso de parcheo estaba desactualizada, el escaneo posterior no encontró el sistema vulnerable, un certificado vencido impidió inspeccionar tráfico cifrado y las bases de datos no estaban suficientemente segmentadas. Se accedió a información personal de al menos 145,5 millones de personas. Fuente: <a href="https://www.gao.gov/products/gao-18-559">informe GAO-18-559</a>.</p>
+<p><strong>Controles relacionados entregados al equipo:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Descripción simplificada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A.8.8 — Gestión de vulnerabilidades técnicas</strong></td>
+<td>Identificar, evaluar, corregir y verificar vulnerabilidades dentro de plazos definidos.</td>
+</tr>
+<tr>
+<td><strong>A.5.9 — Inventario de información y otros activos asociados</strong></td>
+<td>Conocer los activos, software, versiones, ubicación y responsables.</td>
+</tr>
+<tr>
+<td><strong>A.8.16 — Actividades de monitoreo</strong></td>
+<td>Observar sistemas y redes para detectar actividad anómala.</td>
+</tr>
+<tr>
+<td><strong>A.8.22 — Segregación de redes</strong></td>
+<td>Separar redes y sistemas para limitar accesos y movimiento entre zonas.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="expediente-2-target-2013">Expediente 2 — Target (2013)<a class="headerlink" href="#expediente-2-target-2013" title="Permanent link">&para;</a></h3>
+<p><strong>Hechos documentados:</strong> el informe del Senado reconstruyó un acceso inicial con credenciales robadas a un proveedor, desplazamiento desde áreas menos sensibles hacia sistemas de punto de venta y falta de respuesta ante varias alertas del software de detección. Se expusieron aproximadamente 40 millones de cuentas de tarjetas y datos personales de hasta 70 millones de clientes. Fuente: <a href="https://www.commerce.senate.gov/public/_cache/files/24d3c229-4f2f-405d-b8db-a3a67f183883/23E30AA955B5C00FE57CFD709621592C.2014-0325-target-kill-chain-analysis.pdf">informe del Comité de Comercio del Senado de EE. UU.</a>.</p>
+<p><strong>Controles relacionados entregados al equipo:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Descripción simplificada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A.5.19 — Seguridad en las relaciones con proveedores</strong></td>
+<td>Identificar y gestionar riesgos derivados del acceso o servicio de terceros.</td>
+</tr>
+<tr>
+<td><strong>A.5.20 — Seguridad en acuerdos con proveedores</strong></td>
+<td>Establecer requisitos y responsabilidades de seguridad en los acuerdos.</td>
+</tr>
+<tr>
+<td><strong>A.5.22 — Monitoreo y cambios de servicios de proveedores</strong></td>
+<td>Supervisar periódicamente el servicio, los accesos y los cambios del proveedor.</td>
+</tr>
+<tr>
+<td><strong>A.8.22 — Segregación de redes</strong></td>
+<td>Impedir que un acceso de menor confianza alcance directamente sistemas críticos.</td>
+</tr>
+<tr>
+<td><strong>A.5.25 — Evaluación de eventos de seguridad</strong></td>
+<td>Analizar alertas y decidir oportunamente si deben tratarse como incidentes.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="expediente-3-maersk-notpetya-2017">Expediente 3 — Maersk / NotPetya (2017)<a class="headerlink" href="#expediente-3-maersk-notpetya-2017" title="Permanent link">&para;</a></h3>
+<p><strong>Hechos documentados:</strong> la acusación del Departamento de Justicia describe la distribución de NotPetya mediante el mecanismo de actualización del software contable ucraniano M.E.Doc; el ataque provocó una interrupción global. Maersk estimó pérdidas de entre USD 250 y 300 millones por pérdida de ingresos, restauración de TI y costos operacionales extraordinarios. Fuentes: <a href="https://www.justice.gov/d9/press-releases/attachments/2020/10/19/2020_10_19_unsealed_indictment_0.pdf">acusación del Departamento de Justicia de EE. UU.</a> e <a href="https://investor.maersk.com/system/files-encrypted/nasdaq_kms/assets/2018/04/25/13-00-21/A.P._Moller_-_Maersk_Annual_Report_2017.pdf">Informe Anual 2017 de Maersk</a>.</p>
+<p><strong>Controles relacionados entregados al equipo:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Descripción simplificada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A.5.21 — Seguridad en la cadena de suministro TIC</strong></td>
+<td>Gestionar riesgos introducidos por productos, componentes y actualizaciones de terceros.</td>
+</tr>
+<tr>
+<td><strong>A.5.29 — Seguridad durante una interrupción</strong></td>
+<td>Mantener un nivel apropiado de protección mientras la organización opera bajo disrupción.</td>
+</tr>
+<tr>
+<td><strong>A.5.30 — Preparación de las TIC para la continuidad</strong></td>
+<td>Preparar, probar y mantener capacidades tecnológicas de recuperación.</td>
+</tr>
+<tr>
+<td><strong>A.8.13 — Respaldo de información</strong></td>
+<td>Mantener copias protegidas y comprobar que pueden restaurarse.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="expediente-4-capital-one-2019">Expediente 4 — Capital One (2019)<a class="headerlink" href="#expediente-4-capital-one-2019" title="Permanent link">&para;</a></h3>
+<p><strong>Hechos documentados:</strong> una configuración incorrecta del firewall de aplicación web permitió ejecutar solicitudes que obtuvieron credenciales de roles y acceder, dentro de los permisos disponibles, a datos almacenados en la nube. La actividad de marzo fue comunicada a Capital One por una persona externa en julio. El incidente afectó aproximadamente a 100 millones de personas en EE. UU. y 6 millones en Canadá; la OCC impuso una penalidad de USD 80 millones por deficiencias de evaluación de riesgo y controles en la nube. Fuentes: <a href="https://www.justice.gov/usao-wdwa/pr/seattle-tech-worker-arrested-data-theft-involving-large-financial-services-company">Departamento de Justicia de EE. UU.</a>, <a href="https://www.capitalone.com/about/newsroom/capital-one-announces-data-security-incident/">comunicado de Capital One</a> y <a href="https://www.occ.gov/news-issuances/news-releases/2020/nr-occ-2020-101.html">resolución de la OCC</a>.</p>
+<p><strong>Controles relacionados entregados al equipo:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Descripción simplificada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A.5.23 — Seguridad para el uso de servicios en la nube</strong></td>
+<td>Definir procesos para adquirir, usar, administrar y finalizar servicios cloud de forma segura.</td>
+</tr>
+<tr>
+<td><strong>A.8.9 — Gestión de la configuración</strong></td>
+<td>Definir configuraciones seguras, aplicarlas y detectar desviaciones.</td>
+</tr>
+<tr>
+<td><strong>A.8.2 — Derechos de acceso privilegiado</strong></td>
+<td>Restringir y revisar los privilegios de cuentas y roles con capacidades elevadas.</td>
+</tr>
+<tr>
+<td><strong>A.8.16 — Actividades de monitoreo</strong></td>
+<td>Detectar consultas, accesos o transferencias anómalas.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="expediente-5-marriott-starwood-20142018">Expediente 5 — Marriott / Starwood (2014–2018)<a class="headerlink" href="#expediente-5-marriott-starwood-20142018" title="Permanent link">&para;</a></h3>
+<p><strong>Hechos documentados:</strong> el atacante entró al entorno de Starwood en 2014; Marriott adquirió la empresa en 2016 y detectó la actividad en 2018. El ICO documentó, entre otras deficiencias, monitoreo insuficiente de cuentas privilegiadas y bases de datos. Se vieron afectados alrededor de 339 millones de registros de huéspedes y la sanción fue de GBP 18,4 millones. El ICO no atribuyó la sanción a una infracción durante la adquisición anterior al GDPR. Fuente: <a href="https://ico.org.uk/media2/migrated/2618524/marriott-international-inc-mpn-20201030.pdf">resolución sancionadora del ICO</a>.</p>
+<p><strong>Controles relacionados entregados al equipo:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Descripción simplificada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A.8.15 — Registro de eventos</strong></td>
+<td>Generar, proteger y analizar registros útiles de sistemas, aplicaciones y accesos.</td>
+</tr>
+<tr>
+<td><strong>A.8.16 — Actividades de monitoreo</strong></td>
+<td>Observar los sistemas para detectar comportamientos anómalos y actuar ante ellos.</td>
+</tr>
+<tr>
+<td><strong>A.8.2 — Derechos de acceso privilegiado</strong></td>
+<td>Limitar, autorizar y revisar accesos con privilegios elevados.</td>
+</tr>
+<tr>
+<td><strong>A.5.9 — Inventario de información y otros activos asociados</strong></td>
+<td>Conocer los sistemas, bases de datos, información y responsables incluidos en el entorno.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="expediente-6-morgan-stanley-20162019">Expediente 6 — Morgan Stanley (2016–2019)<a class="headerlink" href="#expediente-6-morgan-stanley-20162019" title="Permanent link">&para;</a></h3>
+<p><strong>Hechos documentados:</strong> durante el retiro de centros de datos y otros equipos, la organización no evaluó adecuadamente el riesgo, seleccionó y supervisó deficientemente a proveedores, y no mantuvo un inventario apropiado de los datos en los dispositivos. Parte del hardware fue revendida sin eliminar toda la información. La OCC impuso USD 60 millones y la SEC USD 35 millones; esta última acción abarcó información de aproximadamente 15 millones de clientes. Fuentes: <a href="https://www.occ.gov/news-issuances/news-releases/2020/nr-occ-2020-134.html">resolución de la OCC</a> y <a href="https://www.sec.gov/newsroom/press-releases/2022-168">resolución de la SEC</a>.</p>
+<p><strong>Controles relacionados entregados al equipo:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Descripción simplificada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A.7.14 — Eliminación o reutilización segura de equipos</strong></td>
+<td>Comprobar que equipos y soportes no conservan información antes de desecharlos o reutilizarlos.</td>
+</tr>
+<tr>
+<td><strong>A.8.10 — Eliminación de información</strong></td>
+<td>Eliminar información cuando ya no se requiere, usando métodos apropiados y verificables.</td>
+</tr>
+<tr>
+<td><strong>A.5.9 — Inventario de información y otros activos asociados</strong></td>
+<td>Mantener trazabilidad sobre dispositivos, información, custodios y estado.</td>
+</tr>
+<tr>
+<td><strong>A.5.19 — Seguridad en las relaciones con proveedores</strong></td>
+<td>Evaluar y gestionar los riesgos del tercero que manipula los equipos.</td>
+</tr>
+<tr>
+<td><strong>A.5.22 — Monitoreo y cambios de servicios de proveedores</strong></td>
+<td>Supervisar el desempeño, cumplimiento y cambios del servicio contratado.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="criterios-de-evaluacion-10-puntos">Criterios de evaluación — 10 puntos<a class="headerlink" href="#criterios-de-evaluacion-10-puntos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th style="text-align: right;">Puntaje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identifica correctamente activo, efecto CID y debilidad documentada</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Justifica por qué el control elegido es principal</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Propone una implementación específica, viable y con responsable</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Define evidencia y una prueba o indicador de eficacia</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Formula una conclusión prudente sin afirmar incumplimiento no demostrado</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="entrega-de-las-diapositivas">Entrega de las diapositivas<a class="headerlink" href="#entrega-de-las-diapositivas" title="Permanent link">&para;</a></h3>
+<p>Cada equipo entregará <strong>un solo archivo de PowerPoint (<code>.pptx</code>)</strong> con su análisis. El instructor indicará cuándo está habilitado el servidor de recepción y comunicará verbalmente la contraseña temporal.</p>
+<h4 id="1-guardar-el-archivo-con-el-nombre-obligatorio">1. Guardar el archivo con el nombre obligatorio<a class="headerlink" href="#1-guardar-el-archivo-con-el-nombre-obligatorio" title="Permanent link">&para;</a></h4>
+<p>Guarden y cierren la presentación en la carpeta <strong>Documentos</strong> del usuario conectado en Windows. Usen este formato:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>G##-ATAQUE.pptx
+</code></pre></div>
+<ul>
+<li>Reemplacen <code>##</code> por el número del grupo con dos dígitos.</li>
+<li>Usen uno de estos nombres de ataque: <code>EQUIFAX</code>, <code>TARGET</code>, <code>MAERSK</code>, <code>CAPITAL-ONE</code>, <code>MARRIOTT</code> o <code>MORGAN-STANLEY</code>.</li>
+<li>No agreguen espacios, tildes ni nombres de integrantes al nombre del archivo.</li>
+</ul>
+<p>Ejemplos válidos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>G01-EQUIFAX.pptx
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>G04-CAPITAL-ONE.pptx
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>G06-MORGAN-STANLEY.pptx
+</code></pre></div>
+<h4 id="2-verificar-la-conexion-y-el-comando-scp">2. Verificar la conexión y el comando SCP<a class="headerlink" href="#2-verificar-la-conexion-y-el-comando-scp" title="Permanent link">&para;</a></h4>
+<p>Abrir <strong>PowerShell</strong> y ejecutar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">Test-NetConnection</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">22</span><span class="p">.</span><span class="n">250</span> <span class="n">-Port</span> <span class="n">22</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">Get-Command</span> <span class="n">scp</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</code></pre></div>
+<p>Continuar solamente si <code>TcpTestSucceeded</code> muestra <code>True</code> y el segundo comando muestra la ubicación de <code>scp.exe</code>. Si alguna comprobación falla, avisar al instructor.</p>
+<h4 id="3-enviar-la-presentacion">3. Enviar la presentación<a class="headerlink" href="#3-enviar-la-presentacion" title="Permanent link">&para;</a></h4>
+<p>Copiar y pegar en PowerShell el siguiente bloque completo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">$nombre</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Read-Host</span> <span class="s2">"Nombre exacto del archivo, incluido .pptx"</span><span class="p">).</span><span class="n">Trim</span><span class="p">()</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$nombre</span> <span class="o">-notmatch</span> <span class="s1">'(?i)^G\d{2}-(EQUIFAX|TARGET|MAERSK|CAPITAL-ONE|MARRIOTT|MORGAN-STANLEY)\.pptx$'</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">throw</span> <span class="s2">"Nombre incorrecto. Ejemplo válido: G01-EQUIFAX.pptx"</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nv">$documentos</span> <span class="p">=</span> <span class="no">[Environment]</span><span class="p">::</span><span class="n">GetFolderPath</span><span class="p">(</span><span class="s1">'MyDocuments'</span><span class="p">)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nv">$archivo</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$documentos</span> <span class="nv">$nombre</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="n">-LiteralPath</span> <span class="nv">$archivo</span> <span class="n">-PathType</span> <span class="n">Leaf</span><span class="p">))</span> <span class="p">{</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="k">throw</span> <span class="s2">"No se encontró el archivo en Documentos: $archivo"</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">}</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">scp</span> <span class="nv">$archivo</span> <span class="s2">"entregas@192.168.22.250:$nombre"</span>
+</code></pre></div>
+<p>Cuando el bloque lo solicite, escribir el nombre exacto del archivo. En la primera conexión puede aparecer una pregunta sobre la autenticidad del servidor: responder <code>yes</code> <strong>solo después de que el instructor confirme la huella mostrada</strong>. Luego ingresar la contraseña temporal; PowerShell no muestra caracteres mientras se escribe.</p>
+<h4 id="4-confirmar-la-entrega">4. Confirmar la entrega<a class="headerlink" href="#4-confirmar-la-entrega" title="Permanent link">&para;</a></h4>
+<p>La transferencia terminó correctamente cuando <code>scp</code> muestra el nombre del archivo, una barra de progreso y <code>100%</code>. No cerrar PowerShell antes de ver esa confirmación.</p>
+<div class="admonition warning">
+<p class="admonition-title">Antes de retirarse</p>
+<p>Cada grupo debe comprobar que entregó el archivo correcto. Si necesita reemplazar una entrega, debe comunicarlo al instructor antes de volver a ejecutar el envío.</p>
+</div>
+<details class="success">
+<summary>Guía para el instructor — abrir después de las exposiciones</summary>
+<p>No existe necesariamente una sola respuesta correcta: el control principal depende de la debilidad que el equipo haya priorizado. Las siguientes son rutas sólidas para orientar la retroalimentación.</p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Elección principal defendible</th>
+<th>Ejemplo de implementación verificable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Equifax</td>
+<td><strong>A.8.8</strong> si se prioriza la vulnerabilidad; <strong>A.5.9</strong> si se prioriza la falta de visibilidad del sistema</td>
+<td>Inventario de software y responsables, recepción de avisos, plazo para vulnerabilidades críticas, ticket de corrección y escaneo autenticado que confirme el cierre.</td>
+</tr>
+<tr>
+<td>Target</td>
+<td><strong>A.5.19/A.5.20</strong> si se prioriza el acceso del proveedor; <strong>A.8.22</strong> si se prioriza el desplazamiento; <strong>A.5.25</strong> si se priorizan las alertas desatendidas</td>
+<td>Cuenta individual para cada tercero, privilegio y horario mínimos, segmento aislado, revisión trimestral y alerta con responsable y plazo de escalamiento probado.</td>
+</tr>
+<tr>
+<td>Maersk</td>
+<td><strong>A.5.21</strong> si se prioriza la actualización comprometida; <strong>A.5.30</strong> si se prioriza la continuidad</td>
+<td>Validar origen e integridad de actualizaciones, probarlas en un entorno aislado, mantener respaldos desconectados y ejecutar ejercicios contra objetivos de recuperación.</td>
+</tr>
+<tr>
+<td>Capital One</td>
+<td><strong>A.8.9</strong> o <strong>A.5.23</strong> si se prioriza la configuración cloud; <strong>A.8.16</strong> si se prioriza la detección tardía</td>
+<td>Configuración base versionada, revisión automática antes del despliegue, roles de mínimo privilegio, registro centralizado y alerta de consultas o transferencias anómalas.</td>
+</tr>
+<tr>
+<td>Marriott</td>
+<td><strong>A.8.16</strong> si se prioriza el monitoreo; <strong>A.8.15</strong> si se prioriza la falta de registros útiles; <strong>A.8.2</strong> si se priorizan los privilegios</td>
+<td>Registrar actividad administrativa y de base de datos, centralizarla, alertar por patrones definidos, asignar responsable de respuesta y probar periódicamente la detección.</td>
+</tr>
+<tr>
+<td>Morgan Stanley</td>
+<td><strong>A.7.14/A.8.10</strong> si se prioriza la información residual; <strong>A.5.19/A.5.22</strong> si se prioriza al proveedor</td>
+<td>Conciliar inventario y cadena de custodia, usar borrado verificable o destrucción, conservar certificado, muestrear equipos y auditar al proveedor contra requisitos contractuales.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Diferencia que debe aparecer en una buena respuesta:</strong></p>
+<ul>
+<li><strong>Evidencia de ejecución:</strong> existe un ticket que afirma que se instaló el parche.</li>
+<li><strong>Evidencia de eficacia:</strong> un escaneo posterior confirma que la vulnerabilidad ya no está presente.</li>
+</ul>
+<p><strong>Ejemplos de respuestas insuficientes:</strong> “poner un firewall”, “capacitar al personal”, “hacer respaldos” o “monitorear la red”. Les falta responsable, alcance, frecuencia, evidencia o criterio de éxito.</p>
+</details>
+<p>El patrón común de los seis expedientes no es solamente “faltó una herramienta”. Aparecen inventario, decisiones de riesgo, responsabilidades, proveedores, monitoreo, continuidad y verificación de eficacia: los elementos que convierten controles aislados en un sistema de gestión.</p>
+<hr />
+<h2 id="aplicacion-en-contexto-castrense">Aplicación en Contexto Castrense<a class="headerlink" href="#aplicacion-en-contexto-castrense" title="Permanent link">&para;</a></h2>
+<p><strong>Ejemplo 1 — PDCA y el puesto de mando avanzado:</strong>
+Un puesto de mando avanzado desplegado en campo aplica el ciclo PDCA a sus comunicaciones seguras aunque no lo llame "SGSI". PLAN: antes del despliegue, define qué canales serán cifrados, quién tiene qué radio, y cuáles son los procedimientos de comunicación en caso de interferencia. DO: despliega con los equipos configurados según el plan. CHECK: cada 24 horas, el Técnico de comunicaciones verifica que todos los equipos funcionan correctamente y que no hay señales de interferencia activa. ACT: si detecta que un canal está comprometido o interferido, ejecuta el procedimiento de cambio de frecuencia y actualiza el plan para los días siguientes. Este ciclo no tiene nombre formal, pero es PDCA aplicado a la seguridad operacional.</p>
+<p><strong>Ejemplo 2 — Compliance vs. postura en sistemas C2:</strong>
+Una unidad puede tener documentado en su SOP (Standard Operating Procedure) que todos los sistemas C2 deben tener contraseña de acceso de 12 caracteres mínimo — eso es compliance con una política interna. Pero si en la práctica los operadores usan contraseñas simples para no tener que reescribleas durante operaciones largas, la postura de seguridad real es deficiente pese al cumplimiento formal. Un SGSI que funciona detecta esta brecha en la fase CHECK mediante auditorías reales, y la corrige en la fase ACT.</p>
+<hr />
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<ol>
+<li>El ciclo <strong>PDCA</strong> (Plan-Do-Check-Act) es el principio organizativo del SGSI: es un ciclo permanente, no un proyecto con fecha de fin.</li>
+<li>Cada fase del PDCA corresponde a cláusulas de ISO 27001: PLAN (cláusulas 4-7), DO (8), CHECK (9), ACT (10).</li>
+<li>Los beneficios del SGSI incluyen visibilidad para el mando, responsabilidades claras para el personal técnico, continuidad de misión, y respuesta a incidentes más efectiva.</li>
+<li><strong>Compliance</strong> es cumplir con los requisitos documentados; <strong>security posture</strong> es el nivel de protección real. El SGSI que funciona bien hace que ambos converjan.</li>
+<li>Ante un incidente, el análisis correcto parte de hechos documentados, prioriza una debilidad, selecciona controles relacionados y exige evidencia de ejecución y de eficacia; no convierte el mapeo en una acusación de incumplimiento.</li>
+</ol>
+<h2 id="para-profundizar">Para profundizar<a class="headerlink" href="#para-profundizar" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Recursos opcionales — no requeridos para el examen.</p>
+</blockquote>
+<ul>
+<li><strong>Ciclo PDCA — Wikipedia:</strong> https://es.wikipedia.org/wiki/Ciclo_de_Deming — Historia del modelo y sus aplicaciones en gestión de calidad y seguridad.</li>
+<li><strong>ISO 27001 y PDCA — ISO.org:</strong> https://www.iso.org/isoiec-27001-information-security.html — Descripción oficial del estándar con referencia al ciclo de mejora continua.</li>
+<li><strong>Compliance vs. Security Posture (SANS):</strong> https://www.sans.org/blog/compliance-vs-security/ — Artículo técnico en inglés que profundiza en la distinción con casos de estudio.</li>
+</ul>
+<hr />
+<h2 id="ejercicio-integrador-mejorar-el-control-de-equipos-conectados-a-la-red">Ejercicio integrador — Mejorar el control de equipos conectados a la red<a class="headerlink" href="#ejercicio-integrador-mejorar-el-control-de-equipos-conectados-a-la-red" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Duración sugerida:</strong> 50 minutos | <strong>Modalidad:</strong> equipos de 3–4 alumnos | <strong>Producto:</strong> 12 respuestas, un diagrama y una explicación final</p>
+</blockquote>
+<div class="admonition info">
+<p class="admonition-title">Uso dentro de la sesión</p>
+<p>La unidad ya cuenta con un SGSI. El ejercicio no pide diseñarlo desde cero, sino mejorar una parte que presenta una debilidad.</p>
+<p>Para mantener las dos horas de clase, esta actividad puede reemplazar el trabajo por incidentes cuando se quiera reforzar el ciclo PDCA.</p>
+</div>
+<h3 id="proposito">Propósito<a class="headerlink" href="#proposito" title="Permanent link">&para;</a></h3>
+<p>Aplicar PDCA para mejorar la forma en que la unidad registra, autoriza y supervisa los equipos que se conectan a su red.</p>
+<p>Al finalizar, la unidad debería poder responder:</p>
+<ul>
+<li>¿Quién autorizó la conexión?</li>
+<li>¿Qué persona y qué equipo la utilizaron?</li>
+<li>¿Cuándo y desde dónde se conectaron?</li>
+<li>¿Qué acceso recibieron?</li>
+<li>¿Cuándo terminó la autorización?</li>
+</ul>
+<p>Poder responder estas preguntas se denomina <strong>trazabilidad</strong>. No significa vigilar todo el contenido del equipo, sino conservar evidencia suficiente sobre su acceso a la red.</p>
+<h3 id="escenario">Escenario<a class="headerlink" href="#escenario" title="Permanent link">&para;</a></h3>
+<p>La unidad ya opera un SGSI. Entre otras medidas, registra visitantes, administra sus equipos institucionales, mantiene una red de invitados y conserva registros de red.</p>
+<p>Durante una revisión periódica —CHECK del ciclo anterior— se encontró una conexión que no pudo relacionarse con una visita, una persona ni un equipo registrado.</p>
+<p>Los registros mostraban una dirección IP y una dirección MAC, pero todos los visitantes utilizaban la misma contraseña Wi-Fi. Tampoco existía un registro común que relacionara la visita con la conexión.</p>
+<p>La próxima semana llegará un consultor externo. El Oficial de Operaciones será responsable de la visita. El consultor llevará una laptop para mostrar una presentación almacenada en Internet.</p>
+<p>En principio solo necesita navegar por la web. Si requiere otro servicio, deberá solicitarlo y obtener autorización antes de la visita.</p>
+<p>La situación actual es la siguiente:</p>
+<ul>
+<li>recepción registra al visitante y al oficial responsable, pero no registra el equipo;</li>
+<li>la contraseña de invitados es compartida y no vence al terminar cada visita;</li>
+<li>el punto de acceso registra hora y MAC;</li>
+<li>DHCP registra qué dirección IP entregó;</li>
+<li>el firewall registra las conexiones, pero esos datos no están unidos al registro de la visita;</li>
+<li>algunas salas tienen Wi-Fi y puertos de red cableados; y</li>
+<li>nadie comprueba formalmente que las credenciales y permisos temporales hayan sido retirados.</li>
+</ul>
+<p>El hallazgo se convierte en una oportunidad de mejora. El mando solicita actualizar el SGSI para reducir las conexiones no registradas sin impedir el trabajo legítimo.</p>
+<h3 id="forma-de-trabajo">Forma de trabajo<a class="headerlink" href="#forma-de-trabajo" title="Permanent link">&para;</a></h3>
+<p>Respondan las tres preguntas de cada fase antes de continuar. Cada respuesta debe indicar:</p>
+<ul>
+<li>qué decisión tomaron;</li>
+<li>por qué la tomaron;</li>
+<li>quién sería responsable; y</li>
+<li>qué evidencia quedaría.</li>
+</ul>
+<p>Si necesitan asumir algo que no aparece en el escenario, indíquenlo claramente.</p>
+<h3 id="organizacion-del-tiempo_1">Organización del tiempo<a class="headerlink" href="#organizacion-del-tiempo_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>10 minutos:</strong> PLAN.</li>
+<li><strong>10 minutos:</strong> DO.</li>
+<li><strong>8 minutos:</strong> CHECK.</li>
+<li><strong>10 minutos:</strong> analizar el piloto y responder ACT.</li>
+<li><strong>12 minutos:</strong> preparar la explicación final.</li>
+</ul>
+<hr />
+<h3 id="plan-comprender-el-problema-y-decidir-que-se-necesita">PLAN — Comprender el problema y decidir qué se necesita<a class="headerlink" href="#plan-comprender-el-problema-y-decidir-que-se-necesita" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>¿Qué revisarían para entender la debilidad actual?</strong></p>
+<p>Elijan al menos cuatro fuentes: registro de visitas, inventario, diagrama de red, configuración Wi-Fi, DHCP, firewall o autenticación.</p>
+<p>Para cada fuente, indiquen qué información buscarían y qué duda les permitiría resolver.</p>
+</li>
+<li>
+<p><strong>¿Qué datos mínimos permitirían relacionar la visita, el equipo y la conexión?</strong></p>
+<p>Distingan entre datos declarados por el visitante y datos observados por la red. Indiquen quién autoriza la visita, cuánto dura y cuándo deben eliminarse sus datos.</p>
+</li>
+<li>
+<p><strong>¿Qué riesgo tratarían y qué resultado esperan obtener?</strong></p>
+<p>Completen: “Si [actor] aprovecha [debilidad], podría afectar [activo] y provocar [consecuencia]”.</p>
+<p>Después definan reglas para cuatro casos: equipo institucional, visitante común, visitante con permiso especial y equipo desconocido. Cierren con un objetivo medible y un plazo.</p>
+</li>
+</ol>
+<hr />
+<h3 id="do-poner-en-funcionamiento-lo-planificado">DO — Poner en funcionamiento lo planificado<a class="headerlink" href="#do-poner-en-funcionamiento-lo-planificado" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>¿Cómo funcionaría el procedimiento de principio a fin?</strong></p>
+<p>Describan qué ocurre desde la solicitud de la visita hasta el retiro del acceso. Asignen responsables y señalen qué registro o evidencia deja cada paso.</p>
+</li>
+<li>
+<p><strong>¿Cómo identificarían a los equipos cuando intentan conectarse?</strong></p>
+<p>Comparen estas opciones: contraseña compartida, código temporal individual, clave individual por equipo y certificado digital.</p>
+<p>Elijan una opción para equipos institucionales y otra para visitantes. Expliquen cómo evitarían que la misma credencial se use también en un teléfono.</p>
+</li>
+<li>
+<p><strong>¿Qué acceso recibiría cada equipo y qué registros deberían unirse?</strong></p>
+<p>Apliquen <strong>mínimo privilegio</strong>: cada equipo recibe solo el acceso que necesita.</p>
+<p>Indiquen cómo separarían los equipos, cómo registrarían el punto de acceso (AP) o puerto utilizado y cómo relacionarían visita, autenticación, IP y firewall.</p>
+<p>Si el consultor solicita RDP, SSH u otro servicio, expliquen cómo autorizarían ese acceso sin abrirlo para todos.</p>
+</li>
+</ol>
+<hr />
+<h3 id="check-comprobar-que-la-mejora-funciona">CHECK — Comprobar que la mejora funciona<a class="headerlink" href="#check-comprobar-que-la-mejora-funciona" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>¿Cómo probarían el registro y autorización de los equipos?</strong></p>
+<p>Prueben un equipo desconocido, el uso de la credencial en un teléfono y una reconexión con una MAC privada diferente. Indiquen qué debería ocurrir en cada caso.</p>
+</li>
+<li>
+<p><strong>¿Cómo comprobarían que cada equipo recibe solamente el acceso necesario?</strong></p>
+<p>Verifiquen que el consultor puede usar Internet, que no llega a recursos internos sin permiso y que un permiso especial funciona solo para el destino, servicio y horario aprobados.</p>
+</li>
+<li>
+<p><strong>¿Cómo comprobarían la trazabilidad y el cierre?</strong></p>
+<p>Partan del identificador de la visita y reconstruyan quién se conectó, cuándo, desde qué AP o puerto, con qué IP y qué acceso recibió.</p>
+<p>Definan al menos tres medidas y el valor que indicaría “cumple” o “no cumple”. Incluyan la expiración de la credencial y de todo permiso temporal.</p>
+</li>
+</ol>
+<h3 id="resultado-del-primer-piloto">Resultado del primer piloto<a class="headerlink" href="#resultado-del-primer-piloto" title="Permanent link">&para;</a></h3>
+<p>Después de diseñar las pruebas de CHECK, analicen estos resultados del primer piloto:</p>
+<ul>
+<li>la laptop registrada tuvo acceso a Internet y no pudo alcanzar los servidores internos;</li>
+<li>la misma credencial temporal pudo utilizarse simultáneamente desde un teléfono;</li>
+<li>después de reconectarse, la laptop utilizó otra MAC privada y apareció como un segundo equipo;</li>
+<li>el controlador Wi-Fi y DHCP tenían siete minutos de diferencia, por lo que reconstruir la conexión tomó 40 minutos; y</li>
+<li>la credencial venció correctamente, pero un permiso temporal del firewall continuó activo al día siguiente.</li>
+</ul>
+<p>Si su diseño ya habría evitado alguno de estos resultados, expliquen qué decisión lo impediría y qué evidencia lo demostraría.</p>
+<hr />
+<h3 id="act-corregir-y-comenzar-un-nuevo-ciclo">ACT — Corregir y comenzar un nuevo ciclo<a class="headerlink" href="#act-corregir-y-comenzar-un-nuevo-ciclo" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>¿Qué corregirían de inmediato?</strong></p>
+<p>Ordenen los hallazgos por prioridad. Para cada corrección indiquen qué riesgo reduce, quién la realizará y cuándo debe terminarla.</p>
+</li>
+<li>
+<p><strong>¿Qué cambiarían para que el problema no se repita?</strong></p>
+<p>No se limiten a reparar el caso. Propongan cambios al procedimiento o al sistema para evitar la reutilización de credenciales, registros con horas distintas y permisos que no vencen.</p>
+</li>
+<li>
+<p><strong>¿Qué llevarían al siguiente PLAN?</strong></p>
+<p>Indiquen qué regla, procedimiento, configuración o medida actualizarían. Señalen qué riesgo todavía quedaría y qué prueba repetirían para confirmar la mejora.</p>
+</li>
+</ol>
+<hr />
+<h3 id="producto-final-explicacion-completa-del-ciclo-pdca">Producto final — Explicación completa del ciclo PDCA<a class="headerlink" href="#producto-final-explicacion-completa-del-ciclo-pdca" title="Permanent link">&para;</a></h3>
+<p>Dibujen primero cómo relacionarían la visita, el equipo, la conexión y el cierre del acceso.</p>
+<p>Después redacten una explicación de <strong>200 a 300 palabras</strong>, organizada en cuatro párrafos:</p>
+<blockquote>
+<p><strong>PLAN:</strong> “Examinamos [fuentes], identificamos el riesgo de [riesgo] y establecimos el objetivo de [objetivo].”</p>
+<p><strong>DO:</strong> “Implementamos [medidas], bajo responsabilidad de [responsable], y produjimos como evidencia [evidencia].”</p>
+<p><strong>CHECK:</strong> “Probamos [controles] y los resultados demostraron [resultado]; sin embargo, encontramos [hallazgo].”</p>
+<p><strong>ACT:</strong> “Corregiremos [problema], mejoraremos [proceso] y en el siguiente PLAN revisaremos [aspecto].”</p>
+</blockquote>
+<p>La explicación debe mantener esta relación:</p>
+<table>
+<thead>
+<tr>
+<th>Riesgo identificado</th>
+<th>Objetivo</th>
+<th>Medida implementada</th>
+<th>Evidencia de ejecución</th>
+<th>Prueba de eficacia</th>
+<th>Resultado</th>
+<th>Mejora</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PLAN</td>
+<td>PLAN</td>
+<td>DO</td>
+<td>DO</td>
+<td>CHECK</td>
+<td>CHECK</td>
+<td>ACT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="criterios-de-evaluacion-10-puntos_1">Criterios de evaluación — 10 puntos<a class="headerlink" href="#criterios-de-evaluacion-10-puntos_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th style="text-align: right;">Puntaje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PLAN identifica fuentes, riesgos, categorías y un objetivo verificable</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>DO integra procedimiento, responsables, autenticación, mínimo privilegio y evidencia</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>CHECK define pruebas reproducibles, resultados esperados e indicadores</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>ACT corrige hallazgos, trata causas y alimenta el siguiente ciclo</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>La explicación conecta claramente las cuatro fases</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Siguiente: <a href="../iso27001-requisitos-p1/">ISO 27001 — Requisitos (Parte 1)</a></em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

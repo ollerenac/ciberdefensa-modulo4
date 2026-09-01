@@ -1,0 +1,4134 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/instructor/guia-docente-iso27000/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Guía docente — Familia ISO/IEC 27000 - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  name="robots"  content="noindex, nofollow" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-docente-familia-isoiec-27000" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía docente — Familia ISO/IEC 27000
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/laboratorio-vm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🖥 Laboratorio virtual — accesos y credenciales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/repaso-redes-defensivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precalentamiento y Repaso — Redes Defensivas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/ficha-zero-day-pdca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ficha: Alerta Zero-Day y PDCA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../conferencias/ejercicios-extra-metasploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ejercicio extra — Preparación de Metasploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#orientacion-general-para-las-ocho-sesiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Orientación general para las ocho sesiones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Orientación general para las ocho sesiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-hilo-que-debe-conservar-el-alumno" class="md-nav__link">
+    <span class="md-ellipsis">
+      El hilo que debe conservar el alumno
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regla-de-comunicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regla de comunicación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distinciones-que-deben-repetirse-durante-toda-la-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distinciones que deben repetirse durante toda la unidad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobacion-rapida-al-finalizar-cada-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación rápida al finalizar cada clase
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-resuelto-para-modelar-las-exposiciones-colonial-pipeline-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo resuelto para modelar las exposiciones — Colonial Pipeline (2021)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplo resuelto para modelar las exposiciones — Colonial Pipeline (2021)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-detalles-del-ataque" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Detalles del ataque
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Detalles del ataque">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cadena-tecnica-que-debe-explicar-el-alumno" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cadena técnica que debe explicar el alumno
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-controles-de-isoiec-270022022-que-habrian-anadido-resistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Controles de ISO/IEC 27002:2022 que habrían añadido resistencia
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-procedimientos-especificos-para-implementar-los-controles" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Procedimientos específicos para implementar los controles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Procedimientos específicos para implementar los controles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#procedimiento-a-exigir-mfa-y-contrasenas-unicas-en-todo-acceso-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procedimiento A — Exigir MFA y contraseñas únicas en todo acceso remoto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procedimiento-b-dar-de-baja-accesos-que-ya-no-son-necesarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procedimiento B — Dar de baja accesos que ya no son necesarios
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procedimiento-c-retirar-completamente-una-vpn-o-configuracion-heredada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procedimiento C — Retirar completamente una VPN o configuración heredada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procedimiento-d-comprobar-que-los-controles-funcionan-juntos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procedimiento D — Comprobar que los controles funcionan juntos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-comunicar-el-ejemplo-en-el-aula" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo comunicar el ejemplo en el aula
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-generalidades-parte-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Generalidades — Parte 1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Generalidades — Parte 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resultado-que-debe-quedar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultado que debe quedar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensaje-irrenunciable" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mensaje irrenunciable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-abrir-la-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo abrir la clase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secuencia-recomendada-de-explicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secuencia recomendada de explicación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-comunicar-la-relacion-entre-las-normas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo comunicar la relación entre las normas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-conductor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo conductor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-para-hacer-a-los-alumnos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preguntas para hacer a los alumnos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respuestas-que-revelan-comprension" class="md-nav__link">
+    <span class="md-ellipsis">
+      Respuestas que revelan comprensión
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusiones-que-debe-corregir" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusiones que debe corregir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distribucion-sugerida-del-tiempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribución sugerida del tiempo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cierre-sugerido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cierre sugerido
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-generalidades-parte-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Generalidades — Parte 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Generalidades — Parte 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resultado-que-debe-quedar_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultado que debe quedar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensaje-irrenunciable_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mensaje irrenunciable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-abrir-la-clase_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo abrir la clase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-explicar-pdca" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo explicar PDCA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compliance-y-postura-de-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compliance y postura de seguridad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conduccion-del-trabajo-con-incidentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conducción del trabajo con incidentes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frases-que-debe-modelar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frases que debe modelar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-para-hacer-a-los-alumnos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preguntas para hacer a los alumnos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusiones-que-debe-corregir_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusiones que debe corregir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distribucion-sugerida-del-tiempo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribución sugerida del tiempo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cierre-sugerido_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cierre sugerido
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-iso-27001-requisitos-parte-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. ISO 27001 — Requisitos, Parte 1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. ISO 27001 — Requisitos, Parte 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resultado-que-debe-quedar_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultado que debe quedar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensaje-irrenunciable_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mensaje irrenunciable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-abrir-la-clase_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo abrir la clase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-comunicar-cada-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo comunicar cada bloque
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cómo comunicar cada bloque">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      § 4 — Contexto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-liderazgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      § 5 — Liderazgo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-planificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      § 6 — Planificación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-apoyo" class="md-nav__link">
+    <span class="md-ellipsis">
+      § 7 — Apoyo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogia-util-con-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogía útil, con límite
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-para-hacer-a-los-alumnos_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preguntas para hacer a los alumnos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusiones-que-debe-corregir_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusiones que debe corregir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distribucion-sugerida-del-tiempo_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribución sugerida del tiempo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cierre-sugerido_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cierre sugerido
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-iso-27001-requisitos-parte-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. ISO 27001 — Requisitos, Parte 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. ISO 27001 — Requisitos, Parte 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resultado-que-debe-quedar_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultado que debe quedar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensaje-irrenunciable_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mensaje irrenunciable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-abrir-la-clase_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo abrir la clase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-comunicar-8-operacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo comunicar § 8 — Operación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-comunicar-9-evaluacion-del-desempeno" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo comunicar § 9 — Evaluación del desempeño
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-comunicar-10-mejora" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo comunicar § 10 — Mejora
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actividad-recomendada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad recomendada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-para-hacer-a-los-alumnos_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preguntas para hacer a los alumnos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusiones-que-debe-corregir_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusiones que debe corregir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distribucion-sugerida-del-tiempo_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribución sugerida del tiempo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cierre-sugerido_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cierre sugerido
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-iso-27002-controles-parte-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. ISO 27002 — Controles, Parte 1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. ISO 27002 — Controles, Parte 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resultado-que-debe-quedar_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultado que debe quedar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensaje-irrenunciable_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mensaje irrenunciable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-abrir-la-clase_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo abrir la clase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-explicar-la-relacion-2700127002" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo explicar la relación 27001–27002
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#los-cuatro-temas-que-deben-recordar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Los cuatro temas que deben recordar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-para-hacer-a-los-alumnos_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preguntas para hacer a los alumnos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusiones-que-debe-corregir_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusiones que debe corregir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distribucion-sugerida-del-tiempo_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribución sugerida del tiempo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cierre-sugerido_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cierre sugerido
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-iso-27002-controles-parte-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. ISO 27002 — Controles, Parte 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. ISO 27002 — Controles, Parte 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resultado-que-debe-quedar_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultado que debe quedar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensaje-irrenunciable_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mensaje irrenunciable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-abrir-la-clase_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo abrir la clase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-ensenar-controles-concretos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo enseñar controles concretos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-comunicar-el-soa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo comunicar el SoA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actividad-recomendada_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad recomendada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-para-hacer-a-los-alumnos_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preguntas para hacer a los alumnos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusiones-que-debe-corregir_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusiones que debe corregir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distribucion-sugerida-del-tiempo_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribución sugerida del tiempo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cierre-sugerido_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cierre sugerido
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-iso-27005-gestion-del-riesgo-parte-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. ISO 27005 — Gestión del Riesgo, Parte 1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. ISO 27005 — Gestión del Riesgo, Parte 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resultado-que-debe-quedar_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultado que debe quedar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensaje-irrenunciable_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mensaje irrenunciable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-abrir-la-clase_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo abrir la clase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-comunicar-el-proceso-de-riesgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo comunicar el proceso de riesgo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-ensenar-el-inventario-de-activos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo enseñar el inventario de activos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-diferenciar-amenaza-y-vulnerabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo diferenciar amenaza y vulnerabilidad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actividad-recomendada_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad recomendada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-para-hacer-a-los-alumnos_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preguntas para hacer a los alumnos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusiones-que-debe-corregir_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusiones que debe corregir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distribucion-sugerida-del-tiempo_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribución sugerida del tiempo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cierre-sugerido_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cierre sugerido
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-iso-27005-gestion-del-riesgo-parte-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. ISO 27005 — Gestión del Riesgo, Parte 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. ISO 27005 — Gestión del Riesgo, Parte 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resultado-que-debe-quedar_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultado que debe quedar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensaje-irrenunciable_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mensaje irrenunciable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-abrir-la-clase_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo abrir la clase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-ensenar-la-matriz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo enseñar la matriz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-comunicar-las-cuatro-opciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo comunicar las cuatro opciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conduccion-del-ejercicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conducción del ejercicio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-para-hacer-a-los-alumnos_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preguntas para hacer a los alumnos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusiones-que-debe-corregir_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusiones que debe corregir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distribucion-sugerida-del-tiempo_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribución sugerida del tiempo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cierre-sugerido_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cierre sugerido
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-verificacion-antes-de-cada-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lista de verificación antes de cada clase
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#senal-final-de-dominio-de-la-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Señal final de dominio de la unidad
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="guia-docente-familia-isoiec-27000">Guía docente — Familia ISO/IEC 27000<a class="headerlink" href="#guia-docente-familia-isoiec-27000" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Documento de uso del instructor.</strong> Esta página no aparece en el menú ni en el buscador interno del curso. Su URL es técnicamente pública; no contiene claves de examen ni información sensible.</p>
+</blockquote>
+<p>Esta guía no reemplaza el contenido de las clases. Sirve como apoyo durante la exposición: indica <strong>qué aprendizaje debe quedar</strong>, <strong>cómo comunicarlo</strong>, <strong>qué preguntas hacer</strong> y <strong>qué confusiones corregir</strong>.</p>
+<h2 id="orientacion-general-para-las-ocho-sesiones">Orientación general para las ocho sesiones<a class="headerlink" href="#orientacion-general-para-las-ocho-sesiones" title="Permanent link">&para;</a></h2>
+<h3 id="el-hilo-que-debe-conservar-el-alumno">El hilo que debe conservar el alumno<a class="headerlink" href="#el-hilo-que-debe-conservar-el-alumno" title="Permanent link">&para;</a></h3>
+<p>Presente toda la unidad como una sola cadena de decisiones:</p>
+<blockquote>
+<p><strong>Comprender el contexto → identificar riesgos → decidir qué hacer → seleccionar controles → producir evidencia → comprobar y mejorar.</strong></p>
+</blockquote>
+<p>Si los alumnos entienden esta cadena, podrán ubicar cada norma aunque no recuerden todos sus números:</p>
+<ul>
+<li><strong>ISO/IEC 27000</strong> entrega el panorama, los conceptos y el vocabulario.</li>
+<li><strong>ISO/IEC 27001</strong> establece los requisitos que debe cumplir un SGSI.</li>
+<li><strong>ISO/IEC 27002</strong> orienta la implementación de los controles.</li>
+<li><strong>ISO/IEC 27005</strong> orienta la gestión del riesgo de seguridad de la información.</li>
+</ul>
+<h3 id="regla-de-comunicacion">Regla de comunicación<a class="headerlink" href="#regla-de-comunicacion" title="Permanent link">&para;</a></h3>
+<p>Explique siempre en este orden:</p>
+<ol>
+<li><strong>Problema operacional:</strong> qué puede afectar la misión.</li>
+<li><strong>Decisión de gestión:</strong> quién debe decidir y con qué criterio.</li>
+<li><strong>Acción concreta:</strong> qué hacen el mando, el responsable y el Técnico.</li>
+<li><strong>Evidencia:</strong> cómo se demuestra que la acción ocurrió.</li>
+<li><strong>Eficacia:</strong> cómo se comprueba que realmente redujo el riesgo.</li>
+</ol>
+<p>Evite comenzar por definiciones extensas o números de cláusulas. Primero haga visible el problema; después coloque el nombre ISO sobre una situación que el alumno ya comprendió.</p>
+<h3 id="distinciones-que-deben-repetirse-durante-toda-la-unidad">Distinciones que deben repetirse durante toda la unidad<a class="headerlink" href="#distinciones-que-deben-repetirse-durante-toda-la-unidad" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Tener una herramienta no equivale a gestionar la seguridad.</strong> Deben existir responsables, procedimientos, evidencia y revisión.</li>
+<li><strong>Documentar no es acumular papeles.</strong> Es dejar evidencia útil para operar, verificar, aprender y rendir cuentas.</li>
+<li><strong>Cumplimiento no garantiza ausencia de incidentes.</strong> Un SGSI reduce y gestiona el riesgo; no promete riesgo cero.</li>
+<li><strong>Un control implementado no necesariamente es eficaz.</strong> La instalación o el registro demuestran ejecución; una prueba de resultado demuestra eficacia.</li>
+<li><strong>La norma no sustituye el criterio profesional.</strong> Organiza las preguntas y exige justificar las decisiones.</li>
+</ul>
+<h3 id="comprobacion-rapida-al-finalizar-cada-clase">Comprobación rápida al finalizar cada clase<a class="headerlink" href="#comprobacion-rapida-al-finalizar-cada-clase" title="Permanent link">&para;</a></h3>
+<p>Use siempre una pregunta de transferencia, no una pregunta de memoria:</p>
+<blockquote>
+<p>“¿Cómo se aplicaría esta idea en una sección de comunicaciones y qué evidencia pediría usted para comprobarla?”</p>
+</blockquote>
+<p>Una respuesta sólida debe mencionar una situación concreta, un responsable, una acción y una evidencia. Si el alumno solo menciona una herramienta o repite una definición, todavía no ha transferido el concepto.</p>
+<h2 id="ejemplo-resuelto-para-modelar-las-exposiciones-colonial-pipeline-2021">Ejemplo resuelto para modelar las exposiciones — Colonial Pipeline (2021)<a class="headerlink" href="#ejemplo-resuelto-para-modelar-las-exposiciones-colonial-pipeline-2021" title="Permanent link">&para;</a></h2>
+<p>Utilice este caso para mostrar el nivel de precisión esperado en el trabajo <strong>Ataques → controles de seguridad</strong>. Preséntelo después de explicar la consigna o al terminar las exposiciones, para evitar que los grupos simplemente copien la estructura.</p>
+<div class="admonition warning">
+<p class="admonition-title">Límite de la conclusión</p>
+<p>Este es un análisis docente basado en información pública, no una auditoría de Colonial Pipeline. No diga que la empresa “incumplía ISO” ni que carecía de todos los controles. La formulación rigurosa es: <strong>una VPN heredada continuaba utilizable y no exigía MFA; los controles seleccionados habrían añadido resistencia directa frente a ese vector de acceso</strong>.</p>
+</div>
+<h3 id="1-detalles-del-ataque">1. Detalles del ataque<a class="headerlink" href="#1-detalles-del-ataque" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Ejemplo de respuesta esperada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Víctima</strong></td>
+<td>Colonial Pipeline Company, operador estadounidense de infraestructura energética.</td>
+</tr>
+<tr>
+<td><strong>Atacante</strong></td>
+<td>Un afiliado que utilizó el ransomware como servicio <strong>DarkSide</strong>. El FBI atribuyó el compromiso a DarkSide, pero no identificó públicamente al operador humano concreto.</td>
+</tr>
+<tr>
+<td><strong>Acceso inicial</strong></td>
+<td>La evidencia forense más temprana, del <strong>29 de abril de 2021</strong>, muestra un inicio de sesión en un dispositivo VPN con el usuario y la contraseña de un empleado. Se utilizó un perfil de VPN heredado que la empresa creía inactivo, pero que todavía funcionaba.</td>
+</tr>
+<tr>
+<td><strong>Debilidad explotada</strong></td>
+<td>El perfil VPN aceptaba solamente usuario y contraseña: <strong>no exigía autenticación multifactor (MFA)</strong>. La contraseña era compleja, pero también había sido utilizada en otro sitio posteriormente comprometido. La investigación no pudo determinar de manera concluyente cómo obtuvo el atacante las credenciales.</td>
+</tr>
+<tr>
+<td><strong>Vulnerabilidad CVE</strong></td>
+<td><strong>No se identificó una CVE para el acceso inicial.</strong> El atacante abusó de credenciales válidas y de una configuración de acceso remoto débil; no explotó un defecto de software publicado.</td>
+</tr>
+<tr>
+<td><strong>Acción del atacante</strong></td>
+<td>Una vez dentro de la red de TI, desplegó DarkSide, cifró sistemas y presentó una exigencia de rescate. Las fuentes oficiales no publicaron una reconstrucción completa del movimiento lateral.</td>
+</tr>
+<tr>
+<td><strong>Impacto</strong></td>
+<td>El ransomware afectó sistemas de TI. Colonial detuvo preventivamente aproximadamente <strong>5.500 millas de tubería</strong> mientras contenía y evaluaba el incidente. CISA y el FBI no reportaron afectación directa de la red operacional —OT—.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="cadena-tecnica-que-debe-explicar-el-alumno">Cadena técnica que debe explicar el alumno<a class="headerlink" href="#cadena-tecnica-que-debe-explicar-el-alumno" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>Credenciales comprometidas</strong> → <strong>VPN heredada todavía activa</strong> → <strong>contraseña como único factor</strong> → <strong>acceso no autorizado a TI</strong> → <strong>ransomware y cifrado</strong> → <strong>apagado preventivo para contener el riesgo hacia OT</strong>.</p>
+</blockquote>
+<p>Insista en dos precisiones:</p>
+<ul>
+<li>La reutilización de la contraseña está documentada, pero no se confirmó que esa fuera exactamente la vía por la que el atacante la consiguió.</li>
+<li>La interrupción operacional no significa que el atacante controlara válvulas o sistemas industriales; el cierre fue una decisión preventiva de la empresa.</li>
+</ul>
+<h3 id="2-controles-de-isoiec-270022022-que-habrian-anadido-resistencia">2. Controles de ISO/IEC 27002:2022 que habrían añadido resistencia<a class="headerlink" href="#2-controles-de-isoiec-270022022-que-habrian-anadido-resistencia" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Condición observada</th>
+<th>Resistencia que debía aportar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>8.5 — Autenticación segura</strong></td>
+<td>La ruta VPN utilizada no exigía MFA.</td>
+<td>Aunque el atacante conociera la contraseña, no habría podido ingresar sin el segundo factor. Es la relación más directa y mejor documentada.</td>
+</tr>
+<tr>
+<td><strong>5.17 — Información de autenticación</strong></td>
+<td>La contraseña corporativa también se utilizaba en otro sitio comprometido.</td>
+<td>Contraseñas únicas, un gestor institucional y la detección de credenciales expuestas reducen el riesgo de reutilización y abuso.</td>
+</tr>
+<tr>
+<td><strong>5.18 — Derechos de acceso</strong></td>
+<td>Un perfil VPN que se creía fuera de uso todavía permitía autenticarse.</td>
+<td>La revisión periódica y la revocación verificable eliminan accesos que ya no tienen una necesidad operacional.</td>
+</tr>
+<tr>
+<td><strong>8.9 — Gestión de la configuración</strong></td>
+<td>Persistía una ruta heredada con autenticación de un solo factor, distinta del mecanismo normal con token.</td>
+<td>Una línea base aprobada y la verificación del retiro completo impiden que sobrevivan configuraciones antiguas expuestas.</td>
+</tr>
+<tr>
+<td><strong>5.16 — Gestión de identidades</strong></td>
+<td>Existían credenciales válidas capaces de autenticarse mediante una ruta que no debía utilizarse.</td>
+<td>Cada identidad y cuenta remota debe tener propietario, propósito, vigencia y un ciclo formal de alta, revisión y baja. Este vínculo es complementario porque no se publicó el expediente interno de la cuenta.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Cómo evaluar una selección diferente</p>
+<p>Acepte otro control si el alumno identifica primero una debilidad concreta, explica cómo el control la previene, detecta o limita y no presenta una inferencia como hecho. No acepte una lista extensa de controles sin relación causal.</p>
+</div>
+<p>No presente como ausentes los controles de respuesta a incidentes, segmentación, copias de seguridad o continuidad. La evidencia pública no permite esa conclusión y, de hecho, Colonial activó su respuesta, notificó a las autoridades, aisló sistemas y operó parcialmente con procedimientos manuales.</p>
+<h3 id="3-procedimientos-especificos-para-implementar-los-controles">3. Procedimientos específicos para implementar los controles<a class="headerlink" href="#3-procedimientos-especificos-para-implementar-los-controles" title="Permanent link">&para;</a></h3>
+<p>Los procedimientos siguientes muestran el nivel de detalle esperado: indican <strong>qué se hace, quién lo hace y qué evidencia permite comprobarlo</strong>.</p>
+<h4 id="procedimiento-a-exigir-mfa-y-contrasenas-unicas-en-todo-acceso-remoto">Procedimiento A — Exigir MFA y contraseñas únicas en todo acceso remoto<a class="headerlink" href="#procedimiento-a-exigir-mfa-y-contrasenas-unicas-en-todo-acceso-remoto" title="Permanent link">&para;</a></h4>
+<p><strong>Implementa principalmente:</strong> 8.5 y 5.17.</p>
+<ol>
+<li>El responsable de seguridad obtiene de los firewalls, concentradores VPN, servicios en la nube y directorios una lista única de todos los accesos remotos.</li>
+<li>Para cada acceso registra el sistema, dirección expuesta, propietario, usuarios autorizados, método de autenticación y fecha prevista de retiro.</li>
+<li>La organización prohíbe utilizar la contraseña corporativa en servicios personales y entrega un gestor de contraseñas para generar una clave distinta por cuenta.</li>
+<li>El administrador bloquea contraseñas conocidas como expuestas y ordena su cambio inmediato cuando existe una alerta confiable de compromiso.</li>
+<li>Se configura MFA para todas las conexiones remotas. Para administradores y sistemas críticos se priorizan llaves FIDO2/WebAuthn o tokens resistentes al <em>phishing</em>.</li>
+<li>Una VPN que no admite MFA se retira o se coloca detrás de un servicio moderno que sí lo exija. No se mantiene abierta como excepción permanente.</li>
+<li>Un técnico de pruebas intenta ingresar con una contraseña válida, pero sin el segundo factor. El resultado esperado es <strong>acceso rechazado</strong>.</li>
+<li>Mensualmente se informa el porcentaje de accesos remotos cubiertos por MFA. La meta es 100 %; cada excepción debe tener responsable, tratamiento compensatorio y fecha de vencimiento.</li>
+</ol>
+<p><strong>Evidencia:</strong> inventario de accesos, política de contraseñas, exportación de la configuración MFA, reporte de usuarios inscritos, resultado de la prueba negativa y registro de excepciones.</p>
+<h4 id="procedimiento-b-dar-de-baja-accesos-que-ya-no-son-necesarios">Procedimiento B — Dar de baja accesos que ya no son necesarios<a class="headerlink" href="#procedimiento-b-dar-de-baja-accesos-que-ya-no-son-necesarios" title="Permanent link">&para;</a></h4>
+<p><strong>Implementa principalmente:</strong> 5.16 y 5.18.</p>
+<ol>
+<li>Todo acceso VPN se crea mediante una solicitud aprobada que identifica a la persona, función, responsable, recursos permitidos y fecha de expiración.</li>
+<li>No se crean cuentas compartidas. Cada acceso debe poder atribuirse a una persona o a un servicio técnico con propietario identificado.</li>
+<li>Recursos Humanos o el responsable de contratistas comunica inmediatamente las bajas y cambios de función. El administrador desactiva ese mismo día los accesos que dejan de corresponder.</li>
+<li>El sistema suspende las cuentas VPN que superen el periodo de inactividad definido. Su reactivación requiere una nueva aprobación registrada.</li>
+<li>Cada trimestre, el dueño del sistema revisa la lista de usuarios y confirma uno por uno quién mantiene una necesidad operacional. Los accesos no confirmados se suspenden.</li>
+<li>El administrador compara personal vigente, identidades del directorio y usuarios configurados en la VPN. Investiga y corrige cada diferencia.</li>
+<li>Después de la baja, otro técnico intenta autenticar la cuenta y adjunta al ticket el rechazo obtenido. Cambiar un estado en una hoja de cálculo no demuestra que el acceso dejó de funcionar.</li>
+</ol>
+<p><strong>Evidencia:</strong> solicitudes y aprobaciones, reporte de inactividad, revisión trimestral firmada, conciliación de identidades, ticket de baja y prueba posterior de bloqueo.</p>
+<h4 id="procedimiento-c-retirar-completamente-una-vpn-o-configuracion-heredada">Procedimiento C — Retirar completamente una VPN o configuración heredada<a class="headerlink" href="#procedimiento-c-retirar-completamente-una-vpn-o-configuracion-heredada" title="Permanent link">&para;</a></h4>
+<p><strong>Implementa principalmente:</strong> 8.9.</p>
+<ol>
+<li>La organización aprueba una línea base de acceso remoto: tecnologías y versiones permitidas, MFA obligatorio, cifrado, registros y redes alcanzables.</li>
+<li>El responsable compara todos los concentradores, perfiles y reglas de acceso con la línea base. Marca cualquier componente antiguo, no documentado, sin propietario o sin MFA.</li>
+<li>Para retirar un servicio abre un cambio formal y elimina todos sus componentes: perfil VPN, cuentas locales, certificados, reglas de firewall, publicación DNS y rutas asociadas.</li>
+<li>Desde una red externa de prueba intenta conectarse al servicio retirado. El resultado esperado es que no responda o rechace el acceso; se conserva la captura de la prueba.</li>
+<li>Periódicamente se descubren los servicios expuestos a Internet y se comparan con el inventario aprobado. Toda VPN o puerto no reconocido genera una alerta y un ticket.</li>
+<li>Las configuraciones se exportan a un repositorio controlado y se revisan para detectar autenticación de un solo factor, cuentas locales no autorizadas y otras desviaciones.</li>
+<li>Toda excepción requiere aprobación del responsable del riesgo, medidas compensatorias y fecha de vencimiento. Al vencer, se cierra automáticamente o se renueva formalmente.</li>
+</ol>
+<p><strong>Evidencia:</strong> línea base, inventario, ticket de cambio, configuración anterior y posterior, prueba externa de cierre, resultados del descubrimiento y registro de excepciones.</p>
+<h4 id="procedimiento-d-comprobar-que-los-controles-funcionan-juntos">Procedimiento D — Comprobar que los controles funcionan juntos<a class="headerlink" href="#procedimiento-d-comprobar-que-los-controles-funcionan-juntos" title="Permanent link">&para;</a></h4>
+<p><strong>Implementa y verifica:</strong> 5.16, 5.18, 8.5 y 8.9.</p>
+<ol>
+<li>Trimestralmente, un revisor que no administre la VPN selecciona una muestra de usuarios activos, usuarios dados de baja y servicios retirados.</li>
+<li>Para cada usuario activo comprueba aprobación vigente, MFA inscrito, permisos mínimos y fecha de revisión.</li>
+<li>Para cada usuario dado de baja comprueba que no puede autenticarse ni conserva certificados, tokens o grupos con acceso indirecto.</li>
+<li>Para cada servicio retirado comprueba desde el exterior que no responde y revisa que no queden reglas, DNS, cuentas o perfiles asociados.</li>
+<li>Cada diferencia recibe responsable y fecha de corrección. Después se repite la prueba: cerrar el ticket sin volver a probar no demuestra eficacia.</li>
+<li>El mando recibe cuatro indicadores: cobertura MFA, cuentas sin propietario, accesos vencidos todavía activos y tiempo promedio de revocación.</li>
+</ol>
+<p><strong>Evidencia:</strong> plan de muestreo, lista de comprobación, resultados, tickets de corrección, revalidación e informe de indicadores.</p>
+<h3 id="como-comunicar-el-ejemplo-en-el-aula">Cómo comunicar el ejemplo en el aula<a class="headerlink" href="#como-comunicar-el-ejemplo-en-el-aula" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Proyecte primero solamente los detalles del ataque y pregunte: “¿En qué punto de la cadena habría sido más barato detenerlo?”.</li>
+<li>Revele después los controles. Por cada uno, obligue a completar la frase: “Este control habría añadido resistencia porque…”.</li>
+<li>Muestre los procedimientos al final y contraste <strong>actividad</strong> con <strong>eficacia</strong>: configurar MFA es una actividad; comprobar que la contraseña sola ya no permite entrar es evidencia de eficacia.</li>
+<li>Cierre preguntando: “¿Qué afirmaciones de este ejemplo son hechos documentados y cuáles son inferencias profesionales?”.</li>
+</ol>
+<details class="info">
+<summary>Fuentes oficiales del caso</summary>
+<ul>
+<li><a href="https://www.congress.gov/117/chrg/CHRG-117hhrg45085/CHRG-117hhrg45085.pdf">Audiencia de la Cámara: testimonios de Colonial Pipeline y Mandiant, 9 de junio de 2021</a>.</li>
+<li><a href="https://www.hsgac.senate.gov/wp-content/uploads/imo/media/doc/Testimony-Blount-2021-06-08.pdf">Testimonio de Joseph Blount ante el Senado, 8 de junio de 2021</a>.</li>
+<li><a href="https://www.hsgac.senate.gov/media/reps/portman-presses-president-and-ceo-of-colonial-pipeline-on-gaps-in-cybersecurity-practices/">Interrogatorio oficial del Senado sobre la VPN y MFA</a>.</li>
+<li><a href="https://www.cisa.gov/sites/default/files/publications/AA21-131A_Darkside_Ransomware.pdf">Aviso conjunto CISA–FBI AA21-131A sobre DarkSide</a>.</li>
+<li><a href="https://www.energy.gov/ceser/colonial-pipeline-cyber-incident">Cronología del Departamento de Energía</a>.</li>
+<li><a href="https://www.justice.gov/archives/opa/pr/department-justice-seizes-23-million-cryptocurrency-paid-ransomware-extortionists-darkside">Comunicado del Departamento de Justicia sobre la recuperación parcial del rescate</a>.</li>
+</ul>
+</details>
+<hr />
+<h2 id="1-generalidades-parte-1">1. Generalidades — Parte 1<a class="headerlink" href="#1-generalidades-parte-1" title="Permanent link">&para;</a></h2>
+<p><strong>Duración:</strong> 4 horas · <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p1/">Abrir material de clase</a></p>
+<h3 id="resultado-que-debe-quedar">Resultado que debe quedar<a class="headerlink" href="#resultado-que-debe-quedar" title="Permanent link">&para;</a></h3>
+<p>El alumno debe poder explicar que un <strong>SGSI es un sistema continuo para tomar y verificar decisiones sobre riesgos</strong>, no una colección de productos tecnológicos ni un certificado colocado en la pared.</p>
+<h3 id="mensaje-irrenunciable">Mensaje irrenunciable<a class="headerlink" href="#mensaje-irrenunciable" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>“La seguridad deja de depender de la improvisación cuando la unidad sabe qué protege, qué riesgos enfrenta, qué controles eligió, quién responde y cómo comprueba que funcionan.”</p>
+</blockquote>
+<p>Si solo puede transmitir una idea en esta sesión, transmita esa.</p>
+<h3 id="como-abrir-la-clase">Cómo abrir la clase<a class="headerlink" href="#como-abrir-la-clase" title="Permanent link">&para;</a></h3>
+<p>No empiece preguntando qué significa ISO. Plantee esta situación:</p>
+<blockquote>
+<p>“Una sala tiene guardia, cámaras y cerradura. ¿Eso basta para afirmar que está protegida? ¿Quién puede entrar, quién revisa la cámara, qué ocurre si se pierde una llave y cómo sabemos si el procedimiento funciona?”</p>
+</blockquote>
+<p>Recoja respuestas y muestre que los dispositivos aislados no forman un sistema. Luego traslade la misma lógica a información, radios, terminales C2, cuentas, respaldos y procedimientos. Introduzca el término <strong>SGSI</strong> después de que los alumnos hayan reconocido la necesidad del sistema.</p>
+<h3 id="secuencia-recomendada-de-explicacion">Secuencia recomendada de explicación<a class="headerlink" href="#secuencia-recomendada-de-explicacion" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Problema que originó los estándares.</strong> Diferentes organizaciones protegían información con criterios incompatibles y sin evidencia comparable.</li>
+<li><strong>Familia, no norma única.</strong> Presente las cuatro normas principales como herramientas con funciones diferentes.</li>
+<li><strong>Qué es un SGSI.</strong> Destaque la palabra “sistema”: personas, responsabilidades, procesos, tecnología y mejora.</li>
+<li><strong>Los cuatro componentes.</strong> Alcance y contexto, riesgos, controles y mejora continua.</li>
+<li><strong>Ejemplo SC-RI8.</strong> Mantenga el mismo escenario durante toda la explicación para que el alumno vea cómo se conectan los componentes.</li>
+</ol>
+<h3 id="como-comunicar-la-relacion-entre-las-normas">Cómo comunicar la relación entre las normas<a class="headerlink" href="#como-comunicar-la-relacion-entre-las-normas" title="Permanent link">&para;</a></h3>
+<p>Use esta fórmula breve y repítala:</p>
+<ul>
+<li><strong>27000 orienta:</strong> “¿Qué significan estos conceptos y cómo se relaciona la familia?”</li>
+<li><strong>27001 exige:</strong> “¿Qué debe existir en el sistema de gestión?”</li>
+<li><strong>27002 aconseja:</strong> “¿Cómo podemos implementar los controles?”</li>
+<li><strong>27005 analiza:</strong> “¿Cómo identificamos y tratamos el riesgo?”</li>
+</ul>
+<p>No presente ISO 27002 como una lista obligatoria de 93 compras o instalaciones. Los controles se seleccionan según el riesgo y el contexto.</p>
+<h3 id="ejemplo-conductor">Ejemplo conductor<a class="headerlink" href="#ejemplo-conductor" title="Permanent link">&para;</a></h3>
+<p>Utilice las cuentas compartidas del servidor de la SC-RI8:</p>
+<ul>
+<li><strong>Activo:</strong> archivos operativos.</li>
+<li><strong>Riesgo:</strong> acceso o modificación sin trazabilidad.</li>
+<li><strong>Decisión:</strong> el Jefe de Comunicaciones determina que el riesgo es inaceptable.</li>
+<li><strong>Controles:</strong> cuentas individuales, mínimo privilegio y registro de accesos.</li>
+<li><strong>Evidencia:</strong> listado de cuentas, autorizaciones y logs.</li>
+<li><strong>Eficacia:</strong> una revisión demuestra que cada acción puede atribuirse a una persona y que no quedan cuentas de personal trasladado.</li>
+</ul>
+<p>Vuelva a este ejemplo cada vez que aparezca un concepto nuevo. Evita que la clase se convierta en ocho definiciones desconectadas.</p>
+<h3 id="preguntas-para-hacer-a-los-alumnos">Preguntas para hacer a los alumnos<a class="headerlink" href="#preguntas-para-hacer-a-los-alumnos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>“¿Qué diferencia hay entre instalar un antivirus y gestionar el riesgo de malware?”</li>
+<li>“¿Qué puede quedar fuera del alcance y quién debe responder por ello?”</li>
+<li>“¿Qué necesita saber el Comandante que no puede responder una lista de herramientas instaladas?”</li>
+<li>“¿Qué documento o registro probaría que una medida se aplica realmente?”</li>
+</ul>
+<h3 id="respuestas-que-revelan-comprension">Respuestas que revelan comprensión<a class="headerlink" href="#respuestas-que-revelan-comprension" title="Permanent link">&para;</a></h3>
+<p>Busque que mencionen decisiones y responsabilidades: inventario, propietario del riesgo, procedimiento, autorización, registro, revisión o prueba. Valore más una explicación sencilla y aplicada que una definición recitada literalmente.</p>
+<h3 id="confusiones-que-debe-corregir">Confusiones que debe corregir<a class="headerlink" href="#confusiones-que-debe-corregir" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>“ISO 27000 es la norma certificable.”</strong> Corrija: el estándar de requisitos certificables es ISO/IEC 27001.</li>
+<li><strong>“Implementar un SGSI es instalar seguridad.”</strong> Corrija: la tecnología es una parte; el SGSI coordina gestión, personas, procesos y controles.</li>
+<li><strong>“Certificado significa que no habrá incidentes.”</strong> Corrija: la certificación evalúa conformidad del sistema dentro de un alcance; no elimina el riesgo.</li>
+<li><strong>“Todo debe estar dentro del alcance.”</strong> Corrija: el alcance puede ser limitado, pero sus límites y exclusiones deben justificarse y tener responsables conocidos.</li>
+</ul>
+<h3 id="distribucion-sugerida-del-tiempo">Distribución sugerida del tiempo<a class="headerlink" href="#distribucion-sugerida-del-tiempo" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20 min: problema inicial y propósito de los estándares.</li>
+<li>35 min: familia ISO/IEC 27000 y función de cada norma.</li>
+<li>35 min: concepto y componentes del SGSI.</li>
+<li>10 min: pausa y comprobación oral.</li>
+<li>60 min: ejemplo integrador SC-RI8.</li>
+<li>40 min: análisis en parejas de otro activo de la unidad.</li>
+<li>25 min: puesta en común y corrección de confusiones.</li>
+<li>15 min: síntesis y salida individual.</li>
+</ul>
+<h3 id="cierre-sugerido">Cierre sugerido<a class="headerlink" href="#cierre-sugerido" title="Permanent link">&para;</a></h3>
+<p>Pida completar esta frase en una hoja o verbalmente:</p>
+<blockquote>
+<p>“Un SGSI no es <strong><em>_</em></strong><strong><em>; es </em></strong><strong><em>_</em></strong> porque permite <strong><em>_</em></strong>___.”</p>
+</blockquote>
+<p>No cierre hasta escuchar al menos una respuesta que incluya gestión sistemática del riesgo y verificación.</p>
+<hr />
+<h2 id="2-generalidades-parte-2">2. Generalidades — Parte 2<a class="headerlink" href="#2-generalidades-parte-2" title="Permanent link">&para;</a></h2>
+<p><strong>Duración:</strong> 2 horas · <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p2/">Abrir material de clase</a></p>
+<h3 id="resultado-que-debe-quedar_1">Resultado que debe quedar<a class="headerlink" href="#resultado-que-debe-quedar_1" title="Permanent link">&para;</a></h3>
+<p>El alumno debe comprender que el SGSI <strong>se mantiene útil mediante el ciclo PDCA</strong> y que la eficacia se demuestra con resultados, no con documentos o controles que simplemente existen.</p>
+<h3 id="mensaje-irrenunciable_1">Mensaje irrenunciable<a class="headerlink" href="#mensaje-irrenunciable_1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>“Planificar e implementar no basta: hay que comprobar el resultado y corregir el sistema.”</p>
+</blockquote>
+<h3 id="como-abrir-la-clase_1">Cómo abrir la clase<a class="headerlink" href="#como-abrir-la-clase_1" title="Permanent link">&para;</a></h3>
+<p>Use una rutina conocida:</p>
+<blockquote>
+<p>“Se ordena verificar diariamente los radios. El registro muestra que todos fueron revisados, pero durante el ejercicio una radio de respaldo no funciona. ¿Se cumplió el procedimiento? ¿Funcionó el control?”</p>
+</blockquote>
+<p>La respuesta esperada es que puede existir evidencia de ejecución sin evidencia de eficacia. Use esa diferencia para introducir <strong>CHECK</strong> y <strong>ACT</strong>.</p>
+<h3 id="como-explicar-pdca">Cómo explicar PDCA<a class="headerlink" href="#como-explicar-pdca" title="Permanent link">&para;</a></h3>
+<p>Mantenga un único ejemplo durante las cuatro fases:</p>
+<ul>
+<li><strong>Planificar:</strong> identificar el riesgo de pérdida de comunicaciones y definir respaldo, responsables y tiempo máximo de recuperación.</li>
+<li><strong>Hacer:</strong> configurar el canal alternativo, instruir al personal y registrar la ejecución.</li>
+<li><strong>Verificar:</strong> simular la caída del canal principal y medir si el alternativo entra en servicio a tiempo.</li>
+<li><strong>Actuar:</strong> corregir equipos, responsabilidades o procedimientos según el resultado y volver a probar.</li>
+</ul>
+<p>Evite presentar PDCA como cuatro palabras para memorizar. Cada fase debe responder una pregunta:</p>
+<ul>
+<li>PLAN: “¿Qué resultado necesitamos y qué riesgo trataremos?”</li>
+<li>DO: “¿Qué se implementó realmente?”</li>
+<li>CHECK: “¿Qué evidencia demuestra el resultado?”</li>
+<li>ACT: “¿Qué cambiaremos a partir de lo aprendido?”</li>
+</ul>
+<h3 id="compliance-y-postura-de-seguridad">Compliance y postura de seguridad<a class="headerlink" href="#compliance-y-postura-de-seguridad" title="Permanent link">&para;</a></h3>
+<p>Comunique la diferencia sin despreciar el cumplimiento:</p>
+<ul>
+<li><strong>Compliance:</strong> demuestra que se satisfacen requisitos definidos.</li>
+<li><strong>Postura de seguridad:</strong> expresa la capacidad real de prevenir, detectar, responder y recuperarse.</li>
+<li><strong>Relación correcta:</strong> el cumplimiento aporta disciplina y evidencia; la verificación de eficacia evita que se convierta en cumplimiento aparente.</li>
+</ul>
+<p>No diga “compliance no sirve”. Diga: “cumplir es necesario cuando el requisito aplica, pero debemos comprobar que el control protege en condiciones reales”.</p>
+<h3 id="conduccion-del-trabajo-con-incidentes">Conducción del trabajo con incidentes<a class="headerlink" href="#conduccion-del-trabajo-con-incidentes" title="Permanent link">&para;</a></h3>
+<p>Antes de repartir los expedientes, establezca tres reglas:</p>
+<ol>
+<li>Trabajar solamente con hechos documentados.</li>
+<li>Elegir una debilidad prioritaria y un control principal defendible.</li>
+<li>Proponer una implementación con responsable, alcance, frecuencia, evidencia y prueba de eficacia.</li>
+</ol>
+<p>Durante el trabajo, no responda “cuál es el control correcto” de inmediato. Pregunte:</p>
+<ul>
+<li>“¿Qué debilidad decidieron priorizar?”</li>
+<li>“¿Cómo trata ese control la debilidad de forma más directa?”</li>
+<li>“¿Qué vería usted para distinguir que se ejecutó de que funcionó?”</li>
+</ul>
+<p>En la retroalimentación, acepte elecciones diferentes cuando la debilidad priorizada y la justificación sean coherentes.</p>
+<h3 id="frases-que-debe-modelar">Frases que debe modelar<a class="headerlink" href="#frases-que-debe-modelar" title="Permanent link">&para;</a></h3>
+<p>Use lenguaje prudente:</p>
+<blockquote>
+<p>“La debilidad documentada se relaciona con este control; una aplicación eficaz habría podido prevenir, detectar o limitar el incidente.”</p>
+</blockquote>
+<p>Evite:</p>
+<blockquote>
+<p>“La empresa violó ISO” o “si hubiera estado certificada, el ataque no habría ocurrido”.</p>
+</blockquote>
+<p>Los expedientes sirven para aprender a relacionar evidencia y controles, no para emitir conclusiones de auditoría sin información suficiente.</p>
+<h3 id="preguntas-para-hacer-a-los-alumnos_1">Preguntas para hacer a los alumnos<a class="headerlink" href="#preguntas-para-hacer-a-los-alumnos_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>“¿Qué diferencia hay entre un ticket de parche instalado y un escaneo que confirma el cierre?”</li>
+<li>“¿Qué fase de PDCA falta cuando un error se repite cada mes?”</li>
+<li>“¿Puede una organización cumplir un procedimiento y continuar expuesta? Dé un ejemplo.”</li>
+<li>“¿Qué indicador presentaría al mando para demostrar mejora?”</li>
+</ul>
+<h3 id="confusiones-que-debe-corregir_1">Confusiones que debe corregir<a class="headerlink" href="#confusiones-que-debe-corregir_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>“CHECK es revisar que exista el documento.”</strong> Corrija: también exige analizar resultados y eficacia.</li>
+<li><strong>“ACT es reparar el incidente.”</strong> Corrija: incluye eliminar la causa, mejorar el sistema y verificar la corrección.</li>
+<li><strong>“Más controles siempre significan más seguridad.”</strong> Corrija: los controles deben responder al riesgo y funcionar en el contexto real.</li>
+<li><strong>“Solo hay una respuesta correcta por incidente.”</strong> Corrija: puede haber varias rutas defendibles; lo obligatorio es justificar con evidencia.</li>
+</ul>
+<h3 id="distribucion-sugerida-del-tiempo_1">Distribución sugerida del tiempo<a class="headerlink" href="#distribucion-sugerida-del-tiempo_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>10 min: recuperación de conceptos de la Parte 1.</li>
+<li>25 min: PDCA con un solo escenario operacional.</li>
+<li>15 min: compliance, postura y evidencia de eficacia.</li>
+<li>50 min: trabajo por equipos y exposiciones.</li>
+<li>15 min: comparación de decisiones y retroalimentación.</li>
+<li>5 min: cierre individual.</li>
+</ul>
+<h3 id="cierre-sugerido_1">Cierre sugerido<a class="headerlink" href="#cierre-sugerido_1" title="Permanent link">&para;</a></h3>
+<p>Solicite dos ejemplos breves:</p>
+<ol>
+<li>Una evidencia de <strong>ejecución</strong>.</li>
+<li>Una evidencia de <strong>eficacia</strong> del mismo control.</li>
+</ol>
+<p>Si los ejemplos son indistinguibles, repita la demostración antes de terminar.</p>
+<hr />
+<h2 id="3-iso-27001-requisitos-parte-1">3. ISO 27001 — Requisitos, Parte 1<a class="headerlink" href="#3-iso-27001-requisitos-parte-1" title="Permanent link">&para;</a></h2>
+<p><strong>Duración:</strong> 2 horas · <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p1/">Abrir material de clase</a></p>
+<h3 id="resultado-que-debe-quedar_2">Resultado que debe quedar<a class="headerlink" href="#resultado-que-debe-quedar_2" title="Permanent link">&para;</a></h3>
+<p>El alumno debe interpretar las cláusulas 4 a 7 como una secuencia de preguntas de gestión y asociarlas con acciones observables en una unidad militar. No necesita recitar el texto normativo.</p>
+<h3 id="mensaje-irrenunciable_2">Mensaje irrenunciable<a class="headerlink" href="#mensaje-irrenunciable_2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>“Antes de operar controles, la organización debe comprender su misión, recibir dirección del mando, planificar según sus riesgos y proporcionar apoyo real.”</p>
+</blockquote>
+<h3 id="como-abrir-la-clase_2">Cómo abrir la clase<a class="headerlink" href="#como-abrir-la-clase_2" title="Permanent link">&para;</a></h3>
+<p>Presente la salida de una unidad a una operación y pregunte:</p>
+<ul>
+<li>“¿Qué misión y entorno enfrentamos?” → <strong>§ 4 Contexto</strong>.</li>
+<li>“¿Quién fija la prioridad y asume las decisiones?” → <strong>§ 5 Liderazgo</strong>.</li>
+<li>“¿Qué riesgos, objetivos y acciones se planifican?” → <strong>§ 6 Planificación</strong>.</li>
+<li>“¿Con qué personal, competencia, comunicación y registros?” → <strong>§ 7 Apoyo</strong>.</li>
+</ul>
+<p>Después muestre los números de cláusula. La secuencia debe aprenderse por su lógica, no por repetición mecánica.</p>
+<h3 id="como-comunicar-cada-bloque">Cómo comunicar cada bloque<a class="headerlink" href="#como-comunicar-cada-bloque" title="Permanent link">&para;</a></h3>
+<h4 id="4-contexto">§ 4 — Contexto<a class="headerlink" href="#4-contexto" title="Permanent link">&para;</a></h4>
+<p>Idea clave: un control correcto en una organización puede ser insuficiente o innecesario en otra.</p>
+<p>Pregunte siempre: “¿Qué misión, información, sistemas, límites y partes interesadas determinan nuestras necesidades de seguridad?”. Use el puesto de mando avanzado para hacer visible que el alcance incluye procesos, personas y terceros, no solo equipos.</p>
+<h4 id="5-liderazgo">§ 5 — Liderazgo<a class="headerlink" href="#5-liderazgo" title="Permanent link">&para;</a></h4>
+<p>Idea clave: el área técnica no puede aceptar riesgos de misión ni sostener políticas sin autoridad y recursos del mando.</p>
+<p>No reduzca liderazgo a “firmar la política”. Busque conducta visible: asignar recursos, participar en revisiones, respetar los controles bajo presión y decidir sobre riesgos residuales.</p>
+<h4 id="6-planificacion">§ 6 — Planificación<a class="headerlink" href="#6-planificacion" title="Permanent link">&para;</a></h4>
+<p>Idea clave: los controles se seleccionan porque tratan riesgos y objetivos, no porque estén de moda o aparezcan en una lista.</p>
+<p>Convierta “mejorar la seguridad” en un objetivo medible: “verificar el 100 % de equipos con material criptográfico cada 24 horas durante operaciones”. Pregunte qué dato mostraría avance.</p>
+<h4 id="7-apoyo">§ 7 — Apoyo<a class="headerlink" href="#7-apoyo" title="Permanent link">&para;</a></h4>
+<p>Idea clave: una orden sin tiempo, personal competente, comunicación y evidencia no se convierte en capacidad.</p>
+<p>Diferencie:</p>
+<ul>
+<li><strong>Competencia:</strong> saber ejecutar correctamente una responsabilidad.</li>
+<li><strong>Concienciación:</strong> comprender la política, la propia contribución y las consecuencias.</li>
+<li><strong>Comunicación:</strong> definir qué se comunica, a quién, cuándo y cómo.</li>
+<li><strong>Información documentada:</strong> conservar instrucciones y evidencia adecuadas, controladas y disponibles.</li>
+</ul>
+<h3 id="analogia-util-con-limite">Analogía útil, con límite<a class="headerlink" href="#analogia-util-con-limite" title="Permanent link">&para;</a></h3>
+<p>Puede comparar las cláusulas con la preparación de una operación: comprensión del entorno, intención del mando, planeamiento y sostenimiento. Aclare que es una analogía para recordar la lógica; ISO 27001 tiene requisitos específicos y no equivale a una orden de operaciones.</p>
+<h3 id="preguntas-para-hacer-a-los-alumnos_2">Preguntas para hacer a los alumnos<a class="headerlink" href="#preguntas-para-hacer-a-los-alumnos_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>“¿Puede el Técnico aceptar un riesgo que puede comprometer la misión? ¿Quién tiene autoridad?”</li>
+<li>“¿Qué diferencia hay entre asignar responsabilidad a ‘TI’ y asignarla al Suboficial de turno?”</li>
+<li>“¿Cómo convertiría ‘capacitar al personal’ en un objetivo verificable?”</li>
+<li>“¿Qué evidencia mínima permitiría que una persona nueva continúe el proceso correctamente?”</li>
+</ul>
+<h3 id="confusiones-que-debe-corregir_2">Confusiones que debe corregir<a class="headerlink" href="#confusiones-que-debe-corregir_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>“Contexto es hacer una lista de computadoras.”</strong> Corrija: incluye misión, factores internos y externos, partes interesadas y límites.</li>
+<li><strong>“La política es suficiente si está firmada.”</strong> Corrija: debe comunicarse, aplicarse y estar respaldada por decisiones del mando.</li>
+<li><strong>“Todos son responsables de seguridad.”</strong> Matice: todos contribuyen, pero las responsabilidades y autoridades concretas deben asignarse.</li>
+<li><strong>“Documentar significa producir muchos formatos.”</strong> Corrija: la documentación debe ser proporcional, útil y controlada.</li>
+</ul>
+<h3 id="distribucion-sugerida-del-tiempo_2">Distribución sugerida del tiempo<a class="headerlink" href="#distribucion-sugerida-del-tiempo_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>10 min: escenario de apertura y mapa 4–7.</li>
+<li>25 min: contexto y alcance.</li>
+<li>20 min: liderazgo, política y responsabilidades.</li>
+<li>25 min: riesgos y objetivos medibles.</li>
+<li>25 min: recursos, competencia, concienciación, comunicación y evidencia.</li>
+<li>10 min: aplicación a una jefatura de comunicaciones.</li>
+<li>5 min: salida individual.</li>
+</ul>
+<h3 id="cierre-sugerido_2">Cierre sugerido<a class="headerlink" href="#cierre-sugerido_2" title="Permanent link">&para;</a></h3>
+<p>Asigne a cuatro alumnos una cláusula del 4 al 7. Cada uno debe expresarla sin vocabulario normativo mediante:</p>
+<blockquote>
+<p>“La pregunta que responde es…; una acción observable sería…; la evidencia sería…”.</p>
+</blockquote>
+<hr />
+<h2 id="4-iso-27001-requisitos-parte-2">4. ISO 27001 — Requisitos, Parte 2<a class="headerlink" href="#4-iso-27001-requisitos-parte-2" title="Permanent link">&para;</a></h2>
+<p><strong>Duración:</strong> 3 horas · <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p2/">Abrir material de clase</a></p>
+<h3 id="resultado-que-debe-quedar_3">Resultado que debe quedar<a class="headerlink" href="#resultado-que-debe-quedar_3" title="Permanent link">&para;</a></h3>
+<p>El alumno debe explicar cómo las cláusulas 8, 9 y 10 convierten el plan en operación, verifican el desempeño y producen mejora. También debe entender que una auditoría interna busca evidencia y oportunidades de corrección, no culpables.</p>
+<h3 id="mensaje-irrenunciable_3">Mensaje irrenunciable<a class="headerlink" href="#mensaje-irrenunciable_3" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>“Un SGSI existe de verdad cuando opera, deja evidencia, se verifica y aprende de sus fallas.”</p>
+</blockquote>
+<h3 id="como-abrir-la-clase_3">Cómo abrir la clase<a class="headerlink" href="#como-abrir-la-clase_3" title="Permanent link">&para;</a></h3>
+<p>Retome un objetivo de la sesión anterior: “verificar diariamente los equipos con material criptográfico”. Pregunte:</p>
+<ol>
+<li>“¿Cómo demostramos que se ejecuta?” → <strong>§ 8 Operación</strong>.</li>
+<li>“¿Cómo sabemos si funciona?” → <strong>§ 9 Evaluación</strong>.</li>
+<li>“¿Qué hacemos si falla?” → <strong>§ 10 Mejora</strong>.</li>
+</ol>
+<p>Relacione luego § 8, § 9 y § 10 con DO, CHECK y ACT.</p>
+<h3 id="como-comunicar-8-operacion">Cómo comunicar § 8 — Operación<a class="headerlink" href="#como-comunicar-8-operacion" title="Permanent link">&para;</a></h3>
+<p>Subraye la brecha entre el plan y la práctica. Un procedimiento aprobado no prueba operación. Solicite evidencias concretas: registro firmado, configuración aplicada, ticket cerrado, lista de cuentas revisada o prueba de restauración.</p>
+<p>La evaluación y el tratamiento de riesgos deben repetirse cuando cambian la misión, los sistemas o las amenazas. Use la incorporación de un sistema C2 nuevo: antes de conectarlo deben revisarse riesgos, controles, responsables y dependencias.</p>
+<h3 id="como-comunicar-9-evaluacion-del-desempeno">Cómo comunicar § 9 — Evaluación del desempeño<a class="headerlink" href="#como-comunicar-9-evaluacion-del-desempeno" title="Permanent link">&para;</a></h3>
+<p>Diferencie tres actividades:</p>
+<ul>
+<li><strong>Seguimiento y medición:</strong> observar indicadores y resultados definidos.</li>
+<li><strong>Auditoría interna:</strong> obtener evidencia objetiva y compararla con criterios.</li>
+<li><strong>Revisión por la dirección:</strong> usar resultados, cambios y riesgos para tomar decisiones de mando.</li>
+</ul>
+<p>Defina al auditor interno como alguien que formula preguntas, muestrea evidencia y comunica hallazgos con independencia. No lo presente como inspector que intenta sorprender o sancionar.</p>
+<p>Frase útil:</p>
+<blockquote>
+<p>“La auditoría no pregunta solamente ‘¿tiene un procedimiento?’, sino ‘¿se aplica, deja evidencia y produce el resultado previsto?’”.</p>
+</blockquote>
+<h3 id="como-comunicar-10-mejora">Cómo comunicar § 10 — Mejora<a class="headerlink" href="#como-comunicar-10-mejora" title="Permanent link">&para;</a></h3>
+<p>Explique la secuencia completa:</p>
+<ol>
+<li>Contener o corregir el problema inmediato.</li>
+<li>Determinar su causa.</li>
+<li>Evaluar si puede repetirse en otro lugar.</li>
+<li>Implementar la acción correctiva.</li>
+<li>Verificar que la acción fue eficaz.</li>
+</ol>
+<p>Ejemplo: cerrar una cuenta de una persona trasladada corrige el problema inmediato. Revisar y modificar el proceso de bajas para que ninguna cuenta permanezca activa elimina la causa sistémica. Verificar el listado un mes después demuestra eficacia.</p>
+<h3 id="actividad-recomendada">Actividad recomendada<a class="headerlink" href="#actividad-recomendada" title="Permanent link">&para;</a></h3>
+<p>Entregue un hallazgo: “tres cuentas de personal trasladado siguen activas”. Pida a los grupos responder:</p>
+<ul>
+<li>¿Cuál es la corrección inmediata?</li>
+<li>¿Qué evidencia buscarían para conocer la causa?</li>
+<li>¿Qué acción correctiva evitaría la repetición?</li>
+<li>¿Cómo comprobarían su eficacia?</li>
+<li>¿Quién debe conocer el resultado?</li>
+</ul>
+<p>No acepte “capacitar” como respuesta automática. La acción debe corresponder a la causa encontrada.</p>
+<h3 id="preguntas-para-hacer-a-los-alumnos_3">Preguntas para hacer a los alumnos<a class="headerlink" href="#preguntas-para-hacer-a-los-alumnos_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>“¿Qué diferencia hay entre auditoría interna y certificación?”</li>
+<li>“¿Por qué quien diseñó y opera un control no debería ser su único auditor?”</li>
+<li>“¿Cerrar el incidente significa que se eliminó su causa?”</li>
+<li>“¿Qué decisión corresponde al mando después de revisar los resultados?”</li>
+</ul>
+<h3 id="confusiones-que-debe-corregir_3">Confusiones que debe corregir<a class="headerlink" href="#confusiones-que-debe-corregir_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>“La cláusula 9 trata de conseguir el certificado.”</strong> Corrija: trata del desempeño del SGSI; la certificación externa es otra actividad.</li>
+<li><strong>“Una no conformidad significa que todo el SGSI fracasó.”</strong> Corrija: señala un requisito no satisfecho y activa corrección y aprendizaje.</li>
+<li><strong>“Auditar es revisar todos los registros.”</strong> Corrija: se planifica el alcance y se obtiene evidencia suficiente mediante muestreo y otras técnicas.</li>
+<li><strong>“Acción correctiva es volver a hacer bien la tarea.”</strong> Corrija: debe tratar la causa para evitar repetición.</li>
+</ul>
+<h3 id="distribucion-sugerida-del-tiempo_3">Distribución sugerida del tiempo<a class="headerlink" href="#distribucion-sugerida-del-tiempo_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>15 min: recapitulación y puente 8–10 con PDCA.</li>
+<li>35 min: operación y reevaluación de riesgos.</li>
+<li>45 min: seguimiento, medición, auditoría y revisión por la dirección.</li>
+<li>10 min: pausa.</li>
+<li>35 min: no conformidad, corrección, causa y mejora.</li>
+<li>30 min: actividad de cuentas activas.</li>
+<li>10 min: puesta en común.</li>
+<li>10 min: cierre y comprobación.</li>
+</ul>
+<h3 id="cierre-sugerido_3">Cierre sugerido<a class="headerlink" href="#cierre-sugerido_3" title="Permanent link">&para;</a></h3>
+<p>Muestre la secuencia <strong>plan → registro → medición → hallazgo → acción correctiva → verificación</strong> y pida a un alumno ubicar § 8, § 9 y § 10. Debe explicar el porqué, no solo asignar el número.</p>
+<hr />
+<h2 id="5-iso-27002-controles-parte-1">5. ISO 27002 — Controles, Parte 1<a class="headerlink" href="#5-iso-27002-controles-parte-1" title="Permanent link">&para;</a></h2>
+<p><strong>Duración:</strong> 1 hora · <a href="../../capas-si/familia-iso27000/iso27002-controles-p1/">Abrir material de clase</a></p>
+<h3 id="resultado-que-debe-quedar_4">Resultado que debe quedar<a class="headerlink" href="#resultado-que-debe-quedar_4" title="Permanent link">&para;</a></h3>
+<p>El alumno debe diferenciar ISO 27001, su Anexo A e ISO 27002, y reconocer que los 93 controles se organizan en cuatro temas complementarios: organizacional, personas, físico y tecnológico.</p>
+<h3 id="mensaje-irrenunciable_4">Mensaje irrenunciable<a class="headerlink" href="#mensaje-irrenunciable_4" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>“ISO 27001 exige seleccionar y justificar controles; el Anexo A ofrece el catálogo de referencia; ISO 27002 orienta cómo implementarlos.”</p>
+</blockquote>
+<h3 id="como-abrir-la-clase_4">Cómo abrir la clase<a class="headerlink" href="#como-abrir-la-clase_4" title="Permanent link">&para;</a></h3>
+<p>Pregunte:</p>
+<blockquote>
+<p>“Si el análisis indica riesgo de acceso no autorizado a una sala de comunicaciones, ¿basta con instalar una cerradura?”</p>
+</blockquote>
+<p>Conduzca las respuestas hacia cuatro dimensiones:</p>
+<ul>
+<li>quién autoriza y revisa (<strong>organizacional</strong>),</li>
+<li>quién está habilitado e instruido (<strong>personas</strong>),</li>
+<li>cómo se protege y registra el ingreso (<strong>físico</strong>),</li>
+<li>cómo se protegen los sistemas dentro de la sala (<strong>tecnológico</strong>).</li>
+</ul>
+<p>Así aparecen los cuatro temas antes de mostrar sus números.</p>
+<h3 id="como-explicar-la-relacion-2700127002">Cómo explicar la relación 27001–27002<a class="headerlink" href="#como-explicar-la-relacion-2700127002" title="Permanent link">&para;</a></h3>
+<p>Use una necesidad concreta, no una analogía aislada:</p>
+<ul>
+<li>El riesgo exige controlar accesos.</li>
+<li>ISO 27001 requiere tratar el riesgo, seleccionar controles y justificar la decisión.</li>
+<li>El Anexo A permite identificar controles relacionados.</li>
+<li>ISO 27002 proporciona orientación para implementarlos en el contexto propio.</li>
+</ul>
+<p>Repita que ISO 27002 es guía y que los 93 controles no se aplican indiscriminadamente.</p>
+<h3 id="los-cuatro-temas-que-deben-recordar">Los cuatro temas que deben recordar<a class="headerlink" href="#los-cuatro-temas-que-deben-recordar" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Tema 5 — Organizacional:</strong> políticas, procesos, responsabilidades, proveedores e incidentes.</li>
+<li><strong>Tema 6 — Personas:</strong> selección, obligaciones, formación, concienciación y reporte.</li>
+<li><strong>Tema 7 — Físico:</strong> perímetros, ingreso, monitoreo, equipos e instalaciones.</li>
+<li><strong>Tema 8 — Tecnológico:</strong> autenticación, configuración, malware, logs, redes y datos.</li>
+</ul>
+<p>No dedique la hora a memorizar cantidades. Menciónelas para describir la estructura, pero evalúe la capacidad de clasificar y combinar controles.</p>
+<h3 id="preguntas-para-hacer-a-los-alumnos_4">Preguntas para hacer a los alumnos<a class="headerlink" href="#preguntas-para-hacer-a-los-alumnos_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>“¿Una política de contraseñas es organizacional o tecnológica? ¿Qué parte técnica la hace efectiva?”</li>
+<li>“¿Qué control de personas complementa un registro de incidentes?”</li>
+<li>“¿Por qué un control físico puede proteger información digital?”</li>
+<li>“¿Qué tema faltaría si instalamos autenticación, pero nadie revisa accesos ni sabe reportar anomalías?”</li>
+</ul>
+<h3 id="confusiones-que-debe-corregir_4">Confusiones que debe corregir<a class="headerlink" href="#confusiones-que-debe-corregir_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>“ISO 27002 certifica a la organización.”</strong> Corrija: ISO 27002 es una guía de controles; los requisitos del SGSI están en ISO 27001.</li>
+<li><strong>“El Anexo A y la guía ISO 27002 son documentos idénticos.”</strong> Corrija: comparten referencias de controles, pero ISO 27002 desarrolla la orientación.</li>
+<li><strong>“Los controles importantes son los tecnológicos.”</strong> Corrija: las cuatro categorías se complementan; una herramienta sin proceso y personas puede ser ineficaz.</li>
+<li><strong>“Los 93 controles son un checklist obligatorio.”</strong> Corrija: deben considerarse, seleccionarse y justificarse según riesgos y contexto.</li>
+</ul>
+<h3 id="distribucion-sugerida-del-tiempo_4">Distribución sugerida del tiempo<a class="headerlink" href="#distribucion-sugerida-del-tiempo_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>5 min: situación de apertura.</li>
+<li>15 min: relación ISO 27001, Anexo A e ISO 27002.</li>
+<li>20 min: cuatro temas con un mismo escenario.</li>
+<li>15 min: clasificación oral de ejemplos.</li>
+<li>5 min: comprobación final.</li>
+</ul>
+<h3 id="cierre-sugerido_4">Cierre sugerido<a class="headerlink" href="#cierre-sugerido_4" title="Permanent link">&para;</a></h3>
+<p>Lea cuatro acciones y pida que identifiquen el tema y el control complementario que faltaría. Una respuesta completa debe mostrar que los temas trabajan juntos.</p>
+<hr />
+<h2 id="6-iso-27002-controles-parte-2">6. ISO 27002 — Controles, Parte 2<a class="headerlink" href="#6-iso-27002-controles-parte-2" title="Permanent link">&para;</a></h2>
+<p><strong>Duración:</strong> 4 horas · <a href="../../capas-si/familia-iso27000/iso27002-controles-p2/">Abrir material de clase</a></p>
+<h3 id="resultado-que-debe-quedar_5">Resultado que debe quedar<a class="headerlink" href="#resultado-que-debe-quedar_5" title="Permanent link">&para;</a></h3>
+<p>El alumno debe poder proponer controles combinados para un riesgo y explicar que la <strong>Declaración de Aplicabilidad (SoA)</strong> documenta qué controles se incluyen o excluyen, por qué y en qué estado se encuentran.</p>
+<h3 id="mensaje-irrenunciable_5">Mensaje irrenunciable<a class="headerlink" href="#mensaje-irrenunciable_5" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>“Un control se selecciona por el riesgo, se adapta al contexto, se asigna a un responsable y se conserva evidencia de su funcionamiento.”</p>
+</blockquote>
+<h3 id="como-abrir-la-clase_5">Cómo abrir la clase<a class="headerlink" href="#como-abrir-la-clase_5" title="Permanent link">&para;</a></h3>
+<p>Presente la pérdida de un radio con material criptográfico y divida la pizarra en cuatro:</p>
+<ul>
+<li><strong>Organizacional:</strong> procedimiento de asignación, reporte y respuesta.</li>
+<li><strong>Personas:</strong> instrucción y práctica del operador.</li>
+<li><strong>Físico:</strong> custodia, transporte y registro de entrega.</li>
+<li><strong>Tecnológico:</strong> borrado, cambio de claves, autenticación o capacidades del equipo.</li>
+</ul>
+<p>Pregunte qué ocurriría si se elimina una de las cuatro columnas. El objetivo es demostrar que la defensa se construye como sistema, no como control aislado.</p>
+<h3 id="como-ensenar-controles-concretos">Cómo enseñar controles concretos<a class="headerlink" href="#como-ensenar-controles-concretos" title="Permanent link">&para;</a></h3>
+<p>Para cada control presentado, formule cinco preguntas:</p>
+<ol>
+<li>¿Qué riesgo trata?</li>
+<li>¿Quién es responsable?</li>
+<li>¿Qué acción observable exige?</li>
+<li>¿Qué evidencia deja?</li>
+<li>¿Cómo se prueba su eficacia?</li>
+</ol>
+<p>Ejemplo con <strong>8.15 Registro de actividad</strong>:</p>
+<ul>
+<li>Riesgo: acciones no autorizadas sin trazabilidad.</li>
+<li>Responsable: administrador del sistema y responsable de revisión.</li>
+<li>Acción: generar, proteger y revisar eventos definidos.</li>
+<li>Evidencia: logs, alertas y registros de revisión.</li>
+<li>Eficacia: una prueba controlada genera la alerta esperada y el responsable responde dentro del tiempo establecido.</li>
+</ul>
+<p>Evite recorrer largas listas sin contexto. Seleccione controles representativos y haga que los alumnos reutilicen las cinco preguntas.</p>
+<h3 id="como-comunicar-el-soa">Cómo comunicar el SoA<a class="headerlink" href="#como-comunicar-el-soa" title="Permanent link">&para;</a></h3>
+<p>Preséntelo como el puente entre riesgo y control, no como otra tabla administrativa:</p>
+<blockquote>
+<p>“El SoA permite responder qué controles decidimos aplicar, cuáles excluimos, por qué tomamos esas decisiones y cuál es su estado.”</p>
+</blockquote>
+<p>Diferencie tres situaciones:</p>
+<ul>
+<li><strong>Aplicable e implementado:</strong> existe justificación, acción y evidencia.</li>
+<li><strong>Aplicable en proceso:</strong> se reconoce la necesidad y existe un plan de tratamiento.</li>
+<li><strong>No aplicable:</strong> la exclusión está respaldada por alcance, contexto y riesgos.</li>
+</ul>
+<p>Subraye que “no tenemos presupuesto” no convierte automáticamente un control necesario en “no aplicable”. Si el riesgo exige el control y aún no está implementado, debe registrarse la brecha y tratarse.</p>
+<h3 id="actividad-recomendada_1">Actividad recomendada<a class="headerlink" href="#actividad-recomendada_1" title="Permanent link">&para;</a></h3>
+<p>Use una mini-SoA para una jefatura de comunicaciones. Asigne a cada grupo cinco controles del material y solicite:</p>
+<ul>
+<li>decisión de aplicabilidad,</li>
+<li>justificación basada en contexto o riesgo,</li>
+<li>estado,</li>
+<li>evidencia que esperaría encontrar,</li>
+<li>control complementario de otro tema.</li>
+</ul>
+<p>Incluya al menos un control realmente no aplicable, como filtrado web para terminales sin conectividad a Internet, y otro necesario pero todavía no implementado. La comparación permite detectar exclusiones incorrectas.</p>
+<h3 id="preguntas-para-hacer-a-los-alumnos_5">Preguntas para hacer a los alumnos<a class="headerlink" href="#preguntas-para-hacer-a-los-alumnos_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>“¿Qué diferencia hay entre ‘no aplica’ y ‘aplica, pero no está implementado’?”</li>
+<li>“¿Qué riesgo justifica seleccionar este control?”</li>
+<li>“¿Qué otro tema debe acompañarlo para que funcione?”</li>
+<li>“¿Qué evidencia pediría un auditor y qué prueba demostraría eficacia?”</li>
+<li>“¿Cuándo debe revisarse una exclusión del SoA?”</li>
+</ul>
+<h3 id="confusiones-que-debe-corregir_5">Confusiones que debe corregir<a class="headerlink" href="#confusiones-que-debe-corregir_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>“El SoA es copiar los 93 controles y marcar sí o no.”</strong> Corrija: debe justificar decisiones y reflejar el estado real frente a riesgos y alcance.</li>
+<li><strong>“Excluir un control elimina el riesgo.”</strong> Corrija: la exclusión describe aplicabilidad; el riesgo debe gestionarse de todos modos.</li>
+<li><strong>“Tener logs implementa el monitoreo.”</strong> Corrija: los eventos deben definirse, protegerse, revisarse y generar respuesta.</li>
+<li><strong>“Capacitación resuelve cualquier control de personas.”</strong> Corrija: la acción debe responder a una necesidad de competencia o conducta y evaluarse.</li>
+</ul>
+<h3 id="distribucion-sugerida-del-tiempo_5">Distribución sugerida del tiempo<a class="headerlink" href="#distribucion-sugerida-del-tiempo_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20 min: escenario de radio y combinación de cuatro temas.</li>
+<li>60 min: controles representativos mediante las cinco preguntas.</li>
+<li>10 min: pausa.</li>
+<li>35 min: concepto, decisiones y uso del SoA.</li>
+<li>55 min: actividad de mini-SoA.</li>
+<li>30 min: exposición y contraste de justificaciones.</li>
+<li>20 min: respuesta a incidentes usando los cuatro temas.</li>
+<li>10 min: cierre y comprobación.</li>
+</ul>
+<h3 id="cierre-sugerido_5">Cierre sugerido<a class="headerlink" href="#cierre-sugerido_5" title="Permanent link">&para;</a></h3>
+<p>Entregue un riesgo nuevo y pida una respuesta de sesenta segundos:</p>
+<blockquote>
+<p>“Control principal, control complementario, responsable, evidencia y forma de probar eficacia.”</p>
+</blockquote>
+<p>No acepte respuestas que solo nombren herramientas.</p>
+<hr />
+<h2 id="7-iso-27005-gestion-del-riesgo-parte-1">7. ISO 27005 — Gestión del Riesgo, Parte 1<a class="headerlink" href="#7-iso-27005-gestion-del-riesgo-parte-1" title="Permanent link">&para;</a></h2>
+<p><strong>Duración:</strong> 4 horas · <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p1/">Abrir material de clase</a></p>
+<h3 id="resultado-que-debe-quedar_6">Resultado que debe quedar<a class="headerlink" href="#resultado-que-debe-quedar_6" title="Permanent link">&para;</a></h3>
+<p>El alumno debe construir un escenario de riesgo coherente conectando <strong>activo, amenaza, vulnerabilidad y consecuencia para la misión</strong>, además de reconocer la gestión del riesgo como un ciclo de decisión del mando.</p>
+<h3 id="mensaje-irrenunciable_6">Mensaje irrenunciable<a class="headerlink" href="#mensaje-irrenunciable_6" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>“Una amenaza no es un riesgo por sí sola y una vulnerabilidad tampoco: el riesgo aparece cuando una amenaza puede aprovechar una debilidad y causar una consecuencia sobre un activo valioso.”</p>
+</blockquote>
+<h3 id="como-abrir-la-clase_6">Cómo abrir la clase<a class="headerlink" href="#como-abrir-la-clase_6" title="Permanent link">&para;</a></h3>
+<p>Escriba tres elementos desordenados:</p>
+<ul>
+<li>radio con material criptográfico,</li>
+<li>captura por el adversario,</li>
+<li>operador sin procedimiento de borrado.</li>
+</ul>
+<p>Pregunte cuál es el activo, cuál la amenaza y cuál la vulnerabilidad. Después pida formular la consecuencia completa para la misión. Mantenga este ejemplo para introducir el proceso.</p>
+<h3 id="como-comunicar-el-proceso-de-riesgo">Cómo comunicar el proceso de riesgo<a class="headerlink" href="#como-comunicar-el-proceso-de-riesgo" title="Permanent link">&para;</a></h3>
+<p>No presente las seis etapas como una lista aislada. Formule una pregunta por etapa:</p>
+<ul>
+<li><strong>Contexto:</strong> ¿qué misión, alcance y criterios orientan la decisión?</li>
+<li><strong>Identificación:</strong> ¿qué puede suceder, sobre qué activo y debido a qué debilidad?</li>
+<li><strong>Análisis:</strong> ¿qué probabilidad e impacto estimamos y por qué?</li>
+<li><strong>Evaluación:</strong> ¿el nivel está dentro de los criterios aceptables?</li>
+<li><strong>Tratamiento:</strong> ¿qué decisión y controles se aplicarán?</li>
+<li><strong>Monitoreo:</strong> ¿cambió el contexto y funcionan los controles?</li>
+</ul>
+<p>Repita que el proceso vuelve a comenzar cuando cambian la misión, los activos, las amenazas o la eficacia observada.</p>
+<h3 id="como-ensenar-el-inventario-de-activos">Cómo enseñar el inventario de activos<a class="headerlink" href="#como-ensenar-el-inventario-de-activos" title="Permanent link">&para;</a></h3>
+<p>Empiece por la <strong>información y la misión</strong>, no por el hardware. Pregunte: “¿Qué información o servicio perdería valor si este equipo desaparece?”. Así evitará que el inventario se convierta en una lista de seriales sin relación con la criticidad.</p>
+<p>Incluya datos, hardware, software, personas, instalaciones y servicios. Valore confidencialidad, integridad y disponibilidad por separado: un activo puede ser crítico por una dimensión y no por las otras.</p>
+<p>Ejemplo: para un enlace de mando durante una operación, disponibilidad e integridad pueden ser críticas; para material criptográfico vigente, la confidencialidad es igualmente decisiva.</p>
+<h3 id="como-diferenciar-amenaza-y-vulnerabilidad">Cómo diferenciar amenaza y vulnerabilidad<a class="headerlink" href="#como-diferenciar-amenaza-y-vulnerabilidad" title="Permanent link">&para;</a></h3>
+<p>Use esta prueba verbal:</p>
+<ul>
+<li>La <strong>amenaza</strong> puede expresarse como algo que ocurre o que un actor hace.</li>
+<li>La <strong>vulnerabilidad</strong> puede expresarse como una debilidad existente.</li>
+<li>La <strong>consecuencia</strong> explica el efecto sobre la misión.</li>
+</ul>
+<p>Transforme respuestas vagas:</p>
+<ul>
+<li>“Malware” → amenaza todavía incompleta: infección o ejecución de malware.</li>
+<li>“No hay antivirus” → vulnerabilidad o ausencia de control.</li>
+<li>“Se cae el sistema” → consecuencia; falta explicar activo, amenaza y debilidad.</li>
+<li>“Riesgo alto” → valoración; todavía falta redactar el escenario.</li>
+</ul>
+<p>Una fórmula útil para redactar:</p>
+<blockquote>
+<p>“Debido a <strong>[vulnerabilidad]</strong>, <strong>[amenaza]</strong> podría afectar <strong>[activo]</strong> y causar <strong>[consecuencia sobre la misión]</strong>.”</p>
+</blockquote>
+<h3 id="actividad-recomendada_2">Actividad recomendada<a class="headerlink" href="#actividad-recomendada_2" title="Permanent link">&para;</a></h3>
+<p>Entregue a cada grupo un activo diferente: radio táctico, terminal C2, enlace satelital, sala de comunicaciones, operador habilitado o plan de frecuencias. Solicite:</p>
+<ol>
+<li>valor según confidencialidad, integridad y disponibilidad;</li>
+<li>una amenaza deliberada, accidental o ambiental;</li>
+<li>una vulnerabilidad realista;</li>
+<li>un escenario de riesgo redactado con la fórmula;</li>
+<li>una evidencia que permitiría confirmar la vulnerabilidad.</li>
+</ol>
+<p>En la puesta en común, corrija primero la lógica del escenario y después el vocabulario.</p>
+<h3 id="preguntas-para-hacer-a-los-alumnos_6">Preguntas para hacer a los alumnos<a class="headerlink" href="#preguntas-para-hacer-a-los-alumnos_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>“¿Puede existir una vulnerabilidad sin que haya un riesgo relevante en este contexto?”</li>
+<li>“¿Por qué una persona o un servicio también son activos?”</li>
+<li>“¿Qué cambia en la valoración del mismo radio entre almacén y operación?”</li>
+<li>“¿Qué evidencia demuestra que la vulnerabilidad existe?”</li>
+<li>“¿Quién tiene autoridad para aceptar el efecto sobre la misión?”</li>
+</ul>
+<h3 id="confusiones-que-debe-corregir_6">Confusiones que debe corregir<a class="headerlink" href="#confusiones-que-debe-corregir_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>“Riesgo es lo mismo que amenaza.”</strong> Corrija construyendo la cadena completa.</li>
+<li><strong>“Solo se inventarían equipos.”</strong> Corrija incluyendo información, servicios, personas, procesos e instalaciones.</li>
+<li><strong>“El valor del activo es su precio.”</strong> Corrija: interesa el impacto de perder confidencialidad, integridad o disponibilidad para la misión.</li>
+<li><strong>“Una lista de riesgos se hace una vez.”</strong> Corrija: el inventario y los escenarios deben revisarse ante cambios.</li>
+<li><strong>“El Técnico decide qué riesgo aceptar.”</strong> Corrija: el Técnico aporta evidencia y alternativas; acepta quien tiene autoridad sobre la misión y los recursos.</li>
+</ul>
+<h3 id="distribucion-sugerida-del-tiempo_6">Distribución sugerida del tiempo<a class="headerlink" href="#distribucion-sugerida-del-tiempo_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20 min: situación inicial y distinciones fundamentales.</li>
+<li>30 min: proceso completo de gestión del riesgo.</li>
+<li>50 min: activos, inventario y valoración CID.</li>
+<li>10 min: pausa.</li>
+<li>40 min: amenazas y sus categorías.</li>
+<li>40 min: vulnerabilidades y redacción de escenarios.</li>
+<li>35 min: actividad por grupos.</li>
+<li>10 min: retroalimentación.</li>
+<li>5 min: salida individual.</li>
+</ul>
+<h3 id="cierre-sugerido_6">Cierre sugerido<a class="headerlink" href="#cierre-sugerido_6" title="Permanent link">&para;</a></h3>
+<p>Muestre un activo y solicite a tres alumnos construir consecutivamente la cadena: amenaza, vulnerabilidad y consecuencia. Un cuarto alumno debe redactar el riesgo completo y explicar qué información todavía faltaría para valorarlo.</p>
+<hr />
+<h2 id="8-iso-27005-gestion-del-riesgo-parte-2">8. ISO 27005 — Gestión del Riesgo, Parte 2<a class="headerlink" href="#8-iso-27005-gestion-del-riesgo-parte-2" title="Permanent link">&para;</a></h2>
+<p><strong>Duración:</strong> 1 hora · <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p2/">Abrir material de clase</a></p>
+<h3 id="resultado-que-debe-quedar_7">Resultado que debe quedar<a class="headerlink" href="#resultado-que-debe-quedar_7" title="Permanent link">&para;</a></h3>
+<p>El alumno debe justificar probabilidad e impacto, calcular el nivel con la matriz 3×3, seleccionar una opción de tratamiento y convertir la decisión en una acción con responsable y plazo.</p>
+<h3 id="mensaje-irrenunciable_7">Mensaje irrenunciable<a class="headerlink" href="#mensaje-irrenunciable_7" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>“La matriz ayuda a priorizar; no decide por nosotros. La decisión debe justificarse, asignarse y revisarse.”</p>
+</blockquote>
+<h3 id="como-abrir-la-clase_7">Cómo abrir la clase<a class="headerlink" href="#como-abrir-la-clase_7" title="Permanent link">&para;</a></h3>
+<p>Presente el escenario del radio capturado y pida dos votaciones rápidas: probabilidad e impacto. Cuando aparezcan valores diferentes, no revele una cifra “correcta”. Pregunte qué hechos o criterios sustentan cada valoración.</p>
+<p>Use la discrepancia para mostrar que la matriz exige criterios comunes y justificación; multiplicar números sin contexto produce precisión aparente.</p>
+<h3 id="como-ensenar-la-matriz">Cómo enseñar la matriz<a class="headerlink" href="#como-ensenar-la-matriz" title="Permanent link">&para;</a></h3>
+<p>Mantenga separados los conceptos:</p>
+<ul>
+<li><strong>Probabilidad:</strong> posibilidad de que el escenario ocurra bajo el contexto definido.</li>
+<li><strong>Impacto:</strong> consecuencia para la misión si ocurre.</li>
+<li><strong>Nivel:</strong> resultado usado para comparar con criterios de aceptación y priorizar.</li>
+</ul>
+<p>No permita calificar primero y redactar el riesgo después. La secuencia correcta es escenario claro → criterios → probabilidad → impacto → nivel.</p>
+<h3 id="como-comunicar-las-cuatro-opciones">Cómo comunicar las cuatro opciones<a class="headerlink" href="#como-comunicar-las-cuatro-opciones" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Modificar o mitigar:</strong> reducir probabilidad o impacto mediante controles.</li>
+<li><strong>Retener o aceptar:</strong> decisión autorizada y documentada, con riesgo residual y fecha de revisión; no significa ignorar.</li>
+<li><strong>Compartir o transferir:</strong> distribuir consecuencias o responsabilidades mediante un tercero; la organización conserva responsabilidad sobre su misión e información.</li>
+<li><strong>Evitar:</strong> eliminar la actividad o condición que origina el riesgo cuando la misión lo permite.</li>
+</ul>
+<p>Explique que las opciones pueden combinarse. Después de mitigar queda un <strong>riesgo residual</strong> que debe volver a evaluarse y, si corresponde, aceptarse por la autoridad adecuada.</p>
+<h3 id="conduccion-del-ejercicio">Conducción del ejercicio<a class="headerlink" href="#conduccion-del-ejercicio" title="Permanent link">&para;</a></h3>
+<p>Reserve la mayor parte de la hora para que cada alumno complete una fila. Circule haciendo preguntas, no dando el puntaje:</p>
+<ul>
+<li>“¿Qué evidencia sustenta que la probabilidad es alta?”</li>
+<li>“¿Su impacto describe una consecuencia sobre la misión?”</li>
+<li>“¿El control reduce probabilidad, impacto o ambos?”</li>
+<li>“¿Quién tiene capacidad real para ejecutar la acción?”</li>
+<li>“¿Cómo sabremos que quedó implementada y fue eficaz?”</li>
+</ul>
+<p>La fila final debe contener riesgo, nivel, tratamiento, acción concreta, responsable, fecha y estado. Si falta responsable o plazo, todavía no existe un plan ejecutable.</p>
+<h3 id="preguntas-para-hacer-a-los-alumnos_7">Preguntas para hacer a los alumnos<a class="headerlink" href="#preguntas-para-hacer-a-los-alumnos_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>“¿Dos riesgos con puntuación 6 son necesariamente iguales?”</li>
+<li>“¿Aceptar significa no hacer nada?”</li>
+<li>“¿Un contrato transfiere toda la responsabilidad por la información?”</li>
+<li>“¿Qué riesgo queda después de implementar el control?”</li>
+<li>“¿Cuándo debe reevaluarse la decisión?”</li>
+</ul>
+<h3 id="confusiones-que-debe-corregir_7">Confusiones que debe corregir<a class="headerlink" href="#confusiones-que-debe-corregir_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>“La multiplicación produce una medida exacta.”</strong> Corrija: es una escala cualitativa para priorizar con criterios consistentes.</li>
+<li><strong>“Todo riesgo alto se acepta si falta presupuesto.”</strong> Corrija: la autoridad debe decidir y justificar; la falta de recursos puede requerir controles compensatorios o escalamiento.</li>
+<li><strong>“Transferir elimina el riesgo.”</strong> Corrija: puede compartir consecuencias, pero quedan dependencias y responsabilidad.</li>
+<li><strong>“Mitigar lleva el riesgo a cero.”</strong> Corrija: normalmente queda riesgo residual que se revisa y decide.</li>
+<li><strong>“El control propuesto es ‘capacitar’.”</strong> Pida responsable, contenido, población, momento, evaluación y evidencia.</li>
+</ul>
+<h3 id="distribucion-sugerida-del-tiempo_7">Distribución sugerida del tiempo<a class="headerlink" href="#distribucion-sugerida-del-tiempo_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>5 min: escenario y votación inicial.</li>
+<li>10 min: matriz, criterios y justificación.</li>
+<li>10 min: cuatro tratamientos y riesgo residual.</li>
+<li>25 min: ejercicio individual y fila del plan.</li>
+<li>7 min: comparación de dos decisiones.</li>
+<li>3 min: cierre.</li>
+</ul>
+<h3 id="cierre-sugerido_7">Cierre sugerido<a class="headerlink" href="#cierre-sugerido_7" title="Permanent link">&para;</a></h3>
+<p>Pida a un alumno informar el riesgo como si hablara con el Comandante en treinta segundos:</p>
+<blockquote>
+<p>“Escenario, nivel y justificación, tratamiento recomendado, responsable, plazo y riesgo residual esperado.”</p>
+</blockquote>
+<p>La respuesta debe permitir tomar una decisión; si solo contiene el número de la matriz, está incompleta.</p>
+<hr />
+<h2 id="lista-de-verificacion-antes-de-cada-clase">Lista de verificación antes de cada clase<a class="headerlink" href="#lista-de-verificacion-antes-de-cada-clase" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[ ] Puedo expresar en una frase el aprendizaje irrenunciable de la sesión.</li>
+<li>[ ] Tengo un escenario militar sencillo que conecta el concepto con la misión.</li>
+<li>[ ] Sé qué pregunta usaré para activar conocimientos previos.</li>
+<li>[ ] He elegido qué detalles son esenciales y cuáles son solo referencia.</li>
+<li>[ ] Tengo una pregunta de transferencia para comprobar comprensión.</li>
+<li>[ ] Puedo distinguir evidencia de ejecución y evidencia de eficacia.</li>
+<li>[ ] He reservado tiempo para que los alumnos expliquen, decidan o construyan algo.</li>
+<li>[ ] El cierre recupera el hilo contexto → riesgo → control → evidencia → mejora.</li>
+</ul>
+<h2 id="senal-final-de-dominio-de-la-unidad">Señal final de dominio de la unidad<a class="headerlink" href="#senal-final-de-dominio-de-la-unidad" title="Permanent link">&para;</a></h2>
+<p>Al terminar las ocho sesiones, presente este caso sin indicar la norma:</p>
+<blockquote>
+<p>“Una unidad incorpora un terminal C2 nuevo. No está claro quién autoriza su conexión, qué riesgos introduce, qué configuración debe usar ni cómo se comprobará que opera de forma segura.”</p>
+</blockquote>
+<p>El alumno domina la unidad si puede proponer, en orden:</p>
+<ol>
+<li>definir contexto, alcance y responsables;</li>
+<li>identificar y valorar riesgos;</li>
+<li>decidir el tratamiento;</li>
+<li>seleccionar y justificar controles;</li>
+<li>implementar acciones y conservar evidencia;</li>
+<li>medir, auditar, corregir y mejorar.</li>
+</ol>
+<p>No necesita mencionar todas las normas para demostrar comprensión. Después de construir la solución, pídale ubicar dónde aportan ISO/IEC 27001, 27002 y 27005.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2931 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/seguridad-criptografia/en-el-ordenador/lab-iptables-p1/">
+      
+      
+        <link rel="prev" href="../examen-parcial/">
+      
+      
+        <link rel="next" href="../lab-iptables-p2/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Lab — Iptables (Parte 1) - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#horas-asignadas-1-hr" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab — Iptables (Parte 1)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laboratorio-vm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🖥 Laboratorio virtual — accesos y credenciales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../controles-defensivos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/repaso-redes-defensivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precalentamiento y Repaso — Redes Defensivas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27000-generalidades-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27001-requisitos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/familia-iso27000/lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../capas-si/defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/identificacion-vulnerabilidades/ficha-zero-day-pdca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ficha: Alerta Zero-Day y PDCA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gestion-riesgos/mitigacion-controles/examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../conferencias/ejercicios-extra-metasploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ejercicio extra — Preparación de Metasploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<h1 id="horas-asignadas-1-hr">Horas asignadas: 1 hr<a class="headerlink" href="#horas-asignadas-1-hr" title="Permanent link">&para;</a></h1>
+<h1 id="tipo-laboratorio-version-alumno">Tipo: Laboratorio (versión alumno)<a class="headerlink" href="#tipo-laboratorio-version-alumno" title="Permanent link">&para;</a></h1>
+<hr />
+<h1 id="lab-filtrado-de-paquetes-con-iptables-en-ubuntu-parte-1">Lab: Filtrado de Paquetes con iptables en Ubuntu (Parte 1)<a class="headerlink" href="#lab-filtrado-de-paquetes-con-iptables-en-ubuntu-parte-1" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Duración:</strong> 1 hora | <strong>Unidad:</strong> En el Ordenador</p>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Instrucciones generales</p>
+<ul>
+<li>Trabajar de forma individual salvo indicación del instructor.</li>
+<li>Documentar cada paso con capturas de pantalla en su cuaderno.</li>
+<li>Si un paso falla, <strong>no avanzar</strong> — notificar al instructor.</li>
+</ul>
+</div>
+<h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
+<p>Al finalizar este laboratorio, el alumno habrá:</p>
+<ul>
+<li>Preparado y verificado una VM Ubuntu 24.04 con red NAT + Host-only</li>
+<li>Entendido el modelo de tablas y cadenas de iptables con un diagrama visual</li>
+<li>Capturado el ruleset inicial y aplicado un reset seguro antes de trabajar</li>
+<li>Aplicado una política por defecto DROP en INPUT con reglas selectivas de permiso</li>
+<li>Probado cada regla inbound con un servicio real escuchando y una conexión desde Windows</li>
+<li>Demostrado con contadores que el <strong>orden</strong> de las reglas decide el resultado</li>
+<li>Restaurado el ruleset original al terminar</li>
+</ul>
+<h2 id="preparacion-previa-antes-de-la-clase">Preparación previa (antes de la clase)<a class="headerlink" href="#preparacion-previa-antes-de-la-clase" title="Permanent link">&para;</a></h2>
+<p>Esta sección se completa <strong>una sola vez antes del laboratorio</strong>, sobre una VM Ubuntu
+24.04 recién instalada en VirtualBox con dos adaptadores de red:</p>
+<table>
+<thead>
+<tr>
+<th>Adaptador</th>
+<th>Modo</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Adaptador 1</td>
+<td>NAT</td>
+<td>Salida a internet (actualizaciones, APT)</td>
+</tr>
+<tr>
+<td>Adaptador 2</td>
+<td>Host-only</td>
+<td>Red de laboratorio con el host Windows</td>
+</tr>
+</tbody>
+</table>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. Inspeccionar y respaldar las fuentes APT (formato deb822 de Ubuntu 24.04)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>cat<span class="w"> </span>/etc/apt/sources.list.d/ubuntu.sources
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/apt/sources.list.d/ubuntu.sources<span class="w"> </span>/etc/apt/sources.list.d/ubuntu.sources.bak
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># 2. Actualizar el sistema</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>full-upgrade<span class="w"> </span>-y
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># 3. Instalar los paquetes del laboratorio</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1">#    (python3 ya viene incluido en Ubuntu 24.04; curl y bash-completion se</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1">#    instalan explícitamente por si la instalación fue mínima)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>openssh-server<span class="w"> </span>netfilter-persistent<span class="w"> </span>tcpdump<span class="w"> </span>curl<span class="w"> </span>bash-completion<span class="w"> </span>conntrack
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># 4. Verificaciones</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>iptables<span class="w"> </span>--version<span class="w">          </span><span class="c1"># se espera: iptables v1.8.x (nf_tables)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>:22<span class="w">    </span><span class="c1"># sshd debe estar escuchando</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>curl<span class="w"> </span>-4<span class="w"> </span>-I<span class="w"> </span>http://example.com<span class="w">   </span><span class="c1"># debe devolver una respuesta HTTP (exit code 0)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="c1"># 5. Dependencias para las Guest Additions (el instalador compila un driver)</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>dkms<span class="w"> </span>linux-headers-<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span>
+</code></pre></div>
+<p><strong>6. Guest Additions (integración VM ↔ anfitrión).</strong> Instalarlas desde el CD
+virtual de VirtualBox — así la versión coincide exactamente con la del VirtualBox
+del host:</p>
+<ol>
+<li>En la <strong>ventana de VirtualBox</strong> de la VM: menú <strong>Dispositivos → Insertar
+   imagen de CD de las «Guest Additions»...</strong> (<em>Devices → Insert Guest Additions
+   CD image...</em>).</li>
+<li>El CD aparece montado en <code>/media/$USER/VBox_GAs_&lt;versión&gt;</code>. En la terminal
+   de la VM:</li>
+</ol>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Ejecutar el instalador del CD</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>sh<span class="w"> </span>/media/<span class="nv">$USER</span>/VBox_GAs_*/VBoxLinuxAdditions.run
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Si el CD no se montó solo:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">#   sudo mount /dev/cdrom /mnt &amp;&amp; sudo sh /mnt/VBoxLinuxAdditions.run</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Apagar (no reiniciar): con la VM apagada se ajusta su configuración en VirtualBox</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>sudo<span class="w"> </span>poweroff
+</code></pre></div>
+<p><strong>7. Con la VM apagada</strong>, en el <strong>VirtualBox Manager</strong> seleccionar la VM →
+<strong>Configuración</strong> (<em>Settings</em>) y ajustar:</p>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Ajuste</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>General → Features</strong></td>
+<td>Portapapeles compartido (<em>Shared Clipboard</em>)</td>
+<td><strong>Bidireccional</strong></td>
+</tr>
+<tr>
+<td><strong>Display</strong></td>
+<td>Memoria de vídeo (<em>Video Memory</em>)</td>
+<td><strong>128 MB</strong></td>
+</tr>
+<tr>
+<td><strong>Display</strong></td>
+<td>Aceleración 3D (<em>3D Acceleration</em>)</td>
+<td><strong>Desactivada</strong></td>
+</tr>
+<tr>
+<td><strong>Red / Network</strong></td>
+<td>Adaptador 2</td>
+<td><strong>Solo-anfitrión</strong> (<em>Host-only</em>)</td>
+</tr>
+</tbody>
+</table>
+<p>Luego <strong>encender la VM</strong>. El portapapeles bidireccional permite copiar y pegar
+texto entre el host y la VM en ambos sentidos.</p>
+<div class="admonition warning">
+<p class="admonition-title">No usar los paquetes virtualbox-guest-* de APT</p>
+<p>Los paquetes <code>virtualbox-guest-utils</code> / <code>virtualbox-guest-x11</code> de los
+repositorios de Ubuntu suelen ser de una versión más antigua que el
+VirtualBox del host, y con esa mezcla el redimensionado de pantalla y el
+portapapeles compartido no funcionan. Si ya se instalaron, retirarlos antes
+de usar el CD: <code>sudo apt remove -y virtualbox-guest-utils virtualbox-guest-x11</code>.</p>
+</div>
+<p>Ya con la VM encendida de nuevo, en la <strong>ventana de VirtualBox</strong> de la VM
+verificar que <strong>Ver → Ajustar automáticamente el tamaño de pantalla del invitado</strong>
+(<em>View → Auto-resize Guest Display</em>) esté marcado — el escritorio de la VM debe
+seguir la forma de la ventana al redimensionarla.</p>
+<div class="admonition tip">
+<p class="admonition-title">Si copiar/pegar o el ajuste de pantalla no funcionan</p>
+<p>Ubuntu 24.04 inicia sesión con Wayland por defecto y ahí el portapapeles
+compartido y el redimensionado pueden fallar. Solución: cerrar sesión, y en
+la pantalla de inicio de sesión pulsar el <strong>engranaje</strong> (abajo a la derecha)
+y elegir <strong>"Ubuntu on Xorg"</strong> antes de entrar. Probar de nuevo.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">No modificar las fuentes APT</p>
+<p>Ubuntu 24.04 usa el formato deb822 en <code>/etc/apt/sources.list.d/ubuntu.sources</code>.
+El respaldo es una precaución: <strong>no</strong> sobrescribir el archivo legado
+<code>/etc/apt/sources.list</code> ni añadir repositorios de terceros. Los paquetes del lab
+vienen todos de los repositorios oficiales.</p>
+<p>Dentro del repositorio oficial, los paquetes se agrupan en cuatro componentes
+según licencia y quién los mantiene:</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Licencia</th>
+<th>Mantenimiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main</code></td>
+<td>libre</td>
+<td>Canonical (garantiza parches)</td>
+</tr>
+<tr>
+<td><code>universe</code></td>
+<td>libre</td>
+<td>comunidad</td>
+</tr>
+<tr>
+<td><code>restricted</code></td>
+<td>propietario</td>
+<td>Canonical (drivers NVIDIA, firmware)</td>
+</tr>
+<tr>
+<td><code>multiverse</code></td>
+<td>propietario</td>
+<td>comunidad</td>
+</tr>
+</tbody>
+</table>
+<p>Todos los paquetes de este lab provienen de <code>main</code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">¿Qué es iptables?</p>
+<p><code>iptables</code> es el firewall de Linux: el programa con el que se decide qué
+conexiones de red pueden entrar o salir de la máquina. Se le dan <strong>reglas</strong> —
+"lo que venga a este puerto, déjalo pasar; todo lo demás, descártalo" — y el
+sistema las revisa en orden con cada paquete que llega. Cumple el mismo papel
+que el Firewall de Windows visto en el laboratorio anterior, pero se maneja
+por completo desde la terminal.</p>
+<p>Al verificar la versión aparecerá <code>(nf_tables)</code>: es el nombre del motor
+interno que iptables usa por debajo en Ubuntu 24.04. No afecta al laboratorio
+— aquí se usan únicamente comandos <code>iptables</code>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Autocompletado con Tab (bash-completion)</p>
+<p>Con <code>bash-completion</code> instalado, la tecla <strong>Tab</strong> completa comandos, rutas y
+subcomandos: escribir <code>sudo netf</code> + Tab completa a <code>netfilter-persistent</code>;
+<code>systemctl sta</code> + Tab ofrece <code>start</code>/<code>status</code>. <strong>Doble Tab</strong> lista todas las
+opciones posibles. No requiere configuración: Ubuntu lo activa solo al abrir
+una terminal nueva. Verificar con <code>type _init_completion</code> — debe responder
+"es una función" (si no, cerrar y abrir la terminal).</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">netfilter-persistent al instalar</p>
+<p>Si el instalador pregunta si desea guardar las reglas actuales (IPv4/IPv6),
+responder <strong>Sí</strong>. Este paquete se usará en la Parte 2.</p>
+</div>
+<p>Al terminar: apagar la VM y tomar un <strong>snapshot de VirtualBox</strong> llamado <code>base-limpia</code>.
+Ese snapshot es el punto de partida garantizado de ambas partes del laboratorio.</p>
+<h2 id="entorno-de-laboratorio">Entorno de laboratorio<a class="headerlink" href="#entorno-de-laboratorio" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Host Windows 11 (VirtualBox)
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── Adaptador NAT       → VM: internet (APT, curl)
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>└── Adaptador Host-only → VM: red de laboratorio
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        Host Windows ←──────→ VM Ubuntu 24.04
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        (segundo extremo         (iptables/Netfilter
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>         de prueba)               en el kernel Linux)
+</code></pre></div>
+<div class="admonition note">
+<p>Las reglas iptables que configuramos operan sobre Netfilter, el firewall del
+kernel <strong>de la VM Ubuntu</strong>. No afectan el firewall de Windows ni el tráfico del
+equipo anfitrión. El host Windows participa solo como cliente de prueba a través
+de la red Host-only.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Alcance: solo IPv4</p>
+<p><code>iptables</code> administra reglas <strong>IPv4</strong>. El filtrado IPv6 requiere <code>ip6tables</code> (o
+nftables en familia <code>inet</code>) y queda fuera de este laboratorio. Por eso todas las
+pruebas fuerzan IPv4 con la opción <code>-4</code>. Una política DROP en iptables <strong>no</strong>
+protege el tráfico IPv6.</p>
+</div>
+<h2 id="conceptos-clave-tablas-y-cadenas">Conceptos Clave: Tablas y Cadenas<a class="headerlink" href="#conceptos-clave-tablas-y-cadenas" title="Permanent link">&para;</a></h2>
+<p>Antes de ejecutar cualquier comando, es importante entender el modelo mental de iptables.
+El tráfico de red pasa por <strong>cadenas</strong> (chains), y en cada cadena hay reglas que deciden
+qué hacer con cada paquete.</p>
+<table>
+<thead>
+<tr>
+<th>Cadena</th>
+<th>Descripción</th>
+<th>Uso típico en este lab</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INPUT</td>
+<td>Tráfico destinado a este equipo</td>
+<td>Controlar quién puede conectarse</td>
+</tr>
+<tr>
+<td>OUTPUT</td>
+<td>Tráfico originado en este equipo</td>
+<td>Controlar qué puede salir</td>
+</tr>
+<tr>
+<td>FORWARD</td>
+<td>Tráfico que pasa por el equipo como router</td>
+<td>No usado en este lab</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Flujo de paquetes (simplificado):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Red → [INPUT] → Proceso local
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                     │
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                     ▼
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Red ← [OUTPUT] ← Proceso local
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Tabla filter</p>
+<p>En este lab usamos solo la tabla <code>filter</code> (la predeterminada de iptables). iptables
+tiene también las tablas <code>nat</code> y <code>mangle</code> — las mencionamos brevemente en la Parte 2.
+Cuando ejecutamos <code>iptables</code> sin especificar <code>-t tabla</code>, siempre operamos sobre <code>filter</code>.</p>
+</div>
+<h2 id="pasos-del-laboratorio">Pasos del Laboratorio<a class="headerlink" href="#pasos-del-laboratorio" title="Permanent link">&para;</a></h2>
+<h3 id="parte-1-identificar-el-entorno-de-red">Parte 1: Identificar el entorno de red<a class="headerlink" href="#parte-1-identificar-el-entorno-de-red" title="Permanent link">&para;</a></h3>
+<p><strong>Paso 1 — Identificar interfaces y direcciones</strong></p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Ver las interfaces IPv4 de la VM (una por adaptador + loopback)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ip<span class="w"> </span>-4<span class="w"> </span>addr
+</code></pre></div>
+<p>Identificar cuál interfaz pertenece a la red <strong>Host-only</strong> (comparte subred con el
+host Windows; en VirtualBox suele ser la segunda, con un nombre como <code>enp0s8</code>, y una
+IP tipo <code>192.168.56.x</code> — el nombre y el rango reales pueden variar). Definir las
+variables del lab:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Sustituir enp0s8 por el nombre real de la interfaz Host-only</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">LAB_IF</span><span class="o">=</span>enp0s8
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nv">LAB_IP</span><span class="o">=</span><span class="k">$(</span>ip<span class="w"> </span>-4<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span><span class="s2">"</span><span class="nv">$LAB_IF</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/inet /{print $2}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d/<span class="w"> </span>-f1<span class="k">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Interfaz: </span><span class="nv">$LAB_IF</span><span class="s2"> — IP de la VM: </span><span class="nv">$LAB_IP</span><span class="s2">"</span>
+</code></pre></div>
+<p><strong>[Windows — PowerShell]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c"># IP del host Windows en la red Host-only (adaptador "VirtualBox Host-Only Network")</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">ipconfig</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c"># Anotar esa IP como WIN_IP. Verificar conectividad hacia la VM:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">ping</span> <span class="p">&lt;</span><span class="n">IP-de-la-VM</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Verificación</p>
+<p>¿El ping desde Windows hacia la IP Host-only de la VM responde? Sin esta
+conectividad base, las pruebas inbound de los pasos siguientes no funcionan.
+Anotar en el cuaderno: nombre de interfaz, IP de la VM, IP del host Windows.</p>
+</div>
+<h3 id="parte-2-estado-inicial-y-reset-seguro">Parte 2: Estado inicial y reset seguro<a class="headerlink" href="#parte-2-estado-inicial-y-reset-seguro" title="Permanent link">&para;</a></h3>
+<p><strong>Paso 2 — Capturar el ruleset inicial (OBLIGATORIO)</strong></p>
+<p>Antes de tocar cualquier regla, guardar el estado actual para restaurarlo al final:</p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Exportar el ruleset actual a un archivo</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># (sudo lee las tablas; la redirección &gt; deja el archivo como propiedad del alumno)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>sudo<span class="w"> </span>iptables-save<span class="w"> </span>&gt;<span class="w"> </span>~/ruleset-inicial.txt
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Verificar la captura (puede quedar vacío — ver la nota siguiente)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>cat<span class="w"> </span>~/ruleset-inicial.txt
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1"># Ver el estado actual con detalles</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>-v<span class="w"> </span>-n
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">¿El archivo quedó vacío? Es normal en una VM recién arrancada</p>
+<p><code>iptables-save</code> solo exporta las tablas que ya existen en el kernel. En una VM
+donde nadie ha tocado el firewall todavía no existe ninguna, y la salida es
+vacía — aunque <code>iptables -L</code> muestre las chains con política ACCEPT (esa vista
+es el estado por defecto, no una tabla real). <strong>Archivo vacío = no había
+reglas</strong>: el estado inicial es "sin reglas, todo permitido". Anotarlo en el
+cuaderno — importa para el Paso 11.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Por qué capturar primero</p>
+<p>Una máquina real no siempre arranca con el firewall vacío. Trabajar sin snapshot
+significa no poder volver al estado anterior. Regla profesional: <strong>capturar antes
+de modificar</strong> — igual que un backup antes de un cambio en producción.</p>
+</div>
+<p><strong>Paso 3 — Reset seguro: políticas primero, flush después</strong></p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 1. PRIMERO asegurar políticas ACCEPT en las cadenas integradas</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-P<span class="w"> </span>INPUT<span class="w"> </span>ACCEPT
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-P<span class="w"> </span>OUTPUT<span class="w"> </span>ACCEPT
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-P<span class="w"> </span>FORWARD<span class="w"> </span>ACCEPT
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># 2. DESPUÉS eliminar reglas, cadenas personalizadas y contadores</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-F
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-X
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-Z
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># Confirmar estado limpio</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>-v<span class="w"> </span>-n
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">El orden del reset importa</p>
+<p><code>iptables -F</code> elimina reglas pero <strong>no</strong> cambia las políticas. Si la política
+INPUT ya fuera DROP y se hiciera flush primero, desaparecerían las reglas ACCEPT
+y todo el tráfico entrante (incluida una sesión SSH) quedaría cortado.
+Por eso: <strong>políticas en ACCEPT primero, flush después.</strong></p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Verificación</p>
+<p>Las tres cadenas deben mostrar política <code>ACCEPT</code>, sin reglas, y contadores en 0.</p>
+</div>
+<h3 id="parte-3-construir-la-politica-drop">Parte 3: Construir la política DROP<a class="headerlink" href="#parte-3-construir-la-politica-drop" title="Permanent link">&para;</a></h3>
+<p><strong>Paso 4 — Agregar regla de loopback primero (OBLIGATORIO)</strong></p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Permitir todo el tráfico en la interfaz loopback (lo)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># Sin esta regla, muchos procesos locales dejan de funcionar</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-i<span class="w"> </span>lo<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-A<span class="w"> </span>OUTPUT<span class="w"> </span>-o<span class="w"> </span>lo<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Atención: el orden importa</p>
+<p>Si cambias la política a DROP sin agregar esta regla primero, comandos como
+<code>ping localhost</code> y procesos internos del sistema que usan la interfaz loopback
+dejarán de funcionar. <strong>Siempre agregar la regla de loopback antes del DROP.</strong></p>
+</div>
+<p><strong>Paso 5 — Permitir conexiones establecidas</strong></p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Permitir tráfico de respuesta a conexiones que el equipo inició</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># Sin esta regla, curl no puede recibir la respuesta del servidor</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-m<span class="w"> </span>conntrack<span class="w"> </span>--ctstate<span class="w"> </span>ESTABLISHED,RELATED<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Filtrado stateful (seguimiento de conexiones)</p>
+<p>Esta regla usa el módulo <code>conntrack</code>. Le dice a iptables: "si este paquete es
+parte de una conexión que yo inicié, déjalo pasar." Es la base del filtrado
+stateful — el kernel recuerda las conexiones activas y permite sus respuestas
+aunque la política general sea DROP.
+(El módulo antiguo <code>state</code> sigue existiendo, pero es un subconjunto de
+<code>conntrack</code>; usamos la forma moderna.)</p>
+</div>
+<details class="info">
+<summary>Para profundizar: el comando pieza por pieza</summary>
+<p>El kernel Linux corre <strong>siempre</strong> un registro de conexiones (<code>nf_conntrack</code>):
+una tabla en memoria donde anota cada conexión que pasa, identificada por su
+<strong>tupla</strong> <code>(protocolo, IP origen, puerto origen, IP destino, puerto destino)</code>.
+Esta regla no "enciende" ese registro — solo lo <strong>consulta</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-A INPUT</code></td>
+<td>Añade la regla al final de la cadena INPUT</td>
+</tr>
+<tr>
+<td><code>-m conntrack</code></td>
+<td>Carga el módulo que consulta la tabla de conexiones</td>
+</tr>
+<tr>
+<td><code>--ctstate ESTABLISHED,RELATED</code></td>
+<td>Coincide según el estado registrado (ver abajo)</td>
+</tr>
+<tr>
+<td><code>-j ACCEPT</code></td>
+<td>Deja pasar el paquete</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ESTABLISHED</strong> cubre dos casos, no solo uno:</p>
+<ol>
+<li>Respuestas a conexiones que <strong>esta máquina inició</strong> hacia afuera
+   (apt, curl, DNS…).</li>
+<li>Todos los paquetes siguientes de una conexión <strong>entrante ya aceptada</strong>:
+   del SSH del Paso 6, solo el primer paquete necesita la regla del puerto
+   22 — el resto de la sesión entra por esta regla.</li>
+</ol>
+<p><strong>RELATED</strong> = conexión nueva pero "hija" de una existente: el canal de datos
+de FTP, o un mensaje ICMP de error referido a una conexión tuya.</p>
+<p><strong>El mecanismo, con ejemplo:</strong> al ejecutar <code>curl example.com</code>, el primer
+paquete sale por OUTPUT y conntrack crea la entrada de esa tupla. Cuando
+llega la respuesta, el kernel busca la tupla invertida en la tabla, la
+encuentra, y el paquete queda marcado ESTABLISHED → esta regla lo acepta.
+Sin ella, con política DROP, <strong>toda respuesta a tus propias conexiones
+moriría</strong>.</p>
+<p>Funciona igual con UDP e ICMP, que no tienen conexiones reales: conntrack
+les crea pseudo-conexiones por tupla con un tiempo de vida.</p>
+<p>Por eso la regla va al inicio del ruleset: la mayoría de los paquetes de una
+sesión son ESTABLISHED y se resuelven con una sola consulta a la tabla, sin
+recorrer las demás reglas.</p>
+</details>
+<details class="info">
+<summary>Para profundizar: ver la tabla de conexiones en vivo</summary>
+<p>La tabla que consulta esta regla se puede inspeccionar con la herramienta
+<code>conntrack</code> (instalada en la preparación previa):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>conntrack<span class="w"> </span>-L
+</code></pre></div>
+<p>Una entrada típica (una consulta DNS de la VM por el adaptador NAT):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>udp   17   12   src=10.0.2.15 dst=10.0.2.3 sport=56069 dport=53   src=10.0.2.3 dst=10.0.2.15 sport=53 dport=56069   mark=0 use=1
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a> │     │    │   └──────── tupla ORIGINAL (ida) ────────┘          └──────── tupla REPLY (vuelta) ─────────┘
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a> │     │    └─ segundos de vida que le quedan (timeout)
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a> │     └─ 17 = número de protocolo UDP
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a> └─ protocolo
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>Lectura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tupla ORIGINAL</td>
+<td>La VM (<code>10.0.2.15</code>) preguntó al DNS del NAT de VirtualBox (<code>10.0.2.3:53</code>) desde el puerto efímero 56069</td>
+</tr>
+<tr>
+<td>Tupla REPLY</td>
+<td>La misma invertida — con ella el kernel reconoce la respuesta como ESTABLISHED</td>
+</tr>
+<tr>
+<td>sin <code>[UNREPLIED]</code></td>
+<td>Ya hubo tráfico en ambas direcciones; si apareciera, solo pasó la ida</td>
+</tr>
+</tbody>
+</table>
+<p>Ejercicio de 30 segundos: ejecutar <code>curl -4 -I http://example.com</code> y de
+inmediato <code>sudo conntrack -L | grep 80</code> — ahí está la tupla de esa conexión.</p>
+</details>
+<p><strong>Paso 6 — Permitir SSH y probarlo de verdad</strong></p>
+<p>Una regla inbound solo está probada cuando hay <strong>un servicio escuchando</strong> y <strong>una
+conexión desde otro equipo</strong>. sshd ya está instalado desde la preparación previa:</p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Confirmar que sshd escucha en el puerto 22</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>:22
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1"># Permitir SSH entrante</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">22</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Leer la salida de <code>ss</code> — el equivalente Linux de <code>netstat -ano</code></p>
+<p>En la VM Windows asociamos cada conexión de <code>netstat -ano</code> con su proceso en
+dos pasos: anotar el PID y buscarlo con <code>tasklist</code>. En Linux, <code>ss</code> hace ambas
+cosas en un solo comando. Cada flag:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-l</code></td>
+<td>Solo sockets en escucha (<strong>l</strong>istening) — servicios esperando conexiones</td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>Mostrar <strong>n</strong>úmeros: puerto <code>22</code>, no el nombre <code>ssh</code></td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>Solo <strong>T</strong>CP</td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>Mostrar el <strong>p</strong>roceso dueño de cada socket (requiere <code>sudo</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Salida típica:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>LISTEN  0  128  0.0.0.0:22  0.0.0.0:*  users:(("sshd",pid=812,fd=3))
+</code></pre></div>
+<p>La parte <code>users:(("sshd",pid=812,fd=3))</code> responde de inmediato la pregunta que
+en Windows requería dos comandos: <strong>¿qué proceso está detrás de este puerto?</strong>
+Aquí es <code>sshd</code> con PID 812. Para ver más detalle de ese proceso:
+<code>ps -p 812 -o pid,user,cmd</code>. Sin <code>sudo</code>, la columna del proceso aparece vacía
+para servicios del sistema — por eso el comando lleva <code>sudo</code>.</p>
+<p>Para ver también las conexiones <strong>establecidas</strong> (como ESTABLISHED en
+netstat), quitar la <code>-l</code>: <code>sudo ss -ntp</code>.</p>
+</div>
+<p><strong>[Windows — PowerShell]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c"># Probar la conexión SSH desde el host Windows (sustituir usuario e IP de la VM)</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">ssh</span> <span class="n">usuario</span><span class="p">@&lt;</span><span class="n">IP-de-la-VM</span><span class="p">&gt;</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c"># Alternativa sin sesión interactiva:</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="nb">Test-NetConnection</span> <span class="p">&lt;</span><span class="n">IP-de-la-VM</span><span class="p">&gt;</span> <span class="n">-Port</span> <span class="n">22</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Verificación</p>
+<p><code>Test-NetConnection</code> debe mostrar <code>TcpTestSucceeded : True</code>. En la VM,
+<code>sudo iptables -L INPUT -v -n</code> debe mostrar <code>pkts &gt; 0</code> en la regla tcp:22 —
+el contador es la evidencia de que <strong>esa</strong> regla capturó la conexión.</p>
+</div>
+<p><strong>Paso 7 — Permitir HTTP y probarlo de verdad</strong></p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Levantar un servidor HTTP real en el puerto 80 (dejarlo corriendo en esta terminal)</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>http.server<span class="w"> </span><span class="m">80</span>
+</code></pre></div>
+<p>En una <strong>segunda terminal</strong> de la VM:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Confirmar que escucha (¿qué proceso y PID aparecen esta vez?)</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-lntp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>:80
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1"># Permitir HTTP entrante</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--dport<span class="w"> </span><span class="m">80</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="c1"># Verificar que la regla quedó registrada (última de la lista, contadores en 0)</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>INPUT<span class="w"> </span>-v<span class="w"> </span>-n<span class="w"> </span>--line-numbers<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'dpt:80'</span>
+</code></pre></div>
+<p><strong>[Windows — PowerShell]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c"># Probar desde el host Windows (curl.exe, no el alias de PowerShell)</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">curl</span><span class="p">.</span><span class="n">exe</span> <span class="p">-</span><span class="n">4</span> <span class="n">-I</span> <span class="n">http</span><span class="p">://&lt;</span><span class="n">IP-de-la-VM</span><span class="p">&gt;/</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c"># Alternativa:</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nb">Test-NetConnection</span> <span class="p">&lt;</span><span class="n">IP-de-la-VM</span><span class="p">&gt;</span> <span class="n">-Port</span> <span class="n">80</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Verificación</p>
+<p>La respuesta debe ser un encabezado HTTP válido del servidor de Python
+(<code>HTTP/1.0 200 OK</code> u otro código válido). El contador de la regla tcp:80 debe
+incrementarse. Si se prefiere no usar sudo para el listener, puede usarse el
+puerto 8080 — ajustando la regla y la prueba en ambos lados.</p>
+</div>
+<p><strong>Paso 8 — Aplicar política por defecto DROP</strong></p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># CAMBIAR política por defecto: bloquear todo lo que no tenga regla explícita</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-P<span class="w"> </span>INPUT<span class="w"> </span>DROP
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="c1"># OUTPUT queda en ACCEPT (podemos salir a cualquier destino)</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-P<span class="w"> </span>OUTPUT<span class="w"> </span>ACCEPT
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Principio de mínimo privilegio aplicado a la red</p>
+<p>Este es el momento clave del laboratorio. A partir de ahora, <strong>nada entra</strong> a menos
+que lo hayamos permitido explícitamente con una regla. Todo lo que no coincida con
+una regla de ACCEPT cae a la política DROP y es silenciosamente descartado.</p>
+</div>
+<p>Prueba negativa observable. Para demostrar que es el <strong>firewall</strong> quien bloquea
+(y no la ausencia de servicio), levantar un servicio real en un puerto <strong>sin</strong>
+regla ACCEPT:</p>
+<p><strong>[VM Ubuntu — Bash]</strong> (en una terminal libre)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Servidor escuchando en 8080 — puerto SIN regla ACCEPT</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>python3<span class="w"> </span>-m<span class="w"> </span>http.server<span class="w"> </span><span class="m">8080</span>
+</code></pre></div>
+<p><strong>[Windows — PowerShell]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c"># Hay servicio detrás, pero ninguna regla lo permite</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nb">Test-NetConnection</span> <span class="p">&lt;</span><span class="n">IP-de-la-VM</span><span class="p">&gt;</span> <span class="n">-Port</span> <span class="n">8080</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Verificación</p>
+<p><code>TcpTestSucceeded : False</code> — <strong>a pesar de que el servicio está escuchando</strong>
+(comprobar con <code>sudo ss -lntp | grep :8080</code>). La única explicación posible es
+la política DROP: el paquete nunca llegó al servicio. Notar además que el
+fallo es <strong>lento</strong> (~20 s): DROP descarta en silencio, sin avisar al emisor.
+Si se probara un puerto sin servicio con el firewall abierto, el fallo sería
+instantáneo — el kernel respondería "connection refused". El <strong>cómo</strong> falla
+delata el <strong>porqué</strong>.</p>
+<p>Mientras tanto, SSH (22) y HTTP (80) deben seguir funcionando — repetir sus
+pruebas para confirmarlo. Al terminar, cerrar el servidor del 8080 con
+<code>Ctrl+C</code>.</p>
+</div>
+<h3 id="parte-4-leer-demostrar-el-orden-y-restaurar">Parte 4: Leer, demostrar el orden y restaurar<a class="headerlink" href="#parte-4-leer-demostrar-el-orden-y-restaurar" title="Permanent link">&para;</a></h3>
+<p><strong>Paso 9 — Leer el ruleset completo</strong></p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Ver todas las reglas con estadísticas de paquetes y bytes</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>-v<span class="w"> </span>-n<span class="w"> </span>--line-numbers
+</code></pre></div>
+<p>Anotar en el cuaderno el significado de cada columna:</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pkts</td>
+<td>Número de paquetes que coincidieron con esta regla</td>
+</tr>
+<tr>
+<td>bytes</td>
+<td>Bytes totales de los paquetes que coincidieron</td>
+</tr>
+<tr>
+<td>target</td>
+<td>Acción a tomar (ACCEPT, DROP, LOG, REJECT)</td>
+</tr>
+<tr>
+<td>prot</td>
+<td>Protocolo (tcp, udp, icmp, all)</td>
+</tr>
+<tr>
+<td>in/out</td>
+<td>Interfaz de entrada/salida (enp0s8, lo, etc.)</td>
+</tr>
+<tr>
+<td>source</td>
+<td>IP origen del paquete (0.0.0.0/0 = cualquiera)</td>
+</tr>
+<tr>
+<td>destination</td>
+<td>IP destino del paquete</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Paso 10 — Demostrar que el orden decide: bloqueo con <code>-I</code></strong></p>
+<p>Vamos a bloquear las respuestas de <code>8.8.8.8</code>. La posición de la regla es lo que
+importa: si se agregara con <code>-A</code> (al final), la respuesta al ping — que pertenece a
+una conexión ya rastreada — coincidiría <strong>antes</strong> con la regla ESTABLISHED y el
+bloqueo no tendría efecto. Por eso se inserta <strong>al inicio</strong> con <code>-I INPUT 1</code>:</p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># Insertar el bloqueo en la posición 1 (antes que loopback y ESTABLISHED)</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-I<span class="w"> </span>INPUT<span class="w"> </span><span class="m">1</span><span class="w"> </span>-s<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span>-j<span class="w"> </span>DROP
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="c1"># Probar: el ping debe fallar (forzamos IPv4)</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>ping<span class="w"> </span>-4<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">8</span>.8.8.8
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="c1"># La evidencia: el contador de la regla 1 debe incrementarse</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>INPUT<span class="w"> </span>-v<span class="w"> </span>-n<span class="w"> </span>--line-numbers
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Verificación</p>
+<ul>
+<li>El ping muestra <code>100% packet loss</code>.</li>
+<li>La regla <code>num 1</code> (DROP para 8.8.8.8) muestra <code>pkts</code> ≥ 3 — cada respuesta
+  descartada suma al contador.</li>
+<li>Reflexión para el cuaderno: ¿qué pasaría si la misma regla se agregara con
+  <code>-A</code> al final mientras hay un ping activo? ¿Qué regla capturaría los paquetes?</li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Eliminar la regla de prueba al terminar</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-D<span class="w"> </span>INPUT<span class="w"> </span>-s<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span>-j<span class="w"> </span>DROP
+</code></pre></div>
+<p><strong>Paso 11 — Restaurar el ruleset original (OBLIGATORIO)</strong></p>
+<p>Cerrar el servidor HTTP de Python (Ctrl+C en su terminal) y devolver el firewall a
+su estado inicial:</p>
+<p><strong>[VM Ubuntu — Bash]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># Restaurar el snapshot capturado en el Paso 2</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>sudo<span class="w"> </span>iptables-restore<span class="w"> </span>&lt;<span class="w"> </span>~/ruleset-inicial.txt
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="c1"># Verificar que coincide con el estado inicial</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>-v<span class="w"> </span>-n
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">¿El snapshot del Paso 2 quedó vacío?</p>
+<p><code>iptables-restore</code> con un archivo vacío no aplica <strong>nada</strong> — dejaría las reglas
+del laboratorio activas. Si el estado inicial era "sin reglas" (archivo vacío),
+restaurar significa volver a ese estado con el reset seguro del Paso 3:
+políticas ACCEPT primero, después <code>-F</code>, <code>-X</code> y <code>-Z</code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Ciclo completo</p>
+<p>Capturar → trabajar → restaurar. Ningún laboratorio debe dejar el sistema en un
+estado distinto al que tenía al empezar. La Parte 2 repite este mismo patrón.</p>
+</div>
+<h2 id="validacion-final">Validación final<a class="headerlink" href="#validacion-final" title="Permanent link">&para;</a></h2>
+<p>Al terminar todas las partes, verificar:</p>
+<ul>
+<li>[ ] <code>iptables --version</code> muestra la versión instalada (v1.8.x, backend nf_tables)</li>
+<li>[ ] Existe <code>~/ruleset-inicial.txt</code> con el estado previo al laboratorio
+      (vacío es válido si la VM no tenía reglas cargadas)</li>
+<li>[ ] Con la política DROP activa: SSH (22) y HTTP (80) accesibles desde Windows,
+      puerto 8080 (con servicio escuchando y sin regla) inaccesible</li>
+<li>[ ] La regla DROP insertada con <code>-I INPUT 1</code> bloqueó el ping a 8.8.8.8 y su
+      contador lo demuestra</li>
+<li>[ ] El ruleset final (tras <code>iptables-restore</code>, o el reset seguro si el snapshot
+      quedó vacío) coincide con el inicial</li>
+</ul>
+<h2 id="complemento-offen">Complemento OFFen<a class="headerlink" href="#complemento-offen" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Ejercicio complementario (opcional)</p>
+<p>Este laboratorio se complementa con cualquier desafío de reconocimiento y
+enumeración en la plataforma OFFen. Un escáner externo que intente conectarse
+a los puertos no listados en las reglas de ACCEPT descubrirá que no responden —
+esto es exactamente la perspectiva del atacante que los controles defensivos de
+este lab buscan neutralizar. El comportamiento del firewall desde afuera confirma
+que las reglas DROP funcionan como se diseñaron.</p>
+<p>Acceder desde: <code>http://[ip-offen-server]</code> con las credenciales del curso.</p>
+</div>
+<h2 id="entrega">Entrega<a class="headerlink" href="#entrega" title="Permanent link">&para;</a></h2>
+<p>El alumno debe entregar:</p>
+<ol>
+<li>Captura de <code>sudo iptables -L -v -n --line-numbers</code> con la política DROP y las
+   4 reglas aplicadas (loopback, conntrack ESTABLISHED, tcp:22, tcp:80)</li>
+<li>Captura de las pruebas inbound desde PowerShell: <code>Test-NetConnection</code> al puerto
+   22 y al 80 (<code>True</code>) y al 8080 con servicio escuchando (<code>False</code>)</li>
+<li>Captura del Paso 10: ping fallido a 8.8.8.8 <strong>y</strong> el contador de la regla
+   insertada con <code>pkts</code> &gt; 0</li>
+<li>Captura del ruleset restaurado (Paso 11) junto al contenido de
+   <code>~/ruleset-inicial.txt</code></li>
+</ol>
+<hr />
+<!-- Solución disponible para el instructor en: docs/instructor/lab-iptables-p1-solucion.md -->
+
+<p><em>Continúa en: <a href="../lab-iptables-p2/">Lab iptables (Parte 2)</a></em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

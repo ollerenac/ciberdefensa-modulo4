@@ -1,0 +1,2559 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/instructor/lab-suricata-solucion/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Lab suricata solucion - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documento-instructor-no-compartir-con-alumnos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab suricata solucion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/laboratorio-vm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🖥 Laboratorio virtual — accesos y credenciales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/repaso-redes-defensivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precalentamiento y Repaso — Redes Defensivas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/ficha-zero-day-pdca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ficha: Alerta Zero-Day y PDCA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../conferencias/ejercicios-extra-metasploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ejercicio extra — Preparación de Metasploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<h1 id="documento-instructor-no-compartir-con-alumnos">DOCUMENTO INSTRUCTOR — NO COMPARTIR CON ALUMNOS<a class="headerlink" href="#documento-instructor-no-compartir-con-alumnos" title="Permanent link">&para;</a></h1>
+<h1 id="tipo-solucion-de-laboratorio">Tipo: Solución de laboratorio<a class="headerlink" href="#tipo-solucion-de-laboratorio" title="Permanent link">&para;</a></h1>
+<hr />
+<h1 id="solucion-lab-ids-con-snort-en-windows-lab-04">SOLUCIÓN: Lab IDS con Snort en Windows (LAB-04)<a class="headerlink" href="#solucion-lab-ids-con-snort-en-windows-lab-04" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Nota histórica sobre el nombre</p>
+<p>El archivo conserva el nombre <code>lab-suricata-solucion.md</code> por razones históricas. El laboratorio utiliza <strong>Snort 2.9.20 x64</strong>, no Suricata.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Solo para instructores</p>
+<p>Este documento contiene configuraciones, reglas completas, alertas esperadas, diagnóstico y rúbrica. No publicarlo ni proyectarlo durante el trabajo autónomo del alumno.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Alcance tecnológico</p>
+<p>Snort 2 es una rama heredada. Cisco todavía publica 2.9.20, pero no certifica Windows 11 como plataforma verificada. La formulación correcta es: “laboratorio validado por el curso en una VM Windows 11 x64”. No presentarlo como arquitectura recomendada para un despliegue nuevo.</p>
+</div>
+<hr />
+<h2 id="estado-de-validacion-en-la-vm-de-referencia">Estado de validación en la VM de referencia<a class="headerlink" href="#estado-de-validacion-en-la-vm-de-referencia" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Evidencia</th>
+<th>Estado al 24-08-2026</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Snort</td>
+<td><code>snort.exe -V</code> muestra <code>2.9.20-WIN64</code></td>
+<td>Validado</td>
+</tr>
+<tr>
+<td>Npcap</td>
+<td><code>snort.exe -W</code> enumera Host-only, NAT y <code>NPF_Loopback</code></td>
+<td>Validado</td>
+</tr>
+<tr>
+<td>Configuración</td>
+<td><code>snort.exe -T -c ...snort-lab.conf</code> lee 3 reglas</td>
+<td>Validado</td>
+</tr>
+<tr>
+<td>ICMP</td>
+<td>Alerta SID <code>1000010</code> sobre <code>127.0.0.1</code></td>
+<td>UAT validada</td>
+</tr>
+<tr>
+<td>TCP/23</td>
+<td>Alerta SID <code>1000011</code> mediante <code>Test-NetConnection</code></td>
+<td>UAT validada</td>
+</tr>
+<tr>
+<td>HTTP saliente</td>
+<td>SID <code>1000012</code> sobre adaptador NAT</td>
+<td>Pendiente de UAT final</td>
+</tr>
+<tr>
+<td><code>threshold</code></td>
+<td>Una alerta para diez Echo Request</td>
+<td>Pendiente de UAT final</td>
+</tr>
+</tbody>
+</table>
+<p>No declarar el laboratorio completamente validado hasta cerrar las dos últimas filas en la VM.</p>
+<hr />
+<h2 id="prerrequisitos-preparar-antes-de-la-clase">Prerrequisitos — Preparar antes de la clase<a class="headerlink" href="#prerrequisitos-preparar-antes-de-la-clase" title="Permanent link">&para;</a></h2>
+<h3 id="1-resolver-la-licencia-de-npcap">1. Resolver la licencia de Npcap<a class="headerlink" href="#1-resolver-la-licencia-de-npcap" title="Permanent link">&para;</a></h3>
+<p>Npcap Free permite normalmente hasta cinco instalaciones cuando se usa con Snort y no autoriza redistribuir libremente el instalador. Si el aula supera ese número, gestionar autorización o licencia institucional antes de clonar las VMs. No incorporar el instalador de Npcap a una ISO o USB de distribución sin revisar esos términos.</p>
+<h3 id="2-confirmar-windows-x64-y-privilegios">2. Confirmar Windows x64 y privilegios<a class="headerlink" href="#2-confirmar-windows-x64-y-privilegios" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Get-CimInstance</span> <span class="n">Win32_OperatingSystem</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">OSArchitecture</span>
+</code></pre></div>
+<p>Usar una cuenta que pueda elevar mediante UAC. La salida debe indicar <code>64-bit</code>.</p>
+<h3 id="3-instalar-visual-c-redistributable-x64">3. Instalar Visual C++ Redistributable x64<a class="headerlink" href="#3-instalar-visual-c-redistributable-x64" title="Permanent link">&para;</a></h3>
+<p>Descargar <a href="https://aka.ms/vc14/vc_redist.x64.exe"><code>VC_redist.x64.exe</code></a> directamente desde Microsoft e instalarlo antes de Snort. No usar solo la edición x86: <code>Snort_2_9_20_Installer.x64.exe</code> es un binario x64 e importa <code>VCRUNTIME140.dll</code>.</p>
+<p>Si <code>snort.exe -V</code> ya funciona, el runtime está satisfecho y no debe reinstalarse para resolver errores de reglas, interfaces o configuración.</p>
+<h3 id="4-instalar-npcap">4. Instalar Npcap<a class="headerlink" href="#4-instalar-npcap" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Descargar Npcap 1.88 —versión de la VM validada— desde <a href="https://npcap.com/#download">npcap.com</a>.</li>
+<li>Ejecutarlo como administrador.</li>
+<li>Confirmar <strong>Install Npcap in WinPcap API-compatible Mode</strong>.</li>
+<li>No instalar el WinPcap antiguo en paralelo.</li>
+<li>Mantener <code>NPF_Loopback</code>; reemplaza al antiguo adaptador de loopback.</li>
+</ol>
+<h3 id="5-instalar-snort-2920-x64">5. Instalar Snort 2.9.20 x64<a class="headerlink" href="#5-instalar-snort-2920-x64" title="Permanent link">&para;</a></h3>
+<p>Descargar <code>Snort_2_9_20_Installer.x64.exe</code> desde la <a href="https://www.snort.org/downloads/">página oficial</a> e instalar en <code>C:\Snort\</code>.</p>
+<p>Los instaladores de Snort y Npcap son ejecutables, no archivos MSI.</p>
+<h3 id="6-verificar-por-capas">6. Verificar por capas<a class="headerlink" href="#6-verificar-por-capas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">bin</span><span class="p">\</span><span class="n">snort</span><span class="p">.</span><span class="n">exe</span> <span class="n">-V</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">bin</span><span class="p">\</span><span class="n">snort</span><span class="p">.</span><span class="n">exe</span> <span class="n">-W</span>
+</code></pre></div>
+<p>No continuar hasta que:</p>
+<ul>
+<li><code>-V</code> muestre <code>Version 2.9.20-WIN64</code>.</li>
+<li><code>-W</code> enumere el adaptador NAT y <code>Adapter for loopback traffic capture</code>.</li>
+</ul>
+<p>En la VM de referencia:</p>
+<table>
+<thead>
+<tr>
+<th>Índice observado</th>
+<th>IP</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>192.168.56.102</code></td>
+<td>Host-only</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>10.0.2.15</code></td>
+<td>NAT/HTTP saliente</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>127.0.0.1</code> mediante <code>NPF_Loopback</code></td>
+<td>ICMP y TCP locales</td>
+</tr>
+</tbody>
+</table>
+<p>Los índices pueden cambiar después de modificar la VM. Redescubrirlos antes de cada clase.</p>
+<hr />
+<h2 id="snortconf-minimo-funcional">snort.conf Mínimo Funcional<a class="headerlink" href="#snortconf-minimo-funcional" title="Permanent link">&para;</a></h2>
+<p>No utilizar el <code>C:\Snort\etc\snort.conf</code> completo para LAB-04. La copia incluida con el instalador puede conservar la directiva dinámica comentada con una ruta Unix:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>#dynamicpreprocessor directory /usr/local/lib/snort_dynamicpreprocessor/
+</code></pre></div>
+<p>Aunque <code>sf_ftptelnet.dll</code> exista en Windows, Snort no la carga y termina en <code>Unknown preprocessor: "ftp_telnet"</code>. No solucionar esto eliminando preprocesadores uno por uno: el laboratorio no necesita esa plantilla.</p>
+<p>Crear <code>C:\Snort\etc\snort-lab.conf</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="sh">@'</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="sh"># Configuración mínima para LAB-04</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="sh">ipvar HOME_NET [127.0.0.1/32,10.0.2.0/24,192.168.56.0/24]</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sh">ipvar EXTERNAL_NET any</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="sh">var RULE_PATH C:\Snort\rules</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="sh">include $RULE_PATH\mis-reglas.rules</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="sh">'@</span> <span class="p">|</span> <span class="nb">Set-Content</span> <span class="n">-Path</span> <span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">etc</span><span class="p">\</span><span class="n">snort-lab</span><span class="p">.</span><span class="n">conf</span> <span class="n">-Encoding</span> <span class="n">ascii</span>
+</code></pre></div>
+<p>Crear el archivo de reglas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">rules</span><span class="p">\</span><span class="n">mis-reglas</span><span class="p">.</span><span class="n">rules</span><span class="p">))</span> <span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="nb">New-Item</span> <span class="n">-Path</span> <span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">rules</span><span class="p">\</span><span class="n">mis-reglas</span><span class="p">.</span><span class="n">rules</span> <span class="n">-ItemType</span> <span class="n">File</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>No usar <code>New-Item -Force</code> sobre un archivo existente: podría destruir evidencia o reglas de una ejecución anterior.</p>
+<h3 id="decision-sobre-community-rules">Decisión sobre Community Rules<a class="headerlink" href="#decision-sobre-community-rules" title="Permanent link">&para;</a></h3>
+<p>No cargar <code>community.rules</code> durante el camino principal. Algunas reglas comunitarias requieren variables y preprocesadores ausentes en la configuración mínima; agregarlas impediría atribuir un error a una sola causa.</p>
+<p>Las reglas locales bastan para los objetivos y la rúbrica. El paquete comunitario puede utilizarse posteriormente en una demostración preparada, con versión congelada y configuración validada por el instructor.</p>
+<hr />
+<h2 id="reglas-snort-esperadas">Reglas Snort Esperadas<a class="headerlink" href="#reglas-snort-esperadas" title="Permanent link">&para;</a></h2>
+<p>Guardar cada regla en una sola línea dentro de <code>C:\Snort\rules\mis-reglas.rules</code>.</p>
+<h3 id="regla-1-icmp-inicial">Regla 1 — ICMP inicial<a class="headerlink" href="#regla-1-icmp-inicial" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>alert icmp any any -&gt; $HOME_NET any (msg:"Ping ICMP detectado"; itype:8; sid:1000010; rev:1;)
+</code></pre></div>
+<h3 id="regla-2-intento-tcp-hacia-telnet">Regla 2 — Intento TCP hacia Telnet<a class="headerlink" href="#regla-2-intento-tcp-hacia-telnet" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>alert tcp any any -&gt; $HOME_NET 23 (msg:"Intento de conexion Telnet inseguro"; sid:1000011; rev:1;)
+</code></pre></div>
+<h3 id="regla-3-contenido-http-saliente">Regla 3 — Contenido HTTP saliente<a class="headerlink" href="#regla-3-contenido-http-saliente" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>alert tcp $HOME_NET any -&gt; $EXTERNAL_NET 80 (msg:"HTTP saliente con cadena sospechosa cmd.exe"; content:"cmd.exe"; nocase; sid:1000012; rev:1;)
+</code></pre></div>
+<p>La regla HTTP original estaba invertida: <code>any -&gt; $HOME_NET:80</code> describe tráfico entrante, mientras que <code>curl.exe</code> genera una petición saliente desde la VM. No añadir <code>http_uri</code> a esta configuración mínima; esa opción presupone el preprocesamiento HTTP que deliberadamente no estamos cargando.</p>
+<h3 id="regla-1-final-con-control-de-volumen">Regla 1 final con control de volumen<a class="headerlink" href="#regla-1-final-con-control-de-volumen" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>alert icmp any any -&gt; $HOME_NET any (msg:"Ping ICMP detectado"; itype:8; threshold: type limit, track by_src, count 1, seconds 60; sid:1000010; rev:2;)
+</code></pre></div>
+<p>Mostrarla en una sola línea. Un bloque multilínea sin continuaciones no es una regla lista para copiar a Snort.</p>
+<hr />
+<h2 id="validacion-de-configuracion">Validación de configuración<a class="headerlink" href="#validacion-de-configuracion" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">bin</span><span class="p">\</span><span class="n">snort</span><span class="p">.</span><span class="n">exe</span> <span class="n">-T</span> <span class="n">-c</span> <span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">etc</span><span class="p">\</span><span class="n">snort-lab</span><span class="p">.</span><span class="n">conf</span>
+</code></pre></div>
+<p>Criterios:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>3 Snort rules read
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>3 detection rules
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Snort successfully validated the configuration!
+</code></pre></div>
+<p>Si el error menciona un SID, revisar <code>mis-reglas.rules</code>. Si menciona <code>ftp_telnet</code>, el alumno ejecutó el archivo equivocado.</p>
+<hr />
+<h2 id="uat-1-icmp-sobre-loopback">UAT 1 — ICMP sobre loopback<a class="headerlink" href="#uat-1-icmp-sobre-loopback" title="Permanent link">&para;</a></h2>
+<p>Usar el índice real de <code>NPF_Loopback</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">bin</span><span class="p">\</span><span class="n">snort</span><span class="p">.</span><span class="n">exe</span> <span class="n">-i</span> <span class="p">&lt;</span><span class="n">LOOPBACK</span><span class="p">&gt;</span> <span class="n">-A</span> <span class="n">console</span> <span class="n">-N</span> <span class="n">-c</span> <span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">etc</span><span class="p">\</span><span class="n">snort-lab</span><span class="p">.</span><span class="n">conf</span>
+</code></pre></div>
+<p><code>-N</code> desactiva el almacenamiento de paquetes y mantiene las alertas. Sin esta opción, el comando anterior del curso intentaba crear <code>log/snort.log...</code> en una ruta relativa y podía terminar con error fatal.</p>
+<p>Desde otra PowerShell:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">ping</span> <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span>
+</code></pre></div>
+<p>Salida validada:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>[1:1000010:1] Ping ICMP detectado ... {ICMP} 127.0.0.1 -&gt; 127.0.0.1
+</code></pre></div>
+<p>El aviso <code>No preprocessors configured for policy 0</code> es esperado en esta configuración mínima y no invalida las reglas simples a nivel de paquete.</p>
+<hr />
+<h2 id="uat-2-tcp23-sin-instalar-telnet-client">UAT 2 — TCP/23 sin instalar Telnet Client<a class="headerlink" href="#uat-2-tcp23-sin-instalar-telnet-client" title="Permanent link">&para;</a></h2>
+<p>Con Snort todavía en loopback:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">Test-NetConnection</span> <span class="n">-ComputerName</span> <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span> <span class="n">-Port</span> <span class="n">23</span>
+</code></pre></div>
+<p>Salida validada en Snort:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>[1:1000011:1] Intento de conexion Telnet inseguro ... 127.0.0.1:puerto -&gt; 127.0.0.1:23
+</code></pre></div>
+<p>Un <code>TcpTestSucceeded: False</code> es aceptable. Las alertas repetidas con el mismo puerto de origen son retransmisiones TCP. La herramienta puede efectuar además una comprobación ICMP y activar la Regla 1.</p>
+<p>Esta prueba reemplaza al cliente Telnet opcional de Windows.</p>
+<hr />
+<h2 id="uat-3-http-saliente-sobre-nat">UAT 3 — HTTP saliente sobre NAT<a class="headerlink" href="#uat-3-http-saliente-sobre-nat" title="Permanent link">&para;</a></h2>
+<p>Detener Snort con <code>Ctrl+C</code> y reiniciarlo sobre el índice NAT:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">bin</span><span class="p">\</span><span class="n">snort</span><span class="p">.</span><span class="n">exe</span> <span class="n">-i</span> <span class="p">&lt;</span><span class="n">NAT</span><span class="p">&gt;</span> <span class="n">-A</span> <span class="n">console</span> <span class="n">-N</span> <span class="n">-c</span> <span class="n">C</span><span class="p">:\</span><span class="n">Snort</span><span class="p">\</span><span class="n">etc</span><span class="p">\</span><span class="n">snort-lab</span><span class="p">.</span><span class="n">conf</span>
+</code></pre></div>
+<p>En otra PowerShell:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">curl</span><span class="p">.</span><span class="n">exe</span> <span class="p">-</span><span class="n">-noproxy</span> <span class="s2">"*"</span> <span class="p">-</span><span class="n">-http1</span><span class="p">.</span><span class="n">1</span> <span class="p">-</span><span class="n">-max-time</span> <span class="n">10</span> <span class="n">http</span><span class="p">://</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span>
+</code></pre></div>
+<p>Alerta esperada:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>[1:1000012:1] HTTP saliente con cadena sospechosa cmd.exe ... 10.0.2.15:puerto -&gt; IP_EXTERNA:80
+</code></pre></div>
+<p>El código HTTP puede ser 404. El criterio es que la petición sin cifrar contenga <code>/cmd.exe</code> y la alerta aparezca sobre el adaptador de salida.</p>
+<hr />
+<h2 id="uat-4-threshold">UAT 4 — Threshold<a class="headerlink" href="#uat-4-threshold" title="Permanent link">&para;</a></h2>
+<p>Sustituir la Regla 1 por la revisión 2, validar nuevamente con <code>-T</code>, iniciar sobre loopback y ejecutar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">ping</span> <span class="n">-n</span> <span class="n">10</span> <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span>
+</code></pre></div>
+<p>Esperado: diez Echo Request procesados y como máximo una alerta SID <code>1000010</code> para <code>127.0.0.1</code> durante 60 segundos.</p>
+<hr />
+<h2 id="diagnostico-de-errores-observados">Diagnóstico de errores observados<a class="headerlink" href="#diagnostico-de-errores-observados" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Error o síntoma</th>
+<th>Causa comprobada o probable</th>
+<th>Acción correcta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>snort.exe -V</code> no inicia y menciona <code>VCRUNTIME140.dll</code></td>
+<td>Falta runtime x64</td>
+<td>Instalar <code>VC_redist.x64.exe</code> desde Microsoft</td>
+</tr>
+<tr>
+<td><code>snort.exe -W</code> no enumera adaptadores</td>
+<td>Npcap ausente o sin compatibilidad WinPcap</td>
+<td>Revisar instalación de Npcap, no las reglas</td>
+</tr>
+<tr>
+<td><code>Unknown preprocessor: "ftp_telnet"</code></td>
+<td>Se usó el <code>snort.conf</code> completo sin cargar DLL dinámicas</td>
+<td>Usar <code>snort-lab.conf</code>; no borrar preprocesadores uno por uno</td>
+</tr>
+<tr>
+<td><code>Failed to open log file "log/snort.log..."</code></td>
+<td>El comando no usó <code>-N</code> ni una ruta absoluta de log</td>
+<td>Añadir <code>-N</code> para alertas solo en consola</td>
+</tr>
+<tr>
+<td><code>snort -T</code> lee cero reglas</td>
+<td>Falta el <code>include</code> o se editó otro archivo</td>
+<td>Verificar ruta y <code>mis-reglas.rules</code></td>
+</tr>
+<tr>
+<td>ICMP/TCP no alerta</td>
+<td>Snort captura Ethernet/NAT, pero la prueba circula por loopback</td>
+<td>Seleccionar el índice <code>NPF_Loopback</code></td>
+</tr>
+<tr>
+<td>HTTP no alerta</td>
+<td>Interfaz incorrecta, regla invertida, proxy o HTTPS</td>
+<td>Usar NAT, regla saliente y HTTP directo</td>
+</tr>
+<tr>
+<td>Muchas alertas TCP/23</td>
+<td>Retransmisiones del mismo SYN</td>
+<td>Explicarlo; no confundir con ejecuciones independientes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="notas-de-dictado">Notas de dictado<a class="headerlink" href="#notas-de-dictado" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Tiempo</th>
+<th>Evidencia para avanzar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prerrequisitos y <code>-V</code></td>
+<td>20 min</td>
+<td>Versión 2.9.20-WIN64</td>
+</tr>
+<tr>
+<td>Npcap e interfaces</td>
+<td>10 min</td>
+<td>NAT y <code>NPF_Loopback</code> enumerados</td>
+</tr>
+<tr>
+<td>Configuración mínima y <code>-T</code></td>
+<td>15 min</td>
+<td>Tres reglas validadas</td>
+</tr>
+<tr>
+<td>Escritura y anatomía de reglas</td>
+<td>25 min</td>
+<td>SIDs únicos y direcciones justificadas</td>
+</tr>
+<tr>
+<td>ICMP y TCP loopback</td>
+<td>20 min</td>
+<td>Alertas 1000010 y 1000011</td>
+</tr>
+<tr>
+<td>HTTP sobre NAT</td>
+<td>15 min</td>
+<td>Alerta 1000012</td>
+</tr>
+<tr>
+<td><code>threshold</code> y análisis</td>
+<td>15 min</td>
+<td>Una alerta para diez pings</td>
+</tr>
+</tbody>
+</table>
+<p>La instalación se realiza en paralelo, pero ningún alumno avanza de <code>-V</code> a <code>-W</code>, ni de <code>-W</code> a <code>-T</code>, sin mostrar el checkpoint anterior.</p>
+<hr />
+<h2 id="rubrica-de-calificacion">Rúbrica de calificación<a class="headerlink" href="#rubrica-de-calificacion" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Puntos</th>
+<th>Cómo verificar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>snort-lab.conf</code> valida tres reglas</td>
+<td>2</td>
+<td>Salida <code>Snort successfully validated the configuration!</code></td>
+</tr>
+<tr>
+<td>Regla ICMP funciona sobre loopback</td>
+<td>2</td>
+<td>Regla y alerta SID 1000010</td>
+</tr>
+<tr>
+<td>Regla TCP funciona sin Telnet Client</td>
+<td>2</td>
+<td>Regla y alerta SID 1000011</td>
+</tr>
+<tr>
+<td>Regla HTTP saliente funciona sobre NAT</td>
+<td>2</td>
+<td>Regla y alerta SID 1000012</td>
+</tr>
+<tr>
+<td><code>threshold</code> limita el volumen</td>
+<td>1</td>
+<td>Revisión 2 y resultado de diez pings</td>
+</tr>
+<tr>
+<td>El alumno interpreta una alerta</td>
+<td>1</td>
+<td>Explica timestamp, SID, protocolo, origen y destino</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total: 10 puntos</strong></p>
+<hr />
+<h2 id="checklist-previo-al-dictado">Checklist previo al dictado<a class="headerlink" href="#checklist-previo-al-dictado" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[ ] Licencia o autorización de Npcap resuelta para el número de VMs</li>
+<li>[ ] <code>VC_redist.x64.exe</code>, Npcap y Snort obtenidos desde fuentes oficiales</li>
+<li>[ ] Snapshot de VM tomado después de instalar el driver con la VM apagada</li>
+<li>[ ] Índices NAT y loopback redescubiertos</li>
+<li>[ ] <code>snort-lab.conf</code> y tres reglas validados</li>
+<li>[ ] UAT ICMP, TCP, HTTP y <code>threshold</code> ejecutada de principio a fin</li>
+<li>[ ] Ningún Community Ruleset forma parte del camino crítico</li>
+</ul>
+<!-- Solución instructor para: docs/seguridad-criptografia/en-la-red/ids-ips-p2.md -->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

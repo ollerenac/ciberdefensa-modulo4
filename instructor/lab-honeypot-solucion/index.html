@@ -1,0 +1,2751 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Curso de Ciberdefensa para Técnicos y Sub-Oficiales del Ejército">
+      
+      
+        <meta name="author" content="INICTEL-UNI">
+      
+      
+        <link rel="canonical" href="https://ollerenac.github.io/ciberdefensa-modulo4/instructor/lab-honeypot-solucion/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Lab honeypot solucion - Módulo 4: Ciberdefensa Defensiva</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documento-instructor-no-compartir-con-alumnos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-header__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Módulo 4: Ciberdefensa Defensiva
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab honeypot solucion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Módulo 4: Ciberdefensa Defensiva" class="md-nav__button md-logo" aria-label="Módulo 4: Ciberdefensa Defensiva" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Módulo 4: Ciberdefensa Defensiva
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ollerenac/ciberdefensa-modulo4" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ollerenac/ciberdefensa-modulo4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Seguridad de la Información y Criptografía
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Seguridad de la Información y Criptografía
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En el Ordenador
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            En el Ordenador
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/laboratorio-vm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🖥 Laboratorio virtual — accesos y credenciales
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/controles-defensivos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/antivirus-avanzados-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Antivirus Avanzados (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/cortafuegos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Firewall (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-el-ordenador/lab-iptables-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Iptables (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    En la Red
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            En la Red
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/repaso-redes-defensivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precalentamiento y Repaso — Redes Defensivas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/proxy-squid-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxy Squid (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/ids-ips-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDS e IPS (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/honeypots-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Honey Pots (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seguridad-criptografia/en-la-red/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Capas SI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Capas SI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    La Familia ISO 27000
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            La Familia ISO 27000
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27000-generalidades-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27000 — Generalidades (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27001-requisitos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27001 — Requisitos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27002-controles-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27002 — Controles (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/iso27005-riesgo-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 27005 — Gestión del Riesgo (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/examen-parcial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Parcial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/familia-iso27000/lab-auditoria-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab — Auditoría Interna (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Defensa en Profundidad
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Defensa en Profundidad
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-humana-perimetral-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa Humana y Perimetral (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-red-endpoint-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Red y Endpoint (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-aplicaciones-datos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capa de Aplicaciones y Datos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/capa-activos-criticos-p2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Activos Críticos y Escenarios Defensivos (Parte 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capas-si/defensa-profundidad/examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen Final
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Gestión de Riesgos y Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Gestión de Riesgos y Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de Gestión de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de Gestión de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/concepto-riesgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concepto de Riesgo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/fundamentos-riesgo/tipos-riesgo-militar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tipos de Riesgo en Entornos Militares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identificación y Evaluación de Vulnerabilidades
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Identificación y Evaluación de Vulnerabilidades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/metodos-identificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métodos de Identificación y Priorización
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/identificacion-vulnerabilidades/ficha-zero-day-pdca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ficha: Alerta Zero-Day y PDCA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mitigación y Control de Riesgos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Mitigación y Control de Riesgos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/controles-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Controles y Buenas Prácticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gestion-riesgos/mitigacion-controles/examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Conferencias Magistrales
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Conferencias Magistrales
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../conferencias/ejercicios-extra-metasploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ejercicio extra — Preparación de Metasploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<h1 id="documento-instructor-no-compartir-con-alumnos">DOCUMENTO INSTRUCTOR — NO COMPARTIR CON ALUMNOS<a class="headerlink" href="#documento-instructor-no-compartir-con-alumnos" title="Permanent link">&para;</a></h1>
+<h1 id="tipo-solucion-de-laboratorio">Tipo: Solución de laboratorio<a class="headerlink" href="#tipo-solucion-de-laboratorio" title="Permanent link">&para;</a></h1>
+<hr />
+<h1 id="solucion-lab-despliegue-y-analisis-de-honeypot-lab-05">SOLUCIÓN: Lab Despliegue y Análisis de Honeypot (LAB-05)<a class="headerlink" href="#solucion-lab-despliegue-y-analisis-de-honeypot-lab-05" title="Permanent link">&para;</a></h1>
+<div class="admonition danger">
+<p class="admonition-title">Solo para instructores</p>
+<p>Este documento contiene el procedimiento esperado, las respuestas modelo y la rúbrica. Durante el ejercicio, proyectar únicamente la guía del alumno y el extracto de log sin respuestas.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Alcance obligatorio</p>
+<p>La práctica principal escucha exclusivamente en <code>127.0.0.1</code>. No cambiar a <code>0.0.0.0</code>, no crear reglas de entrada y no conectar equipos entre sí. Una práctica en red necesitaría autorización, segmentación y un plan de contención distintos.</p>
+</div>
+<hr />
+<h2 id="decision-tecnica-del-laboratorio">Decisión técnica del laboratorio<a class="headerlink" href="#decision-tecnica-del-laboratorio" title="Permanent link">&para;</a></h2>
+<p>El procedimiento canónico despliega un honeypot didáctico de baja interacción mediante <code>honeypot-simple.py</code>. El script usa la biblioteca estándar de Python 3, registra conexiones TCP y permite analizar correctamente el origen, el destino y la marca de tiempo de cada evento. La guía incluye además <code>honeypot-multiservicio.py</code> como ampliación opcional fuera de la ruta evaluada de tres horas.</p>
+<hr />
+<h2 id="preparacion-del-instructor">Preparación del instructor<a class="headerlink" href="#preparacion-del-instructor" title="Permanent link">&para;</a></h2>
+<p>Antes de la clase:</p>
+<ol>
+<li>Verificar Python 3 en la VM o equipo Windows 11:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span> <span class="p">-</span><span class="n">-version</span>
+</code></pre></div>
+<p>Si aparece <code>Python 3.x.x</code>, Python está listo. Si el comando falla, instalar el <strong>Python Install Manager</strong> directamente desde el servidor oficial:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">Add-AppxPackage</span> <span class="n">-AppInstallerFile</span> <span class="n">https</span><span class="p">://</span><span class="n">www</span><span class="p">.</span><span class="n">python</span><span class="p">.</span><span class="n">org</span><span class="p">/</span><span class="n">ftp</span><span class="p">/</span><span class="n">python</span><span class="p">/</span><span class="n">pymanager</span><span class="p">/</span><span class="n">pymanager</span><span class="p">.</span><span class="n">appinstaller</span>
+</code></pre></div>
+<p>El comando puede terminar sin mostrar salida. Si no aparece texto rojo ni una excepción, instalar explícitamente el runtime estable predeterminado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">py</span> <span class="n">install</span> <span class="k">default</span>
+</code></pre></div>
+<p>Durante la UAT, este paso actualizó primero Python Install Manager, verificó la firma de <code>index-windows.json</code> y descargó el runtime. Las versiones concretas cambiarán con el tiempo; no exigir un número fijo.</p>
+<p>Comprobar el resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span> <span class="p">-</span><span class="n">-version</span>
+</code></pre></div>
+<p>El criterio de éxito es <code>Python 3.x.x</code>. Si <code>py</code> no se reconoce después de instalar el administrador, cerrar PowerShell, abrir una ventana nueva y repetir <code>py install default</code> y la comprobación.</p>
+<p>!!! note "Alternativa mediante WinGet"
+       Si Microsoft Store funciona en la sesión interactiva, se puede usar <code>winget install --id 9NQ7512CXL7T --exact --source msstore --accept-source-agreements --accept-package-agreements --authentication-mode interactive</code>. Ante <code>0x8a15000f</code> o <code>0x80070520</code>, volver a la ruta <code>Add-AppxPackage</code>; no invertir tiempo de clase en reparar WinGet.</p>
+<ol>
+<li>Crear el directorio de práctica:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Force</span> <span class="n">C</span><span class="p">:\</span><span class="n">HoneypotLab</span>
+</code></pre></div>
+<ol>
+<li>Confirmar que el puerto está libre:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">Get-NetTCPConnection</span> <span class="n">-LocalPort</span> <span class="n">9999</span> <span class="n">-State</span> <span class="n">Listen</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</code></pre></div>
+<ol>
+<li>
+<p>Guardar una copia de <code>honeypot-simple.py</code> en USB o en el medio institucional autorizado. No depender de internet durante la sesión.</p>
+</li>
+<li>
+<p>Ejecutar una UAT completa: inicio, <code>Test-NetConnection</code>, aparición del evento, escritura de <code>honeypot.log</code> y cierre con <code>Ctrl+C</code>.</p>
+</li>
+</ol>
+<hr />
+<h2 id="script-canonico">Script canónico<a class="headerlink" href="#script-canonico" title="Permanent link">&para;</a></h2>
+<p>El bloque siguiente debe ser idéntico al publicado en la guía del alumno. Guardarlo como <code>C:\HoneypotLab\honeypot-simple.py</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Honeypot minimo de demostracion: detecta y registra conexiones TCP.</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">socket</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">HOST</span> <span class="o">=</span> <span class="s2">"127.0.0.1"</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">PORT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">9999</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">LOG_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="s2">"honeypot.log"</span><span class="p">)</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Honeypot iniciado en </span><span class="si">{</span><span class="n">HOST</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">PORT</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Log: </span><span class="si">{</span><span class="n">LOG_PATH</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Esperando conexiones... (Ctrl+C para detener)"</span><span class="p">)</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>    <span class="n">server</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>    <span class="n">server</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>            <span class="n">connection</span><span class="p">,</span> <span class="n">source</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>            <span class="k">with</span> <span class="n">connection</span><span class="p">:</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>                <span class="n">destination</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>                <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">astimezone</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">timespec</span><span class="o">=</span><span class="s2">"seconds"</span><span class="p">)</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>                <span class="n">event</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>                    <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] EVENTO_TCP "</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>                    <span class="sa">f</span><span class="s2">"origen=</span><span class="si">{</span><span class="n">source</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">source</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> "</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>                    <span class="sa">f</span><span class="s2">"destino=</span><span class="si">{</span><span class="n">destination</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">destination</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>                <span class="p">)</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>                <span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>                <span class="k">with</span> <span class="n">LOG_PATH</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">log_file</span><span class="p">:</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>                    <span class="n">log_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">event</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Honeypot detenido."</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="propiedades-que-deben-preservarse">Propiedades que deben preservarse<a class="headerlink" href="#propiedades-que-deben-preservarse" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>127.0.0.1</code> limita la escucha al mismo equipo.</li>
+<li>El puerto por defecto es <code>9999</code>, pero puede pasarse otro puerto alto como argumento.</li>
+<li><code>Path(__file__)</code> coloca el log junto al script, independientemente del directorio desde el que se invoque.</li>
+<li><code>getsockname()</code> registra el destino real y evita confundirlo con el puerto efímero del cliente.</li>
+<li><code>socket</code>, <code>datetime</code>, <code>pathlib</code> y <code>sys</code> pertenecen a la biblioteca estándar.</li>
+</ul>
+<hr />
+<h2 id="uat-esperada-en-windows-11">UAT esperada en Windows 11<a class="headerlink" href="#uat-esperada-en-windows-11" title="Permanent link">&para;</a></h2>
+<h3 id="1-iniciar-el-sensor">1. Iniciar el sensor<a class="headerlink" href="#1-iniciar-el-sensor" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span> <span class="n">C</span><span class="p">:\</span><span class="n">HoneypotLab</span><span class="p">\</span><span class="n">honeypot-simple</span><span class="p">.</span><span class="n">py</span> <span class="n">9999</span>
+</code></pre></div>
+<p>Salida inicial:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Honeypot iniciado en 127.0.0.1:9999
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Log: C:\HoneypotLab\honeypot.log
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>Esperando conexiones... (Ctrl+C para detener)
+</code></pre></div>
+<h3 id="2-generar-trafico-desde-otra-consola">2. Generar tráfico desde otra consola<a class="headerlink" href="#2-generar-trafico-desde-otra-consola" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">Test-NetConnection</span> <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span> <span class="n">-Port</span> <span class="n">9999</span>
+</code></pre></div>
+<p>Criterio de éxito:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>TcpTestSucceeded : True
+</code></pre></div>
+<h3 id="3-verificar-consola-y-archivo">3. Verificar consola y archivo<a class="headerlink" href="#3-verificar-consola-y-archivo" title="Permanent link">&para;</a></h3>
+<p>El puerto de origen variará en cada equipo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[2026-08-24T10:15:01-05:00] EVENTO_TCP origen=127.0.0.1:54321 destino=127.0.0.1:9999
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">Get-Content</span> <span class="n">C</span><span class="p">:\</span><span class="n">HoneypotLab</span><span class="p">\</span><span class="n">honeypot</span><span class="p">.</span><span class="n">log</span>
+</code></pre></div>
+<p>Repetir la conexión tres veces. Deben aparecer tres eventos adicionales en consola y archivo. Después detener con <code>Ctrl+C</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Interpretación correcta</p>
+<p><code>54321</code> representa el puerto de origen elegido para el cliente; <code>9999</code> es el puerto destino del sensor. Una sucesión de puertos de origen no demuestra que se hayan probado varios destinos.</p>
+</div>
+<hr />
+<h2 id="uat-de-la-ampliacion-multservicio">UAT de la ampliación multservicio<a class="headerlink" href="#uat-de-la-ampliacion-multservicio" title="Permanent link">&para;</a></h2>
+<p>Esta ampliación requiere 45–60 minutos adicionales y no modifica la rúbrica de diez puntos. Debe ejecutarse únicamente si el grupo terminó el laboratorio principal y el instructor ya verificó que los puertos <code>8022</code>, <code>8080</code> y <code>2121</code> están libres.</p>
+<h3 id="script-multservicio-canonico">Script multservicio canónico<a class="headerlink" href="#script-multservicio-canonico" title="Permanent link">&para;</a></h3>
+<p>El bloque siguiente debe ser idéntico al publicado en la guía del alumno. Guardarlo como <code>C:\HoneypotLab\honeypot-multiservicio.py</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Honeypot multservicio de baja interaccion para uso exclusivo en localhost.</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">socket</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="n">HOST</span> <span class="o">=</span> <span class="s2">"127.0.0.1"</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="n">SERVICES</span> <span class="o">=</span> <span class="p">((</span><span class="s2">"SSH"</span><span class="p">,</span> <span class="mi">8022</span><span class="p">),</span> <span class="p">(</span><span class="s2">"HTTP"</span><span class="p">,</span> <span class="mi">8080</span><span class="p">),</span> <span class="p">(</span><span class="s2">"FTP"</span><span class="p">,</span> <span class="mi">2121</span><span class="p">))</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="n">LOG_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="s2">"honeypot-multiservicio.log"</span><span class="p">)</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="n">MAX_INPUT</span> <span class="o">=</span> <span class="mi">1024</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="n">LOG_LOCK</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="n">STOP_EVENT</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="k">def</span><span class="w"> </span><span class="nf">register_event</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">astimezone</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">timespec</span><span class="o">=</span><span class="s2">"seconds"</span><span class="p">)</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>    <span class="n">event</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>        <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] servicio=</span><span class="si">{</span><span class="n">service</span><span class="si">}</span><span class="s2"> "</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>        <span class="sa">f</span><span class="s2">"origen=</span><span class="si">{</span><span class="n">source</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">source</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> "</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>        <span class="sa">f</span><span class="s2">"destino=</span><span class="si">{</span><span class="n">destination</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">destination</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> "</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>        <span class="sa">f</span><span class="s2">"evento=</span><span class="si">{</span><span class="n">event_type</span><span class="si">}</span><span class="s2">"</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>    <span class="p">)</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>    <span class="k">if</span> <span class="n">detail</span><span class="p">:</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>        <span class="n">event</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">' detalle="</span><span class="si">{</span><span class="n">detail</span><span class="si">}</span><span class="s1">"'</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>    <span class="k">with</span> <span class="n">LOG_LOCK</span><span class="p">:</span>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>        <span class="k">with</span> <span class="n">LOG_PATH</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">log_file</span><span class="p">:</span>
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>            <span class="n">log_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">event</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a><span class="k">def</span><span class="w"> </span><span class="nf">receive_line</span><span class="p">(</span><span class="n">connection</span><span class="p">):</span>
+<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>    <span class="n">data</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">()</span>
+<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">MAX_INPUT</span><span class="p">:</span>
+<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>        <span class="n">chunk</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">MAX_INPUT</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">chunk</span><span class="p">:</span>
+<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>            <span class="k">break</span>
+<a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>        <span class="n">data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+<a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>        <span class="k">if</span> <span class="sa">b</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+<a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>            <span class="k">break</span>
+<a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a>
+<a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a>    <span class="n">first_line</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">text</span> <span class="k">else</span> <span class="s2">""</span>
+<a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a>    <span class="n">safe_line</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">char</span> <span class="k">if</span> <span class="n">char</span><span class="o">.</span><span class="n">isprintable</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"?"</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">first_line</span><span class="p">)</span>
+<a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a>    <span class="k">return</span> <span class="n">safe_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'"'</span><span class="p">,</span> <span class="s2">"'"</span><span class="p">)[:</span><span class="mi">120</span><span class="p">]</span>
+<a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a>
+<a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a>
+<a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a><span class="k">def</span><span class="w"> </span><span class="nf">handle_client</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">service</span><span class="p">):</span>
+<a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a>    <span class="k">with</span> <span class="n">connection</span><span class="p">:</span>
+<a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a>        <span class="n">destination</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
+<a id="__codelineno-13-51" name="__codelineno-13-51" href="#__codelineno-13-51"></a>        <span class="n">connection</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-13-52" name="__codelineno-13-52" href="#__codelineno-13-52"></a>        <span class="n">register_event</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="s2">"CONEXION"</span><span class="p">)</span>
+<a id="__codelineno-13-53" name="__codelineno-13-53" href="#__codelineno-13-53"></a>
+<a id="__codelineno-13-54" name="__codelineno-13-54" href="#__codelineno-13-54"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-13-55" name="__codelineno-13-55" href="#__codelineno-13-55"></a>            <span class="k">if</span> <span class="n">service</span> <span class="o">==</span> <span class="s2">"SSH"</span><span class="p">:</span>
+<a id="__codelineno-13-56" name="__codelineno-13-56" href="#__codelineno-13-56"></a>                <span class="n">connection</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="sa">b</span><span class="s2">"SSH-2.0-OpenSSH_8.9p1 LabHoneypot</span><span class="se">\r\n</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-13-57" name="__codelineno-13-57" href="#__codelineno-13-57"></a>
+<a id="__codelineno-13-58" name="__codelineno-13-58" href="#__codelineno-13-58"></a>            <span class="k">elif</span> <span class="n">service</span> <span class="o">==</span> <span class="s2">"HTTP"</span><span class="p">:</span>
+<a id="__codelineno-13-59" name="__codelineno-13-59" href="#__codelineno-13-59"></a>                <span class="n">request_line</span> <span class="o">=</span> <span class="n">receive_line</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+<a id="__codelineno-13-60" name="__codelineno-13-60" href="#__codelineno-13-60"></a>                <span class="n">parts</span> <span class="o">=</span> <span class="n">request_line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<a id="__codelineno-13-61" name="__codelineno-13-61" href="#__codelineno-13-61"></a>                <span class="n">method</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">parts</span> <span class="k">else</span> <span class="s2">"INVALIDA"</span>
+<a id="__codelineno-13-62" name="__codelineno-13-62" href="#__codelineno-13-62"></a>                <span class="n">path</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"?"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">"/"</span>
+<a id="__codelineno-13-63" name="__codelineno-13-63" href="#__codelineno-13-63"></a>                <span class="n">register_event</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="s2">"PETICION"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-13-64" name="__codelineno-13-64" href="#__codelineno-13-64"></a>
+<a id="__codelineno-13-65" name="__codelineno-13-65" href="#__codelineno-13-65"></a>                <span class="n">body</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"&lt;h1&gt;Portal de administracion&lt;/h1&gt;&lt;p&gt;Servicio de laboratorio.&lt;/p&gt;"</span>
+<a id="__codelineno-13-66" name="__codelineno-13-66" href="#__codelineno-13-66"></a>                <span class="n">response</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-13-67" name="__codelineno-13-67" href="#__codelineno-13-67"></a>                    <span class="sa">b</span><span class="s2">"HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s2">"</span>
+<a id="__codelineno-13-68" name="__codelineno-13-68" href="#__codelineno-13-68"></a>                    <span class="sa">b</span><span class="s2">"Content-Type: text/html; charset=utf-8</span><span class="se">\r\n</span><span class="s2">"</span>
+<a id="__codelineno-13-69" name="__codelineno-13-69" href="#__codelineno-13-69"></a>                    <span class="o">+</span> <span class="sa">f</span><span class="s2">"Content-Length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">)</span><span class="si">}</span><span class="se">\r\n</span><span class="s2">"</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"ascii"</span><span class="p">)</span>
+<a id="__codelineno-13-70" name="__codelineno-13-70" href="#__codelineno-13-70"></a>                    <span class="o">+</span> <span class="sa">b</span><span class="s2">"Connection: close</span><span class="se">\r\n\r\n</span><span class="s2">"</span>
+<a id="__codelineno-13-71" name="__codelineno-13-71" href="#__codelineno-13-71"></a>                    <span class="o">+</span> <span class="n">body</span>
+<a id="__codelineno-13-72" name="__codelineno-13-72" href="#__codelineno-13-72"></a>                <span class="p">)</span>
+<a id="__codelineno-13-73" name="__codelineno-13-73" href="#__codelineno-13-73"></a>                <span class="n">connection</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a id="__codelineno-13-74" name="__codelineno-13-74" href="#__codelineno-13-74"></a>
+<a id="__codelineno-13-75" name="__codelineno-13-75" href="#__codelineno-13-75"></a>            <span class="k">elif</span> <span class="n">service</span> <span class="o">==</span> <span class="s2">"FTP"</span><span class="p">:</span>
+<a id="__codelineno-13-76" name="__codelineno-13-76" href="#__codelineno-13-76"></a>                <span class="n">connection</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="sa">b</span><span class="s2">"220 FTP de laboratorio listo</span><span class="se">\r\n</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-13-77" name="__codelineno-13-77" href="#__codelineno-13-77"></a>                <span class="n">command_line</span> <span class="o">=</span> <span class="n">receive_line</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+<a id="__codelineno-13-78" name="__codelineno-13-78" href="#__codelineno-13-78"></a>                <span class="n">command</span> <span class="o">=</span> <span class="n">command_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">command_line</span> <span class="k">else</span> <span class="s2">"VACIO"</span>
+<a id="__codelineno-13-79" name="__codelineno-13-79" href="#__codelineno-13-79"></a>                <span class="n">register_event</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="s2">"COMANDO"</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+<a id="__codelineno-13-80" name="__codelineno-13-80" href="#__codelineno-13-80"></a>                <span class="n">connection</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="sa">b</span><span class="s2">"530 Autenticacion no disponible</span><span class="se">\r\n</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-13-81" name="__codelineno-13-81" href="#__codelineno-13-81"></a>
+<a id="__codelineno-13-82" name="__codelineno-13-82" href="#__codelineno-13-82"></a>        <span class="k">except</span> <span class="p">(</span><span class="ne">ConnectionError</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">timeout</span><span class="p">):</span>
+<a id="__codelineno-13-83" name="__codelineno-13-83" href="#__codelineno-13-83"></a>            <span class="k">return</span>
+<a id="__codelineno-13-84" name="__codelineno-13-84" href="#__codelineno-13-84"></a>
+<a id="__codelineno-13-85" name="__codelineno-13-85" href="#__codelineno-13-85"></a>
+<a id="__codelineno-13-86" name="__codelineno-13-86" href="#__codelineno-13-86"></a><span class="k">def</span><span class="w"> </span><span class="nf">serve</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="n">listener</span><span class="p">):</span>
+<a id="__codelineno-13-87" name="__codelineno-13-87" href="#__codelineno-13-87"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">STOP_EVENT</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+<a id="__codelineno-13-88" name="__codelineno-13-88" href="#__codelineno-13-88"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-13-89" name="__codelineno-13-89" href="#__codelineno-13-89"></a>            <span class="n">connection</span><span class="p">,</span> <span class="n">source</span> <span class="o">=</span> <span class="n">listener</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+<a id="__codelineno-13-90" name="__codelineno-13-90" href="#__codelineno-13-90"></a>        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+<a id="__codelineno-13-91" name="__codelineno-13-91" href="#__codelineno-13-91"></a>            <span class="k">break</span>
+<a id="__codelineno-13-92" name="__codelineno-13-92" href="#__codelineno-13-92"></a>        <span class="n">handle_client</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">service</span><span class="p">)</span>
+<a id="__codelineno-13-93" name="__codelineno-13-93" href="#__codelineno-13-93"></a>
+<a id="__codelineno-13-94" name="__codelineno-13-94" href="#__codelineno-13-94"></a>
+<a id="__codelineno-13-95" name="__codelineno-13-95" href="#__codelineno-13-95"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_listeners</span><span class="p">():</span>
+<a id="__codelineno-13-96" name="__codelineno-13-96" href="#__codelineno-13-96"></a>    <span class="n">listeners</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-13-97" name="__codelineno-13-97" href="#__codelineno-13-97"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-13-98" name="__codelineno-13-98" href="#__codelineno-13-98"></a>        <span class="k">for</span> <span class="n">service</span><span class="p">,</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">SERVICES</span><span class="p">:</span>
+<a id="__codelineno-13-99" name="__codelineno-13-99" href="#__codelineno-13-99"></a>            <span class="n">listener</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<a id="__codelineno-13-100" name="__codelineno-13-100" href="#__codelineno-13-100"></a>            <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-13-101" name="__codelineno-13-101" href="#__codelineno-13-101"></a>                <span class="n">listener</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+<a id="__codelineno-13-102" name="__codelineno-13-102" href="#__codelineno-13-102"></a>                <span class="n">listener</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-13-103" name="__codelineno-13-103" href="#__codelineno-13-103"></a>            <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+<a id="__codelineno-13-104" name="__codelineno-13-104" href="#__codelineno-13-104"></a>                <span class="n">listener</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a id="__codelineno-13-105" name="__codelineno-13-105" href="#__codelineno-13-105"></a>                <span class="k">raise</span>
+<a id="__codelineno-13-106" name="__codelineno-13-106" href="#__codelineno-13-106"></a>            <span class="n">listeners</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">service</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">listener</span><span class="p">))</span>
+<a id="__codelineno-13-107" name="__codelineno-13-107" href="#__codelineno-13-107"></a>    <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+<a id="__codelineno-13-108" name="__codelineno-13-108" href="#__codelineno-13-108"></a>        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">listener</span> <span class="ow">in</span> <span class="n">listeners</span><span class="p">:</span>
+<a id="__codelineno-13-109" name="__codelineno-13-109" href="#__codelineno-13-109"></a>            <span class="n">listener</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a id="__codelineno-13-110" name="__codelineno-13-110" href="#__codelineno-13-110"></a>        <span class="k">raise</span>
+<a id="__codelineno-13-111" name="__codelineno-13-111" href="#__codelineno-13-111"></a>    <span class="k">return</span> <span class="n">listeners</span>
+<a id="__codelineno-13-112" name="__codelineno-13-112" href="#__codelineno-13-112"></a>
+<a id="__codelineno-13-113" name="__codelineno-13-113" href="#__codelineno-13-113"></a>
+<a id="__codelineno-13-114" name="__codelineno-13-114" href="#__codelineno-13-114"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-13-115" name="__codelineno-13-115" href="#__codelineno-13-115"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-13-116" name="__codelineno-13-116" href="#__codelineno-13-116"></a>        <span class="n">listeners</span> <span class="o">=</span> <span class="n">create_listeners</span><span class="p">()</span>
+<a id="__codelineno-13-117" name="__codelineno-13-117" href="#__codelineno-13-117"></a>    <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+<a id="__codelineno-13-118" name="__codelineno-13-118" href="#__codelineno-13-118"></a>        <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No se pudieron abrir todos los puertos: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
+<a id="__codelineno-13-119" name="__codelineno-13-119" href="#__codelineno-13-119"></a>
+<a id="__codelineno-13-120" name="__codelineno-13-120" href="#__codelineno-13-120"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Honeypot multservicio iniciado:"</span><span class="p">)</span>
+<a id="__codelineno-13-121" name="__codelineno-13-121" href="#__codelineno-13-121"></a>    <span class="k">for</span> <span class="n">service</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">listeners</span><span class="p">:</span>
+<a id="__codelineno-13-122" name="__codelineno-13-122" href="#__codelineno-13-122"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- </span><span class="si">{</span><span class="n">service</span><span class="si">}</span><span class="s2"> simulado en </span><span class="si">{</span><span class="n">HOST</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-13-123" name="__codelineno-13-123" href="#__codelineno-13-123"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Log: </span><span class="si">{</span><span class="n">LOG_PATH</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-13-124" name="__codelineno-13-124" href="#__codelineno-13-124"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Esperando conexiones... (Ctrl+C para detener)"</span><span class="p">)</span>
+<a id="__codelineno-13-125" name="__codelineno-13-125" href="#__codelineno-13-125"></a>
+<a id="__codelineno-13-126" name="__codelineno-13-126" href="#__codelineno-13-126"></a>    <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-13-127" name="__codelineno-13-127" href="#__codelineno-13-127"></a>    <span class="k">for</span> <span class="n">service</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">listener</span> <span class="ow">in</span> <span class="n">listeners</span><span class="p">:</span>
+<a id="__codelineno-13-128" name="__codelineno-13-128" href="#__codelineno-13-128"></a>        <span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">serve</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="n">listener</span><span class="p">),</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-13-129" name="__codelineno-13-129" href="#__codelineno-13-129"></a>        <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<a id="__codelineno-13-130" name="__codelineno-13-130" href="#__codelineno-13-130"></a>        <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+<a id="__codelineno-13-131" name="__codelineno-13-131" href="#__codelineno-13-131"></a>
+<a id="__codelineno-13-132" name="__codelineno-13-132" href="#__codelineno-13-132"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-13-133" name="__codelineno-13-133" href="#__codelineno-13-133"></a>        <span class="k">while</span> <span class="nb">all</span><span class="p">(</span><span class="n">thread</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()</span> <span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">):</span>
+<a id="__codelineno-13-134" name="__codelineno-13-134" href="#__codelineno-13-134"></a>            <span class="n">STOP_EVENT</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<a id="__codelineno-13-135" name="__codelineno-13-135" href="#__codelineno-13-135"></a>    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+<a id="__codelineno-13-136" name="__codelineno-13-136" href="#__codelineno-13-136"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Honeypot multservicio detenido."</span><span class="p">)</span>
+<a id="__codelineno-13-137" name="__codelineno-13-137" href="#__codelineno-13-137"></a>    <span class="k">finally</span><span class="p">:</span>
+<a id="__codelineno-13-138" name="__codelineno-13-138" href="#__codelineno-13-138"></a>        <span class="n">STOP_EVENT</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<a id="__codelineno-13-139" name="__codelineno-13-139" href="#__codelineno-13-139"></a>        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">listener</span> <span class="ow">in</span> <span class="n">listeners</span><span class="p">:</span>
+<a id="__codelineno-13-140" name="__codelineno-13-140" href="#__codelineno-13-140"></a>            <span class="n">listener</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a id="__codelineno-13-141" name="__codelineno-13-141" href="#__codelineno-13-141"></a>
+<a id="__codelineno-13-142" name="__codelineno-13-142" href="#__codelineno-13-142"></a>
+<a id="__codelineno-13-143" name="__codelineno-13-143" href="#__codelineno-13-143"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+<a id="__codelineno-13-144" name="__codelineno-13-144" href="#__codelineno-13-144"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="secuencia-uat-y-criterios-de-exito">Secuencia UAT y criterios de éxito<a class="headerlink" href="#secuencia-uat-y-criterios-de-exito" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Comprobar los puertos antes de iniciar:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">8022</span><span class="p">,</span> <span class="n">8080</span><span class="p">,</span> <span class="n">2121</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="nb">Get-NetTCPConnection</span> <span class="n">-LocalPort</span> <span class="nv">$_</span> <span class="n">-State</span> <span class="n">Listen</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>No debe aparecer ninguna fila.</p>
+<ol>
+<li>Iniciar el emulador:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">py</span> <span class="p">-</span><span class="n">3</span> <span class="n">C</span><span class="p">:\</span><span class="n">HoneypotLab</span><span class="p">\</span><span class="n">honeypot-multiservicio</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+<ol>
+<li>En otra consola, verificar las tres escuchas:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">Get-NetTCPConnection</span> <span class="n">-LocalPort</span> <span class="n">8022</span><span class="p">,</span><span class="n">8080</span><span class="p">,</span><span class="n">2121</span> <span class="n">-State</span> <span class="n">Listen</span> <span class="p">|</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="nb">Select-Object</span> <span class="n">LocalAddress</span><span class="p">,</span> <span class="n">LocalPort</span><span class="p">,</span> <span class="n">State</span>
+</code></pre></div>
+<p>Deben aparecer <code>8022</code>, <code>8080</code> y <code>2121</code> asociados a <code>127.0.0.1</code>.</p>
+<ol>
+<li>Ejecutar sin modificaciones los clientes SSH, HTTP y FTP publicados en los pasos D, E y F de la guía del alumno. Los resultados esperados son:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Prueba</th>
+<th>Respuesta</th>
+<th>Eventos mínimos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SSH simulado</td>
+<td><code>SSH-2.0-OpenSSH_8.9p1 LabHoneypot</code></td>
+<td><code>servicio=SSH</code>, destino <code>8022</code>, <code>evento=CONEXION</code></td>
+</tr>
+<tr>
+<td>HTTP simulado</td>
+<td>Estado <code>200</code> y texto <code>Portal de administracion</code></td>
+<td><code>servicio=HTTP</code>, destino <code>8080</code>, <code>evento=CONEXION</code> y <code>detalle="GET /admin"</code></td>
+</tr>
+<tr>
+<td>FTP simulado</td>
+<td>Saludo <code>220</code> y rechazo <code>530</code></td>
+<td><code>servicio=FTP</code>, destino <code>2121</code>, <code>evento=CONEXION</code> y <code>detalle="USER"</code></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Confirmar que <code>honeypot-multiservicio.log</code> no contiene <code>alumno</code>, encabezados HTTP, parámetros de consulta ni contraseñas. Después detener con <code>Ctrl+C</code> y comprobar que desaparecen las tres escuchas.</li>
+</ol>
+<h3 id="respuestas-modelo-de-la-ampliacion">Respuestas modelo de la ampliación<a class="headerlink" href="#respuestas-modelo-de-la-ampliacion" title="Permanent link">&para;</a></h3>
+<ol>
+<li>SSH corresponde al puerto destino <code>8022</code>, HTTP a <code>8080</code> y FTP a <code>2121</code>.</li>
+<li>Un banner es texto controlado por quien opera el servicio. Puede imitar otro producto o versión; es una pista para la identificación, no una prueba concluyente del software real.</li>
+<li>HTTP conserva solo método y ruta sin la consulta; FTP conserva únicamente el verbo. Se omiten argumentos, encabezados, cuerpos y contraseñas para minimizar la recopilación de datos y evitar guardar secretos.</li>
+<li>Tres puertos <strong>destino</strong> distintos muestran que el cliente contactó varias superficies simuladas del mismo host. Esto es compatible con reconocimiento multservicio en un escenario real, pero en el laboratorio sigue siendo tráfico autorizado y no demuestra intención maliciosa. Los puertos de origen cambiantes, por sí solos, solo reflejan asignaciones efímeras del cliente.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Controles que no deben relajarse</p>
+<p>El script debe conservar <code>HOST = "127.0.0.1"</code>, las lecturas acotadas, el tiempo de espera y la exclusión de credenciales. No crear reglas de firewall ni reemplazar los puertos altos por <code>22</code>, <code>80</code> o <code>21</code> durante la clase.</p>
+</div>
+<hr />
+<h2 id="extracto-de-log-para-el-ejercicio">Extracto de log para el ejercicio<a class="headerlink" href="#extracto-de-log-para-el-ejercicio" title="Permanent link">&para;</a></h2>
+<p>Este bloque debe coincidir exactamente con el de la guía del alumno:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>[2026-08-24T10:15:01-05:00] EVENTO_TCP origen=192.168.1.100:51024 destino=192.168.1.10:9999
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>[2026-08-24T10:15:45-05:00] EVENTO_TCP origen=192.168.1.100:51025 destino=192.168.1.10:9999
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>[2026-08-24T10:16:02-05:00] EVENTO_TCP origen=192.168.1.100:51026 destino=192.168.1.10:9999
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>[2026-08-24T10:16:03-05:00] EVENTO_TCP origen=192.168.1.100:51027 destino=192.168.1.10:9999
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>[2026-08-24T10:16:04-05:00] EVENTO_TCP origen=192.168.1.100:51028 destino=192.168.1.10:9999
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>[2026-08-24T10:45:22-05:00] EVENTO_TCP origen=10.0.0.5:52048 destino=192.168.1.10:9999
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>[2026-08-24T10:45:23-05:00] EVENTO_TCP origen=10.0.0.5:52049 destino=192.168.1.10:9999
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>[2026-08-24T11:02:15-05:00] EVENTO_TCP origen=192.168.1.77:53000 destino=192.168.1.10:9999
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>[2026-08-24T11:02:18-05:00] EVENTO_TCP origen=192.168.1.77:53001 destino=192.168.1.10:9999
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>[2026-08-24T11:02:20-05:00] EVENTO_TCP origen=192.168.1.77:53002 destino=192.168.1.10:9999
+</code></pre></div>
+<h3 id="respuestas-modelo">Respuestas modelo<a class="headerlink" href="#respuestas-modelo" title="Permanent link">&para;</a></h3>
+<p><strong>1. ¿Cuántos eventos y cuántas IP de origen distintas aparecen?</strong></p>
+<p>Diez eventos y tres IP de origen: <code>192.168.1.100</code>, <code>10.0.0.5</code> y <code>192.168.1.77</code>.</p>
+<p><strong>2. ¿Cuál es la IP más activa? ¿Qué puede observarse sin atribuir una causa?</strong></p>
+<p><code>192.168.1.100</code>, con cinco eventos entre las 10:15:01 y las 10:16:04. Es una concentración breve que podría corresponder a automatización, reintentos, monitoreo o reconocimiento. El log aislado no permite escoger una de esas causas.</p>
+<p><strong>3. ¿En qué ventanas se concentra la actividad?</strong></p>
+<p>Hay tres ventanas:</p>
+<ul>
+<li>10:15:01–10:16:04: cinco eventos de <code>192.168.1.100</code>;</li>
+<li>10:45:22–10:45:23: dos eventos de <code>10.0.0.5</code>;</li>
+<li>11:02:15–11:02:20: tres eventos de <code>192.168.1.77</code>.</li>
+</ul>
+<p>Los intervalos permiten buscar eventos relacionados en otros sistemas, pero no prueban que las tres fuentes pertenezcan al mismo actor.</p>
+<p><strong>4. ¿Qué debe comprobarse para <code>192.168.1.77</code>?</strong></p>
+<p>Confirmar primero el activo y su responsable en el inventario, el calendario de escaneos autorizados, tareas de monitoreo y cambios recientes. Después correlacionar con Snort, firewall, proxy y autenticación. Si el conjunto de evidencia indica compromiso, aplicar el procedimiento institucional de aislamiento y preservación de evidencia; la IP interna por sí sola no basta.</p>
+<hr />
+<h2 id="errores-comunes-y-diagnostico">Errores comunes y diagnóstico<a class="headerlink" href="#errores-comunes-y-diagnostico" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa probable</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ni <code>py</code> ni <code>pymanager</code> se reconocen</td>
+<td>El Python Install Manager está ausente o la terminal aún no reconoce sus comandos</td>
+<td>Ejecutar la ruta <code>Add-AppxPackage</code>; cerrar y abrir PowerShell antes de volver a comprobar</td>
+</tr>
+<tr>
+<td><code>py</code> se reconoce, pero la comprobación de Python 3 falla</td>
+<td>El administrador está instalado, pero falta el runtime</td>
+<td>Ejecutar <code>py install default</code> y repetir la comprobación hasta obtener <code>Python 3.x.x</code></td>
+</tr>
+<tr>
+<td>WinGet devuelve <code>0x8a15000f</code></td>
+<td>La fuente comunitaria <code>winget</code> carece de datos aunque el paquete pertenezca a <code>msstore</code></td>
+<td>No reparar fuentes durante la clase; instalar desde Python.org con <code>Add-AppxPackage</code></td>
+</tr>
+<tr>
+<td>WinGet devuelve <code>0x80070520</code></td>
+<td>Microsoft Store no dispone de una sesión de inicio válida para adquirir el paquete</td>
+<td>Abandonar la ruta Store y usar <code>Add-AppxPackage</code> en la sesión interactiva del alumno</td>
+</tr>
+<tr>
+<td><code>WinError 10048</code> o <code>Address already in use</code></td>
+<td>Otro proceso ya escucha en ese puerto</td>
+<td>Consultar <code>Get-NetTCPConnection -LocalPort 9999 -State Listen</code>; usar otro puerto alto en ambos comandos</td>
+</tr>
+<tr>
+<td><code>WinError 10013</code></td>
+<td>Puerto excluido o reservado, política de seguridad o protección del endpoint</td>
+<td>No asumir que se debe al número del puerto; probar otro puerto alto y escalar al administrador si persiste</td>
+</tr>
+<tr>
+<td><code>TcpTestSucceeded : False</code></td>
+<td>El sensor no está ejecutándose, se usó otro puerto o terminó con error</td>
+<td>Volver a la primera consola, confirmar el puerto mostrado y repetir con el mismo valor</td>
+</tr>
+<tr>
+<td>El multservicio muestra que no pudo abrir todos los puertos</td>
+<td>Al menos uno de <code>8022</code>, <code>8080</code> o <code>2121</code> ya está ocupado</td>
+<td>Consultar cada puerto antes de iniciar; detener el proceso de práctica anterior o editar un puerto alto en el script y en todas sus pruebas</td>
+</tr>
+<tr>
+<td>Una prueba de banner queda esperando</td>
+<td>El emulador no inició, se consultó otro puerto o la respuesta no llegó antes del límite</td>
+<td>Confirmar las tres escuchas y conservar <code>ReceiveTimeout = 3000</code> en los clientes PowerShell</td>
+</tr>
+<tr>
+<td>El evento aparece en consola pero no se encuentra el archivo</td>
+<td>Se buscó el log en el directorio actual</td>
+<td>Consultar <code>C:\HoneypotLab\honeypot.log</code>; el script siempre escribe junto a su propio archivo</td>
+</tr>
+<tr>
+<td>Otra computadora no puede conectarse</td>
+<td>Comportamiento esperado: el sensor escucha en loopback</td>
+<td>Mantener localhost; no abrir el sensor a la red como solución improvisada</td>
+</tr>
+<tr>
+<td><code>localhost</code> resuelve a <code>::1</code> y la prueba falla</td>
+<td>El script usa IPv4 (<code>AF_INET</code>)</td>
+<td>Usar explícitamente <code>127.0.0.1</code> como indica la guía</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cowrie-en-wsl2-ampliacion-opcional">Cowrie en WSL2 — ampliación opcional<a class="headerlink" href="#cowrie-en-wsl2-ampliacion-opcional" title="Permanent link">&para;</a></h2>
+<p>Cowrie no forma parte de la ruta crítica. Su modo shell simula un sistema y se clasifica como <strong>interacción media</strong>; el modo proxy hacia un backend separado puede ofrecer alta interacción.</p>
+<p>Solo realizar esta ampliación si WSL2 con Ubuntu ya está instalado y el grupo terminó la práctica principal. El flujo vigente para operadores es:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3-pip<span class="w"> </span>python3-venv<span class="w"> </span>libssl-dev<span class="w"> </span>libffi-dev<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span>build-essential<span class="w"> </span>libpython3-dev<span class="w"> </span>python3-minimal<span class="w"> </span>authbind
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/my-honeypot
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nb">cd</span><span class="w"> </span>~/my-honeypot
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>cowrie-env
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="nb">source</span><span class="w"> </span>cowrie-env/bin/activate
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>cowrie
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>cowrie<span class="w"> </span>init
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>cowrie<span class="w"> </span>start
+</code></pre></div>
+<p>Probar en otra terminal WSL2:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">cd</span><span class="w"> </span>~/my-honeypot
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nb">source</span><span class="w"> </span>cowrie-env/bin/activate
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">2222</span><span class="w"> </span>root@localhost
+</code></pre></div>
+<p>Detener desde el directorio inicializado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">cd</span><span class="w"> </span>~/my-honeypot
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nb">source</span><span class="w"> </span>cowrie-env/bin/activate
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>cowrie<span class="w"> </span>stop
+</code></pre></div>
+<p>Consultar siempre la <a href="https://github.com/cowrie/cowrie/blob/main/INSTALL.rst">guía oficial de instalación de Cowrie</a> antes de usar esta ampliación, porque sus requisitos pueden cambiar.</p>
+<hr />
+<h2 id="secuencia-sugerida-para-las-3-horas">Secuencia sugerida para las 3 horas<a class="headerlink" href="#secuencia-sugerida-para-las-3-horas" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Minutos</th>
+<th>Actividad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">0–20</td>
+<td>Recap, objetivo y diferencia entre alerta y atribución</td>
+</tr>
+<tr>
+<td style="text-align: right;">20–45</td>
+<td>Arquitectura del sensor, alcance localhost y campos TCP</td>
+</tr>
+<tr>
+<td style="text-align: right;">45–70</td>
+<td>Preparación, creación del script e inicio</td>
+</tr>
+<tr>
+<td style="text-align: right;">70–95</td>
+<td>Conexiones controladas y lectura de <code>honeypot.log</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">95–130</td>
+<td>Ejercicio individual y discusión de respuestas</td>
+</tr>
+<tr>
+<td style="text-align: right;">130–160</td>
+<td>Correlación con inventario, Snort, proxy y firewall</td>
+</tr>
+<tr>
+<td style="text-align: right;">160–175</td>
+<td>Validación individual y rúbrica</td>
+</tr>
+<tr>
+<td style="text-align: right;">175–180</td>
+<td>Cierre: el honeypot inicia la investigación, no la concluye</td>
+</tr>
+</tbody>
+</table>
+<p>El ejercicio multservicio y Cowrie son ampliaciones fuera de esta distribución o reemplazos para un bloque avanzado previamente planificado; no añadirlos improvisadamente a los 180 minutos.</p>
+<hr />
+<h2 id="rubrica-de-calificacion">Rúbrica de calificación<a class="headerlink" href="#rubrica-de-calificacion" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th style="text-align: right;">Puntos</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El sensor inicia en <code>127.0.0.1</code> y un puerto alto</td>
+<td style="text-align: right;">2</td>
+<td>Consola con dirección, puerto y ruta del log</td>
+</tr>
+<tr>
+<td><code>Test-NetConnection</code> produce un evento</td>
+<td style="text-align: right;">2</td>
+<td><code>TcpTestSucceeded : True</code> y evento correspondiente</td>
+</tr>
+<tr>
+<td>El archivo conserva origen y destino</td>
+<td style="text-align: right;">1</td>
+<td><code>Get-Content C:\HoneypotLab\honeypot.log</code></td>
+</tr>
+<tr>
+<td>Q1: conteo de eventos y fuentes</td>
+<td style="text-align: right;">1</td>
+<td>10 eventos, 3 IP de origen</td>
+</tr>
+<tr>
+<td>Q2: fuente más activa e inferencia prudente</td>
+<td style="text-align: right;">1</td>
+<td><code>192.168.1.100</code>, cinco eventos, sin atribución definitiva</td>
+</tr>
+<tr>
+<td>Q3: ventanas temporales</td>
+<td style="text-align: right;">1</td>
+<td>Identifica correctamente las tres ventanas</td>
+</tr>
+<tr>
+<td>Q4: hipótesis, correlación y decisión</td>
+<td style="text-align: right;">2</td>
+<td>Verifica autorización e inventario antes de contener</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total: 10 puntos</strong></p>
+<hr />
+<h2 id="mensaje-de-cierre">Mensaje de cierre<a class="headerlink" href="#mensaje-de-cierre" title="Permanent link">&para;</a></h2>
+<p>Un honeypot genera una señal deliberadamente fácil de investigar. Su utilidad desaparece si el analista confunde una conexión con una atribución, o un puerto de origen con el servicio atacado. El aprendizaje central es conservar el evento, interpretar sus campos y decidir mediante correlación.</p>
+<!-- Solución instructor para: docs/seguridad-criptografia/en-la-red/honeypots-p2.md -->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.tracking", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
