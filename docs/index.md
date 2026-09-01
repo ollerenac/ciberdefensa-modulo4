@@ -9,7 +9,7 @@ Bienvenido al repositorio de materiales del **Módulo 4 — Ciberdefensa Defensi
 | Seguridad de la Información y Criptografía | En el Ordenador, En la Red | 32 hrs | En desarrollo |
 | Capas SI | La Familia ISO 27000, Defensa en Profundidad | 48 hrs | En desarrollo |
 | Gestión de Riesgos y Vulnerabilidades | Fundamentos, Identificación, Mitigación | 8 hrs | En desarrollo |
-| Conferencias Magistrales | Responsabilidad Social, Operaciones de Paz | 3 hrs | En desarrollo |
+| Conferencias Magistrales | Ejercicio extra — Preparación de Metasploit | 3 hrs | Disponible |
 | **Total** | — | **91 hrs** | — |
 
 ## Cómo usar este repositorio

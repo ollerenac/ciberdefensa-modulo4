@@ -66,8 +66,6 @@ nav:
       - "Honey Pots (Parte 2)": seguridad-criptografia/en-la-red/honeypots-p2.md
       - "Examen Final": seguridad-criptografia/en-la-red/examen-final.md
 
-  - "Ejercicio extra — Preparación de Metasploit": seguridad-criptografia/en-la-red/ejercicios-extra-metasploit.md
-
   - Capas SI:
     - capas-si/index.md
     - La Familia ISO 27000:
@@ -111,10 +109,4 @@ nav:
       - "Examen": gestion-riesgos/mitigacion-controles/examen.md
 
   - Conferencias Magistrales:
-    - conferencias/index.md
-    - Responsabilidad Social:
-      - conferencias/responsabilidad-social/index.md
-      - "Impacto de la Responsabilidad Social": conferencias/responsabilidad-social/impacto-responsabilidad-social.md
-    - Operaciones de Paz:
-      - conferencias/operaciones-paz/index.md
-      - "Operaciones de Paz en Entornos Globales": conferencias/operaciones-paz/operaciones-paz-globales.md
+    - "Ejercicio extra — Preparación de Metasploit": conferencias/ejercicios-extra-metasploit.md
