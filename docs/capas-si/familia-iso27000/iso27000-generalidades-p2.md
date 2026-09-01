@@ -29,20 +29,20 @@ Un SGSI no es un proyecto con fecha de inicio y fecha de fin. Es un ciclo perman
 ISO 27001 adoptó el ciclo PDCA como el principio organizativo del SGSI porque captura una verdad fundamental: la seguridad de la información en el mundo real nunca está "completa". Las amenazas evolucionan, los sistemas cambian, el personal rota, surgen nuevas vulnerabilidades. Un sistema de gestión que no se revisa y mejora continuamente se vuelve obsoleto.
 
 ```
-     ┌─────────────────────────────────────────────────────┐
-     │                    CICLO PDCA                       │
-     │                                                     │
-     │   ┌──────────┐          ┌──────────┐               │
-     │   │  PLAN    │ ──────▶  │   DO     │               │
-     │   │ Planear  │          │ Ejecutar │               │
-     │   └──────────┘          └──────────┘               │
-     │        ▲                      │                     │
-     │        │                      ▼                     │
-     │   ┌──────────┐          ┌──────────┐               │
-     │   │   ACT    │ ◀──────  │  CHECK   │               │
-     │   │  Actuar  │          │ Verificar│               │
-     │   └──────────┘          └──────────┘               │
-     └─────────────────────────────────────────────────────┘
+     ┌──────────────────────────────────────────────────┐
+     │                 CICLO PDCA                       │
+     │                                                  │
+     │   ┌──────────┐          ┌──────────┐             │
+     │   │  PLAN    │ ──────▶  │   DO     │             │
+     │   │ Planear  │          │ Ejecutar │             │
+     │   └──────────┘          └──────────┘             │
+     │        ▲                      │                  │
+     │        │                      ▼                  │
+     │   ┌──────────┐          ┌──────────┐             │
+     │   │   ACT    │ ◀──────  │  CHECK   │             │
+     │   │  Actuar  │          │ Verificar│             │
+     │   └──────────┘          └──────────┘             │
+     └──────────────────────────────────────────────────┘
 ```
 
 ### Las cuatro fases aplicadas a la seguridad de la información
