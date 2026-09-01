@@ -58,6 +58,7 @@ nav:
       - "Lab — Iptables (Parte 2)": seguridad-criptografia/en-el-ordenador/lab-iptables-p2.md
     - En la Red:
       - seguridad-criptografia/en-la-red/index.md
+      - "Precalentamiento y Repaso — Redes Defensivas": seguridad-criptografia/en-la-red/repaso-redes-defensivas.md
       - "Proxy Squid (Parte 1)": seguridad-criptografia/en-la-red/proxy-squid-p1.md
       - "Proxy Squid (Parte 2)": seguridad-criptografia/en-la-red/proxy-squid-p2.md
       - "IDS e IPS (Parte 1)": seguridad-criptografia/en-la-red/ids-ips-p1.md
